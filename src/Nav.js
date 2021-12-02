@@ -1,19 +1,20 @@
 import React from 'react';
 import './App.css';
 import { Link } from 'react-router-dom';
+import logo from './logo.jpeg';
 function Nav() {
     return (
         <nav>
-            <h3>Logo</h3>
+            <img src={logo} class="logo" alt="logo" />
             <ul className="nav-links">
                 <Link to="/" className='link'>
-                    <li>Home</li>
+                    <li>בית</li>
                 </Link>
                 <Link to="/about" className='link'>
-                    <li>About</li>
+                    <li>אודות</li>
                 </Link>
                 <Link to="/shop" className='link'>
-                    <li>Shop</li>
+                    <li>הוספת מסלול</li>
                 </Link>
             </ul>
 
@@ -22,3 +23,4 @@ function Nav() {
 }
 
 export default Nav;
+//-------------------------------
