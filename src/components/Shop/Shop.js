@@ -15,7 +15,7 @@ const Shop = () => {
             "acf":""
            }`;
         //  const res = await get('https://taal.tech/wp-json/wp/v2/places/', {});
-        const res = await get('https://localhost:8000/wp-json/wp/v2/routes/747', {});
+        const res = await get('https://s83.bfa.myftpupload.com/wp-json/wp/v2/routes/747', {});
         // const res = await axios.get('https://s83.bfa.myftpupload.com/wp-json/wp/v2/routes/747', {});
         // const res = await axios.post('https://s83.bfa.myftpupload.com/wp-json/wp/v2/routes', { new_route });
 
