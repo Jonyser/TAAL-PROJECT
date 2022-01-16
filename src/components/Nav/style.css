@@ -1,0 +1,14 @@
+.logo{
+    height: 10vh;
+    width: 20vh;
+}
+.nav-links{
+    width: 40%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    list-style: none;
+}
+.link{
+    color: rgb(255, 255, 255);
+}
