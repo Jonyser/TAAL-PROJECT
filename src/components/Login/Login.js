@@ -35,7 +35,7 @@ function Login(props) {
                     <div className="login">
                         <input type="text" placeholder="User Name" name="user" value={loginDetails.user} onChange={handleChange} />
                         <input type="password" placeholder="Password" name="pass" value={loginDetails.pass} onChange={handleChange} />
-                        <input type="submit" value="Go" onClick={handleSubmit} />
+                        <input type="submit" onClick={handleSubmit} />
                     </div>
                     <img src={logo} className="App-logo" alt="logo" ></img>
                 </header>
