@@ -4,6 +4,7 @@ import Login from './components/Login/Login'
 import Header from './components/Header/Header'
 import ProfilePage from './ProfilePage'
 import SignUp from './components/Sign Up/SignUp'
+import './App.css'
 
 //sort out profile page logged in or not
 //block persist rerender?
@@ -17,9 +18,9 @@ function App() {
     <Router>
       <Header username={username} isLoggedIn={isLoggedIn} serverMessage={serverMessage}>
         <nav>
-          <Link to="/">Profile</Link>
-          <Link to="/signup">Sign Up</Link>
-          <Link to="/login">Login</Link>
+          <Link className='nav' to ='/'>Profile</Link>
+          <Link className='nav' to="/signup">Sign Up</Link>
+          <Link className='nav' to="/login">Login</Link>
         </nav>
       </Header>
       <Switch>

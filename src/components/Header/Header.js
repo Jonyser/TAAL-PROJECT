@@ -7,7 +7,6 @@ function Header({children, ...props}) {
 
     return (
         <>
-        <h1>Wordpress Rest API Test App</h1>
         <div className="header">
         <p>Welcome {displayName}!</p>
         {children}

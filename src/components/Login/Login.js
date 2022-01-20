@@ -1,8 +1,7 @@
 import React, { useState } from 'react'
 import './style.css'
 import LoginAPI from './LoginAPI';
-
-let logo = require('../../assets/logo.jpeg');
+import logo from '../../assets/logo.jpeg'
 
 function Login(props) {
     const [APIDetailsLogin, setAPIDetailsLogin] = useState({
