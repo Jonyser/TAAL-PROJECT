@@ -1,33 +1,73 @@
 .App {
   text-align: center;
 }
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  margin: 0 2em 0 2em;
+}
+
+h1{
+  text-align: center;
+}
+
 nav{
   display: flex;
-  justify-content: space-around;
+  flex-direction: row;
+  width: 20vw;
+  justify-content: space-evenly;
   align-items: center;
-  min-height: 10vh;
-  background-color: rgb(60, 79, 104);
+}
+
+input{
+  padding: .8em;
+  border-radius: 5px;
+  width: 300px;
+}
+
+input[type=submit]{
+padding: .8em 0;
+font-size: large;
+font-weight: 800;
+background-color: skyblue;
+border: unset;
+margin-top: 1em;
+width: 100%;
+}
+
+input[type=submit]:hover{
+  background-color: chartreuse;
+}
+
+.login{
+  display: flex;
+  flex-direction: column;
+  /* text-align: left; */
+}
+
+
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
   color: white;
 }
-.nav-links{
-  width: 40%;
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  list-style: none;
+
+.App-link {
+  color: #61dafb;
 }
 
-.abt,.shp, .hom{
-  display: flex;
-  justify-content: space-around;
-  font-size: 10px;
-  color: rgb(0, 0, 0);
-}
-.link{
-  color: rgb(255, 255, 255);
-
-}
-.logo{
-  height: 10vh;
-  width: 20vh;
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
 }

@@ -1,28 +1,41 @@
-import React, { useState } from 'react';
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import Nav from './components/Nav/Nav';
-import About from './components/About.js/About';
-import Shop from './components/Shop/Shop';
-import './App.css';
+import React, { useState } from 'react'
+import { HashRouter as Router, Link, Route, Switch } from 'react-router-dom'
+import Login from './components/Login/Login'
+import Header from './components/Header/Header'
+import ProfilePage from './ProfilePage'
+import SignUp from './components/Sign Up/SignUp'
+
+//sort out profile page logged in or not
+//block persist rerender?
 
 function App() {
-  return (
+  const [username, setUsername] = useState('')
+  const [isLoggedIn, setIsLoggedIn] = useState(false)
+  const [serverMessage, setServerMessage] = useState(false)
+    return (
+    <>
     <Router>
-      <div>
-        <Nav />
-        <Switch>
-          <Route path="/about" component={About}></Route>
-          <Route path="/shop" component={Shop}></Route>
-          <Route path="/" exact component={Home}></Route>
-        </Switch>
-      </div>
-    </Router>
+      <Header username={username} isLoggedIn={isLoggedIn} serverMessage={serverMessage}>
+        <nav>
+          <Link to="/">Profile</Link>
+          <Link to="/signup">Sign Up</Link>
+          <Link to="/login">Login</Link>
+        </nav>
+      </Header>
+      <Switch>
+        <Route exact path="/">
+          <ProfilePage isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} setUsername={setUsername} username={username} serverMessage={serverMessage} setServerMessage={setServerMessage} />
+        </Route>
+        <Route path="/login">
+          <Login setUsername={setUsername} setIsLoggedIn={setIsLoggedIn} serverMessage={serverMessage} setServerMessage={setServerMessage} />
+        </Route>
+        <Route path="/signup">
+          <SignUp setUsername={setUsername} setIsLoggedIn={setIsLoggedIn} serverMessage={serverMessage} setServerMessage={setServerMessage} />
+        </Route>
+      </Switch>
+      </Router>
+    </>
   );
 }
 
-const Home = () => (
-  <div className='hom'>
-    <h1>Home page</h1>
-  </div>
-)
 export default App;
