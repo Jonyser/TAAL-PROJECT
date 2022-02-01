@@ -10,10 +10,8 @@ function SignUpAPI(props) {
             formData.append('email', props.APIDetailsSignUp.email)
             formData.append('pass', props.APIDetailsSignUp.pass)
 
-
             console.log("chack1:", props.APIDetailsSignUp.user)
             const url = 'https://s83.bfa.myftpupload.com/reg.php'
-
 
             fetch(url, {
                 method: 'POST',
@@ -62,7 +60,6 @@ function SignUpAPI(props) {
         <>
         </>
     )
-
 }
 
 export default SignUpAPI
