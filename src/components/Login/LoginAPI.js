@@ -10,7 +10,7 @@ function LoginAPI(props) {
             let formData = new FormData()
             formData.append('username', props.APIDetailsLogin.user)
             formData.append('password', props.APIDetailsLogin.pass)
-            const url = 'https://tomsclassroom.com/student/?rest_route=/simple-jwt-login/v1/auth'
+            const url = 'https://s83.bfa.myftpupload.com/?rest_route=/simple-jwt-login/v1/auth'
             fetch(url, {
                 method: 'POST',
                 body: formData
@@ -20,7 +20,7 @@ function LoginAPI(props) {
                     if (data['success'] == true) {
                         console.log(data)
                         localStorage.setItem('jwt', data['data']['jwt'])
-                        setUrlToLogin(`https://tomsclassroom.com/student/?rest_route=/simple-jwt-login/v1/autologin&jwt=${data['data']['jwt']}`)
+                        setUrlToLogin(`https://s83.bfa.myftpupload.com/?rest_route=/simple-jwt-login/v1/autologin&JWT=${data['data']['jwt']}`)
                     }
                     else {
                         console.log(data)
@@ -40,7 +40,7 @@ function LoginAPI(props) {
                     if (response.status == '200') {
                         props.setIsLoggedIn(true)
                         props.setUsername(props.APIDetailsLogin.user)
-                        window.location.replace('https://tomsclassroom.com/mysite/#/')
+                        window.location.replace('http://jonassp.mysoft.jce.ac.il/Taal-Project/index.html')
                     }
                     else {
                         console.log('error')

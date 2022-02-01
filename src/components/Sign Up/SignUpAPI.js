@@ -46,7 +46,7 @@ function SignUpAPI(props) {
                     if (response.status == '200') {
                         props.setIsLoggedIn(true)
                         props.setUsername(props.APIDetailsSignUp.user)
-                        window.location.replace('https://tomsclassroom.com/mysite/#/')
+                        window.location.replace('http://jonassp.mysoft.jce.ac.il/Taal-Project/index.html')
                     }
                     else {
                         console.log('error')
