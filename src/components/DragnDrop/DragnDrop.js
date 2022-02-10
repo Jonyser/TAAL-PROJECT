@@ -27,7 +27,6 @@ const TagList = [
 
 function DragnDrop() {
     const [board, setBoard] = useState([]);
-
     const [{ isOver }, drop] = useDrop(() => ({
         accept: "image",
         drop: (item) => addImageToBoard(item.id),
@@ -40,6 +39,7 @@ function DragnDrop() {
 
         Route = TagList.filter((tag) => id === tag.id);
         setBoard((board) => [...board, Route[0]]);
+        keyCount++;
         console.log(keyCount);
 
 
