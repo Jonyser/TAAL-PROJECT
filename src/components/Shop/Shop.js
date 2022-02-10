@@ -2,7 +2,9 @@ import axios from 'axios';
 import React, { useState } from 'react';
 import { get } from "./../../api/api";
 import './style.css';
-
+import { DndProvider } from "react-dnd";
+import { HTML5Backend } from "react-dnd-html5-backend";
+import DragnDrop from "../DragnDrop/DragnDrop";
 const Shop = () => {
 
     const [tasksNames, setTasksNames] = useState([])
@@ -45,17 +47,33 @@ const Shop = () => {
         }
     }
     return (
-        <div className='shp'>
+        // 
+        // //       <div className="App">
+        // //         
+        // //       </div>
+        // //     
+        <DndProvider backend={HTML5Backend}>
+            <div className='shp'>
+                <DragnDrop />
+                <h1 onClick={getData}>Shop Page</h1>
+                {/* <h2>{description}</h2> */}
+                <h3>{tasksNames.map((value, index) => { return <li key={index}>{value}</li> })}</h3>
+                {/* <h2>{image}</h2> */}
 
-            <h1 onClick={getData}>Shop Page</h1>
-            {/* <h2>{description}</h2> */}
-            <h3>{tasksNames.map((value, index) => { return <li key={index}>{value}</li> })}</h3>
-            {/* <h2>{image}</h2> */}
-
-        </div>
+            </div>
+        </DndProvider >
     );
 }
 export default Shop;
+
+// return (
+//     <DndProvider backend={HTML5Backend}>
+//       <div className="App">
+//         <DragDrop />
+//       </div>
+//     </DndProvider>
+
+
    // const wpConfig = {
         //     siteUrl: clientConfig.siteUrl,
         //     getRoutes: `${clientConfig.siteUrl}wp-json/wp/v2/routes`,
