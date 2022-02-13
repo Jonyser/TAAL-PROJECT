@@ -14,7 +14,7 @@ const Nav = () => {
                 <Link to="/about" className='link'>
                     <li>אודות <FcAbout /></li>
                 </Link>
-                <Link to="/shop" className='link'>
+                <Link to="/New_route" className='link'>
                     <li>הוספת מסלול <FcPlus /></li>
                 </Link>
 

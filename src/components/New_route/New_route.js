@@ -1,6 +1,6 @@
 import axios from 'axios';
 import React, { useState } from 'react';
-import { get } from "./../../api/api";
+import { get } from "../../api/api";
 import './style.css';
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
@@ -8,7 +8,7 @@ import DragnDrop from "../DragnDrop/DragnDrop";
 import { GrDuplicate } from "react-icons/gr";
 import { FcOk, FcLink } from "react-icons/fc";
 
-const Shop = () => {
+const New_route = () => {
 
     const [tasksNames, setTasksNames] = useState([])
     const [description, setDescription] = useState([])
@@ -67,7 +67,7 @@ const Shop = () => {
         </DndProvider >
     );
 }
-export default Shop;
+export default New_route;
 
 // return (
 //     <DndProvider backend={HTML5Backend}>

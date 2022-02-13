@@ -12,7 +12,7 @@ function Nav() {
                 <Link to="/about" className='link'>
                     <li>אודות</li>
                 </Link>
-                <Link to="/shop" className='link'>
+                <Link to="/New_route" className='link'>
                     <li>הוספת מסלול</li>
                 </Link>
             </ul>
