@@ -5,6 +5,9 @@ import './style.css';
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
 import DragnDrop from "../DragnDrop/DragnDrop";
+import { GrDuplicate } from "react-icons/gr";
+import { FcOk, FcLink } from "react-icons/fc";
+
 const Shop = () => {
 
     const [tasksNames, setTasksNames] = useState([])
@@ -17,12 +20,10 @@ const Shop = () => {
             "acf":""
            }`;
         //  const res = await get('https://taal.tech/wp-json/wp/v2/places/', {});
-        const res = await get('https://s83.bfa.myftpupload.com/wp-json/wp/v2/routes/747', {});
-        // const res = await axios.get('https://s83.bfa.myftpupload.com/wp-json/wp/v2/routes/747', {});
+        //const res = await get('https://s83.bfa.myftpupload.com/wp-json/wp/v2/routes/747', {});
+
+        const res = await axios.get('https://s83.bfa.myftpupload.com/wp-json/wp/v2/routes/747', {});
         // const res = await axios.post('https://s83.bfa.myftpupload.com/wp-json/wp/v2/routes', { new_route });
-
-
-
 
         if (res) {
             console.log("res")
@@ -47,20 +48,22 @@ const Shop = () => {
         }
     }
     return (
-        // 
-        // //       <div className="App">
-        // //         
-        // //       </div>
-        // //     
-        <DndProvider backend={HTML5Backend}>
-            <div className='shp'>
-                <DragnDrop />
-                <h1 onClick={getData}>Shop Page</h1>
-                {/* <h2>{description}</h2> */}
-                <h3>{tasksNames.map((value, index) => { return <li key={index}>{value}</li> })}</h3>
-                {/* <h2>{image}</h2> */}
 
+        <DndProvider backend={HTML5Backend}>
+            {/* <img src={Vicon} alt="Vicon"></img> */}
+            <div className="Tags">
+                <button className='AddRoute'> שמור מסלול  <FcOk className='icon' /> </button>
+                <button className='AddRoute' > שכפל מסלול  <GrDuplicate className='icon' /></button>
+                <button className='AddRoute' > שייך מסלול לחניך  <FcLink className='icon' /></button>
+
+                <DragnDrop />
             </div>
+            {/* <h2>{description}</h2> */}
+            <h3>{tasksNames.map((value, index) => { return <li key={index}>{value}</li> })}</h3>
+            {/* <h2>{image}</h2> */}
+
+            <h1 onClick={getData}>כפתור בדיקה</h1>
+
         </DndProvider >
     );
 }

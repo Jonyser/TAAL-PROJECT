@@ -2,16 +2,13 @@ import React, { useState } from "react";
 import Tag from "../Tag/Tag.js";
 import { useDrop } from "react-dnd";
 import "./style.css";
+import { FaRoute } from "react-icons/fa";
+import { ImPencil2 } from "react-icons/im";
+
 
 let Route = [];
 let keyCount = 0;
-//-------------------------------------------
-function Incrementation(count) {
-    alert("check")
-    count = count + 1;
-    return count
-}
-//-------------------------------------------
+
 const TagList = [
     {
         id: 1,
@@ -27,6 +24,8 @@ const TagList = [
 
 function DragnDrop() {
     const [board, setBoard] = useState([]);
+
+    //---------------------------------------------------------
     const [{ isOver }, drop] = useDrop(() => ({
         accept: "image",
         drop: (item) => addImageToBoard(item.id),
@@ -35,34 +34,40 @@ function DragnDrop() {
         }),
     }));
 
+    //---------------------------------------------------------
     const addImageToBoard = (id) => {
 
         Route = TagList.filter((tag) => id === tag.id);
         setBoard((board) => [...board, Route[0]]);
         keyCount++;
         console.log(keyCount);
-
-
     };
+    //---------------------------------------------------------
     return (
         <>
-            <div className="Tags">
+            <div>
                 {TagList.map((tag) => {
                     return <Tag url={tag.url} id={tag.id} key={tag.id} />;
                 })}
             </div>
+
             <div className="Board" ref={drop}>
+
                 {board.map((tag, keyCount) => {
 
                     return <Tag url={tag.url} id={tag.id} key={keyCount} />;
+
                 })}
 
+
+
+            </div>
+            <div className="textview">
+                <h5>שם המסלול <ImPencil2 /></h5>
+                <input type="text" name="שם המסלול" className="view" ></input>
             </div>
         </>
-
     );
-
-
 }
 
 export default DragnDrop;

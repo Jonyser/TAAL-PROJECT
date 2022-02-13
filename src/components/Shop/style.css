@@ -1,6 +1,32 @@
 .shp{
-    display: flex;
+  display: flex;
   justify-content: space-around;
   font-size: 10px;
   color: rgb(0, 0, 0);
+}
+.AddRoute{
+  float: right;
+  margin: 10px;
+  padding: 20px;
+  width: auto;
+  height: 50px;
+  background-color: rgb(194, 219, 240);
+  color: rgb(3, 3, 3);
+  border-radius: 20px;
+
+  border: none;
+}
+.AddRoute:hover{
+  background-color: rgb(186, 186, 202);
+}
+.icon{
+font-size: 20px;
+color: rgb(55, 55, 158);
+
+}
+
+.Tags {
+
+  background-color: rgb(194, 219, 240);
+  height: 70px;
 }

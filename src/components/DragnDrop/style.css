@@ -1,14 +1,30 @@
 
-.Tags {
-    margin: 10px;
-  }
   img {
+    
     margin: 5px;
+    width: 60px;
+    height: 60px;
+    position: left ;
   }
   
   .Board {
-    width: 300px;
-    height: 500px;
-    border: 2px solid black;
+    float: right;
+    margin: 10px;
+    padding: 5px;
+    height: 70px;
+    min-width: 70px;
+    width: auto;
+    border: 5px solid rgb(83, 90, 146); 
+    display:inline-flex;
+
+  }
+  .textview{
+    float: right;
+    height: 70px;
+  }
+
+  .view{
+    height: 30px;
+    width: 70px;
   }
   
