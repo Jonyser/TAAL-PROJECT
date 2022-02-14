@@ -1,3 +1,11 @@
+nav{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    min-height: 10vh;
+    background-color: rgb(21, 27, 36);
+    color: white;
+  }
 .logo{
     height: 10vh;
     width: 20vh;
@@ -19,6 +27,5 @@
 }
 .UserIcon{
     font-size: 40px;
-
-
 }
+

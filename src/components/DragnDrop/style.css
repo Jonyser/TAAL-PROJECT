@@ -1,6 +1,6 @@
 
   img {
-    
+
     margin: 5px;
     width: 60px;
     height: 60px;
@@ -8,7 +8,9 @@
   }
   
   .Board {
-    float: right;
+    /* float: right; */
+    position: absolute;
+    right: 10px;
     margin: 10px;
     padding: 5px;
     height: 70px;
@@ -19,7 +21,9 @@
 
   }
   .textview{
-    float: right;
+    /* float: right; */
+    /* position: absolute;
+    right: 110px; */
     height: 70px;
   }
 

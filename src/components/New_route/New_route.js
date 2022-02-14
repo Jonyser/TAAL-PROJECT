@@ -9,73 +9,123 @@ import { GrDuplicate } from "react-icons/gr";
 import { FcOk, FcLink } from "react-icons/fc";
 
 const New_route = () => {
+    const [name, setName] = useState(null);
+    const [tasksNames, setTasksNames] = useState([]);
+    const [routesNames, setRoutesNames] = useState([]);
+    const [placesNames, setPlacesNames] = useState([]);
 
-    const [tasksNames, setTasksNames] = useState([])
-    const [description, setDescription] = useState([])
-    const [image, setImage] = useState([])
+    let arrTasks = [];
+    let arrRoutes = [];
+    let arrPlaces = [];
 
+
+    // const { onChange } = this.props;
     const getData = async () => {
         const new_route = `{
             "id": 222,
             "acf":""
            }`;
-        //  const res = await get('https://taal.tech/wp-json/wp/v2/places/', {});
+
+
+        const resPlaces = await get('https://taal.tech/wp-json/wp/v2/places/', {});
+        const resRoutes = await axios.get('https://s83.bfa.myftpupload.com/wp-json/wp/v2/routes', {});
+        const resTasks = await axios.get('https://s83.bfa.myftpupload.com/wp-json/wp/v2/tasks', {});
+        // const res2 = await axios.get('https://taal.tech/wp-json/wp/v2/routes', {});
+        // const res = await axios.get('https://taal.tech/wp-json/wp/v2/places', {});
+        // const res = await axios.post('https://taal.tech/wp-json/wp/v2/routes', { new_route });
         //const res = await get('https://s83.bfa.myftpupload.com/wp-json/wp/v2/routes/747', {});
+        //---------------------------------------------------------------------------------------------------------------
+        if (resTasks) {
+            // console.log("resTasks");
+            // console.log(resTasks.data[9]);
+            // console.log(resTasks);
 
-        const res = await axios.get('https://s83.bfa.myftpupload.com/wp-json/wp/v2/routes/747', {});
-        // const res = await axios.post('https://s83.bfa.myftpupload.com/wp-json/wp/v2/routes', { new_route });
-
-        if (res) {
-            console.log("res")
-            console.log(res)
-            for (let i = 0; res[i] != undefined; i++) {
-
-                let element = res[i];
+            for (let i = 0; resTasks.data[i] != undefined; i++) {
+                arrTasks[i] = resTasks.data[i];
+                let element = resTasks.data[i];
                 // console.log(element.title.rendered)
 
                 setTasksNames([...tasksNames,
                 tasksNames[i] = element.title.rendered
                 ])
-                setDescription([...description,
-                description[i] = element.content.rendered
-                ])
+            }
+            console.log(arrTasks[0].title.rendered);
+        }
+        //---------------------------------------------------------------------------------------------------------------
 
-                setImage([...image,
-                image[i] = element.acf.image.url
+        if (resRoutes) {
+            for (let i = 0; resRoutes.data[i] != undefined; i++) {
+                arrRoutes[i] = resRoutes.data[i];
+                let element = resRoutes.data[i];
+                setRoutesNames([...routesNames,
+                routesNames[i] = element.title.rendered
                 ])
             }
-            // console.log("description:", description)
+            // console.log(arrRoutes);
+
+        }
+        //---------------------------------------------------------------------------------------------------------------
+        if (resPlaces) {
+            // console.log(resPlaces);
+            for (let i = 0; resPlaces[i] != undefined; i++) {
+                arrPlaces[i] = resPlaces[i];
+                let element = resPlaces[i];
+                setPlacesNames([...placesNames,
+                placesNames[i] = element.name
+                ])
+            }
+            // console.log(arrPlaces);
         }
     }
+    //-------------------input-------------------------
+    function getName(val) {
+
+        setName(val.target.value)
+        console.warn(val.target.value)
+    }
+    //-------------------------------------------------
     return (
-
-        <DndProvider backend={HTML5Backend}>
-            {/* <img src={Vicon} alt="Vicon"></img> */}
-            <div className="Tags">
-                <button className='AddRoute'> שמור מסלול  <FcOk className='icon' /> </button>
-                <button className='AddRoute' > שכפל מסלול  <GrDuplicate className='icon' /></button>
+        <>
+            <div className="Actions">
                 <button className='AddRoute' > שייך מסלול לחניך  <FcLink className='icon' /></button>
-
-                <DragnDrop />
+                <button className='AddRoute' > שכפל מסלול  <GrDuplicate className='icon' /></button>
+                <button className='AddRoute'> שמור מסלול  <FcOk className='icon' /> </button>
             </div>
-            {/* <h2>{description}</h2> */}
-            <h3>{tasksNames.map((value, index) => { return <li key={index}>{value}</li> })}</h3>
-            {/* <h2>{image}</h2> */}
+            {/* <>{name}</> */}
+            <div className='textView'>
+                <input type="text" className="RouteName" onChange={getName}></input>
 
-            <h1 onClick={getData}>כפתור בדיקה</h1>
+            </div>
 
-        </DndProvider >
+            <DndProvider backend={HTML5Backend}>
+                <div className='NewRouteBody'>
+                    <h1 onClick={getData}>כפתור בדיקה</h1>
+                </div>
+                <DragnDrop />
+
+            </DndProvider >
+
+            <div className='GetElement'>
+                {/* <select ClassName="cars" id="cars">
+                    <option value="volvo">Volvo</option>
+                    <option value="saab">Saab</option>
+                    <option value="mercedes">Mercedes</option>
+                    <option value="audi">Audi</option>
+                </select> */}
+
+
+                <select onClick={getData}>
+                    <option >{tasksNames[0]}</option>
+
+                </select>
+                <h3>{tasksNames.map((value, index) => { return <li key={index}>{value}</li> })}</h3>
+                <h3>{routesNames.map((value, index) => { return <li key={index}>{value}</li> })}</h3>
+                <h3>{placesNames.map((value, index) => { return <li key={index}>{value}</li> })}</h3>
+            </div>
+        </>
     );
 }
 export default New_route;
-
-// return (
-//     <DndProvider backend={HTML5Backend}>
-//       <div className="App">
-//         <DragDrop />
-//       </div>
-//     </DndProvider>
-
 
    // const wpConfig = {
         //     siteUrl: clientConfig.siteUrl,

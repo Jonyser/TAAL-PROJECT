@@ -2,9 +2,6 @@ import React, { useState } from "react";
 import Tag from "../Tag/Tag.js";
 import { useDrop } from "react-dnd";
 import "./style.css";
-import { FaRoute } from "react-icons/fa";
-import { ImPencil2 } from "react-icons/im";
-
 
 let Route = [];
 let keyCount = 0;
@@ -27,7 +24,7 @@ function DragnDrop() {
 
     //---------------------------------------------------------
     const [{ isOver }, drop] = useDrop(() => ({
-        accept: "image",
+        accept: "image", //סוג של האובייקט שניתן לגרור ללוח
         drop: (item) => addImageToBoard(item.id),
         collect: (monitor) => ({
             isOver: !!monitor.isOver(),
@@ -45,26 +42,16 @@ function DragnDrop() {
     //---------------------------------------------------------
     return (
         <>
+            <div className="Board" ref={drop}>
+                {board.map((tag, keyCount) => {
+                    return <Tag url={tag.url} id={tag.id} key={keyCount} />;
+                })}
+            </div>
+
             <div>
                 {TagList.map((tag) => {
                     return <Tag url={tag.url} id={tag.id} key={tag.id} />;
                 })}
-            </div>
-
-            <div className="Board" ref={drop}>
-
-                {board.map((tag, keyCount) => {
-
-                    return <Tag url={tag.url} id={tag.id} key={keyCount} />;
-
-                })}
-
-
-
-            </div>
-            <div className="textview">
-                <h5>שם המסלול <ImPencil2 /></h5>
-                <input type="text" name="שם המסלול" className="view" ></input>
             </div>
         </>
     );
