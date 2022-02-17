@@ -56,3 +56,21 @@ font-size: 20px;
   right: 10px;
   
 }
+.Dropdown{
+  position:absolute;
+    top:0;
+    right:0;
+    bottom:0;
+    left:0;
+    background-color:white;
+    padding:0 10px;
+    font-weight:bold;
+  width:300px;
+  border-radius: 15px;
+  background-color: rgb(67, 66, 75);
+  
+}
+
+.Dropdown:active, .styledSelect.active {
+  background-color:rgb(136, 30, 30);
+}
