@@ -39,7 +39,6 @@ font-size: 20px;
   color: rgb(255, 255, 255);
   position: absolute;
   right: 0px;
-
 } 
 .textView{
   display: flex;
@@ -54,23 +53,42 @@ font-size: 20px;
   color: rgb(0, 0, 0);
   position: absolute;
   right: 10px;
-  
 }
-.Dropdown{
-  position:absolute;
-    top:0;
-    right:0;
-    bottom:0;
-    left:0;
-    background-color:white;
-    padding:0 10px;
-    font-weight:bold;
-  width:300px;
-  border-radius: 15px;
-  background-color: rgb(67, 66, 75);
-  
-}
-
 .Dropdown:active, .styledSelect.active {
   background-color:rgb(136, 30, 30);
+}
+.Places{
+  background-color:aliceblue;
+  margin-right: 30px;
+  padding-top: 5px;
+}
+.place{
+  display: flex;
+  background-color: rgb(237, 234, 255);
+  width: 250px;
+  height: 30%;
+  margin: 20px;
+  padding: 20px;
+  justify-content:right;
+}
+.place:hover{
+  background-color:rgb(180, 175, 199);
+}
+
+.TitlePlaces{
+  margin-right: 30px;
+  background-color: rgb(237, 234, 255);
+  width: 250px;
+  height: 30%;
+  margin-bottom: 15px;
+}
+h1{
+  display:flex;
+  justify-content:right;
+}
+.Cover{
+  float: right;
+}
+.Place_icon{
+  justify-content:left;
 }

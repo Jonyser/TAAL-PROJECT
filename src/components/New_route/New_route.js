@@ -7,13 +7,20 @@ import { HTML5Backend } from "react-dnd-html5-backend";
 import DragnDrop from "../DragnDrop/DragnDrop";
 import { GrDuplicate } from "react-icons/gr";
 import { FcOk, FcLink } from "react-icons/fc";
-import Select from 'react-select';
+import { BsPencilFill, BsTropicalStorm } from "react-icons/bs";
+
+// import Select from 'react-select';
+
+
+let tasks = [];
+let places = [];
+let Places_and_their_stations = [];
 // import AsyncSelect from 'react-select/async';
 const New_route = () => {
     const [name, setName] = useState(null);// for TextView
-    const [loading, setLoading] = useState(true);
-    const [arrPlaces, setArrPlaces] = useState([]);
-    const [arrTasks, setArrTasks] = useState([]);
+    const [loading, setLoading] = useState(false);
+    const [statePlaces, setStatePlaces] = useState([]);
+    // const [arrTasks, setArrTasks] = useState([]);
     // const [arrRoutes, setArrRoutes] = useState([]);
     const [selectedOption, setSelectedOption] = useState(null);
 
@@ -37,24 +44,27 @@ const New_route = () => {
         //----------------------------------------------------------------------------------
         //https://s83.bfa.myftpupload.com/wp-json/wp/v2/places/
 
-        const resPlaces = await get('https://taal.tech/wp-json/wp/v2/places/', {
+        const resPlaces = await get('https://s83.bfa.myftpupload.com/wp-json/wp/v2/places/', {
             params: {
                 per_page: 99, 'Cache-Control': 'no-cache'
             }
         }).then(res => {
-            console.log("resPlaces:", res)
-            const plases = res.filter((item) => item.parent === 0)
-            const grupes = plases.map((element) => {
+            // console.log("res:", res)
+            places = res.filter((item) => item.parent === 0)
+            Places_and_their_stations = places.map((element) => {
                 return {
                     parent: element,
                     related: res.filter((r) => r.parent === element.id)
                 }
             })
-            console.log(grupes);
+            // console.log("grooups", groupes);
             // console.log("plases:", plases)
-            for (let i = 0; i < grupes.length; i++) {
-                setArrPlaces(arrPlaces => [...arrPlaces, { value: grupes[i].parent.name, label: grupes[i].parent.name }])
+            for (let i = 0; i < Places_and_their_stations.length; i++) {
+                setStatePlaces(statePlaces => [...statePlaces, { value: Places_and_their_stations[i].parent.name, label: Places_and_their_stations[i].parent.name }])
+
+                // console.log(statePlaces[i].value)
             }
+
         });
         //----------------------------------------------------------------------------------
 
@@ -64,12 +74,12 @@ const New_route = () => {
                 per_page: 99, 'Cache-Control': 'no-cache'
             }
         }).then(res => {
+            tasks = res
+            // for (let i = 0; res[i] != undefined; i++) {
 
-            for (let i = 0; res[i] != undefined; i++) {
+            //     setArrTasks(arrTasks => [...arrTasks, { value: res[i].title.rendered, label: res[i].title.rendered }])
 
-                setArrTasks(arrTasks => [...arrTasks, { value: res[i].title.rendered, label: res[i].title.rendered }])
-
-            }
+            // }
             // console.log("arrTasks is: ", arrTasks)
 
         });
@@ -144,6 +154,79 @@ const New_route = () => {
         console.warn(val.target.value)
     }
     //-------------------------------------------------
+    let to_add = "";
+    let counter = 0;
+    function Display_The_Stations(e) {
+
+        counter++;
+        if (counter >= 1) {
+            console.log("in")
+            document.getElementById('stations').innerHTML = "";
+            to_add = "";
+        }
+
+        //If we want the stations
+        Places_and_their_stations.forEach(element => {
+            if (element.parent.id === e.id) {
+
+                element.related.forEach(rel => {
+                    to_add += "<button id = 'station'>" + rel.name + "</button>";
+
+                });
+
+                document.getElementById('stations').innerHTML = to_add
+                if (document.getElementById('station') != null) {
+                    let elements = document.getElementById('station');
+                    for (let i = 0; i < elements.length; i++) {
+                        elements[i].onclick = function () { return Display_The_tasks(element) };
+                    }
+
+                }
+                console.log(element.related[0])
+            }
+        });
+    }
+    let to_add_to_tasks = ""
+
+    function Display_The_tasks(element) {
+
+        let tasks_of_the_station;
+        console.log(tasks_of_the_station)
+        console.log('in the task function', element)
+        element.related.forEach(station => {
+            tasks.forEach(task => {
+                task.places.forEach(place => {
+
+                    if (place === station.id && place !== task.title.rendered) {
+                        console.log(place)
+                        tasks_of_the_station += task.title.rendered
+                    }
+                });
+            })
+            console.log(tasks_of_the_station)
+            // tasks_of_the_station.map((e) => to_add_to_tasks += "<h1>" + e.title.rendered + "</h1>")
+        });
+        document.getElementById('tasks').innerHTML = to_add_to_tasks
+        console.log(document.getElementById('tasks'))
+
+    }
+    // document.getElementById('station').onclick = Display_The_Tasks();
+
+    // function Display_The_Tasks(){
+    //     if(this != null){
+
+    //         let to_add_to_tasks = ""
+    //         this.related.forEach(station => {
+    //             tasks.forEach(task => {
+    //                 if(station.id in task.places){
+    //                     to_add_to_tasks += "<button>" + task.title.rendered + "</button>"
+    //                 }  
+    //             });
+    //         });
+    //         document.getElementById('tasks').innerHTML = to_add_to_tasks
+    //     }
+
+    // }
 
     return (
         <>
@@ -165,21 +248,48 @@ const New_route = () => {
                         <h3>{tasksNames.map((value, index) => { return <li key={index}>{value}</li> })}</h3>
                         <h3>{routesNames.map((value, index) => { return <li key={index}>{value}</li> })}</h3>
                         <h3>{placesNames.map((value, index) => { return <li key={index}>{value}</li> })}</h3>
+
+                         {names.map(name => <h2>{name}</h2>)}
                     </div> */}
+
+                    <div className='Cover'>
+                        <div className='TitlePlaces'><h1>אתרים</h1></div>
+
+                        <div className='Places'>
+                            {places.map((value, index) => { return (<button className='place' onClick={() => Display_The_Stations(value)} key={index}><BsPencilFill className='Place_icon' />&nbsp;	&nbsp;	&nbsp;	&nbsp;{value.name} </button>) })} <br></br>
+                            <div id='stations'></div>
+                            <div id='tasks'></div>
+                        </div>
+
+                    </div>
+
+
+
+
                     <div>
-                        {<Select options={arrPlaces} className="Dropdown"
-                            onChange={setSelectedOption} />}
-                        {/* {<Select options={arrRoutes}
+                        {/* {console.log(places)} */}
+                        {/* <h3>{places.map(e => <li>{e.name}</li>)}</h3> */}
+
+                        {/* {<Select options={statePlaces} className="Dropdown"
+                            onChange={setSelectedOption} />
+
+                        } */}
+
+
+                        {/* {<Select options={arrTasks} className="Dropdown"
                             onChange={setSelectedOption} />} */}
 
-                        {<Select options={arrTasks} className="Dropdown"
-                            onChange={setSelectedOption} />}
+                        {/* {<Select options={arrRoutes}
+                            onChange={setSelectedOption} />} */}
                     </div>
                 </>
             )}
         </>
     );
 }
+
+
+
 export default New_route;
 
    // const wpConfig = {
