@@ -158,9 +158,10 @@ const New_route = () => {
     let counter = 0;
     function Display_The_Stations(e) {
 
+        //To erase the previous station's display and allow to the new one to be the unique station's display
         counter++;
         if (counter >= 1) {
-            console.log("in")
+            console.log("in the station function")
             document.getElementById('stations').innerHTML = "";
             to_add = "";
         }
@@ -170,13 +171,18 @@ const New_route = () => {
             if (element.parent.id === e.id) {
 
                 element.related.forEach(rel => {
-                    to_add += "<button id = 'station'>" + rel.name + "</button>";
+                    to_add += "<button class = 'station' name = 'station'>" + rel.name + "</button>";
 
                 });
 
                 document.getElementById('stations').innerHTML = to_add
-                if (document.getElementById('station') != null) {
-                    let elements = document.getElementById('station');
+
+                //If that set the onclick function of the Stations button to Display_The_tasks
+                if (document.getElementsByName('station') != null) {
+
+                    let elements = document.getElementsByName('station');
+                    console.log(elements, 'Size of elements : ' + elements.length)
+
                     for (let i = 0; i < elements.length; i++) {
                         elements[i].onclick = function () { return Display_The_tasks(element) };
                     }
@@ -197,8 +203,8 @@ const New_route = () => {
             tasks.forEach(task => {
                 task.places.forEach(place => {
 
-                    if (place === station.id && place !== task.title.rendered) {
-                        console.log(place)
+                    if (place === station.id) {
+                        console.log(tasks_of_the_station, "name of the task" + task.title.rendered)
                         tasks_of_the_station += task.title.rendered
                     }
                 });
@@ -227,7 +233,6 @@ const New_route = () => {
     //     }
 
     // }
-
     return (
         <>
             {loading && <div>Loading</div>}
@@ -244,6 +249,10 @@ const New_route = () => {
                     <DndProvider backend={HTML5Backend}>
                         <DragnDrop />
                     </DndProvider >
+                    <br></br> <br></br> <br></br>
+
+
+
                     {/* <div className='GetElement'>
                         <h3>{tasksNames.map((value, index) => { return <li key={index}>{value}</li> })}</h3>
                         <h3>{routesNames.map((value, index) => { return <li key={index}>{value}</li> })}</h3>
@@ -251,36 +260,27 @@ const New_route = () => {
 
                          {names.map(name => <h2>{name}</h2>)}
                     </div> */}
+                    <div>
+                        {/* {console.log(places)} */}
+                        {/* <h3>{placesNames.map((value, index) => { return <li key={index}>{value}</li> })}</h3> */}
+                        <div className='Cover1'>
+                            <div className='TitlePlaces'><h2>אתרים</h2></div>
 
-                    <div className='Cover'>
-                        <div className='TitlePlaces'><h1>אתרים</h1></div>
-
-                        <div className='Places'>
-                            {places.map((value, index) => { return (<button className='place' onClick={() => Display_The_Stations(value)} key={index}><BsPencilFill className='Place_icon' />&nbsp;	&nbsp;	&nbsp;	&nbsp;{value.name} </button>) })} <br></br>
+                            <div className='Places'>
+                                {places.map((value, index) => { return (<button className='place' onClick={() => Display_The_Stations(value)} key={index}>{value.name}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<BsPencilFill /> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</button>) })} <br></br>
+                            </div>
+                        </div>
+                        <div className='Cover2'>
+                            <div className='TitleStation'><h2>תחנות</h2></div>
                             <div id='stations'></div>
                             <div id='tasks'></div>
                         </div>
-
-                    </div>
-
-
-
-
-                    <div>
-                        {/* {console.log(places)} */}
-                        {/* <h3>{places.map(e => <li>{e.name}</li>)}</h3> */}
-
                         {/* {<Select options={statePlaces} className="Dropdown"
                             onChange={setSelectedOption} />
 
                         } */}
 
 
-                        {/* {<Select options={arrTasks} className="Dropdown"
-                            onChange={setSelectedOption} />} */}
-
-                        {/* {<Select options={arrRoutes}
-                            onChange={setSelectedOption} />} */}
                     </div>
                 </>
             )}

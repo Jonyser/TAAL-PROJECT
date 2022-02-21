@@ -35,7 +35,7 @@ font-size: 20px;
   display: flex;
   height:30px;
   width:100%;
-  background-color: rgb(116, 115, 115);
+  background-color: rgb(180, 180, 180);
   color: rgb(255, 255, 255);
   position: absolute;
   right: 0px;
@@ -54,22 +54,26 @@ font-size: 20px;
   position: absolute;
   right: 10px;
 }
-.Dropdown:active, .styledSelect.active {
+/* .Dropdown:active, .styledSelect.active {
   background-color:rgb(136, 30, 30);
-}
+} */
 .Places{
-  background-color:aliceblue;
+  background-color: rgb(237, 234, 255);
   margin-right: 30px;
   padding-top: 5px;
+  padding-bottom: 5px;
+  border-radius: 1.5ch;
 }
 .place{
   display: flex;
-  background-color: rgb(237, 234, 255);
   width: 250px;
   height: 30%;
   margin: 20px;
   padding: 20px;
   justify-content:right;
+  justify-Content: 'space-between';
+  margin-right: 50;
+  border-radius: 1.5ch;
 }
 .place:hover{
   background-color:rgb(180, 175, 199);
@@ -78,17 +82,60 @@ font-size: 20px;
 .TitlePlaces{
   margin-right: 30px;
   background-color: rgb(237, 234, 255);
-  width: 250px;
-  height: 30%;
+  height: 40px;
+  border-radius: 1.5ch;
   margin-bottom: 15px;
 }
-h1{
+h2{
   display:flex;
   justify-content:right;
+  margin: 10px;
 }
-.Cover{
+.Cover1{
   float: right;
+
 }
-.Place_icon{
-  justify-content:left;
+.Cover2{
+  float:right;
+  position:relative;
+   left:-70px; 
+   top:2px;
+
+
+}
+#stations{
+  width: 280px;
+  background-color: rgb(255, 234, 220);
+  margin-right: 30px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  border-radius: 1.5ch;
+
+  
+  
+}
+
+.station{
+  display: flex;
+  width: 250px;
+  height: 30%;
+  margin: 20px;
+  padding: 20px;
+  justify-content:right;
+  justify-Content: 'space-between';
+  margin-right: 50;
+  border-radius: 1.5ch;
+}
+
+.TitleStation{
+  margin-right: 30px;
+  background-color: rgb(255, 234, 220);
+  height: 40px;
+  width: 280px;
+  border-radius: 1.5ch;
+  margin-bottom: 15px;
+}
+
+.Station:hover{
+  background-color:rgb(199, 188, 174);
 }
