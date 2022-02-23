@@ -1,0 +1,38 @@
+  .Places{
+    background-color: rgb(237, 234, 255);
+    margin-right: 30px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    border-radius: 1.5ch;
+  }
+  .place{
+    display: flex;
+    width: 250px;
+    height: 30%;
+    margin: 20px;
+    padding: 20px;
+    justify-content:right;
+    justify-Content: 'space-between';
+    margin-right: 50;
+    border-radius: 1.5ch;
+  }
+  .place:hover{
+    background-color:rgb(180, 175, 199);
+  }
+  
+  .TitlePlaces{
+    margin-right: 30px;
+    background-color: rgb(237, 234, 255);
+    height: 40px;
+    border-radius: 1.5ch;
+    margin-bottom: 15px;
+  }
+  h2{
+    display:flex;
+    justify-content:right;
+    margin: 10px;
+  }
+  /* .Cover{
+    float: right;
+  
+  } */

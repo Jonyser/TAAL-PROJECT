@@ -1,0 +1,24 @@
+.Station{
+    display: flex;
+    width: 250px;
+    height: 30%;
+    margin: 20px;
+    padding: 20px;
+    justify-content:right;
+    justify-Content: 'space-between';
+    margin-right: 50;
+    border-radius: 1.5ch;
+  }
+
+  .StationColler{
+    background-color: rgb(255, 242, 234);
+    margin-right: 30px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    border-radius: 1.5ch;
+  }
+
+  .Cover{
+    float: right;
+
+  }

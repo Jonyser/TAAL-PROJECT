@@ -91,16 +91,8 @@ h2{
   justify-content:right;
   margin: 10px;
 }
-.Cover1{
+.Cover{
   float: right;
-
-}
-.Cover2{
-  float:right;
-  position:relative;
-   left:-70px; 
-   top:2px;
-
 
 }
 #stations{
@@ -109,12 +101,8 @@ h2{
   margin-right: 30px;
   padding-top: 5px;
   padding-bottom: 5px;
-  border-radius: 1.5ch;
-
-  
-  
+  border-radius: 1.5ch; 
 }
-
 .station{
   display: flex;
   width: 250px;
