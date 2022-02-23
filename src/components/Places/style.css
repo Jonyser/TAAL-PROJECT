@@ -15,6 +15,7 @@
     justify-Content: 'space-between';
     margin-right: 50;
     border-radius: 1.5ch;
+
   }
   .place:hover{
     background-color:rgb(180, 175, 199);
@@ -22,7 +23,7 @@
   
   .TitlePlaces{
     margin-right: 30px;
-    background: linear-gradient(90deg, rgb(237, 234, 255) 95%, rgb(196, 189, 233) 1%);
+    background: linear-gradient(90deg, rgb(237, 234, 255) 95%, rgb(161, 147, 229) 1%);
     height: 40px;
     border-radius: 1ch;
     margin-bottom: 15px;
@@ -34,6 +35,6 @@
   }
   .Cover{
     float: right;
-    margin: 80px;
+    margin: 30px;
   
   }

@@ -1,36 +1,15 @@
-
-  img {
-
-    margin: 5px;
-    width: 60px;
-    height: 60px;
-    position: left ;
-  }
-  
-  .Board {
-    /* float: right; */
+   .Board {
     float:right;
     position: absolute;
-    right: 180px;
-    margin: -180px;
+    right: 170px;
+    margin: -170px;
     padding: 5px;
-    height: 70px;
-    /* min-width: 1500px; */
+    height: 80px;
     width:100%; 
+    border: 5px solid rgb(83, 90, 146); 
+    background-color: rgb(238, 238, 238);
     justify-content: right;
     display:inline-flex;
-    background-color: rgb(165, 168, 170);
-
-  }
-  .textview{
-    /* float: right; */
-    /* position: absolute;
-    right: 110px; */
-    height: 70px;
   }
 
-  .view{
-    height: 30px;
-    width: 70px;
-  }
   

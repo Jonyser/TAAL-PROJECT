@@ -1,5 +1,5 @@
 .TaskColler{
-    background-color: rgb(211, 248, 206);
+    background-color: rgb(236, 245, 220);
     margin-right: 30px;
     padding-top: 5px;
     padding-bottom: 5px;
@@ -7,12 +7,14 @@
 }
 .TitleTasks{
     margin-right: 30px;
-    background: linear-gradient(90deg, rgb(211, 248, 206) 95%, rgb(142, 189, 136) 1%);
+    background: linear-gradient(90deg, rgb(236, 245, 220) 95%, rgb(164, 190, 125) 1%);
     height: 40px;
     border-radius: 1ch;
     margin-bottom: 15px;
   }
   .Tasks{
+    background: linear-gradient(90deg, rgb(241, 243, 243) 95%, rgb(164, 190, 125) 1%);
+
     display: flex;
     width: 250px;
     height: 30%;
