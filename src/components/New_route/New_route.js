@@ -2,12 +2,11 @@ import axios from 'axios';
 import React, { useState, useEffect } from 'react';
 import { get } from "../../api/api";
 import './style.css';
-import { DndProvider } from "react-dnd";
-import { HTML5Backend } from "react-dnd-html5-backend";
-import DragnDrop from "../DragnDrop/DragnDrop";
+// import { DndProvider } from "react-dnd";
+// import { HTML5Backend } from "react-dnd-html5-backend";
+// import DragnDrop from "../DragnDrop/DragnDrop";
 import { GrDuplicate } from "react-icons/gr";
 import { FcOk, FcLink } from "react-icons/fc";
-import { BsPencilFill, BsTropicalStorm } from "react-icons/bs";
 import Places from '../Places/Places'
 
 
@@ -48,18 +47,15 @@ const New_route = () => {
                         <input type="text" className="RouteName" onChange={getName}></input>
                     </div>
 
-                            <DndProvider backend={HTML5Backend}>
-                        <DragnDrop />
-                    </DndProvider >
+                   
                     <div>
                         <br></br>
                          <br></br> 
                         <Places/>
+                        
+                        
                      
                         
-                      
-            
-                     
                         {/* <div className='Cover2'>
                             <div className='TitleStation'><h2>תחנות</h2></div>
                             <div id='stations'></div>

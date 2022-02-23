@@ -22,17 +22,18 @@
   
   .TitlePlaces{
     margin-right: 30px;
-    background-color: rgb(237, 234, 255);
+    background: linear-gradient(90deg, rgb(237, 234, 255) 95%, rgb(196, 189, 233) 1%);
     height: 40px;
-    border-radius: 1.5ch;
+    border-radius: 1ch;
     margin-bottom: 15px;
   }
   h2{
     display:flex;
-    justify-content:right;
+    justify-content:center;
     margin: 10px;
   }
-  /* .Cover{
+  .Cover{
     float: right;
+    margin: 80px;
   
-  } */
+  }

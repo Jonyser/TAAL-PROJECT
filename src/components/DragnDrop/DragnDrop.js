@@ -2,24 +2,35 @@ import React, { useState } from "react";
 import Tag from "../Tag/Tag.js";
 import { useDrop } from "react-dnd";
 import "./style.css";
+import { BsPencilFill } from "react-icons/bs";
+
 
 let Route = [];
 let keyCount = 0;
+let dndArray = [];
 
-const TagList = [
-    {
-        id: 1,
-        url:
-            "https://yt3.ggpht.com/ytc/AAUvwnjOQiXUsXYMs8lwrd4litEEqXry1-atqJavJJ09=s900-c-k-c0x00ffffff-no-rj",
-    },
-    {
-        id: 3,
-        url:
-            "https://yt3.ggpht.com/pe57RF1GZibOWeZ9GwRWbjnLDCK2EEAeQ3u4iMAFNeaz-PN9uSsg1p2p32TZUedNnrUhKfoOuMM=s900-c-k-c0x00ffffff-no-rj",
-    },
-];
 
-function DragnDrop() {
+function DragnDrop(props) {
+    console.log("propssssss", props.propDataTask);
+    dndArray = (props.propDataTask).map((element) => {
+        return {
+            id: element.id,
+            title: element.title.rendered
+        }
+    })
+    console.log("dndArray:", dndArray)
+    const TagList = [
+        {
+            id: 1,
+            url:
+                "https://yt3.ggpht.com/ytc/AAUvwnjOQiXUsXYMs8lwrd4litEEqXry1-atqJavJJ09=s900-c-k-c0x00ffffff-no-rj",
+        },
+        {
+            id: 3,
+            url:
+                "https://yt3.ggpht.com/pe57RF1GZibOWeZ9GwRWbjnLDCK2EEAeQ3u4iMAFNeaz-PN9uSsg1p2p32TZUedNnrUhKfoOuMM=s900-c-k-c0x00ffffff-no-rj",
+        },
+    ];
     const [board, setBoard] = useState([]);
 
     //---------------------------------------------------------
@@ -34,7 +45,7 @@ function DragnDrop() {
     //---------------------------------------------------------
     const addImageToBoard = (id) => {
 
-        Route = TagList.filter((tag) => id === tag.id);
+        Route = dndArray.filter((tag) => id === tag.id);
         setBoard((board) => [...board, Route[0]]);
         keyCount++;
         console.log(keyCount);
@@ -42,15 +53,25 @@ function DragnDrop() {
     //---------------------------------------------------------
     return (
         <>
+            {/* <div className='Cover'>
+                <div className='TitleTasks'><h2>משימות</h2></div>
+                <div className='TaskColler'>
+
+                    {props.propDataTask.map((value, index) => { return (<button className='Tasks' key={index}>{value.title.rendered}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<BsPencilFill /> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</button>) })} <br></br>
+
+                </div>
+            </div> */}
+
+
             <div className="Board" ref={drop}>
                 {board.map((tag, keyCount) => {
-                    return <Tag url={tag.url} id={tag.id} key={keyCount} />;
+                    return <Tag title={tag.title} id={tag.id} key={keyCount} />;
                 })}
             </div>
 
             <div>
-                {TagList.map((tag) => {
-                    return <Tag url={tag.url} id={tag.id} key={tag.id} />;
+                {dndArray.map((tag) => {
+                    return <Tag title={tag.title} id={tag.id} key={tag.id} />;
                 })}
             </div>
         </>

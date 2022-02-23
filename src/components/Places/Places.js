@@ -50,7 +50,6 @@ const Places = () => {
                 per_page: 99, 'Cache-Control': 'no-cache'
             }
         }).then(res => {
-            // console.log("res11111111111111111,", res)
             places = res.filter((item) => item.parent === 0)
 
             Places_and_their_stations = places.map((element) => {
@@ -104,28 +103,17 @@ const Places = () => {
                         <div className='TitlePlaces'><h2>אתרים</h2></div>
 
                         <div className='Places'>
-                            {/* {console.log("places:", places)} */}
 
-                            {/* <Stations data={stateStation.data} /> */}
                             {places.map((value, index) => { return (<button className='place' onClick={() => Display_The_Stations(value)} key={index}>{value.name}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<BsPencilFill /> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</button>) })} <br></br>
-                            {/* <Stations /> */}
-                            {/* {console.log("stationArrayHTML:", stationArray)} */}
 
                         </div>
-                        {/* <div className='testState'>
-                            <button onClick={funTest}>Click</button>
-                            <span>{count}</span>
-
-                        </div> */}
-
 
                     </div>
-                    <div className='Cover'>
-                        <div className='TitleStation'><h2>תחנות</h2></div>
 
-                        <Stations propsData={stationArray} />
 
-                    </div>
+                    <Stations propsData={stationArray} />
+
+
                     {/* <div className='Cover2'>
                         <div className='TitleStation'><h2>תחנות</h2></div>
                         <div id='stations'></div>

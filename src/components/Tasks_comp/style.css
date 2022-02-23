@@ -1,0 +1,28 @@
+.TaskColler{
+    background-color: rgb(211, 248, 206);
+    margin-right: 30px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    border-radius: 1.5ch;
+}
+.TitleTasks{
+    margin-right: 30px;
+    background: linear-gradient(90deg, rgb(211, 248, 206) 95%, rgb(142, 189, 136) 1%);
+    height: 40px;
+    border-radius: 1ch;
+    margin-bottom: 15px;
+  }
+  .Tasks{
+    display: flex;
+    width: 250px;
+    height: 30%;
+    margin: 20px;
+    padding: 20px;
+    justify-content:right;
+    justify-Content: 'space-between';
+    margin-right: 50;
+    border-radius: 1.5ch;
+  }
+  .Tasks:hover{
+    background-color:rgb(164, 192, 161);
+  }
