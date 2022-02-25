@@ -1,8 +1,8 @@
    .Board {
     float:right;
     position: absolute;
-    right: 170px;
-    margin: -170px;
+    right: 190px;
+    margin: -190px;
     padding: 5px;
     height: 80px;
     width:100%; 

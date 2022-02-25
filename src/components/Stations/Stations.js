@@ -3,7 +3,7 @@ import { get } from "../../api/api";
 import { BsPencilFill } from "react-icons/bs";
 import './style.css';
 import Tasks_comp from "../Tasks_comp/Tasks_comp";
-
+import Dot from '../Dot/Dot'
 
 let allTasks = [];
 let tasks = [];
@@ -72,7 +72,7 @@ const Stations = (props) => {
                         <div className='TitleStation'><h2>תחנות</h2></div>
                         <div className='StationColler'>
 
-                            {props.propsData.map((value, index) => { return (<button className='Station' onClick={() => Display_The_Tasks(value)} key={index}>{value.name}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<BsPencilFill /> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</button>) })} <br></br>
+                            {props.propsData.map((value, index) => { return (<button className='Station' onClick={() => Display_The_Tasks(value)} key={index}>{value.name}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<BsPencilFill /> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<Dot color="#e29e62" /></button>) })} <br></br>
                         </div>
                     </div>
 

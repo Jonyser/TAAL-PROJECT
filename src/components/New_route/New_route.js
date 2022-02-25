@@ -2,9 +2,6 @@ import axios from 'axios';
 import React, { useState, useEffect } from 'react';
 import { get } from "../../api/api";
 import './style.css';
-// import { DndProvider } from "react-dnd";
-// import { HTML5Backend } from "react-dnd-html5-backend";
-// import DragnDrop from "../DragnDrop/DragnDrop";
 import { GrDuplicate } from "react-icons/gr";
 import { FcOk, FcLink } from "react-icons/fc";
 import Places from '../Places/Places'
@@ -52,6 +49,8 @@ const New_route = () => {
                         <br></br>
                          <br></br> 
                         <Places/>
+
+                    
                         
                         
                      

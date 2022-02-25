@@ -3,12 +3,10 @@ import { get } from "../../api/api";
 import './style.css';
 import { BsPencilFill } from "react-icons/bs";
 import Stations from '../Stations/Stations'
-
+import Dot from '../Dot/Dot'
 // import Select from 'react-select';
 
 let places = [];
-let to_add = "";
-let counter = 0;
 let stationArray = [];
 let Places_and_their_stations = [];
 
@@ -104,14 +102,17 @@ const Places = () => {
 
                         <div className='Places'>
 
-                            {places.map((value, index) => { return (<button className='place' onClick={() => Display_The_Stations(value)} key={index}>{value.name}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<BsPencilFill /> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</button>) })} <br></br>
+                            {places.map((value, index) => { return (<button className='place' onClick={() => Display_The_Stations(value)} key={index}>{value.name}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<BsPencilFill /> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<Dot color="rgb(161, 147, 229)" /></button>) })} <br></br>
 
                         </div>
+
 
                     </div>
 
 
                     <Stations propsData={stationArray} />
+
+
 
 
                     {/* <div className='Cover2'>
