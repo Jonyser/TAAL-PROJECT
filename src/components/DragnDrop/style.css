@@ -19,10 +19,10 @@
 }
 
 .TitleTasks{
-  background: linear-gradient(90deg, rgb(236, 245, 220) 95%, rgb(164, 190, 125) 1%);
-  height: 40px;
-    border-radius: 1ch;
-    margin-bottom: 15px;
+   background: linear-gradient(90deg, rgb(236, 245, 220) 95%, rgb(164, 190, 125) 1%);
+   height: 40px;
+   border-radius: 1ch;
+   margin-bottom: 15px;
 }
 
 .TasksCover{

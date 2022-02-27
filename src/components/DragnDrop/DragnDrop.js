@@ -17,6 +17,10 @@ const jq = () => {
     $(".TitleTasks").show();
 }
 
+const jq_Hide = () => {
+    $(".TitleTasks").hide();
+}
+
 function DragnDrop(props) {
     const [loading, setLoading] = useState(false);
 
@@ -79,7 +83,8 @@ function DragnDrop(props) {
             <div className='Cover_Tasks'>
                 <div className='TitleTasks'><h2>משימות</h2></div>
                 <div className='TasksCover'>
-                    {dndArray.map((tag) => {
+
+                    {dndArray.length == 0 ? jq_Hide() : dndArray.map((tag) => {
                         return <Tag title={tag.title} id={tag.id} key={tag.id} show={jq()} />;
                     })}
 
