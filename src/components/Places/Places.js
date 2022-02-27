@@ -15,7 +15,6 @@ let Places_and_their_stations = [];
 
 const jq = () => {
     $(".TitleStation").show();
-
 }
 
 // const jq = () => {
@@ -82,12 +81,10 @@ const Places = () => {
 
                 element.related.forEach(rel => {
 
-
                     setStateStation({ data: stationArray.push(rel) });
 
                 });
                 // console.log("stationArray:", stationArray);
-
             }
         });
     }
@@ -99,12 +96,12 @@ const Places = () => {
             {loading && (<div>Loading</div>)}
             {!loading && (
                 <>
-                    <div className='Cover'>
+                    <div className='Cover_Places'>
                         <div className='TitlePlaces'><h2>אתרים</h2></div>
 
                         <div className='Places'>
 
-                            {places.map((value, index) => { return (<button className='place' onClick={() => Display_The_Stations(value)} key={index}>{value.name}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<BsPencilFill /> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<Dot color="rgb(161, 147, 229)" /></button>) })} <br></br>
+                            {places.map((value, index) => { return (<button className='Place' onClick={() => Display_The_Stations(value)} key={index}>{value.name}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<BsPencilFill /> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<Dot color="rgb(161, 147, 229)" /></button>) })} <br></br>
                         </div>
 
                     </div>

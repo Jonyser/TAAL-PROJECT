@@ -8,7 +8,6 @@ import $ from 'jquery'
 
 let allTasks = [];
 let tasks = [];
-let taskArray = [];
 
 const Stations = (props) => {
     const [statetask, setStateTask] = useState([]);
@@ -68,9 +67,9 @@ const Stations = (props) => {
             {loading && (<div>Loading</div>)}
             {!loading && (
                 <>
-                    <div className='Cover'>
+                    <div className='Cover_Stations'>
                         <div className='TitleStation'><h2>תחנות</h2></div>
-                        <div className='StationColler'>
+                        <div className='Stations'>
                             {props.propsData.map((value, index) => { return (<button className='Station' onClick={() => Display_The_Tasks(value)} key={index}>{value.name}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<BsPencilFill /> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<Dot color="#e29e62" /></button>) })} <br></br>
                         </div>
                     </div>

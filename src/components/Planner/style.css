@@ -20,15 +20,7 @@ font-size: 20px;
   background-color: rgb(194, 219, 240);
   height: 70px;
 }
-.NewRouteBody{
-  height:60px;
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  min-height: 10vh;
-  background-color: rgb(178, 187, 201);
-  color: white;
-}
+
 .RouteName{
   text-align: right;
   border: none;
@@ -44,7 +36,17 @@ font-size: 20px;
   display: flex;
   height:30px;
 }
-.GetElement{
+/* .NewRouteBody{
+  height:60px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  min-height: 10vh;
+  background-color: rgb(178, 187, 201);
+  color: white;
+} */
+
+/* .GetElement{
   text-align: right;
   border: none;
   display: flex;
@@ -53,7 +55,7 @@ font-size: 20px;
   color: rgb(0, 0, 0);
   position: absolute;
   right: 10px;
-}
+} */
 /* .Dropdown:active, .styledSelect.active {
   background-color:rgb(136, 30, 30);
 } */

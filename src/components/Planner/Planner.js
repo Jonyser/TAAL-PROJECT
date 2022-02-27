@@ -8,26 +8,33 @@ import $ from 'jquery';
 let tasks = [];
 let places = [];
 
-
-// let jq =$(".TitleStation").hide();
-// console.log("jq",typeof jq)
-// let jq = setJqry(jqry =$(".TitleStation").hide());
 const jq =() =>{
     $(".TitleTasks").hide();
     $(".TitleStation").hide();
-    // $(".TitlePlaces").hide();
-    // $(".TitlePlaces").fadeTo("slow", 1);
-}
+    console.log(document.body.style.zoom)
 
+}
+// function useWindowSize() {
+//     const [size, setSize] = useState([10, 0]);
+//     useLayoutEffect(() => {
+//       function updateSize() {
+//         setSize([window.innerWidth, window.innerHeight]);
+//       }
+//       window.addEventListener('resize', updateSize);
+//       updateSize();
+//       return () => window.removeEventListener('resize', updateSize);
+//     }, []);
+//     return size;
+//   }
 const Planner = () => {
     const [name, setName] = useState(null);// for TextView
     const [loading, setLoading] = useState(false);
-    
     useEffect(() => {
         const fetchData = async () => {
             setLoading(true);
             try {
                 jq();
+                // useWindowSize()
             } catch (error) {
                 console.error(error.message);
             }
@@ -36,17 +43,13 @@ const Planner = () => {
         fetchData();
     }, []);
 
-    
-    
     // const [jqry, setJqry] = useState(jq);
 
     //-------------------input-------------------------
     function getName(val) {
         setName(val.target.value)
-        console.warn(val.target.value)
-    
-    }
-   
+        console.warn(val.target.value)  
+    } 
     return (
         <>
             {loading && <div>Loading</div>}
@@ -63,7 +66,6 @@ const Planner = () => {
                         <input type="text" className="RouteName" onChange={getName}></input>
                     </div>
 
-                   
                     <div>
                         <br></br>
                          <br></br> 

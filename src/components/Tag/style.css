@@ -1,7 +1,6 @@
 .Tasks{
     display: flex;
-    width: 250px;
-    height: 30%;
+    width: 55vh;
     margin: 20px;
     padding: 20px;
     justify-content: right;
@@ -9,3 +8,7 @@
     margin-right: 50;
     border-radius: 1.5ch;
 }
+
+.Tasks:hover{
+    background-color:rgb(164, 192, 161);
+  }
