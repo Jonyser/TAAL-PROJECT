@@ -1,8 +1,8 @@
    .Board {
     float:right;
     position: absolute;
-    right: 190px;
-    margin: -190px;
+    right: 45px;
+    margin: -45px;
     padding: 5px;
     height: 80px;
     width:100%; 
@@ -12,4 +12,40 @@
     display:inline-flex;
   }
 
+  .Cover{
+    float: right;
+    margin: 80px;
+  }
+
+.TitleTasks{
+  margin-right: 30px;
+  background: linear-gradient(90deg, rgb(236, 245, 220) 95%, rgb(164, 190, 125) 1%);
+  height: 40px;
+  border-radius: 1ch;
+  margin-bottom: 15px;
+}
+
+.Tasks:hover{
+  background-color:rgb(164, 192, 161);
+}
+
+.TasksCover{
+  background-color: rgb(236, 245, 220);
+  margin-right: 30px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  border-radius: 1.5ch;
+}
+
+.MediaCover{
+  float: right;
+  margin: 80px; 
+}
+
+.MediaSize{
+  background-color:rgb(194, 219, 240);
+  height: 150%;
+  width: 110%;
+  border-radius: 1.5ch;
+}
   

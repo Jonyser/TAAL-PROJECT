@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Nav from './components/Nav/Nav';
 import About from './components/About.js/About';
-import New_route from './components/New_route/New_route';
+import Planner from './components/Planner/Planner';
 import './App.css';
 
 function App() {
@@ -12,7 +12,7 @@ function App() {
         <Nav />
         <Switch>
           <Route path="/about" component={About}></Route>
-          <Route path="/New_route" component={New_route}></Route>
+          <Route path="/planner" component={Planner}></Route>
           <Route path="/" exact component={Home}></Route>
         </Switch>
       </div>

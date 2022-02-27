@@ -4,6 +4,7 @@ import { BsPencilFill } from "react-icons/bs";
 import './style.css';
 import Tasks_comp from "../Tasks_comp/Tasks_comp";
 import Dot from '../Dot/Dot'
+import $ from 'jquery'
 
 let allTasks = [];
 let tasks = [];
@@ -43,7 +44,6 @@ const Stations = (props) => {
     }
 
     const Display_The_Tasks = (e) => {
-
         if (tasks.length > 0) {
             tasks = [];
         }
@@ -61,7 +61,7 @@ const Stations = (props) => {
         // tasks = allTasks.filter((item) => item.places[1] === e.id)
 
         // console.log("eeee.", e)
-        console.log("tasks,", tasks)
+        // console.log("tasks,", tasks)
     }
     return (
         <>
@@ -71,14 +71,10 @@ const Stations = (props) => {
                     <div className='Cover'>
                         <div className='TitleStation'><h2>תחנות</h2></div>
                         <div className='StationColler'>
-
                             {props.propsData.map((value, index) => { return (<button className='Station' onClick={() => Display_The_Tasks(value)} key={index}>{value.name}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<BsPencilFill /> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<Dot color="#e29e62" /></button>) })} <br></br>
                         </div>
                     </div>
-
-
                     <Tasks_comp propsDataTask={tasks} />
-
                 </>
 
             )}

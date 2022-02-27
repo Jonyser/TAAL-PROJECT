@@ -1,31 +1,50 @@
-import axios from 'axios';
 import React, { useState, useEffect } from 'react';
-import { get } from "../../api/api";
 import './style.css';
 import { GrDuplicate } from "react-icons/gr";
 import { FcOk, FcLink } from "react-icons/fc";
-import Places from '../Places/Places'
-
-
-// import Select from 'react-select';
+import Places from '../Places/Places';
+import $ from 'jquery';
 
 let tasks = [];
 let places = [];
-let to_add = "";
-let counter = 0;
-let to_add_to_tasks = ""
-let Places_and_their_stations = [];
 
-// import AsyncSelect from 'react-select/async';
-const New_route = () => {
+
+// let jq =$(".TitleStation").hide();
+// console.log("jq",typeof jq)
+// let jq = setJqry(jqry =$(".TitleStation").hide());
+const jq =() =>{
+    $(".TitleTasks").hide();
+    $(".TitleStation").hide();
+    // $(".TitlePlaces").hide();
+    // $(".TitlePlaces").fadeTo("slow", 1);
+}
+
+const Planner = () => {
     const [name, setName] = useState(null);// for TextView
     const [loading, setLoading] = useState(false);
-    const [statePlaces, setStatePlaces] = useState([]);
- 
+    
+    useEffect(() => {
+        const fetchData = async () => {
+            setLoading(true);
+            try {
+                jq();
+            } catch (error) {
+                console.error(error.message);
+            }
+            setLoading(false);
+        }
+        fetchData();
+    }, []);
+
+    
+    
+    // const [jqry, setJqry] = useState(jq);
+
     //-------------------input-------------------------
     function getName(val) {
         setName(val.target.value)
         console.warn(val.target.value)
+    
     }
    
     return (
@@ -48,21 +67,9 @@ const New_route = () => {
                     <div>
                         <br></br>
                          <br></br> 
-                        <Places/>
 
-                    
-                        
-                        
-                     
-                        
-                        {/* <div className='Cover2'>
-                            <div className='TitleStation'><h2>תחנות</h2></div>
-                            <div id='stations'></div>
-                            <div id='tasks'></div>
-                        </div> */}
-                        {/* {<Select options={statePlaces} className="Dropdown"
-                            onChange={setSelectedOption} />
-                        } */}
+                        <Places />
+
                     </div>
                 </>
             )}
@@ -70,7 +77,7 @@ const New_route = () => {
     );
 }
 
-export default New_route;
+export default Planner;
 
    // const wpConfig = {
         //     siteUrl: clientConfig.siteUrl,
