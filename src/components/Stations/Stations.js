@@ -10,7 +10,7 @@ let allTasks = [];
 let tasks = [];
 
 const Stations = (props) => {
-    const [statetask, setStateTask] = useState([]);
+    const [, setStateTask] = useState([]);
     const [loading, setLoading] = useState(false);
     useEffect(() => {
         const fetchData = async () => {
@@ -50,7 +50,7 @@ const Stations = (props) => {
         allTasks.forEach(element => {
             // console.log("elllllll:", element)
             for (let i = 0; i < element.places.length; i++) {
-                if (element.places[i] == e.id) {
+                if (element.places[i] === e.id) {
                     tasks.push(element)
                 }
             }

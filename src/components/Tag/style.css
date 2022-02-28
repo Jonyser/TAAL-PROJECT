@@ -1,11 +1,11 @@
 .Tasks{
     display: flex;
-    width: 50vh;
+    width: 210px;
     margin: 20px;
     padding: 20px;
     justify-content: right;
     justify-Content: 'space-between';
-    margin-right: 50;
+    margin-right: 50px;
     border-radius: 1.5ch;
 }
 

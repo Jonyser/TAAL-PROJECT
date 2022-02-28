@@ -11,6 +11,7 @@ const Tasks_comp = (props) => {
             <DndProvider backend={HTML5Backend}>
                 <DragnDrop propDataTask={props.propsDataTask} />
             </DndProvider >
+
         </>
     );
 

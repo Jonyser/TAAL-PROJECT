@@ -4,30 +4,42 @@ import { GrDuplicate } from "react-icons/gr";
 import { FcOk, FcLink } from "react-icons/fc";
 import Places from '../Places/Places';
 import $ from 'jquery';
+import { createStore } from 'redux';
+//------------------test redux----------------------
+// const increment =() => {
+//     return{
+//     type: 'INCREMENT'
+//     }
+// }
 
-let tasks = [];
-let places = [];
+// const decrement =() => {
+//     return{
+//     type: 'DECREMENT'
+//     }
+// }
 
-const jq =() =>{
-    $(".TitleTasks").hide();
-    $(".TitleStation").hide();
-    console.log(document.body.style.zoom)
+// const counter =(state =0,action)=>{
+//     switch(action.type){
+//         case "INCREMENT":
+//             return state +1;
+//         case "DECREMENT":
+//             return state -2;
+//     }
+    
+// }
+// let store = createStore(counter) 
+// store.subscribe(()=> console.log("redux",store.getState()))
 
-}
-// function useWindowSize() {
-//     const [size, setSize] = useState([10, 0]);
-//     useLayoutEffect(() => {
-//       function updateSize() {
-//         setSize([window.innerWidth, window.innerHeight]);
-//       }
-//       window.addEventListener('resize', updateSize);
-//       updateSize();
-//       return () => window.removeEventListener('resize', updateSize);
-//     }, []);
-//     return size;
-//   }
+// store.dispatch(increment());
+// store.dispatch(decrement());
+// store.dispatch(decrement());
+
+//------------------------------------------------------------------------
+// import { createStore } from 'redux'
+// import { Provider } from 'react-redux'
+
 const Planner = () => {
-    const [name, setName] = useState(null);// for TextView
+    const [, setName] = useState(null);// for TextView
     const [loading, setLoading] = useState(false);
     useEffect(() => {
         const fetchData = async () => {
@@ -69,14 +81,21 @@ const Planner = () => {
                     <div>
                         <br></br>
                          <br></br> 
-
+                         <br></br> 
+                       
                         <Places />
-
+                    
                     </div>
                 </>
             )}
         </>
     );
+}
+const jq =() =>{
+    $(".TitleTasks").hide();
+    $(".TitleStation").hide();
+    console.log(document.body.style.zoom)
+
 }
 
 export default Planner;

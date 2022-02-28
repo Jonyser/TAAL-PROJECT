@@ -1,16 +1,34 @@
-   .Board {
-    float:right;
-    position: absolute;
-    right: 45px;
-    margin: -45px;
-    padding: 5px;
-    height: 80px;
-    width:100%;
-    border: 5px solid rgb(83, 90, 146); 
-    background-color: rgb(238, 238, 238);
-    justify-content: right;
-    display:inline-flex;
-  }
+.Board{
+  right: 60px;
+  margin: -60px;
+  float:right;
+  position:fixed;
+  height: 80px;
+  width: 100%;
+  /* min-width: 250px; */
+  justify-content: right;
+  display:inline-flex;
+   border-radius: 1.5ch;
+  border: 5px solid rgb(83, 90, 146); 
+  background-color: rgb(238, 238, 238);
+  position:absolute;
+} 
+
+/* .Board{
+  right: 45px;
+  margin: -45px;
+  float:right;
+  position:fixed;
+  height: 110px;
+  width: 100%;
+  min-width: 250px;
+  justify-content: right;
+  display:inline-flex;
+  display:inline-flex;
+  border-radius: 1.5ch;
+  border: 5px solid rgb(83, 90, 146); 
+  background-color: rgb(238, 238, 238);
+} */
 
 .Cover_Tasks{
     float: right;
@@ -37,12 +55,12 @@
   margin: 10%;
 }
 
-.MediaSize{
+/* .MediaSize{
   background-color:rgb(194, 219, 240);
-  height: 200%;
-  width:150%;
-  float: left;
+  height: 50px;
+  width:50px;
+
   border-radius: 1.5ch;
   
-}
+} */
   
