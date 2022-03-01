@@ -44,8 +44,10 @@ const Places = () => {
     }, []);
 
     const getData = async () => {
+        let a = "https://s83.bfa.myftpupload.com/?rest_route=/simple-jwt-login/v1/auth"
 
-        //----------------------------------------------------------------------------------
+        fetch(a, { method: "POST", body: "email=jonassp@post.jce.ac.il&password=GvS7GZJUDLt0DKBM" }).then(r => r.json()).then(console.log)
+        // ----------------------------------------------------------------------------
         //https://s83.bfa.myftpupload.com/wp-json/wp/v2/places/
 
         await get('https://s83.bfa.myftpupload.com/wp-json/wp/v2/places/', {

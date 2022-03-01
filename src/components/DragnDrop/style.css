@@ -8,7 +8,7 @@
   /* min-width: 250px; */
   justify-content: right;
   display:inline-flex;
-   border-radius: 1.5ch;
+   /* border-radius: 1.5ch; */
   border: 5px solid rgb(83, 90, 146); 
   background-color: rgb(238, 238, 238);
   position:absolute;

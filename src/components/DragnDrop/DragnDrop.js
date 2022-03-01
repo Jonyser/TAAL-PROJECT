@@ -11,7 +11,7 @@ let dndArray = [];
 let image = "";
 let saveProps = [];
 let thisId = ""
-
+let thisIdArray = [];
 const jq = () => {
     $(".TitleTasks").show();
 }
@@ -63,6 +63,9 @@ function DragnDrop(props) {
         image = ""
         Route = dndArray.filter((tag) => id === tag.id);
         setBoard((board) => [...board, Route[0]]);
+        thisIdArray.push(thisId);
+        console.log("thisIdArray: ", thisIdArray)
+
         // keyCount++;
         // keyCount = ("propsChac", props.propDataTask.id);
 
