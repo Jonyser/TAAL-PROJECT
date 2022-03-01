@@ -3,7 +3,6 @@ import { HashRouter as Router, Link, Route, Switch } from 'react-router-dom'
 import Login from './components/Login/Login'
 import Header from './components/Header/Header'
 import ProfilePage from './ProfilePage'
-import SignUp from './components/Sign Up/SignUp'
 import './App.css'
 
 //sort out profile page logged in or not
@@ -19,7 +18,6 @@ function App() {
       <Header username={username} isLoggedIn={isLoggedIn} serverMessage={serverMessage}>
         <nav>
           <Link className='nav' to ='/'>Profile</Link>
-          <Link className='nav' to="/signup">Sign Up</Link>
           <Link className='nav' to="/login">Login</Link>
         </nav>
       </Header>
@@ -31,7 +29,6 @@ function App() {
           <Login setUsername={setUsername} setIsLoggedIn={setIsLoggedIn} serverMessage={serverMessage} setServerMessage={setServerMessage} />
         </Route>
         <Route path="/signup">
-          <SignUp setUsername={setUsername} setIsLoggedIn={setIsLoggedIn} serverMessage={serverMessage} setServerMessage={setServerMessage} />
         </Route>
       </Switch>
       </Router>
