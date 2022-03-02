@@ -4,7 +4,7 @@ import Login from "./Login"
 import Header from '../Header/Header'
 import ProfilePage from './ProfilePage'
 import './styleLogin.css'
-
+import { CgLogIn, CgProfile } from "react-icons/cg";
 //sort out profile page logged in or not
 //block persist rerender?
 
@@ -17,8 +17,8 @@ function LoginApp() {
       <Router>
         <Header username={username} isLoggedIn={isLoggedIn} serverMessage={serverMessage}>
           <nav>
-            <Link className='nav' to='/'>Profile</Link>
-            <Link className='nav' to="/login">Login</Link>
+            <Link className='nav' to='/'><CgProfile />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Profile</Link>
+            <Link className='nav' to="/login"><CgLogIn />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Login</Link>
           </nav>
         </Header>
         <Switch>

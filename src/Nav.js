@@ -7,7 +7,7 @@ function Nav() {
             <img src={logo} class="logo" alt="logo" />
             <ul className="nav-links">
                 <Link to="/" className='link'>
-                    <li>בית</li>
+                    <li>כניסה</li>
                 </Link>
                 <Link to="/about" className='link'>
                     <li>אודות</li>

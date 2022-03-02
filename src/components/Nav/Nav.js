@@ -9,7 +9,7 @@ const Nav = () => {
         <nav>
             <ul className="nav-links">
                 <Link to="/" className='link'>
-                    <li>בית <FcHome /></li>
+                    <li>כניסה <FcHome /></li>
                 </Link>
                 <Link to="/about" className='link'>
                     <li>אודות <FcAbout /></li>
