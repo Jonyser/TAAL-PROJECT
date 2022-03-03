@@ -22,7 +22,6 @@ const jq_Hide = () => {
 
 function DragnDrop(props) {
     const [loading, setLoading] = useState(false);
-
     useEffect(() => {
         const fetchData = async () => {
             setLoading(true);
@@ -80,7 +79,7 @@ function DragnDrop(props) {
                 <div className='TitleTasks'><h2>משימות</h2></div>
                 <div className='TasksCover'>
 
-                    {dndArray.length == 0 ? jq_Hide() : dndArray.map((tag) => {
+                    {dndArray.length === 0 ? jq_Hide() : dndArray.map((tag) => {
                         return <Tag title={tag.title} id={tag.id} key={tag.id} show={jq()} idImg={thisId} dataImg={saveProps.propDataTask} />;
                     })}
 
