@@ -1,9 +1,17 @@
+nav{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    min-height: 20vh;
+    background-color: rgb(21, 27, 36);
+    color: white;
+  }
 .logo{
     height: 10vh;
     width: 20vh;
 }
 .nav-links{
-    width: 40%;
+    width: 80%;
     display: flex;
     justify-content: space-around;
     align-items: center;
@@ -11,4 +19,13 @@
 }
 .link{
     color: rgb(255, 255, 255);
+    text-decoration: none;
 }
+.link :hover{
+    color: rgb(105, 105, 105);
+    text-decoration: none;
+}
+.UserIcon{
+    font-size: 40px;
+}
+

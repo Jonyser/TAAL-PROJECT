@@ -1,0 +1,66 @@
+.Board{
+  right: 60px;
+  margin: -60px;
+  float:right;
+  position:fixed;
+  height: 80px;
+  width: 100%;
+  /* min-width: 250px; */
+  justify-content: right;
+  display:inline-flex;
+   /* border-radius: 1.5ch; */
+  border: 5px solid rgb(83, 90, 146); 
+  background-color: rgb(238, 238, 238);
+  position:absolute;
+} 
+
+/* .Board{
+  right: 45px;
+  margin: -45px;
+  float:right;
+  position:fixed;
+  height: 110px;
+  width: 100%;
+  min-width: 250px;
+  justify-content: right;
+  display:inline-flex;
+  display:inline-flex;
+  border-radius: 1.5ch;
+  border: 5px solid rgb(83, 90, 146); 
+  background-color: rgb(238, 238, 238);
+} */
+
+.Cover_Tasks{
+    float: right;
+    padding: 5%;
+    margin-right: -7%;
+}
+
+.TitleTasks{
+   background: linear-gradient(90deg, rgb(236, 245, 220) 95%, rgb(164, 190, 125) 1%);
+   height: 40px;
+   border-radius: 1ch;
+   margin-bottom: 15px;
+}
+
+.TasksCover{
+  background-color: rgb(236, 245, 220);
+  padding-top: 5px;
+  padding-bottom: 5px;
+  border-radius: 1.5ch;
+}
+
+.MediaCover{
+  float:right;
+  margin: 10%;
+}
+
+/* .MediaSize{
+  background-color:rgb(194, 219, 240);
+  height: 50px;
+  width:50px;
+
+  border-radius: 1.5ch;
+  
+} */
+  

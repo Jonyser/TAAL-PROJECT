@@ -1,0 +1,40 @@
+  .Stations{
+    background-color: rgb(255, 242, 234);
+    margin: -0.5px;
+    /* margin-right: 30px; */
+    padding-top: 1px;
+    padding-bottom: 1px;
+    border-radius: 1.5ch;
+  }
+  
+  .Station{
+    display: flex;
+    width: 85%;
+    height: 30%;
+    margin: 20px;
+    padding: 20px;
+    justify-content:right;
+    justify-Content: 'space-between';
+    margin-right: 50;
+    border-radius: 1.5ch;
+}
+
+  .Station:hover{
+    background-color:rgb(199, 188, 174);
+  }
+ 
+  .TitleStation{
+
+    background: linear-gradient(90deg, rgb(255, 234, 220) 95%, #e29e62 1%);
+    height: 40px;
+    border-radius: 1ch;
+    margin-bottom: 15px;
+  }
+
+  .Cover_Stations{
+    float: right;
+    margin-right: -7%;
+    padding: 5%;
+    /* margin: 2px; */
+  
+  }

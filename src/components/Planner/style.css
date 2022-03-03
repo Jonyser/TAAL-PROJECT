@@ -1,0 +1,69 @@
+.AddRoute{
+  margin: 10px;
+  padding: 20px;
+  width: auto;
+  height: 50px;
+  background-color: rgb(194, 219, 240);
+  color: rgb(3, 3, 3);
+  border-radius: 20px;
+  border: none;
+}
+.AddRoute:hover{
+  background-color: rgb(186, 186, 202);
+}
+.icon{
+font-size: 20px;
+}
+.Actions {
+  display: flex;
+  justify-content:right;
+  background-color: rgb(194, 219, 240);
+  height: 70px;
+  min-height: 15vh;
+}
+
+.RouteName{
+  text-align: right;
+  border: none;
+  display: flex;
+  height:30px;
+  width:100%;
+  background-color: rgb(180, 180, 180);
+  color: rgb(255, 255, 255);
+  position: absolute;
+  right: 0px;
+} 
+.textView{
+  display: flex;
+  height:30px;
+}
+
+
+/* .NewRouteBody{
+  height:60px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  min-height: 10vh;
+  background-color: rgb(178, 187, 201);
+  color: white;
+} */
+
+/* .GetElement{
+  text-align: right;
+  border: none;
+  display: flex;
+  height:30px;
+  width:100%;
+  color: rgb(0, 0, 0);
+  position: absolute;
+  right: 10px;
+} */
+/* .Dropdown:active, .styledSelect.active {
+  background-color:rgb(136, 30, 30);
+} */
+
+
+
+
+
