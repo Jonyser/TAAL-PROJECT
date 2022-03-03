@@ -67,6 +67,7 @@ const Planner = () => {
             {loading && <div>Loading</div>}
             {!loading && (
                 <>
+        
                     <div className="Actions">
                         <button className='AddRoute' > שייך מסלול לחניך  <FcLink className='icon' /></button>
                         <button className='AddRoute' > שכפל מסלול  <GrDuplicate className='icon' /></button>

@@ -1,11 +1,11 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import { get } from "../../api/api";
 import './style.css';
 import { BsPencilFill } from "react-icons/bs";
 import Stations from '../Stations/Stations'
 import Dot from '../Dot/Dot'
 import $ from 'jquery'
-
+import ReactLoading from 'react-loading';
 // import Select from 'react-select';
 
 let places = [];
@@ -23,10 +23,12 @@ const jq = () => {
 //     // $(".TitlePlaces").fadeTo("slow", 1);
 // }
 const Places = () => {
-    // memo//משתנים,coolbake//pפונ
-    const [loading, setLoading] = useState(false);
-    const [statePlaces, setStatePlaces] = useState([]);
-    const [stateStation, setStateStation] = useState([]);
+    const [, setData] = useState([]);
+    const [done, setDone] = useState(undefined);
+
+    const [, setLoading] = useState(false);
+    const [, setStatePlaces] = useState([]);
+    const [, setStateStation] = useState([]);
 
 
     useEffect(() => {
@@ -42,11 +44,22 @@ const Places = () => {
         }
         fetchData();
     }, []);
+    useEffect(() => {
+        setTimeout(() => {
+            fetch('https://jsonplaceholder.typicode.com/posts/1') //https://jsonplaceholder.typicode.com/guide/ api
+                .then((response) => response.json())
+                .then((json) => {
+                    setData(json);
+                    setDone(true);
+                });
+        }, 2000);
+
+    }, [])
 
     const getData = async () => {
-        let a = "https://s83.bfa.myftpupload.com/?rest_route=/simple-jwt-login/v1/auth"
+        // let a = "https://s83.bfa.myftpupload.com/?rest_route=/simple-jwt-login/v1/auth"
 
-        fetch(a, { method: "POST", body: "email=jonassp@post.jce.ac.il&password=GvS7GZJUDLt0DKBM" }).then(r => r.json()).then(console.log)
+        // fetch(a, { method: "POST", body: "email=jonassp@post.jce.ac.il&password=GvS7GZJUDLt0DKBM" }).then(r => r.json()).then(console.log)
         // ----------------------------------------------------------------------------
         //https://s83.bfa.myftpupload.com/wp-json/wp/v2/places/
 
@@ -63,8 +76,10 @@ const Places = () => {
                     related: res.filter((r) => r.parent === element.id)
                 }
             })
+
             for (let i = 0; i < Places_and_their_stations.length; i++) {
-                setStatePlaces(statePlaces => [...statePlaces, { value: Places_and_their_stations[i].parent.name, label: Places_and_their_stations[i].parent.name }])
+                let temp = Places_and_their_stations[i]
+                setStatePlaces(statePlaces => [...statePlaces, { value: temp.parent.name, label: temp.parent.name }])
             }
         });
     }
@@ -95,8 +110,9 @@ const Places = () => {
 
     return (
         <>
-            {loading && (<div>Loading</div>)}
-            {!loading && (
+
+            {!done ? <><h1 float={'right'}>loading</h1>< ReactLoading type={"bars"} color={"rgb(180, 175, 199)"} height={'10%'} width={'10%'} />  </>
+                :
                 <>
                     <div className='Cover_Places'>
                         <div className='TitlePlaces'><h2>אתרים</h2></div>
@@ -109,7 +125,7 @@ const Places = () => {
                     </div>
                     <Stations propsData={stationArray} />
                 </>
-            )}
+            }
         </>
     );
 
