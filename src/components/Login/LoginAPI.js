@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 
 function LoginAPI(props) {
-    const [urlToLogin, setUrlToLogin] = useState('')
+    const [, setUrlToLogin] = useState('')
 
 
 
@@ -17,7 +17,7 @@ function LoginAPI(props) {
             })
                 .then((response) => response.json())
                 .then((data) => {
-                    if (data['success'] == true) {
+                    if (data['success'] === true) {
 
                         console.log(data)
                         localStorage.setItem('jwt', data['data']['jwt'])

@@ -5,7 +5,7 @@ let image = ""
 const Images = ({ id, data }) => {
 
     for (let index = 0; index < data.length; index++) {
-        if (data[index].id == id) {
+        if (data[index].id === id) {
             image = data[index].acf.image.url;
         }
     }

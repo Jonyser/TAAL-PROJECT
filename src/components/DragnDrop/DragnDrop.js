@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect,  } from 'react';
 import Tag from "../Tag/Tag.js";
 import { useDrop } from "react-dnd";
 import "./style.css";
@@ -8,7 +8,6 @@ import $ from 'jquery'
 
 let Route = [];
 let dndArray = [];
-let image = "";
 let saveProps = [];
 let thisId = ""
 let thisIdArray = [];
@@ -21,7 +20,7 @@ const jq_Hide = () => {
 }
 
 function DragnDrop(props) {
-    const [loading, setLoading] = useState(false);
+    const [, setLoading] = useState(false);
     useEffect(() => {
         const fetchData = async () => {
             setLoading(true);
@@ -49,7 +48,7 @@ function DragnDrop(props) {
     const [board, setBoard] = useState([]);
 
     //---------------------------------------------------------
-    const [{ isOver }, drop] = useDrop(() => ({
+    const [, drop] = useDrop(() => ({
         accept: "image",
         drop: (item) => addImageToBoard(item.id),
         collect: (monitor) => ({
@@ -59,7 +58,6 @@ function DragnDrop(props) {
     //---------------------------------------------------------
     const addImageToBoard = (id) => {
         thisId = id;
-        image = ""
         Route = dndArray.filter((tag) => id === tag.id);
         setBoard((board) => [...board, Route[0]]);
         thisIdArray.push(thisId);
