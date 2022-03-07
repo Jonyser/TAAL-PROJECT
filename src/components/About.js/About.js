@@ -1,48 +1,73 @@
-import React from 'react';
-import './style.css'
+import React, { useState, useEffect } from 'react';
+import './style.css';
+import { GrDuplicate } from "react-icons/gr";
+import { FcOk, FcLink } from "react-icons/fc";
+import Cards from '../Cards/Cards';
+import $ from 'jquery';
 
-function About() {
+
+
+const About = () => {
+    const [, setName] = useState(null);// for TextView
+    const [loading, setLoading] = useState(false);
+
+    useEffect(() => {
+        const fetchData = async () => {
+            setLoading(true);
+            try {
+                jq();
+                // useWindowSize()
+            } catch (error) {
+                console.error(error.message);
+            }
+            setLoading(false);
+        }
+        fetchData();
+    }, []);
+
+    // const [jqry, setJqry] = useState(jq);
+
+    //-------------------input-------------------------
+    function getName(val) {
+        setName(val.target.value)
+        console.warn(val.target.value)
+    }
     return (
-        <div className='abt'>
-            <h1>About page</h1>
-        </div>
+        <>
+            {loading && <div>Loading</div>}
+            {!loading && (
+                <>
+
+                    <div className="Actions">
+                        <button className='AddRoute' > שייך מסלול לחניך  <FcLink className='icon' /></button>
+                        <button className='AddRoute' > שכפל מסלול  <GrDuplicate className='icon' /></button>
+                        <button className='AddRoute'> שמור מסלול  <FcOk className='icon' /> </button>
+                    </div>
+
+
+                    <div className='textView'>
+                        <input type="text" className="RouteName" onChange={getName}></input>
+                    </div>
+
+                    <div>
+                        <br></br>
+                        <br></br>
+                        <br></br>
+
+                        <Cards />
+
+                    </div>
+                </>
+            )}
+        </>
     );
+}
+const jq = () => {
+    $(".TitleTasks").hide();
+    $(".TitleStation").hide();
+    console.log(document.body.style.zoom)
+
 }
 
 export default About;
 
-
-
-
-// //import React from "react";
-// import Card from "../../Card";
-// import img7 from "../../Pictures/img7.png"
-// // import img7 from "../../../Pictures/img7.png";
-
-
-// function About() {
-//     return (
-//         <>
-//             <div className="my-5">
-//                 <h1 className="text-center">המסלולים שלנו</h1>
-//             </div>
-
-//             <div className="container-fluid mb-5">
-//                 <div className="row">
-//                     <div className="col-10 mx-auto">
-//                         <div className="row gy-4">
-//                             <Card title="מסלול1" imgsrc={img7} />
-//                             <Card title="מסלול2" imgsrc={img7} />
-//                             <Card title="מסלול3" imgsrc={img7} />
-//                             <Card title="מסלול4" imgsrc={img7} />
-//                             <Card title="מסלול5" imgsrc={img7} />
-//                             <Card title="מסלול6" imgsrc={img7} />
-//                         </div>
-//                     </div>
-//                 </div>
-//             </div>
-//         </>
-//     );
-// }
-
-// export default About;

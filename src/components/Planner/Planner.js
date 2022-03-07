@@ -4,39 +4,8 @@ import { GrDuplicate } from "react-icons/gr";
 import { FcOk, FcLink } from "react-icons/fc";
 import Places from '../Places/Places';
 import $ from 'jquery';
-import { createStore } from 'redux';
-//------------------test redux----------------------
-// const increment =() => {
-//     return{
-//     type: 'INCREMENT'
-//     }
-// }
 
-// const decrement =() => {
-//     return{
-//     type: 'DECREMENT'
-//     }
-// }
 
-// const counter =(state =0,action)=>{
-//     switch(action.type){
-//         case "INCREMENT":
-//             return state +1;
-//         case "DECREMENT":
-//             return state -2;
-//     }
-    
-// }
-// let store = createStore(counter) 
-// store.subscribe(()=> console.log("redux",store.getState()))
-
-// store.dispatch(increment());
-// store.dispatch(decrement());
-// store.dispatch(decrement());
-
-//------------------------------------------------------------------------
-// import { createStore } from 'redux'
-// import { Provider } from 'react-redux'
 
 const Planner = () => {
     const [, setName] = useState(null);// for TextView
