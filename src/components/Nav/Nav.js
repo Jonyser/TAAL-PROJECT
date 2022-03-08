@@ -12,7 +12,7 @@ const Nav = () => {
                     <li>כניסה <FcHome /></li>
                 </Link>
                 <Link to="/about" className='link'>
-                    <li>אודות <FcAbout /></li>
+                    <li>מסלולים <FcAbout /></li>
                 </Link>
                 <Link to="/planner" className='link'>
                     <li>הוספת מסלול <FcPlus /></li>

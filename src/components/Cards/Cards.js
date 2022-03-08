@@ -1,14 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import { get } from "../../api/api";
 import ReactLoading from 'react-loading';
-import Card from '../Card/Card'
-import { keys } from 'mobx';
-
-// import Select from 'react-select';
-
+import './style.css';
+import { GrScorecard } from "react-icons/gr";
+import img1 from '../../Pictures/img1.png';
+import img2 from '../../Pictures/img2.png';
+import img3 from '../../Pictures/img3.png';
+import img4 from '../../Pictures/img4.png';
+import img5 from '../../Pictures/img5.png';
+import img6 from '../../Pictures/img7.png';
+let result = 0;
 let dataCards = [];
-
-
+let i = 1;
 
 const Cards = () => {
     const [, setData] = useState([]);
@@ -53,24 +56,32 @@ const Cards = () => {
         }).then(res => {
             console.log("routes:", res)
             setDataCards(
-                dataCards = res.map((element) => {
+                dataCards = res.map((value
+                ) => {
                     return {
-                        myUsers: element.acf.users,
-                        myTitle: element.title.rendered,
-                        myTasks: element.acf.tasks
 
+                        myUsers: value.acf.users,
+                        myTitle: value.title.rendered,
+                        myTasks: value.acf.tasks,
+                        myId: value.id
                     }
                 })
             )
-            console.log("dataCardssssssssssssssss", dataCards)
-
-
-
+            console.log(dataCards)
         });
     }
 
     //----------------------------------------------------------------------
+    // const foo = () => {
+    //     result = "img" + i
+    //     i++;
+    //     if (i == 7) {
+    //         i = 1
+    //     }
+    //     console.log("res:", result)
 
+
+    // }
     return (
         <>
             {!done ?
@@ -83,32 +94,38 @@ const Cards = () => {
 
                     {dataCards.map((value, index) => {
                         return (
-                            <div
-                                key={index}>
-                                <Card myTitle={value.myTitle} myTasks={value.myTasks} size={dataCards.length} />
+
+                            <div key={index} className='Cards' >
+
+                                <button key={index} className='Card'>
+                                    {/* {foo()}
+                                    {console.log("res:", typeof result)} */}
+                                    <img className='img' src={img1}></img>
+                                    <h4> <GrScorecard />{value.myTitle}</h4>
+
+
+                                    <div className='Task_s'>
+                                        {value.myTasks.map((value, index) =>
+
+                                            <p className='Task'
+                                                key={index}>
+
+                                                {value.post_title}
+
+                                            </p>)}
+
+
+                                    </div>
+
+
+                                </button>
                             </div>
                         )
-                    })} <br></br>
-
-                    {/* {dataCards.map((value, index) => {
-
-                        return (
-                            <div> key={index}
-                                <Card myTitle={value.myTitle} />
-
-                            </div>
+                    })}
 
 
 
 
-                        )
-
-                        //  console.log("dataCardsdataCardsdataCards: ", element.myTitle)
-
-
-                    })} */}
-
-                    {/* {dataCards.map((value, index) => { return (<button className='Place' key={index}>{value}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</button>) })} <br></br> */}
 
                 </>
             }

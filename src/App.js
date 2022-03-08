@@ -5,8 +5,8 @@ import Planner from './components/Planner/Planner';
 import './App.css';
 import LoginApp from './components/Login/LoginApp';
 import { Provider } from 'react-redux';
-import store from './redux/store'
-import CallState from "./components/CallState/CallState";
+import store from './redux/store';
+// import CallState from "./components/CallState/CallState";
 function App() {
   return (
 

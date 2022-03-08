@@ -4,10 +4,10 @@ import './style.css';
 import { BsPencilFill } from "react-icons/bs";
 import Stations from '../Stations/Stations'
 import Dot from '../Dot/Dot'
-import $, { post } from 'jquery'
+import $, { } from 'jquery'
 import ReactLoading from 'react-loading';
-import { connect } from 'react-redux';
-import { setName } from '../../redux/actions';
+// import { connect } from 'react-redux';
+// import { setName } from '../../redux/actions';
 // import Select from 'react-select';
 
 let places = [];
@@ -28,7 +28,7 @@ const Places = () => {
     const [done, setDone] = useState(undefined);
 
     const [, setLoading] = useState(false);
-    const [, setStatePlaces] = useState([]);
+    // const [, setStatePlaces] = useState([]);
     const [, setStateStation] = useState([]);
 
 
@@ -73,10 +73,10 @@ const Places = () => {
                 }
             })
 
-            for (let i = 0; i < Places_and_their_stations.length; i++) {
-                let temp = Places_and_their_stations[i]
-                setStatePlaces(statePlaces => [...statePlaces, { value: temp.parent.name, label: temp.parent.name }])
-            }
+            // for (let i = 0; i < Places_and_their_stations.length; i++) {
+            //     let temp = Places_and_their_stations[i]
+            //     // setStatePlaces(statePlaces => [...statePlaces, { value: temp.parent.name, label: temp.parent.name }])
+            // }
         });
     }
 

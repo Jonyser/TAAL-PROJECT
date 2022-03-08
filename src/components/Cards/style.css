@@ -1,0 +1,44 @@
+/* .Card{
+      background-color:rgb(180, 175, 199);
+   border-radius: 1.5ch;
+} */
+
+.Cards {
+ 
+    display: grid;
+    display: inline;
+    grid-template-columns: repeat(3, 8fr);
+    
+     
+    grid-auto-rows: auto;
+     
+    grid-gap: 1rem;
+     
+    }
+     
+     
+.Card {
+     
+    flex-wrap: wrap;
+    justify-content: space-between;
+    flex: 0 1 calc(25% - 1em);
+    border: 5px solid #b4aaaa; 
+    border-radius: 4px;
+    padding: 50px;
+    margin: 10px;
+  
+     
+    }
+h4{
+        color: brown;
+    }
+.Task{
+
+    right: 100%;
+    background-color: rgb(196, 243, 227);
+   
+}
+.img{
+    width: 200px;
+    height: 200px;
+}

@@ -5,17 +5,15 @@ import { FcOk, FcLink } from "react-icons/fc";
 import Cards from '../Cards/Cards';
 import $ from 'jquery';
 
-
-
 const About = () => {
     const [, setName] = useState(null);// for TextView
-    const [loading, setLoading] = useState(false);
+    const [, setLoading] = useState(false);
 
     useEffect(() => {
         const fetchData = async () => {
             setLoading(true);
             try {
-                jq();
+
                 // useWindowSize()
             } catch (error) {
                 console.error(error.message);
@@ -34,32 +32,28 @@ const About = () => {
     }
     return (
         <>
-            {loading && <div>Loading</div>}
-            {!loading && (
-                <>
-
-                    <div className="Actions">
-                        <button className='AddRoute' > שייך מסלול לחניך  <FcLink className='icon' /></button>
-                        <button className='AddRoute' > שכפל מסלול  <GrDuplicate className='icon' /></button>
-                        <button className='AddRoute'> שמור מסלול  <FcOk className='icon' /> </button>
-                    </div>
+            <div className="Actions">
+                <button className='AddRoute' > שייך מסלול לחניך  <FcLink className='icon' /></button>
+                <button className='AddRoute' > שכפל מסלול  <GrDuplicate className='icon' /></button>
+                <button className='AddRoute'> שמור מסלול  <FcOk className='icon' /> </button>
+            </div>
 
 
-                    <div className='textView'>
-                        <input type="text" className="RouteName" onChange={getName}></input>
-                    </div>
+            <div className='textView'>
+                <input type="text" className="RouteName" onChange={getName}></input>
+            </div>
 
-                    <div>
-                        <br></br>
-                        <br></br>
-                        <br></br>
+            <div>
+                <br></br>
+                <br></br>
+                <br></br>
 
-                        <Cards />
+                <Cards />
 
-                    </div>
-                </>
-            )}
+            </div>
         </>
+
+
     );
 }
 const jq = () => {
