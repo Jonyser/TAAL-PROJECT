@@ -16,6 +16,7 @@
     justify-Content: 'space-between';
     margin-right: 50;
     border-radius: 1.5ch;
+    font-size: small;
 
   }
   .Place:hover{
@@ -28,7 +29,7 @@
     border-radius: 1ch;
     margin-bottom: 15px;
   }
-  h2{
+  h3{
     display:flex;
     justify-content:center;
     margin: 10px;
@@ -45,4 +46,11 @@
     background-color: black;
     border-radius: 50%;
     display: inline-block;
+  }
+  .loading{
+
+    display:block;
+    margin-right: auto;
+    margin-left: auto; 
+  
   }

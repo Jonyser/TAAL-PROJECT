@@ -64,7 +64,7 @@ const Stations = (props) => {
             {!loading && (
                 <>
                     <div className='Cover_Stations'>
-                        <div className='TitleStation'><h2>תחנות</h2></div>
+                        <div className='TitleStation'><h3>תחנות</h3></div>
                         <div className='Stations'>
                             {
                                 props.propsData.map((value, index) => {

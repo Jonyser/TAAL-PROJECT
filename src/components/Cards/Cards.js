@@ -1,24 +1,39 @@
 import React, { useState, useEffect } from 'react';
 import { get } from "../../api/api";
-import ReactLoading from 'react-loading';
 import './style.css';
-import { GrScorecard } from "react-icons/gr";
+import '../../../node_modules/bootstrap/dist/css/bootstrap.css';
+// /
+
 import img1 from '../../Pictures/img1.png';
 import img2 from '../../Pictures/img2.png';
 import img3 from '../../Pictures/img3.png';
-import img4 from '../../Pictures/img4.png';
-import img5 from '../../Pictures/img5.png';
-import img6 from '../../Pictures/img7.png';
-let result = 0;
+import img4 from '../../Pictures/img6.png';
+import {
+    Button,
+    Dropdown,
+    DropdownButton,
+    Card
+} from 'react-bootstrap';
+
 let dataCards = [];
-let i = 1;
+let dataCards1 = [];
+let dataCards2 = [];
+let dataCards3 = [];
+let dataCards4 = [];
+let size = 0;
+let index;
+
+const number = 4;
 
 const Cards = () => {
-    const [, setData] = useState([]);
-    const [done, setDone] = useState(undefined);
+
 
     const [, setLoading] = useState(false);
     const [, setDataCards] = useState([]);
+    const [, setDataCards1] = useState([]);
+    const [, setDataCards2] = useState([]);
+    const [, setDataCards3] = useState([]);
+    const [, setDataCards4] = useState([]);
 
 
 
@@ -35,17 +50,6 @@ const Cards = () => {
         }
         fetchData();
     }, []);
-    useEffect(() => {
-        setTimeout(() => {
-            fetch('https://jsonplaceholder.typicode.com/posts/1') //https://jsonplaceholder.typicode.com/guide/ api
-                .then((response) => response.json())
-                .then((json) => {
-                    setData(json);
-                    setDone(true);
-                });
-        }, 2000);
-
-    }, [])
 
     const getData = async () => {
 
@@ -54,8 +58,12 @@ const Cards = () => {
                 per_page: 99, 'Cache-Control': 'no-cache'
             }
         }).then(res => {
+            size = res.length / number;
+
+
             console.log("routes:", res)
             setDataCards(
+
                 dataCards = res.map((value
                 ) => {
                     return {
@@ -65,10 +73,45 @@ const Cards = () => {
                         myTasks: value.acf.tasks,
                         myId: value.id
                     }
+
                 })
+
             )
+            size = dataCards.length / number;
+            for (index = 0; index < size; index++) {
+                setDataCards1(dataCards1[index] = dataCards[index])
+
+            }
             console.log(dataCards)
+            console.log(index)
+            console.log("dataCards1", dataCards1)
+
+
+            for (let i = 0; i < size; i++, index++) {
+
+                setDataCards2(dataCards2[i] = dataCards[index])
+
+
+            }
+            console.log("dataCards2", dataCards2)
+
+            for (let i = 0; i < size; i++, index++) {
+
+                setDataCards3(dataCards3[i] = dataCards[index])
+
+
+            }
+            console.log("dataCards3", dataCards3);
+
+            for (let i = 0; i < size; i++, index++) {
+
+                setDataCards4(dataCards4[i] = dataCards[index])
+
+
+            }
+            console.log("dataCards4", dataCards4)
         });
+
     }
 
     //----------------------------------------------------------------------
@@ -84,52 +127,204 @@ const Cards = () => {
     // }
     return (
         <>
-            {!done ?
-                <>
-                    <h1 float={'right'}>loading</h1>
-                    < ReactLoading type={"bars"} color={"rgb(180, 175, 199)"} height={'10%'} width={'10%'} />
-                </>
-                :
-                <>
 
-                    {dataCards.map((value, index) => {
+            <div className='container'>
+
+                <div className="row">
+                    <div className="col-3">{dataCards1.map((value, index) => {
                         return (
+                            <div key={index} className='App'>
+                                <header key={index}>
+                                    <Card style={{ color: "#000", marginBottom: 15 }}>
+                                        {/* display_name */}
+                                        <Card.Img src={img1} style={{ height: 237 }} />
+                                        <Card.Body>
+                                            <Card.Title>
+                                                {value.myTitle}
+                                            </Card.Title>
+                                            <Card.Subtitle >
 
-                            <div key={index} className='Cards' >
-
-                                <button key={index} className='Card'>
-                                    {/* {foo()}
-                                    {console.log("res:", typeof result)} */}
-                                    <img className='img' src={img1}></img>
-                                    <h4> <GrScorecard />{value.myTitle}</h4>
-
-
-                                    <div className='Task_s'>
-                                        {value.myTasks.map((value, index) =>
-
-                                            <p className='Task'
-                                                key={index}>
-
-                                                {value.post_title}
-
-                                            </p>)}
+                                            </Card.Subtitle>
 
 
-                                    </div>
+                                            <DropdownButton className="d-inline p-2 text-white" id="dropdown-basic-button" title="משימות" >
 
+                                                {value.myTasks.map((value, index) =>
+                                                    <Dropdown.Item key={index} >
 
-                                </button>
+                                                        {value.post_title}
+                                                    </Dropdown.Item>)}
+
+                                            </DropdownButton>
+                                            <DropdownButton className="d-inline p-2  text-white" id="dropdown-basic-button" title="משוייך ל" >
+                                                {value.myUsers ? <>
+
+                                                    {value.myUsers.map((value, index) =>
+                                                        <Dropdown.Item key={index} >
+
+                                                            {value.display_name}
+                                                        </Dropdown.Item>)}
+                                                </> : <>
+
+                                                    <Dropdown.Item href="#/action-1">
+
+                                                        אינו משוייך
+
+                                                    </Dropdown.Item>
+                                                </>}
+
+                                            </DropdownButton>
+
+                                        </Card.Body>
+                                    </Card>
+                                </header>
                             </div>
                         )
-                    })}
+                    })}</div>
+                    <div className="col-3">{dataCards2.map((value, index) => {
+                        return (
+                            <div key={index} className='App'>
+                                <header key={index} >
+                                    <Card className="mb-3" style={{ color: "#000", marginBottom: 7 }}>
+
+                                        <Card.Img src={img2} style={{ height: 237 }} />
+                                        <Card.Body>
+                                            <Card.Title>
+                                                {value.myTitle}
+                                            </Card.Title>
+                                            <Card.Subtitle >
+                                                <DropdownButton className="d-inline p-2 text-white" id="dropdown-basic-button" title="משימות" >
+
+                                                    {value.myTasks.map((value, index) =>
+                                                        <Dropdown.Item key={index} >
+
+                                                            {value.post_title}
+                                                        </Dropdown.Item>)}
+                                                </DropdownButton>
+                                                <DropdownButton className="d-inline p-2  text-white" id="dropdown-basic-button" title="משוייך ל" >
+                                                    {value.myUsers ? <>
+
+                                                        {value.myUsers.map((value, index) =>
+                                                            <Dropdown.Item key={index} >
+
+                                                                {value.display_name}
+                                                            </Dropdown.Item>)}
+                                                    </> : <>
+
+                                                        <Dropdown.Item href="#/action-1">
+                                                            {console.log("אינו משוייך")}
+                                                            אינו משוייך
+
+                                                        </Dropdown.Item>
+                                                    </>}
+
+                                                </DropdownButton>
+                                            </Card.Subtitle>
+                                        </Card.Body>
+
+
+                                    </Card>
+                                </header>
+                            </div>
+                        )
+                    })}</div>
+                    <div className="col-3">{dataCards3.map((value, index) => {
+                        return (
+                            <div key={index} className='App'>
+                                <header key={index} >
+                                    <Card className="mb-3" style={{ color: "#000", marginBottom: 7 }}>
+
+                                        <Card.Img src={img3} style={{ height: 237 }} />
+                                        <Card.Body>
+                                            <Card.Title>
+                                                {value.myTitle}
+                                            </Card.Title>
+                                            <Card.Subtitle >
+
+                                                <DropdownButton className="d-inline p-2 text-white" id="dropdown-basic-button" title="משימות" >
+
+                                                    {value.myTasks.map((value, index) =>
+                                                        <Dropdown.Item key={index} >
+
+                                                            {value.post_title}
+                                                        </Dropdown.Item>)}
+                                                </DropdownButton>
+
+                                                <DropdownButton className="d-inline p-2  text-white" id="dropdown-basic-button" title="משוייך ל" >
+                                                    {value.myUsers ? <>
 
 
 
+                                                        {value.myUsers.map((value, index) =>
+                                                            <Dropdown.Item key={index} >
 
+                                                                {value.display_name}
+                                                            </Dropdown.Item>)}
+                                                    </> : <>
+                                                        <Dropdown.Item href="#/action-1">
+                                                            {console.log("אינו משוייך")}
+                                                            אינו משוייך
 
-                </>
-            }
+                                                        </Dropdown.Item></>}
 
+                                                </DropdownButton>
+
+                                            </Card.Subtitle>
+                                        </Card.Body>
+
+                                    </Card>
+                                </header>
+                            </div>
+                        )
+                    })}</div>
+                    <div className="col-3">{dataCards4.map((value, index) => {
+                        return (
+                            <div key={index} className='App'>
+                                <header key={index} >
+                                    <Card className="mb-3" style={{ color: "#000", marginBottom: 7 }}>
+
+                                        <Card.Img src={img4} style={{ height: 237 }} />
+                                        <Card.Body>
+                                            <Card.Title>
+                                                {value.myTitle}
+
+                                            </Card.Title>
+
+                                            <Card.Subtitle >
+
+                                                <DropdownButton className="d-inline p-2 " id="dropdown-basic-button" title="משימות" >
+
+                                                    {value.myTasks.map((value, index) =>
+                                                        <Dropdown.Item key={index}>
+
+                                                            {value.post_title}
+                                                        </Dropdown.Item>)}
+                                                </DropdownButton>
+                                                <DropdownButton className="d-inline p-2 " id="dropdown-basic-button" title="משוייך ל" >
+                                                    {value.myUsers ? <>
+                                                        {value.myUsers.map((value, index) =>
+                                                            <Dropdown.Item key={index} >
+
+                                                                {value.display_name}
+                                                            </Dropdown.Item>)}
+                                                    </> : <>
+                                                        <Dropdown.Item href="#/action-1">
+                                                            {console.log("אינו משוייך")}
+                                                            אינו משוייך
+
+                                                        </Dropdown.Item></>}
+
+                                                </DropdownButton>
+                                            </Card.Subtitle>
+                                        </Card.Body>
+                                    </Card>
+                                </header>
+                            </div>
+                        )
+                    })}</div>
+
+                </div>
+            </div>
         </>
     );
 

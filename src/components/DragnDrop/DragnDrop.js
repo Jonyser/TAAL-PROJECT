@@ -1,4 +1,4 @@
-import React, { useState, useEffect,  } from 'react';
+import React, { useState, useEffect, } from 'react';
 import Tag from "../Tag/Tag.js";
 import { useDrop } from "react-dnd";
 import "./style.css";
@@ -74,7 +74,7 @@ function DragnDrop(props) {
 
 
             <div className='Cover_Tasks'>
-                <div className='TitleTasks'><h2>משימות</h2></div>
+                <div className='TitleTasks'><h3>משימות</h3></div>
                 <div className='TasksCover'>
 
                     {dndArray.length === 0 ? jq_Hide() : dndArray.map((tag) => {

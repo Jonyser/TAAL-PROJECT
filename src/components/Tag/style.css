@@ -1,6 +1,8 @@
 .Tasks{
     display: flex;
-    width: 210px;
+   /* min-width: 250px;
+   width:auto; */
+    height: 70px;
     margin: 20px;
     padding: 20px;
     justify-content: right;

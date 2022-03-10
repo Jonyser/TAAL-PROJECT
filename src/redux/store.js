@@ -1,11 +1,11 @@
 import { createStore } from 'redux';
 import reduser from './reduser';
-import React, { useState, useEffect } from 'react';
-import { get } from "../api/api";
+// import React, { useState, useEffect } from 'react';
+// import { get } from "../api/api";
 
-let places = [];
-let stationArray = [];
-let Places_and_their_stations = [];
+// let places = [];
+// let stationArray = [];
+// let Places_and_their_stations = [];
 
 const store = createStore(
 

@@ -3,9 +3,7 @@ import './style.css';
 import { GrDuplicate } from "react-icons/gr";
 import { FcOk, FcLink } from "react-icons/fc";
 import Places from '../Places/Places';
-import $ from 'jquery';
-
-
+// import $ from 'jquery';
 
 const Planner = () => {
     const [, setName] = useState(null);// for TextView
@@ -62,9 +60,9 @@ const Planner = () => {
     );
 }
 const jq =() =>{
-    $(".TitleTasks").hide();
-    $(".TitleStation").hide();
-    console.log(document.body.style.zoom)
+    // $(".TitleTasks").hide();
+    // $(".TitleStation").hide();
+  
 
 }
 

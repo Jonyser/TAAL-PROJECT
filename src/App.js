@@ -18,7 +18,6 @@ function App() {
             {/* <CallState /> */}
             <Route path="/planner" component={Planner}></Route>
             <Route path="/about" component={About}></Route>
-
             <Route path="/" exact component={Home}></Route>
 
           </Switch>

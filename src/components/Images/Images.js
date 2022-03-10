@@ -1,5 +1,5 @@
 import './style.css';
-
+import Image from 'react-bootstrap/Image'
 let image = ""
 
 const Images = ({ id, data }) => {
@@ -13,7 +13,9 @@ const Images = ({ id, data }) => {
     return (
         <>
             <div className="images">
-                <img
+                <Image
+
+
                     src={image}
                     alt="new"
                 />

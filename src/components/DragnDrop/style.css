@@ -1,12 +1,11 @@
 .Board{
   right: 60px;
   margin: -60px;
-  float:right;
-  position:fixed;
-  height: 80px;
+  height: 130px;
   width: 100%;
   /* min-width: 250px; */
   justify-content: right;
+ justify-self: unset;
   display:inline-flex;
    /* border-radius: 1.5ch; */
   border: 5px solid rgb(83, 90, 146); 
@@ -14,26 +13,13 @@
   position:absolute;
 } 
 
-/* .Board{
-  right: 45px;
-  margin: -45px;
-  float:right;
-  position:fixed;
-  height: 110px;
-  width: 100%;
-  min-width: 250px;
-  justify-content: right;
-  display:inline-flex;
-  display:inline-flex;
-  border-radius: 1.5ch;
-  border: 5px solid rgb(83, 90, 146); 
-  background-color: rgb(238, 238, 238);
-} */
+
 
 .Cover_Tasks{
     float: right;
     padding: 5%;
     margin-right: -7%;
+    font-size: small;
 }
 
 .TitleTasks{
@@ -41,12 +27,14 @@
    height: 40px;
    border-radius: 1ch;
    margin-bottom: 15px;
+   font-size: small;
 }
 
 .TasksCover{
   background-color: rgb(236, 245, 220);
-  padding-top: 5px;
-  padding-bottom: 5px;
+  margin: -0.5px;
+  padding-top: 1px;
+  padding-bottom: 1px;
   border-radius: 1.5ch;
 }
 

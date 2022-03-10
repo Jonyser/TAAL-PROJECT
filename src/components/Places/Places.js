@@ -4,7 +4,7 @@ import './style.css';
 import { BsPencilFill } from "react-icons/bs";
 import Stations from '../Stations/Stations'
 import Dot from '../Dot/Dot'
-import $, { } from 'jquery'
+// import $, { } from 'jquery'
 import ReactLoading from 'react-loading';
 // import { connect } from 'react-redux';
 // import { setName } from '../../redux/actions';
@@ -15,7 +15,8 @@ let stationArray = [];
 let Places_and_their_stations = [];
 
 const jq = () => {
-    $(".TitleStation").show();
+    // $(".TitleStation").hide();
+    // console.log("ttt")
 }
 
 // const jq = () => {
@@ -26,7 +27,6 @@ const jq = () => {
 const Places = () => {
     const [, setData] = useState([]);
     const [done, setDone] = useState(undefined);
-
     const [, setLoading] = useState(false);
     // const [, setStatePlaces] = useState([]);
     const [, setStateStation] = useState([]);
@@ -38,6 +38,7 @@ const Places = () => {
             try {
                 getData();
                 jq();
+
             } catch (error) {
                 console.error(error.message);
             }
@@ -109,11 +110,13 @@ const Places = () => {
 
             {!done ? <>
                 <h1 float={'right'}>loading</h1>
-                < ReactLoading type={"bars"} color={"rgb(180, 175, 199)"} height={'10%'} width={'10%'} />  </>
+                < ReactLoading type={"bars"} className='loading' color={"rgb(180, 175, 199)"} height={'10%'} width={'10%'} />
+            </>
                 :
                 <>
+
                     <div className='Cover_Places'>
-                        <div className='TitlePlaces'><h2>אתרים</h2></div>
+                        <div className='TitlePlaces'><h3>אתרים</h3></div>
 
                         <div className='Places'>
 
@@ -128,11 +131,16 @@ const Places = () => {
                                         <Dot color="rgb(161, 147, 229)" />
                                     </button>
                                 )
-                            })} <br></br>
+
+                            })}
+
+                            {/* <br></br> */}
                         </div>
 
                     </div>
                     <Stations propsData={stationArray} />
+
+
                 </>
             }
         </>
