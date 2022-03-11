@@ -9,7 +9,7 @@ import img2 from '../../Pictures/img2.png';
 import img3 from '../../Pictures/img3.png';
 import img4 from '../../Pictures/img6.png';
 import {
-    Button,
+    // Button,
     Dropdown,
     DropdownButton,
     Card
@@ -20,9 +20,10 @@ let dataCards1 = [];
 let dataCards2 = [];
 let dataCards3 = [];
 let dataCards4 = [];
+let flag = false;
 let size = 0;
-let index;
-
+let index = 0;
+let sizeMod = 0;
 const number = 4;
 
 const Cards = () => {
@@ -34,9 +35,17 @@ const Cards = () => {
     const [, setDataCards2] = useState([]);
     const [, setDataCards3] = useState([]);
     const [, setDataCards4] = useState([]);
+    const [, setFlag] = useState(false);
+    // setDataCards(dataCards = []);
+    // setDataCards1(dataCards1 = []);
 
+    // setDataCards2(dataCards2 = [])
 
+    // setDataCards3(dataCards3 = [])
 
+    // setDataCards4(dataCards4 = [])
+
+    //
     useEffect(() => {
         const fetchData = async () => {
             setLoading(true);
@@ -52,8 +61,9 @@ const Cards = () => {
     }, []);
 
     const getData = async () => {
-
-        await get('https://s83.bfa.myftpupload.com/wp-json/wp/v2/routes/', {
+        // https://s83.bfa.myftpupload.com/wp-json/wp/v2/routes/
+        // https://taal.tech/wp-json/wp/v2/routes/
+        await get('https://taal.tech/wp-json/wp/v2/routes/', {
             params: {
                 per_page: 99, 'Cache-Control': 'no-cache'
             }
@@ -61,55 +71,104 @@ const Cards = () => {
             size = res.length / number;
 
 
-            console.log("routes:", res)
-            setDataCards(
+            console.log("dataCards:", dataCards)
+            console.log("flag:", flag)
+            if (flag === false) {
+                setDataCards(
 
-                dataCards = res.map((value
-                ) => {
-                    return {
 
-                        myUsers: value.acf.users,
-                        myTitle: value.title.rendered,
-                        myTasks: value.acf.tasks,
-                        myId: value.id
+                    dataCards = res.map((value
+                    ) => {
+                        return {
+
+                            myUsers: value.acf.users,
+                            myTitle: value.title.rendered,
+                            myTasks: value.acf.tasks,
+                            myId: value.id
+                        }
+                    })
+                )
+            }
+
+            sizeMod = dataCards.length % number;
+            size = (dataCards.length - sizeMod) / number;
+            console.log("size", size)
+            // console.log("sizesizesizesizesizesize:", size)
+            if (flag === false)
+                for (let i = 0; i < size; i++) {
+
+                    setDataCards1(dataCards1[i] = dataCards[index]);
+                    index++;
+                    setDataCards2(dataCards2[i] = dataCards[index])
+                    index++;
+                    setDataCards3(dataCards3[i] = dataCards[index])
+                    index++;
+                    setDataCards4(dataCards4[i] = dataCards[index])
+                    index++;
+
+                }
+            // console.log("dataCards1", dataCards1)
+            // console.log("dataCards2", dataCards2)
+            // console.log("dataCards3", dataCards3)
+            // console.log("dataCards4", dataCards4)
+
+            if (flag === false)
+                for (let i = 0; i < sizeMod; i++) {
+
+                    if (i < sizeMod) {
+                        setDataCards4(dataCards4[size] = dataCards[index]);
+                        i++;
+                        index++;
                     }
+                    if (i < sizeMod) {
+                        setDataCards3(dataCards3[size] = dataCards[index]);
+                        i++;
+                        index++;
+                    }
+                    if (i < sizeMod) {
+                        setDataCards2(dataCards2[size] = dataCards[index]);
+                        i++;
+                        index++;
+                    }
+                    if (i < sizeMod) {
+                        setDataCards1(dataCards1[size] = dataCards[index]);
+                        i++;
+                        index++;
+                    }
+                }
+            setFlag(flag = true)
+            sizeMod = dataCards.length % number;
+            size = (dataCards.length - sizeMod) / number;
+            // for (index = 0; index < size; index++) {
+            //     setDataCards1(dataCards1[index] = dataCards[index])
 
-                })
-
-            )
-            size = dataCards.length / number;
-            for (index = 0; index < size; index++) {
-                setDataCards1(dataCards1[index] = dataCards[index])
-
-            }
-            console.log(dataCards)
-            console.log(index)
-            console.log("dataCards1", dataCards1)
-
-
-            for (let i = 0; i < size; i++, index++) {
-
-                setDataCards2(dataCards2[i] = dataCards[index])
-
-
-            }
-            console.log("dataCards2", dataCards2)
-
-            for (let i = 0; i < size; i++, index++) {
-
-                setDataCards3(dataCards3[i] = dataCards[index])
-
-
-            }
-            console.log("dataCards3", dataCards3);
-
-            for (let i = 0; i < size; i++, index++) {
-
-                setDataCards4(dataCards4[i] = dataCards[index])
+            // }
+            // console.log(dataCards)
+            // console.log(index)
+            // console.log("dataCards1", dataCards1)
 
 
-            }
-            console.log("dataCards4", dataCards4)
+            // for (let i = 0; i < size; i++, index++) {
+
+            //     setDataCards2(dataCards2[i] = dataCards[index])
+
+
+            // }
+            // console.log("dataCards2", dataCards2)
+
+            // for (let i = 0; i < size; i++, index++) {
+
+            //     setDataCards3(dataCards3[i] = dataCards[index])
+
+
+            // }
+            // console.log("dataCards3", dataCards3);
+
+            // for (let i = 0; i < size; i++, index++) {
+
+            //     setDataCards4(dataCards4[i] = dataCards[index])
+            // }
+
         });
 
     }
