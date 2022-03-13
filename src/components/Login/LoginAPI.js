@@ -4,7 +4,7 @@ function LoginAPI(props) {
     const [, setUrlToLogin] = useState('')
 
 
-    fetch('http://s83.bfa.myftpupload.com/wp-json/jwt-auth/v1/token',{
+    fetch('https://s83.bfa.myftpupload.com/wp-json/jwt-auth/v1/token',{
     method: "POST",
     headers:{
         'Content-Type': 'application/json',
