@@ -63,6 +63,24 @@ const Places = () => {
         // ----------------------------------------------------------------------------
         //https://s83.bfa.myftpupload.com/wp-json/wp/v2/places/
 
+        var token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2NDY3NDEzMjYsImlkIjoyNSwidXNlcm5hbWUiOiJKb25hcyJ9.TURkjx5n7UmSIry5BUbCmAGPbt8TvueupVet6cQwzjQ";
+        let url_post = `https://s83.bfa.myftpupload.com/wp-json/wp/v2/routes`
+        fetch(url_post, {
+            method: "POST",
+            headers: {
+                'Content-Type': 'application/json',
+                
+                'Authorization': `Basic ${btoa('Jonas:' + 'Y6fV e9VO vvfq o6HJ 4ook EV2U')}`,
+
+            },
+        }).then(function (response) {
+            return response.json();
+        }).then(function (post) {
+            console.log(post);
+        });
+
+
+
         await get('https://s83.bfa.myftpupload.com/wp-json/wp/v2/places/', {
             params: {
                 per_page: 99, 'Cache-Control': 'no-cache'
