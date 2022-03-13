@@ -63,23 +63,39 @@ const Places = () => {
         // ----------------------------------------------------------------------------
         //https://s83.bfa.myftpupload.com/wp-json/wp/v2/places/
 
-        var token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2NDY3NDEzMjYsImlkIjoyNSwidXNlcm5hbWUiOiJKb25hcyJ9.TURkjx5n7UmSIry5BUbCmAGPbt8TvueupVet6cQwzjQ";
-        let url_post = `https://s83.bfa.myftpupload.com/wp-json/wp/v2/routes`
-        fetch(url_post, {
-            method: "POST",
-            headers: {
-                'Content-Type': 'application/json',
+        // var token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2NDY3NDEzMjYsImlkIjoyNSwidXNlcm5hbWUiOiJKb25hcyJ9.TURkjx5n7UmSIry5BUbCmAGPbt8TvueupVet6cQwzjQ";
+        // let url_post = `https://s83.bfa.myftpupload.com/wp-json/wp/v2/routes`
+        // fetch(url_post, {
+        //     method: "POST",
+        //     headers: {
+        //         'Content-Type': 'application/json',
                 
-                'Authorization': `Basic ${btoa('Jonas:' + 'Y6fV e9VO vvfq o6HJ 4ook EV2U')}`,
+        //         'Authorization': `Basic ${btoa('Jonas:' + 'Y6fV e9VO vvfq o6HJ 4ook EV2U')}`,
 
-            },
-        }).then(function (response) {
-            return response.json();
-        }).then(function (post) {
-            console.log(post);
-        });
+        //     },
+        // }).then(function (response) {
+        //     return response.json();
+        // }).then(function (post) {
+        //     console.log(post);
+        // });
 
-
+            // fetch('https://s83.bfa.myftpupload.com/wp-json/wp/v2/routes',{
+            //     method: "POST",
+            //     headers: {
+            //         'Content-Type': 'application/json',
+            //         'accept': 'application/json',
+            //         'Authorization': `Bearer ${localStorage.getItem('jwt')}`
+            //     },
+            //     body:JSON.stringify({
+            //         title: 'Add posts from the frontend',
+            //         content: 'This is the way to add posts from your frontend.',
+            //         status: 'publish'
+            //     })
+            // }).then(function(response){
+            //     return response.json()
+            // }).then(function(post){
+            //     console.log(post)
+            // });
 
         await get('https://s83.bfa.myftpupload.com/wp-json/wp/v2/places/', {
             params: {

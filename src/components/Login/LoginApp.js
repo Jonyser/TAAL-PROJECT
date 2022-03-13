@@ -22,13 +22,8 @@ function LoginApp() {
           </nav>
         </Header>
         <Switch>
-          <Route exact path="/">
-            <ProfilePage isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} setUsername={setUsername} username={username} serverMessage={serverMessage} setServerMessage={setServerMessage} />
-          </Route>
           <Route path="/login">
             <Login setUsername={setUsername} setIsLoggedIn={setIsLoggedIn} serverMessage={serverMessage} setServerMessage={setServerMessage} />
-          </Route>
-          <Route path="/signup">
           </Route>
         </Switch>
       </Router>
