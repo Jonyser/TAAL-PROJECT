@@ -35,8 +35,8 @@ function LoginAPI(props) {
                 body: formData
             })
                 .then((response) => response.json())
-                .then((data) => {
-                    console.log(data)
+                .then(function (user) {
+                    console.log(user.token)
                     localStorage.setItem('jwt', user.token)
                 })
         }
