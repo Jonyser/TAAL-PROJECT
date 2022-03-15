@@ -20,8 +20,6 @@ const About = () => {
 
     }, [])
 
-    // const [jqry, setJqry] = useState(jq);
-
     //-------------------input-------------------------
 
     return (
@@ -38,41 +36,9 @@ const About = () => {
                         <button className='AddRoute' > שכפל מסלול  <GrDuplicate className='icon' /></button>
                         <button className='AddRoute'> שמור מסלול  <FcOk className='icon' /> </button>
                     </div>
-
-                    {/* <div className='cardsCover'> */}
-                    {/* <form className='textView'>
-                        <input type="text" className="textview" onChange={getName}></input>
-                    </form> */}
-
-
                     <br></br>
                     <br></br>
-
-
-                    {/* 
-                        <button className='Calc' value="∪">∪</button>
-                        <button className='Calc' value="∪">∩</button>
-                        <button className='Calc' value="\">\</button> */}
-
-
-
-
-
-                    {/* <table>
-                            <tr>
-                                <td> <input type="button" class="button symbol " value="∪" onclick="action('∪')"> </td>
-                                <td> <input type="button" class="button symbol " value="∩" onclick="action('∩')"></td>
-                                <td> <input type="button" class="button symbol " value="\" onclick="action('-')"> </td>
-                                <td> <input type="button" class="button symbol " value="⨁" onclick="action('⨁')"> </td>
-                                <td> <input type="button" class="button symbol " value="×" onclick="action('×')"> </td>
-                                <td><input type="button" class="button groups empty " value="Ø" onclick="organ('Ø')"> </td>
-                            </tr>
-                        </table> */}
-
                     <Calculator />
-
-
-                    {/* </div> */}
                 </>
             }
         </>

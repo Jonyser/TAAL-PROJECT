@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { get } from "../../api/api";
 import '../../../node_modules/bootstrap/dist/css/bootstrap.css';
 import './style.css';
-import Dot from '../Dot/Dot'
+// import Dot from '../Dot/Dot'
 
 let dataCards = [];
 let dataCards1 = [];
@@ -31,7 +31,6 @@ const Calculator = () => {
             setLoading(true);
             try {
                 getData();
-
             } catch (error) {
                 console.error(error.message);
             }
@@ -57,7 +56,7 @@ const Calculator = () => {
                         ) => {
                             return {
                                 myUsers: value.acf.users,
-                                myTitle: value.title.rendered,
+                                myTitle: value.title.rendered.replace("&#8211;", "-").replace("&#8217;", "'"),
                                 myTasks: value.acf.tasks,
                                 myId: value.id
                             }
@@ -66,9 +65,8 @@ const Calculator = () => {
                 }
                 sizeMod = dataCards.length % number;
                 size = (dataCards.length - sizeMod) / number;
-                if (flag === false)
+                if (flag === false) {
                     for (let i = 0; i < size; i++) {
-
                         setDataCards1(dataCards1[i] = dataCards[index]);
                         index++;
                         setDataCards2(dataCards2[i] = dataCards[index])
@@ -78,7 +76,7 @@ const Calculator = () => {
                         setDataCards4(dataCards4[i] = dataCards[index])
                         index++;
                     }
-                if (flag === false)
+
                     for (let i = 0; i < sizeMod; i++) {
 
                         if (i < sizeMod) {
@@ -102,6 +100,7 @@ const Calculator = () => {
                             index++;
                         }
                     }
+                }
                 setFlag(flag = true)
                 sizeMod = dataCards.length % number;
                 size = (dataCards.length - sizeMod) / number;
@@ -124,19 +123,12 @@ const Calculator = () => {
 
     }
     //--------------------------------------------------------------
-
     return (
-
         <>
-
             <div className="row">
-
                 <div id="TaskShow" className='col-4 '></div>
-
                 <div className='col-4 ' id="containerCalc" style={{ width: "600px" }}>
-
                     <form name="myForm">
-
                         <input type="text" className='textview' id='textview' disabled ></input>
                     </form>
                     <div className="row">
@@ -145,14 +137,12 @@ const Calculator = () => {
                         <input type="button" className="col-2" id="btns" value="\" onClick={() => Action("-")}></input>
                         <input type="button" className="col-2" id="btns" value="⨁" onClick={() => Action('⨁')}></input>
                     </div>
-
                     <div className="row">
                         <div className="col-3">{dataCards1.map((value, index) => {
                             return (
                                 <div key={index} className='App'>
                                     <header key={index}>
                                         <button className='btnRoute' onClick={() => calc(value)} style={{ color: "#000", marginBottom: 15, height: 80, width: 100, borderRadius: "10px" }}>
-
                                             <div className='f' style={{ fontSize: "12px" }}>{value.myTitle}</div>
                                         </button>
                                     </header>
@@ -176,7 +166,6 @@ const Calculator = () => {
                                 <div key={index} className='App'>
                                     <header key={index}>
                                         <button className='btnRoute' onClick={() => calc(value)} style={{ color: "#000", marginBottom: 15, height: 80, width: 100, borderRadius: "10px" }}>
-
                                             <div className='f' style={{ fontSize: "12px" }}>{value.myTitle}</div>
                                         </button>
                                     </header>
@@ -188,29 +177,20 @@ const Calculator = () => {
                                 <div key={index} className='App'>
                                     <header key={index}>
                                         <button className='btnRoute' onClick={() => calc(value)} style={{ color: "#000", marginBottom: 15, height: 80, width: 100, borderRadius: "10px" }}>
-
                                             <div className='f' style={{ fontSize: "12px" }}>{value.myTitle}</div>
                                         </button>
                                     </header>
                                 </div>
                             )
-
-                        })}
-
-
-                        </div>
+                        })} </div>
                     </div>
                     <div className="row">
                         <input type="button" className="col-2" id="btnsOrange" value="AC" onClick={() => calc("value")}  ></input>
                         <input type="button" className="col-2" id="btnsOrange" value="Enter" onClick={() => calc("value")} ></input>
                     </div>
-
-
                 </div>
             </div>
         </>
     );
-
 }
 export default Calculator;
-

@@ -7,18 +7,18 @@ import img1 from '../../Pictures/img1.png';
 import img2 from '../../Pictures/img2.png';
 import img3 from '../../Pictures/img3.png';
 import img4 from '../../Pictures/img6.png';
-
-let dataCards = [];
-let dataCards1 = [];
-let dataCards2 = [];
-let dataCards3 = [];
-let dataCards4 = [];
-let flag = false;
-let size = 0;
-let index = 0;
-let sizeMod = 0;
-const number = 4;
-
+//----------------------------------------------------|
+let dataCards = [];//                                 |
+let dataCards1 = [];//                                |
+let dataCards2 = [];//                                |
+let dataCards3 = [];//                                |
+let dataCards4 = [];//                                |
+let flag = false;//                                   |
+let size = 0;//                                       |
+let index = 0;//                                      |
+let sizeMod = 0;//                                    |
+const number = 4;//                                   |
+//----------------------------------------------------|
 const Cards = () => {
     const [, setLoading] = useState(false);
     const [, setDataCards] = useState([]);
@@ -77,7 +77,7 @@ const Cards = () => {
                 // console.log("size", size)
                 // console.log(flag)
 
-                if (flag === false)
+                if (flag === false) {
                     for (let i = 0; i < size; i++) {
                         setDataCards1(dataCards1[i] = dataCards[index]);
                         index++;
@@ -89,7 +89,6 @@ const Cards = () => {
                         index++;
                     }
 
-                if (flag === false)
                     for (let i = 0; i < sizeMod; i++) {
                         if (i < sizeMod) {
                             setDataCards4(dataCards4[size] = dataCards[index]);
@@ -112,6 +111,7 @@ const Cards = () => {
                             index++;
                         }
                     }
+                }
                 setFlag(flag = true)
                 sizeMod = dataCards.length % number;
                 size = (dataCards.length - sizeMod) / number;
@@ -120,13 +120,12 @@ const Cards = () => {
     return (
         <>
             <div className='container'>
-
                 <div className="row">
                     <div className="col-3">{dataCards1.map((value, index) => {
                         return (
                             <div key={index} className='App'>
                                 <header key={index}>
-                                    <Card style={{ color: "#000", marginBottom: 15 }}>
+                                    <Card style={{ color: "#000", marginBottom: 15, border: "2px solid rgba(0, 0, 0, 0.125)" }}>
                                         {/* display_name */}
                                         <Card.Img src={img1} style={{ height: 237 }} />
                                         <Card.Body>
@@ -150,7 +149,7 @@ const Cards = () => {
                                                     </Dropdown.Item>
                                                     </>}
                                             </DropdownButton>
-                                            <DropdownButton className="d-inline p-3  text-white" id="dropdown-basic-button" title="משוייך ל" >
+                                            <DropdownButton className="d-inline p-3  text-white" id="dropdown-basic-button" title="משוייך ל"  >
                                                 {value.myUsers ? <>
                                                     {value.myUsers.map((val, index) =>
                                                         <Dropdown.Item key={index} >
@@ -172,7 +171,7 @@ const Cards = () => {
                         return (
                             <div key={index} className='App'>
                                 <header key={index} >
-                                    <Card className="mb-3" style={{ color: "#000", marginBottom: 7 }}>
+                                    <Card style={{ color: "#000", marginBottom: 15, border: "2px solid rgba(0, 0, 0, 0.125)" }}>
                                         <Card.Img src={img2} style={{ height: 237 }} />
                                         <Card.Body>
                                             <Card.Title >
@@ -218,7 +217,7 @@ const Cards = () => {
                         return (
                             <div key={index} className='App'>
                                 <header key={index} >
-                                    <Card className="mb-3" style={{ color: "#000", marginBottom: 7 }}>
+                                    <Card style={{ color: "#000", marginBottom: 15, border: "2px solid rgba(0, 0, 0, 0.125)" }}>
                                         <Card.Img src={img3} style={{ height: 237 }} />
                                         <Card.Body>
                                             <Card.Title >
@@ -262,7 +261,7 @@ const Cards = () => {
                         return (
                             <div key={index} className='App'>
                                 <header key={index} >
-                                    <Card className="mb-3" style={{ color: "#000", marginBottom: 7 }}>
+                                    <Card style={{ color: "#000", marginBottom: 15, border: "2px solid rgba(0, 0, 0, 0.125)" }}>
 
                                         <Card.Img src={img4} style={{ height: 237 }} />
                                         <Card.Body>
@@ -272,7 +271,6 @@ const Cards = () => {
                                                         <div className="col-md-11">
                                                             <h5>{value.myTitle}</h5>
                                                         </div>
-
                                                     </div>
                                                 </div>
                                             </Card.Title>
@@ -284,7 +282,6 @@ const Cards = () => {
                                                             {val.post_title}
                                                         </Dropdown.Item>)} </>
                                                     : <> <Dropdown.Item href="#/action-1">
-
                                                         לא קיים
                                                     </Dropdown.Item>
                                                     </>}
