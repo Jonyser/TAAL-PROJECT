@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { GrDuplicate } from "react-icons/gr";
 import { FcOk, FcLink } from "react-icons/fc";
-import Cards from '../Cards/Cards';
 import ReactLoading from 'react-loading';
-
+import Calculator from '../Calculator/Calculator'
 
 const About = () => {
     // const [, setName] = useState(null);// for TextView
@@ -69,8 +68,8 @@ const About = () => {
                                 <td><input type="button" class="button groups empty " value="Ø" onclick="organ('Ø')"> </td>
                             </tr>
                         </table> */}
-                    {/* 
-                    <Cards /> */}
+
+                    <Calculator />
 
 
                     {/* </div> */}

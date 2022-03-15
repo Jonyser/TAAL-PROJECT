@@ -114,7 +114,6 @@ const Places = () => {
             </>
                 :
                 <>
-
                     <div className='Cover_Places'>
                         <div className='TitlePlaces'><h3>אתרים</h3></div>
 
@@ -131,10 +130,8 @@ const Places = () => {
                                         <Dot color="rgb(161, 147, 229)" />
                                     </button>
                                 )
-
                             })}
 
-                            {/* <br></br> */}
                         </div>
 
                     </div>
