@@ -1,4 +1,8 @@
 .audio{
-    margin: 2%;
-    padding: 2%;
+    display: flex;
+    width: 240px;
+    height: 260px;
+    margin-right:  130px;
+    margin-left: 1180px;
+    padding: -25px;
 }

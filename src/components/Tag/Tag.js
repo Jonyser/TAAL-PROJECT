@@ -4,7 +4,7 @@ import { RiDragMove2Line } from "react-icons/ri";
 import Dot from '../Dot/Dot'
 import "./style.css";
 import $ from 'jquery';
-let image = ""
+
 function Tag({ title, id, show, idImg, dataImg }) {
 
     // for (let index = 0; index < dataImg.length; index++) {

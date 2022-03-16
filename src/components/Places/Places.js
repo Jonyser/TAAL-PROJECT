@@ -4,30 +4,24 @@ import './style.css';
 import { BsPencilFill } from "react-icons/bs";
 import Stations from '../Stations/Stations'
 import Dot from '../Dot/Dot'
-import $ from 'jquery'
+// import $, { } from 'jquery'
 import ReactLoading from 'react-loading';
-// import Select from 'react-select';
+
 
 let places = [];
 let stationArray = [];
 let Places_and_their_stations = [];
 
-
 const jq = () => {
-    $(".TitleStation").show();
+    // $(".TitleStation").hide();
+    // console.log("ttt")
 }
 
-// const jq = () => {
-//     $(".TitleStation").show();
 
-//     // $(".TitlePlaces").fadeTo("slow", 1);
-// }
 const Places = () => {
     const [, setData] = useState([]);
     const [done, setDone] = useState(undefined);
-
     const [, setLoading] = useState(false);
-    const [, setStatePlaces] = useState([]);
     const [, setStateStation] = useState([]);
 
 
@@ -37,6 +31,7 @@ const Places = () => {
             try {
                 getData();
                 jq();
+
             } catch (error) {
                 console.error(error.message);
             }
@@ -102,6 +97,7 @@ const Places = () => {
                 per_page: 99, 'Cache-Control': 'no-cache'
             }
         }).then(res => {
+            console.log("res: ", res)
             places = res.filter((item) => item.parent === 0)
 
             Places_and_their_stations = places.map((element) => {
@@ -110,11 +106,6 @@ const Places = () => {
                     related: res.filter((r) => r.parent === element.id)
                 }
             })
-
-            for (let i = 0; i < Places_and_their_stations.length; i++) {
-                let temp = Places_and_their_stations[i]
-                setStatePlaces(statePlaces => [...statePlaces, { value: temp.parent.name, label: temp.parent.name }])
-            }
         });
     }
 
@@ -145,15 +136,30 @@ const Places = () => {
     return (
         <>
 
-            {!done ? <><h1 float={'right'}>loading</h1>< ReactLoading type={"bars"} color={"rgb(180, 175, 199)"} height={'10%'} width={'10%'} />  </>
+            {!done ? <>
+                <h1 float={'right'}>loading</h1>
+                < ReactLoading type={"bars"} className='loading' color={"rgb(180, 175, 199)"} height={'10%'} width={'10%'} />
+            </>
                 :
                 <>
                     <div className='Cover_Places'>
-                        <div className='TitlePlaces'><h2>אתרים</h2></div>
+                        <div className='TitlePlaces'><h3>אתרים</h3></div>
 
                         <div className='Places'>
 
-                            {places.map((value, index) => { return (<button className='Place' onClick={() => Display_The_Stations(value)} key={index}>{value.name}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<BsPencilFill /> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<Dot color="rgb(161, 147, 229)" /></button>) })} <br></br>
+                            {places.map((value, index) => {
+                                return (
+                                    <button
+                                        className='Place'
+                                        onClick={() => Display_The_Stations(value)}
+                                        key={index}>{value.name}  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                        <BsPencilFill />
+                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                        <Dot color="rgb(161, 147, 229)" />
+                                    </button>
+                                )
+                            })}
+
                         </div>
 
                     </div>
@@ -166,3 +172,71 @@ const Places = () => {
 }
 export default Places;
 
+
+// connect(
+//     undefined,
+//     (dispatch) => {
+//         return {
+//             changeNameFromPlaces:
+//                 (newName) => dispatch(setName(newName))
+//         }
+
+//     }
+
+// )(Places);
+
+ // let a = "https://s83.bfa.myftpupload.com/?rest_route=/simple-jwt-login/v1/auth"
+
+        // fetch(a, { method: "POST", body: "email=jonassp@post.jce.ac.il&password=GvS7GZJUDLt0DKBM" }).then(r => r.json()).then(console.log)
+        // ----------------------------------------------------------------------------
+        //https://s83.bfa.myftpupload.com/wp-json/wp/v2/places/
+
+
+        // await get('https://s83.bfa.myftpupload.com/wp-json/wp/v2/routes/', {
+        //     params: {
+        //         per_page: 99, 'Cache-Control': 'no-cache'
+        //     }
+        // }).then(res => {
+        //     places = res.filter((item) => item.parent === 0)
+
+        //     Places_and_their_stations = places.map((element) => {
+        //         return {
+        //             parent: element,
+        //             related: res.filter((r) => r.parent === element.id)
+        //         }
+        //     })
+
+        //     for (let i = 0; i < Places_and_their_stations.length; i++) {
+        //         let temp = Places_and_their_stations[i]
+        //         setStatePlaces(statePlaces => [...statePlaces, { value: temp.parent.name, label: temp.parent.name }])
+        //     }
+        // });
+
+        // await get('https://s83.bfa.myftpupload.com/wp-json/wp/v2/routes/', {
+        //     params: {
+        //         per_page: 99, 'Cache-Control': 'no-cache'
+        //     }
+        // }).then(res => {
+        //     console.log("masloulims :", res)
+        // })
+
+        // var token = `eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2N…hcyJ9.IdhRTqgRouzeJHx6CmPu1oNVFddK5bjtfmxOk2Fnb1s`;
+        // let url_post = `https://s83.bfa.myftpupload.com/wp-json/wp/v2/routes`
+        // fetch(url_post, {
+        //     method: "POST",
+        //     headers: {
+        //         'Content-Type': 'application/json',
+        //         'Authorization': `Bearer ${token}`,
+
+
+        //     },
+        //     body: JSON.stringify({
+        //         title: 'Lorem ipsum',
+        //         content: 'Lorem ipsum dolor sit amet.',
+        //         status: 'draft'
+        //     })
+        // }).then(function (response) {
+        //     return response.json();
+        // }).then(function (post) {
+        //     console.log(post);
+        // });

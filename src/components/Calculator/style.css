@@ -1,0 +1,59 @@
+#containerCalc{
+    background-color: #f3eee7;
+    /* box-shadow: 40px 40px 25px 15px #111; */
+    border: 7px solid #6c6e83;
+    border-top-left-radius: 80% 30px;
+    border-top-right-radius: 80% 30px;
+    border-bottom-left-radius: 80% 50px;
+    border-bottom-right-radius: 80% 50px;
+}
+#btns{
+    margin: 4.1%;
+    margin-bottom: 10px;
+    height: 60;
+    width: 100; 
+    border-radius: 10px;
+    background-color: rgb(51, 51, 51);
+    color: rgb(255, 255, 255);
+}
+#btns:hover{
+    margin: 4.1%;
+    margin-bottom: 10px;
+    height: 60;
+    width: 100; 
+    border-radius: 10px;
+    background-color: rgb(0, 0, 0);
+    color: rgb(192, 192, 192);
+}
+.btnRoute{
+    margin: 8.5%;
+    background-color: #f3eee7;
+    /* box-shadow: 2px 2px 1px 1px #222 */
+}
+.btnRoute:hover{
+
+    background-color: #d3cec7;
+}
+#btnsOrange{
+    margin: 4.1%;
+    margin-bottom: 20px;
+    height: 60;
+    width: 100; 
+    border-radius: 10px;
+    color: rgb(59, 59, 59);
+    background-color: #e7981e;
+}
+#btnsOrange:hover{
+    color: rgb(10, 10, 10);
+    background-color: #b47619;
+
+}
+#demo{
+   
+   
+}
+.Task{
+
+    background-color: rgb(237, 234, 255); 
+
+}

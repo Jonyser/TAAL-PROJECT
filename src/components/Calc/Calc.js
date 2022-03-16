@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import './style.css';
-import Cards from '../Cards/Cards';
+import { GrDuplicate } from "react-icons/gr";
+import { FcOk, FcLink } from "react-icons/fc";
 import ReactLoading from 'react-loading';
-
+import Calculator from '../Calculator/Calculator'
 
 const About = () => {
     // const [, setName] = useState(null);// for TextView
@@ -13,12 +13,14 @@ const About = () => {
         setTimeout(() => {
             fetch('https://jsonplaceholder.typicode.com/posts/1') //https://jsonplaceholder.typicode.com/guide/ api
                 .then((response) => response.json())
-                .then(() => {
+                .then((json) => {
                     setDone(true);
                 });
         }, 2000);
 
     }, [])
+
+    //-------------------input-------------------------
 
     return (
         <>
@@ -29,12 +31,14 @@ const About = () => {
                 </>
                 :
                 <>
+                    <div className="Actions">
+                        <button className='AddRoute' > שייך מסלול לחניך  <FcLink className='icon' /></button>
+                        <button className='AddRoute' > שכפל מסלול  <GrDuplicate className='icon' /></button>
+                        <button className='AddRoute'> שמור מסלול  <FcOk className='icon' /> </button>
+                    </div>
                     <br></br>
                     <br></br>
-
-
-                    <Cards />
-
+                    <Calculator />
                 </>
             }
         </>

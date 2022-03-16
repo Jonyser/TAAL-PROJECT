@@ -1,52 +1,69 @@
-.Board{
+/* .Board{
   right: 60px;
   margin: -60px;
-  float:right;
-  position:fixed;
-  height: 80px;
+  height: 130px;
   width: 100%;
-  /* min-width: 250px; */
   justify-content: right;
+ justify-self: unset;
   display:inline-flex;
+  border: 5px solid rgb(83, 90, 146); 
+  position:absolute;
+  
+}  */
+.Board{
+  left: 10px;
+  margin: 10px;
+  height: auto;
+  width: 300px;
+  justify-content: right;
+ justify-self: unset;
    /* border-radius: 1.5ch; */
   border: 5px solid rgb(83, 90, 146); 
-  background-color: rgb(238, 238, 238);
   position:absolute;
+  
 } 
+.txt{
+  margin: 10px;
+  padding: 20px;
+  width: auto;
+  height: 60px;
 
-/* .Board{
-  right: 45px;
-  margin: -45px;
-  float:right;
-  position:fixed;
-  height: 110px;
-  width: 100%;
-  min-width: 250px;
-  justify-content: right;
-  display:inline-flex;
-  display:inline-flex;
-  border-radius: 1.5ch;
-  border: 5px solid rgb(83, 90, 146); 
-  background-color: rgb(238, 238, 238);
-} */
+  color: rgb(55, 82, 82);
+  border-radius: 20px;
+  border: 1px solid transparent;
+  position: relative;
+  font-size: 28px;
+  line-height: 32px;
+  font-family: ReformaNarrowMedium;
+  font-weight: 400;
+  display: inline-block;
+  white-space: nowrap;
+}
+
+
 
 .Cover_Tasks{
     float: right;
     padding: 5%;
     margin-right: -7%;
+    font-size: small;
 }
 
 .TitleTasks{
-   background: linear-gradient(90deg, rgb(236, 245, 220) 95%, rgb(164, 190, 125) 1%);
-   height: 40px;
+
+  background: linear-gradient(90deg,#6eb5b8 0,#738376);
+  color:rgb(236, 245, 220);
+  height: 40px;
    border-radius: 1ch;
    margin-bottom: 15px;
+   font-size: small;
 }
 
 .TasksCover{
-  background-color: rgb(236, 245, 220);
-  padding-top: 5px;
-  padding-bottom: 5px;
+  background: linear-gradient(90deg,#a3b0b1 0,#738376);
+  margin: -0.5px;
+  padding-top: 1px;
+  padding-bottom: 1px;
   border-radius: 1.5ch;
 }
 
