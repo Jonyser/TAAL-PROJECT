@@ -1,7 +1,6 @@
   .Places{
-    background-color: rgb(237, 234, 255);
+    background: linear-gradient(90deg,rgb(252, 252, 252)0,rgb(97, 82, 180) );  
     margin: -0.5px;
-    /* margin-right: 30px; */
     padding-top: 1px;
     padding-bottom: 1px;
     border-radius: 1.5ch;
@@ -17,14 +16,13 @@
     margin-right: 50;
     border-radius: 1.5ch;
     font-size: small;
-
   }
   .Place:hover{
-    background-color:rgb(180, 175, 199);
+    background: linear-gradient(90deg,#1ed4da 0,#72ae7a);
   }
-  
   .TitlePlaces{
-    background: linear-gradient(90deg, rgb(237, 234, 255) 95%, rgb(161, 147, 229) 1%);
+    background: linear-gradient(90deg,rgb(219, 216, 238)0,rgb(97, 82, 180) );  
+    color:rgb(219, 216, 238) ; 
     height: 40px;
     border-radius: 1ch;
     margin-bottom: 15px;
@@ -37,9 +35,7 @@
   .Cover_Places{
     float: right;
     padding: 5%
-  
   }
-
   .dot {
     height: 25px;
     width: 25px;
@@ -48,9 +44,7 @@
     display: inline-block;
   }
   .loading{
-
     display:block;
     margin-right: auto;
     margin-left: auto; 
-  
   }

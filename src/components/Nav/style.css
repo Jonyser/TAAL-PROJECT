@@ -4,7 +4,6 @@ nav{
     align-items: center;
     min-height: 20vh;
     color: white;
-
     background-color: rgba(37,47,57,.9);
     padding: 0;
     margin: 0;
@@ -15,6 +14,11 @@ nav{
     -ms-flex-direction: row;
     flex-direction: row;
     -ms-flex-pack: start;
+  }
+  nav:hover{
+    background-color: rgba(24, 31, 37, 0.9);
+
+
   }
 .logo{
     height: 10vh;

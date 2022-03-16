@@ -6,9 +6,7 @@ import Stations from '../Stations/Stations'
 import Dot from '../Dot/Dot'
 // import $, { } from 'jquery'
 import ReactLoading from 'react-loading';
-// import { connect } from 'react-redux';
-// import { setName } from '../../redux/actions';
-// import Select from 'react-select';
+
 
 let places = [];
 let stationArray = [];
@@ -19,16 +17,11 @@ const jq = () => {
     // console.log("ttt")
 }
 
-// const jq = () => {
-//     $(".TitleStation").show();
 
-//     // $(".TitlePlaces").fadeTo("slow", 1);
-// }
 const Places = () => {
     const [, setData] = useState([]);
     const [done, setDone] = useState(undefined);
     const [, setLoading] = useState(false);
-    // const [, setStatePlaces] = useState([]);
     const [, setStateStation] = useState([]);
 
 
@@ -59,12 +52,13 @@ const Places = () => {
     }, [])
 
     const getData = async () => {
-
+        // taal.tech/wp-json/wp/v2/places
         await get('https://s83.bfa.myftpupload.com/wp-json/wp/v2/places/', {
             params: {
                 per_page: 99, 'Cache-Control': 'no-cache'
             }
         }).then(res => {
+            console.log("res: ", res)
             places = res.filter((item) => item.parent === 0)
 
             Places_and_their_stations = places.map((element) => {
@@ -73,11 +67,6 @@ const Places = () => {
                     related: res.filter((r) => r.parent === element.id)
                 }
             })
-
-            // for (let i = 0; i < Places_and_their_stations.length; i++) {
-            //     let temp = Places_and_their_stations[i]
-            //     // setStatePlaces(statePlaces => [...statePlaces, { value: temp.parent.name, label: temp.parent.name }])
-            // }
         });
     }
 
@@ -136,8 +125,6 @@ const Places = () => {
 
                     </div>
                     <Stations propsData={stationArray} />
-
-
                 </>
             }
         </>

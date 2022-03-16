@@ -8,15 +8,17 @@ import './App.css';
 import LoginApp from './components/Login/LoginApp';
 import { Provider } from 'react-redux';
 import store from './redux/store';
-import background from './Pictures/background.jpg';
+import background from './Pictures/img8.jpg';
 // import CallState from "./components/CallState/CallState";
 
 function App() {
   return (
 
     <div style={{
+      backgroundColor: 'rgba(37,47,57,.9)',
       overflow: "auto",
-      height: 'auto', backgroundImage: `url(${background})`
+      height: 'auto', backgroundImage: `url(${background})`,
+
     }}>
       <Provider store={store}>
         <Router>

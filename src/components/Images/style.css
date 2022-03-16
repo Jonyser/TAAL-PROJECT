@@ -1,9 +1,10 @@
   .images{
     display: flex;
-    width: 100px;
+    width: 280px;
     height: 100px;
-    margin: 2%;
-    padding: 2%;
+    /* margin-right:  230px;
+    margin-left: 240px;
+    padding:  80px; */
 
   }
   img{
@@ -12,7 +13,4 @@
     height: 130px;
     margin: 2%;
     padding: 2%;
-
-
-
   }

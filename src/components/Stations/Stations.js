@@ -82,7 +82,6 @@ const Stations = (props) => {
                     </div>
                     <Tasks_comp propsDataTask={tasks} />
                 </>
-
             )}
         </>
     );

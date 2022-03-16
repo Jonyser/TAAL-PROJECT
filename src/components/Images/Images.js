@@ -14,8 +14,6 @@ const Images = ({ id, data }) => {
         <>
             <div className="images">
                 <Image
-
-
                     src={image}
                     alt="new"
                 />

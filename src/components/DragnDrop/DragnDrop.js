@@ -5,7 +5,7 @@ import "./style.css";
 import Images from "../Images/Images";
 import Audios from "../Audios/Audios";
 import $ from 'jquery'
-
+import { Card } from 'react-bootstrap';
 let Route = [];
 let dndArray = [];
 let saveProps = [];
@@ -40,7 +40,7 @@ function DragnDrop(props) {
     dndArray = (props.propDataTask).map((element) => {
         return {
             id: element.id,
-            title: element.title.rendered
+            title: element.title.rendered.replace("&#8211;", "-").replace("&#8217;", "' ")
         }
     })
     // console.log("dndArray:", dndArray)
@@ -71,7 +71,22 @@ function DragnDrop(props) {
     //---------------------------------------------------------
     return (
         <>
+            <div className="Board" ref={drop} >
+                <i className="bi bi-dash-square">
+                    <Images id={thisId} data={saveProps.propDataTask} />
 
+                    <div className='txt'> :גרור המשימה לכאן</div>
+
+
+                </i>
+
+
+
+                {board.map((tag, keyCount) => {
+                    return <Tag title={tag.title} id={tag.id} idImg={thisId} dataImg={saveProps.propDataTask} key={keyCount} />;
+                })}
+
+            </div>
 
             <div className='Cover_Tasks'>
                 <div className='TitleTasks'><h3>משימות</h3></div>
@@ -85,20 +100,10 @@ function DragnDrop(props) {
 
             </div>
 
-            <div className="MediaCover">
-
-
-            </div>
-            <div className="Board" ref={drop}>
-                {board.map((tag, keyCount) => {
-                    return <Tag title={tag.title} id={tag.id} idImg={thisId} dataImg={saveProps.propDataTask} key={keyCount} />;
-                })}
-
-            </div>
             <div className=" MediaSize">
 
-                <Images id={thisId} data={saveProps.propDataTask} />
                 <Audios id={thisId} data={saveProps.propDataTask} />
+
 
             </div>
 

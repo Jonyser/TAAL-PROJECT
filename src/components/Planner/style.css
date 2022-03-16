@@ -4,14 +4,12 @@
   width: auto;
   height: 60px;
   background-color: rgba(74, 94, 114, 0.9);
+  border-color: rgba(74, 94, 114, 0.9);
   color: rgb(188, 202, 202);
   border-radius: 20px;
   border: 1px solid transparent;
-  border-color: rgb(185, 199, 199);
-  
   position: relative;
-  font-size
-  : 28px;
+  font-size: 28px;
   line-height: 32px;
   font-family: ReformaNarrowMedium;
   font-weight: 400;
@@ -31,7 +29,6 @@ font-size: 20px;
   display: flex;
   justify-content:right;
   min-height: 15vh;
-  
   background-color: rgba(74, 94, 114, 0.9);
   padding: 0;
   margin: 0;
@@ -43,7 +40,10 @@ font-size: 20px;
   flex-direction: row;
   -ms-flex-pack: start;
 }
+.Actions:hover{
+  background-color: rgba(89, 108, 133, 0.9);
 
+}
 .RouteName{
   text-align: right;
   border: none;
@@ -51,13 +51,33 @@ font-size: 20px;
   height:30px;
   width:100%;
   background-color: rgb(180, 180, 180);
+  border-color: rgb(180, 180, 180);;
   color: rgb(255, 255, 255);
   position: absolute;
   right: 0px;
 } 
-.textView{
-  display: flex;
-  height:30px;
+
+#IPU{
+
+  left: 30px;
+  margin: 18px;
+
+  /* height:20px; */
+  /* padding: 12px 20px; */
+  /* margin: 8px; */
+  /* box-sizing: border-box; */
+  
+}
+.w3-input{
+  background-color: #d0d8d8;
+}
+
+#titleIPU{
+  /* float: right;
+  right:  300px;
+  margin: 180px; */
+
+
 }
 
 

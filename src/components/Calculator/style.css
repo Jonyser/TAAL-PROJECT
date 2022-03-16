@@ -14,7 +14,7 @@
     width: 100; 
     border-radius: 10px;
     background-color: rgb(51, 51, 51);
-    color: white;
+    color: rgb(255, 255, 255);
 }
 #btns:hover{
     margin: 4.1%;
