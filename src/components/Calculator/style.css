@@ -46,11 +46,15 @@
 #btnsOrange:hover{
     color: rgb(10, 10, 10);
     background-color: #b47619;
-
 }
-#demo{
-   
-   
+.textview {
+    background-color: #c7c7b0;
+    border: 1.5px solid #b2b292;
+    border-radius: 10px;
+    height: 100%;
+    margin: 10%;
+    padding: 10%;
+    width: 80%;
 }
 .Task{
 

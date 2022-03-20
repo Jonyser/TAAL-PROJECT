@@ -1,10 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import './style.css';
 import { GrDuplicate } from "react-icons/gr";
-import { FcOk, FcLink } from "react-icons/fc";
+import { FcOk, FcLink, FcMultipleInputs } from "react-icons/fc";
 import Places from '../Places/Places';
-// import $ from 'jquery';
-
 const Planner = () => {
     const [, setName] = useState(null);// for TextView
     const [loading, setLoading] = useState(false);
@@ -41,14 +39,11 @@ const Planner = () => {
                     </div>
 
                     <form id="IPU" className="w3-container">
-
-                        <p id="titleIPU">:רשום את שם המסלול</p>
-
-                        <p><input className="w3-input w3-hover-green" type="text"></input></p>
-
+                        <p id="titleIPU">:רשום את שם המסלול <FcMultipleInputs /></p>
+                        <p><input className="w3-input w3-hover-green" type="text" onChange={getName} style={{
+                            textAlign: 'right'
+                        }}></input></p>
                     </form>
-
-
 
                     {/* <div className='textInput'>
                         

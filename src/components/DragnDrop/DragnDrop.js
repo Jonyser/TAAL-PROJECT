@@ -5,7 +5,8 @@ import "./style.css";
 import Images from "../Images/Images";
 import Audios from "../Audios/Audios";
 import $ from 'jquery'
-import { Card } from 'react-bootstrap';
+import { RiDragMove2Line } from "react-icons/ri";
+
 let Route = [];
 let dndArray = [];
 let saveProps = [];
@@ -75,13 +76,8 @@ function DragnDrop(props) {
                 <i className="bi bi-dash-square">
                     <Images id={thisId} data={saveProps.propDataTask} />
 
-                    <div className='txt'> :גרור המשימה לכאן</div>
-
-
+                    <div className='txt'> :גרור משימה לכאן&nbsp;<RiDragMove2Line /></div>
                 </i>
-
-
-
                 {board.map((tag, keyCount) => {
                     return <Tag title={tag.title} id={tag.id} idImg={thisId} dataImg={saveProps.propDataTask} key={keyCount} />;
                 })}
@@ -104,9 +100,7 @@ function DragnDrop(props) {
 
                 <Audios id={thisId} data={saveProps.propDataTask} />
 
-
             </div>
-
         </>
     );
 }

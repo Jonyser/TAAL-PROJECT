@@ -11,16 +11,13 @@ import ReactLoading from 'react-loading';
 let places = [];
 let stationArray = [];
 let Places_and_their_stations = [];
-
 const jq = () => {
     // $(".TitleStation").hide();
     // console.log("ttt")
 }
 
-
 const Places = () => {
-    const [, setData] = useState([]);
-    const [done, setDone] = useState(undefined);
+    const [done, setDone] = useState(false);
     const [, setLoading] = useState(false);
     const [, setStateStation] = useState([]);
 
@@ -39,25 +36,17 @@ const Places = () => {
         }
         fetchData();
     }, []);
-    useEffect(() => {
-        setTimeout(() => {
-            fetch('https://jsonplaceholder.typicode.com/posts/1') //https://jsonplaceholder.typicode.com/guide/ api
-                .then((response) => response.json())
-                .then((json) => {
-                    setData(json);
-                    setDone(true);
-                });
-        }, 2000);
-
-    }, [])
 
     const getData = async () => {
         // taal.tech/wp-json/wp/v2/places
+        ///s83.bfa.myftpupload.com/wp-json/wp/v2/places
         await get('https://s83.bfa.myftpupload.com/wp-json/wp/v2/places/', {
             params: {
                 per_page: 99, 'Cache-Control': 'no-cache'
             }
+
         }).then(res => {
+
             console.log("res: ", res)
             places = res.filter((item) => item.parent === 0)
 
@@ -68,6 +57,9 @@ const Places = () => {
                 }
             })
         });
+        setDone(true)
+        // setData_Loaded(true)
+
     }
 
     const Display_The_Stations = (e) => {
@@ -96,9 +88,8 @@ const Places = () => {
 
     return (
         <>
-
             {!done ? <>
-                <h1 float={'right'}>loading</h1>
+                <h1 float={'right'}>Loading</h1>
                 < ReactLoading type={"bars"} className='loading' color={"rgb(180, 175, 199)"} height={'10%'} width={'10%'} />
             </>
                 :
@@ -122,7 +113,6 @@ const Places = () => {
                             })}
 
                         </div>
-
                     </div>
                     <Stations propsData={stationArray} />
                 </>

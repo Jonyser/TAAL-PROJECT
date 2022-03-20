@@ -5,7 +5,6 @@ import './style.css';
 import Tasks_comp from "../Tasks_comp/Tasks_comp";
 import Dot from '../Dot/Dot'
 // import $ from 'jquery'
-
 let allTasks = [];
 let tasks = [];
 
@@ -24,14 +23,10 @@ const Stations = (props) => {
         }
         fetchData();
     }, []);
-
-
     const getingData = async () => {
-
-        //----------------------------------------------------------------------------------
-        //https://s83.bfa.myftpupload.com/wp-json/wp/v2/places/
-
-        await get('https://s83.bfa.myftpupload.com/wp-json/wp/v2/tasks/', {
+        //'https://taal.tech/wp-json/wp/v2/tasks/'
+        //https://s83.bfa.myftpupload.com/wp-json/wp/v2/tasks/
+        await get('/s83.bfa.myftpupload.com/wp-json/wp/v2/tasks/', {
             params: {
                 per_page: 99, 'Cache-Control': 'no-cache'
             }
@@ -41,7 +36,6 @@ const Stations = (props) => {
                 console.log("temp:", allTasks)
             });
     }
-
     const Display_The_Tasks = (e) => {
         if (tasks.length > 0) {
             tasks = [];
@@ -56,7 +50,6 @@ const Stations = (props) => {
             }
         })
         setStateTask({ data: tasks })//Updating the state
-
     }
     return (
         <>
@@ -85,7 +78,6 @@ const Stations = (props) => {
             )}
         </>
     );
-
 }
 export default Stations;
 //----------------------------------------

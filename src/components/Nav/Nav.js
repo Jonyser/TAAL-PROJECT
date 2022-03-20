@@ -16,7 +16,7 @@ const Nav = () => {
                 <Link to="/about" className='link'>
                     <li>אודות <FcAbout /></li>
                 </Link>
-                <Link to="/about" className='link'>
+                <Link to="/routes_cards" className='link'>
                     <li>כרטיסיות <AiOutlineIdcard /></li>
                 </Link>
                 <Link to="/profile" className='link'>

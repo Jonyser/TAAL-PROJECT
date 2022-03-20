@@ -27,20 +27,14 @@
   padding: 20px;
   width: auto;
   height: 60px;
-
-  color: rgb(55, 82, 82);
-  border-radius: 20px;
+  color: rgb(41, 61, 61);
   border: 1px solid transparent;
-  position: relative;
   font-size: 28px;
   line-height: 32px;
   font-family: ReformaNarrowMedium;
-  font-weight: 400;
-  display: inline-block;
+  font-weight: 800;
   white-space: nowrap;
 }
-
-
 
 .Cover_Tasks{
     float: right;
@@ -50,8 +44,7 @@
 }
 
 .TitleTasks{
-
-  background: linear-gradient(90deg,#6eb5b8 0,#738376);
+  background: linear-gradient(90deg,#9dbbbb 0,#738376);
   color:rgb(236, 245, 220);
   height: 40px;
    border-radius: 1ch;
@@ -60,7 +53,7 @@
 }
 
 .TasksCover{
-  background: linear-gradient(90deg,#a3b0b1 0,#738376);
+  background: linear-gradient(90deg,#b0caca 0,#738376);
   margin: -0.5px;
   padding-top: 1px;
   padding-bottom: 1px;
