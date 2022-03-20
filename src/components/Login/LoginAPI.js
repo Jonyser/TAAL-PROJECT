@@ -26,6 +26,7 @@ function LoginAPI(props) {
                     console.log(user.token)
                     sessionStorage.setItem('jwt', user.token)
                     sessionStorage.setItem('logged_in', 1)
+                    sessionStorage.setItem('loggedin_count',2)
                     login_token(flag_token = true)
                     window.location.replace('/planner')
                 }

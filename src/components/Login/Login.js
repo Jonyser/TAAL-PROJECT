@@ -28,7 +28,7 @@ function Login(props) {
     console.log(loginDetails)
     return (
         <>
-        {sessionStorage.logged_in ? null :<> <header className="App-header" >
+        {sessionStorage.logged_in ? <h1>You are not supposed to be here ! Please close the tab and log in again</h1> :<> <header className="App-header" >
                     {/* <p>{props.serverMessage}</p> */}
                     <div class="d-flex justify-content-around">
 

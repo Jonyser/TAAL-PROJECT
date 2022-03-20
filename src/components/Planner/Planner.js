@@ -41,7 +41,8 @@ const Planner = () => {
                     <form id="IPU" className="w3-container">
                         <p id="titleIPU">:רשום את שם המסלול <FcMultipleInputs /></p>
                         <p><input className="w3-input w3-hover-green" type="text" onChange={getName} style={{
-                            textAlign: 'right'
+                            textAlign: 'right',
+                            width: '290px'
                         }}></input></p>
                     </form>
 
