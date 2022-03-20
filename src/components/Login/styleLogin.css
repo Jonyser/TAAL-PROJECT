@@ -5,27 +5,12 @@ body {
       sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    background-color: #292929;
   }
   
   code {
     font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
       monospace;
-  }
-  
-  a.nav:link,a.nav:visited {
-    margin: 7px;
-    border-radius: 20px;
-    background-color: white;
-    color: black;
-    border: 2px solid rgba(0, 73, 0, 0);
-    padding: 10px 20px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-  }
-  a.nav:hover {
-    background-color: rgb(194, 194, 194);
-    font-size:110%;
   }
 
   .header {
@@ -50,10 +35,12 @@ body {
   }
   
   input{
+    margin: 0.5rem;
     padding: .8em;
     border-radius: 5px;
-    width: 300px;
   }
+
+  
   
   input[type=submit]{
   padding: .8em 0;
@@ -62,31 +49,37 @@ body {
   background-color: skyblue;
   border: unset;
   margin-top: 1em;
-  width: 100%;
+  width: 80%;
   }
   
   input[type=submit]:hover{
-    background-color: chartreuse;
+    background: linear-gradient(90deg,#1ed4da 0,#72ae7a);
   }
   
   .login{
     display: flex;
     flex-direction: column;
+    
     /* text-align: left; */
   }
   
-  
-  .App-header {
+  .App-logo {
+    height: auto;
+  }
+
+ .App-header {
     background-color: #292929;
-    min-height: 100vh;
-    display: flex;
+    height: auto;
+    width: 100%;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
     font-size: calc(10px + 2vmin);
-    color: rgb(255, 255, 255);
+    color: rgb(255, 255, 255); 
+    justify-content: center; 
   }
-  
+
+
+
   .App-link {
     color: #61dafb;
   }

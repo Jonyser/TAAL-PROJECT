@@ -4,7 +4,7 @@ import './style.css';
 import { BsPencilFill } from "react-icons/bs";
 import Stations from '../Stations/Stations'
 import Dot from '../Dot/Dot'
-// import $, { } from 'jquery'
+import $, { } from 'jquery'
 import ReactLoading from 'react-loading';
 
 

@@ -1,8 +1,7 @@
 import React, { useState } from 'react'
-import './style.css'
 import LoginAPI from './LoginAPI';
 import logo from '../../Pictures/logo.jpeg'
-import './style.css';
+import './styleLogin.css';
 
 function Login(props) {
     const [APIDetailsLogin, setAPIDetailsLogin] = useState({
@@ -29,20 +28,36 @@ function Login(props) {
     console.log(loginDetails)
     return (
         <>
-            <div className="App">
-                <header className="App-header">
-                    <h2>Login</h2>
-                    <p>{props.serverMessage}</p>
-                    <div className="login">
-                        <input type="text" placeholder="User Name" name="user" value={loginDetails.user} onChange={handleChange} />
-                        <input type="password" placeholder="Password" name="pass" value={loginDetails.pass} onChange={handleChange} />
-                        <input type="submit" onClick={handleSubmit} />
+        {sessionStorage.logged_in ? null :<> <header className="App-header" >
+                    {/* <p>{props.serverMessage}</p> */}
+                    <div class="d-flex justify-content-around">
+
+
+                        <div class="d-flex flex-column">
+
+                            <div className='p-2'>
+                                <h2 className='Login_Title' style={{ paddingTop: "7vh",marginLeft:"0.5rem"}}>Login</h2>
+                            </div>
+
+                            <div className='p-2'>
+                                <div className="login">
+                                    <input type="text" placeholder="User Name" name="user" value={loginDetails.user} onChange={handleChange} />
+                                    <input type="password" placeholder="Password" name="pass" value={loginDetails.pass} onChange={handleChange} />
+                                    <div class="d-flex justify-content-center">
+                                        <input type="submit" onClick={handleSubmit} />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <img src={logo} className="App-logo" alt="logo" style={{paddingTop:"4.5%"}}></img>
+
                     </div>
-                    <img src={logo} className="App-logo" alt="logo" ></img>
                 </header>
-            </div>
-            <LoginAPI APIDetailsLogin={APIDetailsLogin} setUsername={props.setUsername} setIsLoggedIn={props.setIsLoggedIn} setServerMessage={props.setServerMessage} />
+            <LoginAPI APIDetailsLogin={APIDetailsLogin} setUsername={props.setUsername} setIsLoggedIn={props.setIsLoggedIn} setServerMessage={props.setServerMessage} /></>}
+                
         </>
+    
     )
 }
 

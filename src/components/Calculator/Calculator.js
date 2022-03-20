@@ -136,6 +136,7 @@ const Calculator = () => {
     //--------------------------------------------------------------
     return (
         <>
+        <div class="d-flex justify-content-center">
             {!done ? <>
                 <h1 float={'right'}>Loading</h1>
                 < ReactLoading type={"bars"} className='loading' color={"rgb(180, 175, 199)"} height={'10%'} width={'10%'} />
@@ -209,6 +210,7 @@ const Calculator = () => {
                     </div>
                 </>
             }
+            </div>
         </>
     );
 }

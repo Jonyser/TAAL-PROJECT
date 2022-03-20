@@ -10,9 +10,9 @@ const Nav = () => {
     return (
         <nav>
             <ul className="nav-links">
-                <Link to="/" className='link'>
+                {/* <Link to="/" className='link'>
                     <li>כניסה <FcHome /></li>
-                </Link>
+                </Link> */}
                 <Link to="/about" className='link'>
                     <li>אודות <FcAbout /></li>
                 </Link>
