@@ -26,7 +26,7 @@ const Stations = (props) => {
     const getingData = async () => {
         //'https://taal.tech/wp-json/wp/v2/tasks/'
         //https://s83.bfa.myftpupload.com/wp-json/wp/v2/tasks/
-        await get('/s83.bfa.myftpupload.com/wp-json/wp/v2/tasks/', {
+        await get('https://s83.bfa.myftpupload.com/wp-json/wp/v2/tasks', {
             params: {
                 per_page: 99, 'Cache-Control': 'no-cache'
             }

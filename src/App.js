@@ -11,22 +11,7 @@ import store from './redux/store';
 import background from './Pictures/img8.jpg';
 import Cards from './components/Cards/Cards'
 // import CallState from "./components/CallState/CallState";
-import { useState } from "react";
 
-
-
-function Reset_localStorage(){
-
-  if(localStorage.getItem('logged_in') == 1){
-    localStorage.removeItem('jwt')
-    localStorage.removeItem('logged_in')
-  } 
-}
-// window.onbeforeunload = function() {
-//   localStorage.removeItem('jwt');
-//   localStorage.removeItem('logged_in');
-//   return '';
-// };
 
 function App() {
 

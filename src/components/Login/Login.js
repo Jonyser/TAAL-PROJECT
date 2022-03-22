@@ -30,10 +30,10 @@ function Login(props) {
         <>
         {sessionStorage.logged_in ? <h1>You are not supposed to be here ! Please close the tab and log in again</h1> :<> <header className="App-header" >
                     {/* <p>{props.serverMessage}</p> */}
-                    <div class="d-flex justify-content-around">
+                    <div className="d-flex justify-content-around">
 
 
-                        <div class="d-flex flex-column">
+                        <div className="d-flex flex-column">
 
                             <div className='p-2'>
                                 <h2 className='Login_Title' style={{ paddingTop: "7vh",marginLeft:"0.5rem"}}>Login</h2>
@@ -43,7 +43,7 @@ function Login(props) {
                                 <div className="login">
                                     <input type="text" placeholder="User Name" name="user" value={loginDetails.user} onChange={handleChange} />
                                     <input type="password" placeholder="Password" name="pass" value={loginDetails.pass} onChange={handleChange} />
-                                    <div class="d-flex justify-content-center">
+                                    <div className="d-flex justify-content-center">
                                         <input type="submit" onClick={handleSubmit} />
                                     </div>
                                 </div>

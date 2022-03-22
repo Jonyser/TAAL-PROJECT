@@ -1,13 +1,15 @@
 import React, { useEffect, useState } from "react";
+import jwt from 'jwt-decode';
 
 let flag_token = false
+let id;
 
 function LoginAPI(props) {
     const [, setUrlToLogin] = useState('')
     const [, login_token] = useState('')
 
-
     if (props.APIDetailsLogin.user.length > 0) {
+        
         const url = 'https://s83.bfa.myftpupload.com/wp-json/jwt-auth/v1/token'
         fetch(url, {
             method: 'POST',
@@ -23,14 +25,16 @@ function LoginAPI(props) {
             .then((response) => response.json())
             .then(function (user) {
                 if(!flag_token){
-                    console.log(user.token)
+                    console.log("token",user.token)
+                    console.log(jwt(user.token).data.user.id)
                     sessionStorage.setItem('jwt', user.token)
                     sessionStorage.setItem('logged_in', 1)
-                    sessionStorage.setItem('loggedin_count',2)
+                    sessionStorage.setItem('id',jwt(user.token).data.user.id)
                     login_token(flag_token = true)
                     window.location.replace('/planner')
                 }
             })
+            
     }
 
     // useEffect(() => {
