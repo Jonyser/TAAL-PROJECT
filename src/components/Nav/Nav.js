@@ -37,31 +37,6 @@ const Nav = () => {
             });
     })
 
-
-
-    let url_post = `https://s83.bfa.myftpupload.com/wp-json/wp/v2/routes`
-        fetch(url_post, {
-            method: "POST",
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${sessionStorage.getItem('jwt')}`,
-
-
-            },
-            body: JSON.stringify({
-                title: 'Lorem ipsum',
-                content: 'Lorem ipsum dolor sit amet.',
-                acf: 
-                    tasks: sess,
-                status: 'publish'
-            })
-        }).then(function (response) {
-            return response.json();
-        }).then(function (post) {
-            console.log(post);
-        });
-
-
     return (
         <nav>
             <ul className="nav-links">

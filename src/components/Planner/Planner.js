@@ -3,10 +3,14 @@ import './style.css';
 import { GrDuplicate } from "react-icons/gr";
 import { FcOk, FcLink, FcMultipleInputs } from "react-icons/fc";
 import Places from '../Places/Places';
+
+let obj = {tasks:null,users:null}
+
 const Planner = () => {
-
-
-    const [, setName] = useState(null);// for TextView
+    
+    
+    const [, set_obj] = useState(null);// for TextView
+    const [get_Name, setName] = useState(null);// for TextView
     const [loading, setLoading] = useState(false);
     useEffect(() => {
         const fetchData = async () => {
@@ -32,7 +36,50 @@ const Planner = () => {
     
 
 
-    console.log("JSON",JSON.parse(sessionStorage.getItem('New_Routes')))
+
+
+    function Post_Route(){
+
+        console.log("in")
+        
+        if(get_Name === null || get_Name === ""){
+            alert('Please give the Route a title !')
+            return
+        }
+
+        if(JSON.parse(localStorage.getItem('New_Routes')) === null){
+            alert('Route is empty ! ');
+            return
+        }
+        else{
+
+            
+            set_obj(obj.tasks = JSON.parse(localStorage.getItem('New_Routes'))) ;
+            console.log("obj : ",obj)
+            
+            
+            let url_post = `https://s83.bfa.myftpupload.com/wp-json/wp/v2/routes`
+            fetch(url_post, {
+                method: "POST",
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${sessionStorage.getItem('jwt')}`,
+                    
+                },
+                body: JSON.stringify({
+                    title: get_Name,
+                    acf: obj,
+                    status:'publish'
+                })
+            }).then(function (response) {
+                return response.json();
+            }).then(function (post) {
+                // window.location.replace("/planner")
+            });
+            
+        }
+        
+    }
     return (
         <>
             {loading && <div>Loading</div>}
@@ -41,7 +88,7 @@ const Planner = () => {
                     <div className="Actions">
                         <button className='AddRoute' > שייך מסלול לחניך  <FcLink className='icon' /></button>
                         <button className='AddRoute' > שכפל מסלול  <GrDuplicate className='icon' /></button>
-                        <button className='AddRoute'> שמור מסלול  <FcOk className='icon' /> </button>
+                        <button className='AddRoute' onClick={Post_Route}> שמור מסלול  <FcOk className='icon' /> </button>
                     </div>
 
                     <form id="IPU" className="w3-container">
