@@ -13,6 +13,7 @@ let dndArray = [];
 let saveProps = [];
 let thisId = ""
 let thisIdArray = [];
+let myTask = {};
 const jq = () => {
     $(".TitleTasks").show();
 }
@@ -41,6 +42,7 @@ function DragnDrop(props) {
 
     dndArray = (props.propDataTask).map((element) => {
         return {
+
             id: element.id,
             title: element.title.rendered.replace("&#8211;", "-").replace("&#8217;", "' ")
         }
@@ -62,7 +64,12 @@ function DragnDrop(props) {
         thisId = id;
         Route = dndArray.filter((tag) => id === tag.id);
         setBoard((board) => [...board, Route[0]]);
-        thisIdArray.push(thisId);
+        // thisIdArray.push(thisId);
+        myTask = saveProps.propDataTask.filter((item) => item.id === id)
+        console.log("myTask:", myTask)
+        thisIdArray.push(myTask);
+
+
         console.log("thisIdArray: ", thisIdArray)
 
 
@@ -92,7 +99,6 @@ function DragnDrop(props) {
                     {dndArray.length === 0 ? jq_Hide() : dndArray.map((tag) => {
                         return <Tag title={tag.title} id={tag.id} key={tag.id} show={jq()} idImg={thisId} dataImg={saveProps.propDataTask} />;
                     })}
-
 
                     <button
                         className='AddTasks'

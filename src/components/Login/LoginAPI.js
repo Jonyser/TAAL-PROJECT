@@ -9,7 +9,7 @@ function LoginAPI(props) {
     const [, login_token] = useState('')
 
     if (props.APIDetailsLogin.user.length > 0) {
-        
+
         const url = 'https://s83.bfa.myftpupload.com/wp-json/jwt-auth/v1/token'
         fetch(url, {
             method: 'POST',
@@ -17,26 +17,26 @@ function LoginAPI(props) {
                 'Content-Type': 'application/json',
                 'accept': 'application/json',
             },
-            body:  JSON.stringify({
-                        username: props.APIDetailsLogin.user,
-                        password: props.APIDetailsLogin.pass
-                    })
+            body: JSON.stringify({
+                username: props.APIDetailsLogin.user,
+                password: props.APIDetailsLogin.pass
+            })
         })
             .then((response) => response.json())
             .then(function (user) {
-                if(!flag_token){
-                    console.log("token",user.token)
+                if (!flag_token) {
+                    console.log("token", user.token)
                     console.log(jwt(user.token).data.user.id)
                     sessionStorage.setItem('jwt', user.token)
                     sessionStorage.setItem('logged_in', 1)
-                    sessionStorage.setItem('id',jwt(user.token).data.user.id)
+                    sessionStorage.setItem('id', jwt(user.token).data.user.id)
                     login_token(flag_token = true)
                     window.location.replace('/planner')
                 }
             })
-            
+
     }
-    
+
 
     // useEffect(() => {
     //     if (props.APIDetailsLogin.user.length > 0) {
