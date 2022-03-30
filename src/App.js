@@ -18,11 +18,10 @@ function App() {
   return (
     <>
     <div style={{
-      backgroundColor: 'rgba(37,47,57,.9)',
+      backgroundColor: 'rgb(213, 221, 228)',
       overflow: "auto",
-      height: 'auto', backgroundImage: `url(${background})`,
-
     }}>
+
       <Provider store={store}>
         <Router>
           <div>

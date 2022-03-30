@@ -23,14 +23,14 @@ function Login(props) {
     }
 
     function handleSubmit() {
-        setAPIDetailsLogin({ ...loginDetails }) //check i need the ...here
+        setAPIDetailsLogin({ ...loginDetails })
     }
-    console.log(loginDetails)
+
     return (
         <>
         {sessionStorage.logged_in ? <h1>You are not supposed to be here ! Please close the tab and log in again</h1> :<> <header className="App-header" >
                     {/* <p>{props.serverMessage}</p> */}
-                    <div className="d-flex justify-content-around">
+                    <div className="d-flex justify-content-around"  onKeyPress={(e) =>{e.key === 'Enter' && handleSubmit()}}>
 
 
                         <div className="d-flex flex-column">
@@ -42,8 +42,9 @@ function Login(props) {
                             <div className='p-2'>
                                 <div className="login">
                                     <input type="text" placeholder="User Name" name="user" value={loginDetails.user} onChange={handleChange} />
-                                    <input type="password" placeholder="Password" name="pass" value={loginDetails.pass} onChange={handleChange} />
+                                    <input type="password" placeholder="Password" name="pass" value={loginDetails.pass} onChange={handleChange}/>
                                     <div className="d-flex justify-content-center">
+                                        
                                         <input type="submit" onClick={handleSubmit} />
                                     </div>
                                 </div>

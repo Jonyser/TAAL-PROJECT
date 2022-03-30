@@ -6,6 +6,7 @@ import Images from "../Images/Images";
 import Audios from "../Audios/Audios";
 import $ from 'jquery'
 import { RiDragMove2Line } from "react-icons/ri";
+import { FcAddDatabase } from "react-icons/fc";
 
 let Route = [];
 let dndArray = [];
@@ -64,12 +65,12 @@ function DragnDrop(props) {
         thisIdArray.push(thisId);
         console.log("thisIdArray: ", thisIdArray)
 
-        // keyCount++;
-        // keyCount = ("propsChac", props.propDataTask.id);
 
-        // console.log("image:", image)
     };
     //---------------------------------------------------------
+    const AddStation = () => {
+
+    }
     return (
         <>
             <div className="Board" ref={drop} >
@@ -92,8 +93,19 @@ function DragnDrop(props) {
                         return <Tag title={tag.title} id={tag.id} key={tag.id} show={jq()} idImg={thisId} dataImg={saveProps.propDataTask} />;
                     })}
 
-                </div>
 
+                    <button
+                        className='AddTasks'
+                        onClick={() => AddStation()}>
+                        <FcAddDatabase style={{
+                            width: "85px",
+                            height: "30px"
+                        }} />
+                        <h6>הוסף משימה</h6>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    </button>
+                </div>
             </div>
 
             <div className=" MediaSize">

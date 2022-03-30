@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { get } from "../../api/api";
 import { BsPencilFill } from "react-icons/bs";
+import { FcAddDatabase } from "react-icons/fc";
 import './style.css';
 import Tasks_comp from "../Tasks_comp/Tasks_comp";
 import Dot from '../Dot/Dot'
@@ -26,7 +27,7 @@ const Stations = (props) => {
     const getingData = async () => {
         //'https://taal.tech/wp-json/wp/v2/tasks/'
         //https://s83.bfa.myftpupload.com/wp-json/wp/v2/tasks/
-        await get('https://s83.bfa.myftpupload.com/wp-json/wp/v2/tasks', {
+        await get('https://s83.bfa.myftpupload.com/wp-json/wp/v2/tasks/', {
             params: {
                 per_page: 99, 'Cache-Control': 'no-cache'
             }
@@ -51,6 +52,10 @@ const Stations = (props) => {
         })
         setStateTask({ data: tasks })//Updating the state
     }
+    //----------------------------------------------------------
+    const AddStation = () => {
+
+    }
     return (
         <>
             {loading && (<div>Loading</div>)}
@@ -70,7 +75,18 @@ const Stations = (props) => {
                                             <Dot color="#e29e62" />
                                         </button>
                                     )
-                                })} <br></br>
+                                })}
+                            <button
+                                className='AddStation'
+                                onClick={() => AddStation()}>
+                                <FcAddDatabase style={{
+                                    width: "85px",
+                                    height: "30px"
+                                }} />
+                                <h6>הוסף תחנה</h6>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            </button>
                         </div>
                     </div>
                     <Tasks_comp propsDataTask={tasks} />

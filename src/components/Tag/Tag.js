@@ -22,7 +22,11 @@ function Tag({ title, id, show, idImg, dataImg }) {
     return (
         <>
 
-            <button className='Tasks' ref={drag} src={title}>{title} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<RiDragMove2Line /> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<Dot color="rgb(164, 190, 125)" />   </button>
+            <button className='Tasks' ref={drag} src={title}>{title} 
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <RiDragMove2Line />
+             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+             <Dot color="rgb(164, 190, 125)" />   </button>
             {show ? $(".TitleTasks").show() : null}
         </>
 
