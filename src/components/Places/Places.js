@@ -59,6 +59,7 @@ const Places = () => {
 
     }
 
+
     const Display_The_Stations = (e) => {
         jq()
         if (stationArray.length > 0) {
@@ -356,22 +357,3 @@ export default Places;
 //         // })
 
 //         // var token = `eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2N…hcyJ9.IdhRTqgRouzeJHx6CmPu1oNVFddK5bjtfmxOk2Fnb1s`;
-//         // let url_post = `https://s83.bfa.myftpupload.com/wp-json/wp/v2/routes`
-//         // fetch(url_post, {
-//         //     method: "POST",
-//         //     headers: {
-//         //         'Content-Type': 'application/json',
-//         //         'Authorization': `Bearer ${token}`,
-
-
-//         //     },
-//         //     body: JSON.stringify({
-//         //         title: 'Lorem ipsum',
-//         //         content: 'Lorem ipsum dolor sit amet.',
-//         //         status: 'draft'
-//         //     })
-//         // }).then(function (response) {
-//         //     return response.json();
-//         // }).then(function (post) {
-//         //     console.log(post);
-//         // });

@@ -66,15 +66,11 @@ function DragnDrop(props) {
         setBoard((board) => [...board, Route[0]]);
         // thisIdArray.push(thisId);
         myTask = saveProps.propDataTask.filter((item) => item.id === id)
-        console.log("myTask:", myTask)
-        thisIdArray.push(myTask);
-
-
-        console.log("thisIdArray: ", thisIdArray)
-
-
+        thisIdArray.push(myTask[0]);
+        sessionStorage.setItem('New_Routes',JSON.stringify(thisIdArray))
     };
     //---------------------------------------------------------
+    
     const AddStation = () => {
 
     }

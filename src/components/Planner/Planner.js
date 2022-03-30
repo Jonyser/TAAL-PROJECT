@@ -27,6 +27,8 @@ const Planner = () => {
         setName(val.target.value)
         console.warn(val.target.value)
     }
+
+    console.log("JSON",JSON.parse(sessionStorage.getItem('New_Routes')))
     return (
         <>
             {loading && <div>Loading</div>}

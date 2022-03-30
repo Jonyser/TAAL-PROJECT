@@ -55,7 +55,7 @@ const Cards = () => {
                     per_page: 99
                 }
             }).then(res => {
-                console.log("resres:", res)
+                console.log("Masloulims:", res)
                 size = res.length / number;
 
                 // console.log("dataCards:", dataCards)
