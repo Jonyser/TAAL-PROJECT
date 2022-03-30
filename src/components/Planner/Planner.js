@@ -4,6 +4,8 @@ import { GrDuplicate } from "react-icons/gr";
 import { FcOk, FcLink, FcMultipleInputs } from "react-icons/fc";
 import Places from '../Places/Places';
 const Planner = () => {
+
+
     const [, setName] = useState(null);// for TextView
     const [loading, setLoading] = useState(false);
     useEffect(() => {
@@ -27,6 +29,8 @@ const Planner = () => {
         setName(val.target.value)
         console.warn(val.target.value)
     }
+    
+
 
     console.log("JSON",JSON.parse(sessionStorage.getItem('New_Routes')))
     return (
