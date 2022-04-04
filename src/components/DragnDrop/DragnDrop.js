@@ -7,6 +7,7 @@ import Audios from "../Audios/Audios";
 import $ from 'jquery'
 import { RiDragMove2Line } from "react-icons/ri";
 import { FcAddDatabase } from "react-icons/fc";
+import Modal_Tasks from '../Modal/Modal_Tasks'
 
 let Route = [];
 let dndArray = [];
@@ -18,12 +19,14 @@ const jq = () => {
     $(".TitleTasks").show();
 }
 
-const jq_Hide = () => {
-    $(".TitleTasks").hide();
-}
+// const jq_Hide = () => {
+//     $(".TitleTasks").hide();
+// }
 
 function DragnDrop(props) {
-    const [, setLoading] = useState(false);
+
+    const [loading, setLoading] = useState(false);
+    const [modalOpen, setModalOpen] = useState(false)
     useEffect(() => {
         const fetchData = async () => {
             setLoading(true);
@@ -87,15 +90,28 @@ function DragnDrop(props) {
                 })}
 
             </div>
-
+            {modalOpen && <Modal_Tasks setOpenModalPlases={setModalOpen} />}
             <div className='Cover_Tasks'>
                 <div className='TitleTasks'><h3>משימות</h3></div>
                 <div className='TasksCover'>
 
-                    {dndArray.length === 0 ? jq_Hide() : dndArray.map((tag) => {
+                    {dndArray.length === 0 ? null : dndArray.map((tag) => {
                         return <Tag title={tag.title} id={tag.id} key={tag.id} show={jq()} idImg={thisId} dataImg={saveProps.propDataTask} />;
                     })}
-
+                    <button
+                        className='AddTasks'
+                        onClick={() => {
+                            setModalOpen(true);
+                        }}>
+                        <FcAddDatabase style={{
+                            width: "85px",
+                            height: "30px"
+                        }} />
+                        <h6>הוסף תחנה</h6>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    </button>
+                    {/* 
                     <button
                         className='AddTasks'
                         onClick={() => AddStation()}>
@@ -106,7 +122,7 @@ function DragnDrop(props) {
                         <h6>הוסף משימה</h6>
                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    </button>
+                    </button> */}
                 </div>
             </div>
 

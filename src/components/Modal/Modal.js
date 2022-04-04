@@ -1,6 +1,5 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import "./Modal.css";
-import { FcOk, FcLink, FcMultipleInputs } from "react-icons/fc";
 
 
 let obj = { tasks: [], users: [] }
@@ -8,18 +7,10 @@ let get_Route_ID = 0;
 
 
 function Modal({ setOpenModal, setText }) {
-    const [posts, setPosts] = useState([]);
-    const [isPending, setIsPending] = useState(false);
     const [, set_obj] = useState(null);// for TextView
-    const [get_Name, setName] = useState(null);// for TextView
-    const [loading, setLoading] = useState(false);
-    const [modalOpen, setModalOpen] = useState(false);
-    const [done, setDone] = useState(false);
+    const [, setDone] = useState(false);
 
-    function getName(val) {
-        setName(val.target.value)
-        console.warn(val.target.value)
-    }
+
     function Post_Route() {
 
         if (setText === null || setText === "") {
@@ -71,70 +62,73 @@ function Modal({ setOpenModal, setText }) {
     return (
         <>
             {setText === null || setText === "" ? <>
+                <div className="Background">
+                    <div className="modalContainer">
+                        <div className="titleCloseBtn">
+                            <button
+                                onClick={() => {
+                                    setOpenModal(false);
+                                }}
+                            >
+                                X
+                            </button>
+                        </div>
+                        <div className="title">
+                            <h3>נא להקליד את שם המסלול ולגרור משימות </h3>
+                        </div>
+                        <div className="body">
 
-                <div className="modalContainer">
-                    <div className="titleCloseBtn">
-                        <button
-                            onClick={() => {
-                                setOpenModal(false);
-                            }}
-                        >
-                            X
-                        </button>
-                    </div>
-                    <div className="title">
-                        <h3>נא להקליד את שם המסלול ולגרור משימות </h3>
-                    </div>
-                    <div className="body">
+                        </div>
+                        <div className="footer">
+                            <button className='cancelBtn'
+                                onClick={() => {
+                                    setOpenModal(false);
+                                }}
+                            >
+                                Cancel
+                            </button>
+                        </div>
 
                     </div>
-                    <div className="footer">
-                        <button className='cancelBtn'
-                            onClick={() => {
-                                setOpenModal(false);
-                            }}
-                        >
-                            Cancel
-                        </button>
-                    </div>
-
                 </div>
             </>
                 :
-                <div className="modalContainer">
-                    <div className="titleCloseBtn">
-                        <button
-                            onClick={() => {
-                                setOpenModal(false);
-                            }}
-                        >
-                            X
-                        </button>
-                    </div>
-                    <div className="title">
-                        <h2>  האם את/ה בטוח</h2>
-                    </div>
-                    <div className="body">
+                <div className="Background">
+                    <div className="modalContainer">
+                        <div className="titleCloseBtn">
+                            <button
+                                onClick={() => {
+                                    setOpenModal(false);
+                                }}
+                            >
+                                X
+                            </button>
+                        </div>
+                        <div className="title">
+                            <h2>  האם את/ה בטוח</h2>
+                        </div>
+                        <div className="body">
+
+                        </div>
+                        <div className="footer">
+                            <button className='cancelBtn'
+                                onClick={() => {
+                                    setOpenModal(false);
+                                }}
+
+                            >
+                                לא
+                            </button>
+
+                            &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
+                            <button className='continueBtn'
+                                onClick={Post_Route}
+                            >
+                                כן
+                            </button>
+                        </div>
 
                     </div>
-                    <div className="footer">
-                        <button className='cancelBtn'
-                            onClick={() => {
-                                setOpenModal(false);
-                            }}
-
-                        >
-                            לא
-                        </button>
-
-                        &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
-                        <button className='continueBtn'
-                            onClick={Post_Route}
-                        >
-                            כן
-                        </button>
-                    </div>
-
                 </div>
             }
         </>

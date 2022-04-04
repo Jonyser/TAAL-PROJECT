@@ -7,17 +7,20 @@ import Stations from '../Stations/Stations'
 import Dot from '../Dot/Dot'
 import $, { } from 'jquery'
 import ReactLoading from 'react-loading';
+import Modal_Plases from '../Modal/Model_Plases'
+
 // import Popup from 'reactjs-popup';
 
 let places = [];
 let stationArray = [];
 let Places_and_their_stations = [];
 
-
 const Places = () => {
+    const [get_Name, setName] = useState(null);// for TextView
     const [done, setDone] = useState(false);
     const [, setLoading] = useState(false);
     const [, setStateStation] = useState([]);
+    const [modalOpen, setModalOpen] = useState(false);
 
     useEffect(() => {
         const fetchData = async () => {
@@ -67,7 +70,6 @@ const Places = () => {
         }
         // console.log("val:", e);
 
-
         Places_and_their_stations.forEach(element => {
 
             if (element.parent.id === e.id) {
@@ -100,6 +102,7 @@ const Places = () => {
             </>
                 :
                 <>
+                    {modalOpen && <Modal_Plases setOpenModalPlases={setModalOpen} setText={get_Name} />}
                     <div className='Cover_Places'>
                         <div className='TitlePlaces'><h3>אתרים</h3></div>
                         <div className='Places'>
@@ -115,19 +118,19 @@ const Places = () => {
                                     </button>
                                 )
                             })}
-
                             <button
                                 className='AddPlace'
-                                onClick={() => AddPlace()}>
+                                onClick={() => {
+                                    setModalOpen(true);
+                                }}>
                                 <FcAddDatabase style={{
                                     width: "85px",
                                     height: "30px"
                                 }} />
-                                <h6 >הוסף אתר</h6>
+                                <h6>הוסף אתר</h6>
                                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                             </button>
-
                         </div>
                     </div>
                     <Stations propsData={stationArray} />

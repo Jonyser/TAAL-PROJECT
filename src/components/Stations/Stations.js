@@ -5,6 +5,7 @@ import { FcAddDatabase } from "react-icons/fc";
 import './style.css';
 import Tasks_comp from "../Tasks_comp/Tasks_comp";
 import Dot from '../Dot/Dot'
+import Modal_Stations from '../Modal/Modal_Stations'
 // import $ from 'jquery'
 let allTasks = [];
 let tasks = [];
@@ -12,6 +13,7 @@ let tasks = [];
 const Stations = (props) => {
     const [, setStateTask] = useState([]);
     const [loading, setLoading] = useState(false);
+    const [modalOpen, setModalOpen] = useState(false)
     useEffect(() => {
         const fetchData = async () => {
             setLoading(true);
@@ -61,6 +63,7 @@ const Stations = (props) => {
             {loading && (<div>Loading</div>)}
             {!loading && (
                 <>
+                    {modalOpen && <Modal_Stations setOpenModalPlases={setModalOpen} />}
                     <div className='Cover_Stations'>
                         <div className='TitleStation'><h3>תחנות</h3></div>
                         <div className='Stations'>
@@ -78,7 +81,9 @@ const Stations = (props) => {
                                 })}
                             <button
                                 className='AddStation'
-                                onClick={() => AddStation()}>
+                                onClick={() => {
+                                    setModalOpen(true);
+                                }}>
                                 <FcAddDatabase style={{
                                     width: "85px",
                                     height: "30px"
@@ -87,6 +92,17 @@ const Stations = (props) => {
                                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                             </button>
+                            {/* <button
+                                className='AddStation'
+                                onClick={() => AddStation()}>
+                                <FcAddDatabase style={{
+                                    width: "85px",
+                                    height: "30px"
+                                }} />
+                                <h6>הוסף תחנה</h6>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            </button> */}
                         </div>
                     </div>
                     <Tasks_comp propsDataTask={tasks} />
