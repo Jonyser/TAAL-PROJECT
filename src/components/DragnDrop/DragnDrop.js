@@ -67,10 +67,10 @@ function DragnDrop(props) {
         // thisIdArray.push(thisId);
         myTask = saveProps.propDataTask.filter((item) => item.id === id)
         thisIdArray.push(myTask[0]);
-        localStorage.setItem('New_Routes',JSON.stringify(thisIdArray))
+        localStorage.setItem('New_Routes', JSON.stringify(thisIdArray))
     };
     //---------------------------------------------------------
-    
+
     const AddStation = () => {
 
     }

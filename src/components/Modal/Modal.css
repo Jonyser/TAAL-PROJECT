@@ -1,0 +1,173 @@
+.modalBackground {
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(200, 200, 200);
+    position: fixed;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+   
+  }
+  
+  .modalContainer {
+    margin-left: auto;
+    margin-right: auto;
+    width: 8em;
+    width: 500px;
+    height: 300px;
+    border-radius: 12px;
+    background-color: white;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    display: flex;
+    flex-direction: column;
+    padding: 25px;
+  }
+/* 
+
+ .modalContainer-inner 
+
+      position: fixed;
+ top: 0;
+ left: 0;
+ width: 100%;
+.height: 100vh;
+      background-color: Orgba(0, 0, 0, 0.2);
+
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+
+
+
+.modalContainer-inner {
+ position: relative;
+
+
+      padding: 32px;
+      width: 100%;
+ max-width: 640px;
+ background-color: #FFF; I
+
+
+ modalContainer-inner  {
+
+
+      position: absolute;
+      top: 16рх;
+
+
+      right: 16px;
+
+
+
+
+*/
+  .modalContainer:hover{
+    background-color: rgb(221, 219, 219);
+
+  }
+  
+  .modalContainer .title {
+    display: inline-block;
+    text-align: center;
+    margin-top: 10px;
+    
+  }
+  
+  .titleCloseBtn {
+    display: flex;
+    justify-content: flex-end;
+  }
+  
+  .titleCloseBtn button {
+    background-color: transparent;
+    border: none;
+    font-size: 25px;
+    cursor: pointer;
+  }
+  
+  .modalContainer .body {
+    flex: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.7rem;
+    text-align: center;
+  }
+
+  
+ .footer button {
+    width: 150px;
+    height: 45px;
+    margin: 10px;
+    border: none;
+    color: white;
+    border-radius: 8px;
+    font-size: 20px;
+    cursor: pointer;
+  }
+
+
+.continueBtn{
+  background-color: cornflowerblue;
+
+}
+.continueBtn:hover{
+  background-color: rgb(59, 86, 138);
+
+}
+  .cancelBtn {
+    background-color: crimson;
+  }
+  .cancelBtn:hover {
+    background-color: rgb(116, 12, 32);
+  }
+  #cancelBtn:hover {
+    background-color: rgb(131, 14, 37);
+  }
+
+
+  .RouteName{
+    text-align: right;
+    border: none;
+    display: flex;
+    height:30px;
+    width:100%;
+    background-color: rgb(180, 180, 180);
+    border-color: rgb(180, 180, 180);;
+    color: rgb(255, 255, 255);
+    position: absolute;
+    right: 0px;
+  } 
+  
+  #IPU{
+  
+    left: 30px;
+    margin: 18px;
+  
+    /* height:20px; */
+    /* padding: 12px 20px; */
+    /* margin: 8px; */
+    /* box-sizing: border-box; */
+    
+  }
+  .w3-input{
+    background-color: #d0d8d8;
+  }
+  
+  #titleIPU{
+    margin: 10px;
+    padding: 20px;
+    width: auto;
+    height: 60px;
+    color: rgb(41, 61, 61);
+    border: 1px solid transparent;
+    font-size: 28px;
+    line-height: 32px;
+    font-family: ReformaNarrowMedium;
+    font-weight: 800;
+    white-space: nowrap;
+  
+  
+  }

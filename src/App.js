@@ -2,6 +2,8 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Nav from './components/Nav/Nav';
 // import About from './components/About.js/About';
 import Planner from './components/Planner/Planner';
+import About from './components/About/About'
+
 import Profile from './components/Profile/Profile';
 import Calc from './components/Calc/Calc';
 import './App.css';
@@ -17,29 +19,30 @@ function App() {
 
   return (
     <>
-    <div style={{
-      backgroundColor: 'rgb(213, 221, 228)',
-      overflow: "auto",
-    }}>
+      <div style={{
+        backgroundColor: 'rgb(213, 221, 228)',
+        overflow: "auto",
+      }}>
 
-      <Provider store={store}>
-        <Router>
-          <div>
-          {sessionStorage.logged_in == 1 ?  <><Nav /></>:null}
-            <Switch>
-              {/* <CallState /> */}
-              <Route path="/" exact component={Home}></Route>
-              <Route path="/planner" component={Planner}></Route>
-              <Route path="/profile" component={Profile}></Route>
-              <Route path="/calc" component={Calc}></Route>
-              <Route path="/routes_cards" component={Cards}></Route>
+        <Provider store={store}>
+          <Router>
+            <div>
+              {sessionStorage.logged_in == 1 ? <><Nav /></> : null}
+              <Switch>
+                {/* <CallState /> */}
+                <Route path="/" exact component={Home}></Route>
+                <Route path="/planner" component={Planner}></Route>
+                {/* <Route path="/profile" component={Profile}></Route> */}
+                <Route path="/about" component={About}></Route>
+                <Route path="/calc" component={Calc}></Route>
+                <Route path="/routes_cards" component={Cards}></Route>
 
-              {/* <Route path="/about" component={About}></Route> */}
-            </Switch>
-          </div>
-        </Router>
-      </Provider>
-    </div >
+                {/* <Route path="/about" component={About}></Route> */}
+              </Switch>
+            </div>
+          </Router>
+        </Provider>
+      </div >
 
     </>
   );

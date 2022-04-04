@@ -93,7 +93,9 @@ const Places = () => {
     return (
         <>
             {!done ? <>
+
                 <h1 style={{ textAlign: "center" }}>Loading</h1>
+
                 < ReactLoading type={"bars"} className='loading' color={"rgb(180, 175, 199)"} height={'10%'} width={'10%'} />
             </>
                 :

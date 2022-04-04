@@ -12,10 +12,10 @@ let flag_token = false
 const Nav = () => {
 
     const [, login_token] = useState('')
-    const [complete_name,setcomplete_name] = useState('')
-    const [role,setRole] = useState('')
+    const [complete_name, setcomplete_name] = useState('')
+    const [role, setRole] = useState('')
 
-    useEffect(()=>{
+    useEffect(() => {
 
         const url2 = 'https://s83.bfa.myftpupload.com/wp-json/wp/v2/users/me'
         fetch(url2, {
@@ -49,9 +49,9 @@ const Nav = () => {
                 <Link to="/routes_cards" className='link'>
                     <li>כרטיסיות <AiOutlineIdcard /></li>
                 </Link>
-                <Link to="/profile" className='link'>
+                {/* <Link to="/profile" className='link'>
                     <li>בניית פרופיל <FcBusinessman /></li>
-                </Link>
+                </Link> */}
                 <Link to="/calc" className='link'>
                     <li>פעולות נוספות <FcCalculator /></li>
                 </Link>
@@ -60,8 +60,8 @@ const Nav = () => {
                 </Link>
 
             </ul>
-             {complete_name}
-             
+            {complete_name}
+
 
             {/* ---------------------------- */}
             <div className='user'>

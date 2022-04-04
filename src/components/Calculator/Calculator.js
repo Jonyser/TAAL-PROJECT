@@ -136,80 +136,80 @@ const Calculator = () => {
     //--------------------------------------------------------------
     return (
         <>
-        <div class="d-flex justify-content-center">
-            {!done ? <>
-                <h1 float={'right'}>Loading</h1>
-                < ReactLoading type={"bars"} className='loading' color={"rgb(180, 175, 199)"} height={'10%'} width={'10%'} />
-            </>
-                :
-                <>
-                    <div className="row">
-                        <div id="TaskShow" className='col-4 '></div>
-                        <div className='col-4 ' id="containerCalc" style={{ width: "600px" }}>
-                            <form name="myForm">
-                                <input type="text" className='textview' id='textview' disabled ></input>
-                            </form>
-                            <div className="row">
-                                <input type="button" className="col-2" id="btns" value="∪" onClick={() => Action('∪')} ></input>
-                                <input type="button" className="col-2" id="btns" value="∩" onClick={() => Action('∩')}></input>
-                                <input type="button" className="col-2" id="btns" value="\" onClick={() => Action("-")}></input>
-                                <input type="button" className="col-2" id="btns" value="⨁" onClick={() => Action('⨁')}></input>
-                            </div>
-                            <div className="row">
-                                <div className="col-3">{dataCards1.map((value, index) => {
-                                    return (
-                                        <div key={index} className='App'>
-                                            <header key={index}>
-                                                <button className='btnRoute' onClick={() => calc(value)} style={{ color: "#000", marginBottom: 15, height: 80, width: 100, borderRadius: "10px" }}>
-                                                    <div className='f' style={{ fontSize: "12px" }}>{value.myTitle}</div>
-                                                </button>
-                                            </header>
-                                        </div>
-                                    )
-                                })}</div>
-                                <div className="col-3">{dataCards2.map((value, index) => {
-                                    return (
-                                        <div key={index} className='App'>
-                                            <header key={index}>
-                                                <button className='btnRoute' onClick={() => calc(value)} style={{ color: "#000", marginBottom: 15, height: 80, width: 100, borderRadius: "10px" }}>
+            <div className="d-flex justify-content-center">
+                {!done ? <>
+                    <h1 float={'right'}>Loading</h1>
+                    < ReactLoading type={"bars"} className='loading' color={"rgb(180, 175, 199)"} height={'10%'} width={'10%'} />
+                </>
+                    :
+                    <>
+                        <div className="row">
+                            <div id="TaskShow" className='col-4 '></div>
+                            <div className='col-4 ' id="containerCalc" style={{ width: "600px" }}>
+                                <form name="myForm">
+                                    <input type="text" className='textview' id='textview' disabled ></input>
+                                </form>
+                                <div className="row">
+                                    <input type="button" className="col-2" id="btns" value="∪" onClick={() => Action('∪')} ></input>
+                                    <input type="button" className="col-2" id="btns" value="∩" onClick={() => Action('∩')}></input>
+                                    <input type="button" className="col-2" id="btns" value="\" onClick={() => Action("-")}></input>
+                                    <input type="button" className="col-2" id="btns" value="⨁" onClick={() => Action('⨁')}></input>
+                                </div>
+                                <div className="row">
+                                    <div className="col-3">{dataCards1.map((value, index) => {
+                                        return (
+                                            <div key={index} className='App'>
+                                                <header key={index}>
+                                                    <button className='btnRoute' onClick={() => calc(value)} style={{ color: "#000", marginBottom: 15, height: 80, width: 100, borderRadius: "10px" }}>
+                                                        <div className='f' style={{ fontSize: "12px" }}>{value.myTitle}</div>
+                                                    </button>
+                                                </header>
+                                            </div>
+                                        )
+                                    })}</div>
+                                    <div className="col-3">{dataCards2.map((value, index) => {
+                                        return (
+                                            <div key={index} className='App'>
+                                                <header key={index}>
+                                                    <button className='btnRoute' onClick={() => calc(value)} style={{ color: "#000", marginBottom: 15, height: 80, width: 100, borderRadius: "10px" }}>
 
-                                                    <div className='f' style={{ fontSize: "12px" }}>{value.myTitle}</div>
-                                                </button>
-                                            </header>
-                                        </div>
-                                    )
-                                })}</div>
-                                <div className="col-3">{dataCards3.map((value, index) => {
-                                    return (
-                                        <div key={index} className='App'>
-                                            <header key={index}>
-                                                <button className='btnRoute' onClick={() => calc(value)} style={{ color: "#000", marginBottom: 15, height: 80, width: 100, borderRadius: "10px" }}>
-                                                    <div className='f' style={{ fontSize: "12px" }}>{value.myTitle}</div>
-                                                </button>
-                                            </header>
-                                        </div>
-                                    )
-                                })}</div>
-                                <div className="col-3">{dataCards4.map((value, index) => {
-                                    return (
-                                        <div key={index} className='App'>
-                                            <header key={index}>
-                                                <button className='btnRoute' onClick={() => calc(value)} style={{ color: "#000", marginBottom: 15, height: 80, width: 100, borderRadius: "10px" }}>
-                                                    <div className='f' style={{ fontSize: "12px" }}>{value.myTitle}</div>
-                                                </button>
-                                            </header>
-                                        </div>
-                                    )
-                                })} </div>
-                            </div>
-                            <div className="row">
-                                <input type="button" className="col-2" id="btnsOrange" value="AC" onClick={() => calc("value")}  ></input>
-                                <input type="button" className="col-2" id="btnsOrange" value="Enter" onClick={() => enter("value")} ></input>
+                                                        <div className='f' style={{ fontSize: "12px" }}>{value.myTitle}</div>
+                                                    </button>
+                                                </header>
+                                            </div>
+                                        )
+                                    })}</div>
+                                    <div className="col-3">{dataCards3.map((value, index) => {
+                                        return (
+                                            <div key={index} className='App'>
+                                                <header key={index}>
+                                                    <button className='btnRoute' onClick={() => calc(value)} style={{ color: "#000", marginBottom: 15, height: 80, width: 100, borderRadius: "10px" }}>
+                                                        <div className='f' style={{ fontSize: "12px" }}>{value.myTitle}</div>
+                                                    </button>
+                                                </header>
+                                            </div>
+                                        )
+                                    })}</div>
+                                    <div className="col-3">{dataCards4.map((value, index) => {
+                                        return (
+                                            <div key={index} className='App'>
+                                                <header key={index}>
+                                                    <button className='btnRoute' onClick={() => calc(value)} style={{ color: "#000", marginBottom: 15, height: 80, width: 100, borderRadius: "10px" }}>
+                                                        <div className='f' style={{ fontSize: "12px" }}>{value.myTitle}</div>
+                                                    </button>
+                                                </header>
+                                            </div>
+                                        )
+                                    })} </div>
+                                </div>
+                                <div className="row">
+                                    <input type="button" className="col-2" id="btnsOrange" value="AC" onClick={() => calc("value")}  ></input>
+                                    <input type="button" className="col-2" id="btnsOrange" value="Enter" onClick={() => enter("value")} ></input>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                </>
-            }
+                    </>
+                }
             </div>
         </>
     );
