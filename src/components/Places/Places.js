@@ -7,7 +7,7 @@ import Stations from '../Stations/Stations'
 import Dot from '../Dot/Dot'
 import $, { } from 'jquery'
 import ReactLoading from 'react-loading';
-import Modal_Plases from '../Modal/Model_Plases'
+import Modal_Places from '../Modal/Model_Places'
 
 // import Popup from 'reactjs-popup';
 
@@ -102,7 +102,7 @@ const Places = () => {
             </>
                 :
                 <>
-                    {modalOpen && <Modal_Plases setOpenModalPlases={setModalOpen} setText={get_Name} />}
+                    {modalOpen && <Modal_Places setOpenModalPlases={setModalOpen} setText={get_Name} />}
                     <div className='Cover_Places'>
                         <div className='TitlePlaces'><h3>אתרים</h3></div>
                         <div className='Places'>
