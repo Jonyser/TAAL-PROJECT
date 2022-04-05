@@ -5,29 +5,30 @@ import { BsPencilFill } from "react-icons/bs";
 import { FcAddDatabase } from "react-icons/fc";
 import Stations from '../Stations/Stations'
 import Dot from '../Dot/Dot'
-import $, { } from 'jquery'
 import ReactLoading from 'react-loading';
 import Modal_Places from '../Modal/Model_Places'
 
-// import Popup from 'reactjs-popup';
 
 let places = [];
+let onlyAllStation = [];
 let stationArray = [];
 let Places_and_their_stations = [];
+let thisIdTask = 0;
 
 const Places = () => {
-    const [get_Name, setName] = useState(null);// for TextView
     const [done, setDone] = useState(false);
     const [, setLoading] = useState(false);
     const [, setStateStation] = useState([]);
     const [modalOpen, setModalOpen] = useState(false);
+    const [, setThisIdTask] = useState(0)
+    const [, setOnlyAllStation] = useState([]);
 
     useEffect(() => {
         const fetchData = async () => {
             setLoading(true);
             try {
                 getData();
-                jq();
+
 
             } catch (error) {
                 console.error(error.message);
@@ -49,7 +50,7 @@ const Places = () => {
 
             console.log("res: ", res)
             places = res.filter((item) => item.parent === 0)
-
+            setOnlyAllStation(onlyAllStation = res.filter((item) => item.parent > 0))
             Places_and_their_stations = places.map((element) => {
                 return {
                     parent: element,
@@ -61,10 +62,10 @@ const Places = () => {
         // setData_Loaded(true)
 
     }
-
-
     const Display_The_Stations = (e) => {
-        jq()
+
+        setThisIdTask(thisIdTask = e.id)
+
         if (stationArray.length > 0) {
             stationArray = [];
         }
@@ -82,15 +83,9 @@ const Places = () => {
                 // console.log("stationArray:", stationArray);
             }
         });
+        setStateStation({ data: stationArray })
+    }
 
-    }
-    //----------------------------------------------------------------------
-    const jq = () => {
-        // setJQ($(".TitleStation").hide())
-    }
-    //----------------------------------------------------------------------
-    const AddPlace = () => {
-    }
     //----------------------------------------------------------------------
     return (
         <>
@@ -102,7 +97,7 @@ const Places = () => {
             </>
                 :
                 <>
-                    {modalOpen && <Modal_Places setOpenModalPlases={setModalOpen} setText={get_Name} />}
+                    {modalOpen && <Modal_Places setOpenModalPlaces={setModalOpen} />}
                     <div className='Cover_Places'>
                         <div className='TitlePlaces'><h3>אתרים</h3></div>
                         <div className='Places'>
@@ -133,7 +128,7 @@ const Places = () => {
                             </button>
                         </div>
                     </div>
-                    <Stations propsData={stationArray} />
+                    <Stations propsData={stationArray} idTask={thisIdTask} allStations={onlyAllStation} />
                 </>
             }
         </>

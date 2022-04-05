@@ -1,4 +1,4 @@
-.modalBackground {
+/* .modalBackground {
     width: 100vw;
     height: 100vh;
     background-color: rgba(200, 200, 200);
@@ -7,9 +7,9 @@
     justify-content: center;
     align-items: center;
    
-  }
+  } */
 
-  .modalContainer {
+  /* .modalContainer {
     margin-left: 35%;
     margin-right: auto;
     width: 500px;
@@ -21,9 +21,9 @@
     flex-direction: column;
     padding: 25px;
     position: fixed;
-  }
+  } */
 
-.modalContainer .Planner{
+/* .modalContainer .Planner{
   display: none;
   position: fixed;
   top: 0;
@@ -32,60 +32,20 @@
   right: 0;
   background: rgba(90, 90, 90, 0.5);
   z-index: 9999;
-}
+} */
 /* 
-
- .modalContainer-inner 
-
-      position: fixed;
- top: 0;
- left: 0;
- width: 100%;
-.height: 100vh;
-      background-color: Orgba(0, 0, 0, 0.2);
-
-      display: flex;
-      justify-content: center;
-      align-items: center;
-
-
-
-
-.modalContainer-inner {
- position: relative;
-
-
-      padding: 32px;
-      width: 100%;
- max-width: 640px;
- background-color: #FFF; I
-
-
- modalContainer-inner  {
-
-
-      position: absolute;
-      top: 16рх;
-
-
-      right: 16px;
-
-
-
-
-*/
   .modalContainer:hover{
     background-color: rgb(221, 219, 219);
 
   }
-  
-  .modalContainer .title {
+   */
+  /* .modalContainer .title {
     display: inline-block;
     text-align: center;
     margin-top: 10px;
     
   }
-  
+   */
   .titleCloseBtn {
     display: flex;
     justify-content: flex-end;
@@ -98,14 +58,14 @@
     cursor: pointer;
   }
   
-  .modalContainer .body {
+  /* .modalContainer .body {
     flex: 50%;
     display: flex;
     justify-content: center;
     align-items: center;
     font-size: 1.7rem;
     text-align: center;
-  }
+  } */
 
   
  .footer button {
@@ -152,22 +112,15 @@
     right: 0px;
   } 
   
-  #IPU{
-  
+  /* #IPU{
     left: 30px;
     margin: 18px;
-  
-    /* height:20px; */
-    /* padding: 12px 20px; */
-    /* margin: 8px; */
-    /* box-sizing: border-box; */
-    
-  }
+  } */
   .w3-input{
     background-color: #d0d8d8;
   }
   
-  #titleIPU{
+  /* #titleIPU{
     margin: 10px;
     padding: 20px;
     width: auto;
@@ -181,19 +134,12 @@
     white-space: nowrap;
   
   
-  }
+  } */
 
 
-  .BackgroundPlases{
-    /* background-color: aliceblue;
-    margin: auto;
-    border: 3px solid green;
-    padding: 10px;
-    position: absolute; */
+  .BackgroundPlases{  
     background-color: aliceblue;
- 
     border: 3px solid green;
-
     position: fixed;
     width: 500px;
     height: -200px;

@@ -24,7 +24,7 @@ const jq = () => {
 // }
 
 function DragnDrop(props) {
-
+    // console.log("Task AllStation in:", props.allStations)
     const [loading, setLoading] = useState(false);
     const [modalOpen, setModalOpen] = useState(false)
     useEffect(() => {
@@ -90,7 +90,7 @@ function DragnDrop(props) {
                 })}
 
             </div>
-            {modalOpen && <Modal_Tasks setOpenModalPlases={setModalOpen} />}
+            {modalOpen && <Modal_Tasks setOpenModalPlases={setModalOpen} allStations={props.allStations} />}
             <div className='Cover_Tasks'>
                 <div className='TitleTasks'><h3>משימות</h3></div>
                 <div className='TasksCover'>
@@ -107,7 +107,7 @@ function DragnDrop(props) {
                             width: "85px",
                             height: "30px"
                         }} />
-                        <h6>הוסף תחנה</h6>
+                        <h6>הוסף משימה</h6>
                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     </button>

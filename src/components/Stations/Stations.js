@@ -9,8 +9,10 @@ import Modal_Stations from '../Modal/Modal_Stations'
 // import $ from 'jquery'
 let allTasks = [];
 let tasks = [];
-
 const Stations = (props) => {
+    console.log(" props.allStations:", props.allStations)
+
+    console.log(" props.idTask:", props.idTask)
     const [, setStateTask] = useState([]);
     const [loading, setLoading] = useState(false);
     const [modalOpen, setModalOpen] = useState(false)
@@ -43,9 +45,8 @@ const Stations = (props) => {
         if (tasks.length > 0) {
             tasks = [];
         }
-        // console.log("allTasks:", allTasks[0].places);
+
         allTasks.forEach(element => {
-            // console.log("elllllll:", element)
             for (let i = 0; i < element.places.length; i++) {
                 if (element.places[i] === e.id) {
                     tasks.push(element)
@@ -55,15 +56,12 @@ const Stations = (props) => {
         setStateTask({ data: tasks })//Updating the state
     }
     //----------------------------------------------------------
-    const AddStation = () => {
-
-    }
     return (
         <>
             {loading && (<div>Loading</div>)}
             {!loading && (
                 <>
-                    {modalOpen && <Modal_Stations setOpenModalPlases={setModalOpen} />}
+                    {modalOpen && <Modal_Stations setOpenModalPlaces={setModalOpen} idTasks={props.idTask} />}
                     <div className='Cover_Stations'>
                         <div className='TitleStation'><h3>תחנות</h3></div>
                         <div className='Stations'>
@@ -92,20 +90,10 @@ const Stations = (props) => {
                                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                             </button>
-                            {/* <button
-                                className='AddStation'
-                                onClick={() => AddStation()}>
-                                <FcAddDatabase style={{
-                                    width: "85px",
-                                    height: "30px"
-                                }} />
-                                <h6>הוסף תחנה</h6>
-                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                            </button> */}
+
                         </div>
                     </div>
-                    <Tasks_comp propsDataTask={tasks} />
+                    <Tasks_comp propsDataTask={tasks} allStations={props.allStations} />
                 </>
             )}
         </>

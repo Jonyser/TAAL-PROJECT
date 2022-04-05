@@ -1,16 +1,51 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import "./Modal.css";
 import { FcMultipleInputs } from "react-icons/fc";
+import { RiAsterisk } from "react-icons/ri";
+
 
 let obj = { tasks: [], users: [] }
 let get_Route_ID = 0;
+let myParent = 0;
 
-function Modal_Stations({ setOpenModalPlases }) {
+let getPicture, getSound;
+let ichour = 'אישור'
+let parentNum = 0;
+const Modal_Stations = ({ setOpenModalPlaces, idTasks }) => {
+
+    console.log('ID TASK:', idTasks)
     const [, set_obj] = useState(null);// for TextView
     const [, setDone] = useState(false);
+    const [, setParent] = useState(0);
+    const [get_title, settitle] = useState("");
+    const [, setPicture] = useState(null);
+    const [, setSound] = useState(null);
+    const [getDescription, setDescription] = useState("");
+    const fileInput = useRef(null)
 
 
-    function Post_Route() {
+    const handleTitleInput = (e) => {
+        settitle(e.target.value)
+    }
+    const handleDescriptionInput = (e) => {
+        setDescription(e.target.value)
+    }
+
+    const handleFileInput = (e) => {
+        // handle validations
+        const file = e.target.files[0];
+
+        if ((file.type).includes('image')) {
+            setPicture(getPicture = file)
+            console.log(file)
+        }
+
+        if ((file.type).includes('audio')) {
+            setSound(getSound = file)
+            console.log(file)
+        }
+    }
+    function Post_Station() {
 
         if (JSON.parse(localStorage.getItem('New_Routes')) === null) {
             alert('Route is empty ! ');
@@ -20,7 +55,7 @@ function Modal_Stations({ setOpenModalPlases }) {
             set_obj(obj.tasks = JSON.parse(localStorage.getItem('New_Routes')));
             console.log("obj : ", obj)
 
-            let url_post = `https://s83.bfa.myftpupload.com/wp-json/wp/v2/routes`
+            let url_post = `https://s83.bfa.myftpupload.com/wp-json/wp/v2/places`
             fetch(url_post, {
                 method: "POST",
                 headers: {
@@ -28,9 +63,15 @@ function Modal_Stations({ setOpenModalPlases }) {
                     'Authorization': `Bearer ${sessionStorage.getItem('jwt')}`,
                 },
 
+
                 body: JSON.stringify({
-
-
+                    name: get_title,
+                    description: getDescription,
+                    parent: idTasks,
+                    fields: {
+                        audio: getSound,
+                        image: getPicture
+                    }
                 })
 
             }).then(function (response) {
@@ -54,7 +95,7 @@ function Modal_Stations({ setOpenModalPlases }) {
                     <div className="titleCloseBtnPlases">
                         <button
                             onClick={() => {
-                                setOpenModalPlases(false);
+                                setOpenModalPlaces(false);
                             }}
                         >
                             X
@@ -64,50 +105,42 @@ function Modal_Stations({ setOpenModalPlases }) {
 
                     </div>
                     <div className="body">
+                        <h3><b>הוסף תחנה</b></h3>
                         <form id="IPU" className="w3-container">
-                            <p>:רשום את שם התחנה <FcMultipleInputs /></p>
-                            <p><input type="text" style={{
+                            <h6>:רשום את שם תחנה <RiAsterisk style={{ color: 'red' }} /></h6>
+                            <p><input required={true} type="text" onChange={handleTitleInput} style={{
                                 textAlign: 'right',
-                                width: '350px'
+                                width: '420px'
                             }}></input></p>
                         </form>
                         <form id="IPU" className="w3-container">
-                            <p>:תאר במשפט את התחנה <FcMultipleInputs /></p>
-                            <p><input type="text" style={{
+                            <h6>:תאר במשפט את תחנה <RiAsterisk style={{ color: 'red' }} /></h6>
+                            <p><input type="text" onChange={handleDescriptionInput} style={{
                                 textAlign: 'right',
-                                width: '350px'
+                                width: '420px'
                             }}></input></p>
                         </form>
                         <form id="IPU" className="w3-container">
-                            <p>:הוסף תמונה של התחנה  <FcMultipleInputs /></p>
-                            <p><input type="text" style={{
-                                textAlign: 'right',
-                                width: '350px'
-                            }}></input></p>
+                            <h6>: הוסף תמונה של תחנה <FcMultipleInputs /></h6>
+                            <div className="input-group mb-3">
+                                <input required={true} accept=".png, .jpg, .jpeg" className='form-control' type="file" onChange={handleFileInput} style={{
+                                    textAlign: 'right',
+                                    width: '100%'
+                                }} ></input>
+                            </div>
                         </form>
                         <form id="IPU" className="w3-container">
-                            <p>:הוסף קטע קול המתאר את התחנה <FcMultipleInputs /></p>
-                            <p><input type="text" style={{
+                            <h6>: הוסף קטע קול המתאר את התחנה <FcMultipleInputs /></h6>
+                            <p><input required={true} accept='.mp3' type="file" className='form-control' onChange={handleFileInput} style={{
                                 textAlign: 'right',
-                                width: '350px'
+                                width: '96%'
                             }}></input></p>
                         </form>
 
                     </div>
                     <div className="footer">
+                        <input type="submit" className='OK' value={ichour} onClick={Post_Station} />
 
-                        <button className='OK'
-                            onClick={Post_Route}
-                        >
-                            אישור
-                        </button>
-                        {/* <button className='cancelBtn'
-                            onClick={() => {
-                                setOpenModalPlases(false);
-                            }}
-                        >
-                            Cancel
-                        </button> */}
                     </div>
 
                 </div>
@@ -116,4 +149,5 @@ function Modal_Stations({ setOpenModalPlases }) {
         </>
     );
 }
+
 export default Modal_Stations;

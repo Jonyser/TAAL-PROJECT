@@ -18,6 +18,11 @@
   border-radius: 1.5ch;
   font-size: small;
 }
+.Station:focus{
+  background: linear-gradient(90deg,#fffbf7 0,#f5a55f);
+  font-size: medium;
+  transition: 0.4s;
+}
 .AddStation{
 background-color: rgb(253, 245, 241);
 color: rgb(90, 107, 122);

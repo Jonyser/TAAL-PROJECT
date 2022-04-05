@@ -1,14 +1,15 @@
 import React, { useState, useRef } from 'react';
 import "./Modal.css";
 import { FcMultipleInputs } from "react-icons/fc";
+import { RiAsterisk } from "react-icons/ri";
 
 let obj = { tasks: [], users: [] }
 let get_Route_ID = 0;
-let getPicture,getSound;
+let getPicture, getSound;
 let ichour = 'אישור'
+let parentNum = 0;
 
-
-function Modal_Plases({ setOpenModalPlases }) {
+function Modal_Plases({ setOpenModalPlaces }) {
     const [, set_obj] = useState(null);// for TextView
     const [, setDone] = useState(false);
     const [get_title, settitle] = useState("");
@@ -18,10 +19,10 @@ function Modal_Plases({ setOpenModalPlases }) {
     const fileInput = useRef(null)
 
 
-    const handleTitleInput = (e)=>{
+    const handleTitleInput = (e) => {
         settitle(e.target.value)
     }
-    const handleDescriptionInput = (e)=>{
+    const handleDescriptionInput = (e) => {
         setDescription(e.target.value)
     }
 
@@ -29,23 +30,23 @@ function Modal_Plases({ setOpenModalPlases }) {
         // handle validations
         const file = e.target.files[0];
 
-        if((file.type).includes('image')){
+        if ((file.type).includes('image')) {
             setPicture(getPicture = file)
             console.log(file)
         }
 
-        if((file.type).includes('audio')){
+        if ((file.type).includes('audio')) {
             setSound(getSound = file)
             console.log(file)
         }
 
-      };
+    };
 
     function Post_Place() {
-        console.log("Picture from post function",getPicture)
-        console.log("Sound from post function",getSound)
-        console.log("Title from post function",get_title)
-        console.log("Description from post function",getDescription)
+        console.log("Picture from post function", getPicture)
+        console.log("Sound from post function", getSound)
+        console.log("Title from post function", get_title)
+        console.log("Description from post function", getDescription)
 
         if (getPicture == null || getSound == null) {
             alert('Please provide an image and a sound')
@@ -66,33 +67,30 @@ function Modal_Plases({ setOpenModalPlases }) {
                 body: JSON.stringify({
                     name: get_title,
                     description: getDescription,
-                    fields:{
+                    parent: parentNum,
+                    fields: {
                         audio: getSound,
                         image: getPicture
                     }
-
-
                 })
 
             }).then(function (response) {
                 return response.json();
             }).then(function (post) {
-               
+
                 console.log(post)
-                // window.location.replace("/planner")
+                window.location.replace("/planner")
             })
         }
     }
     return (
         <>
-
-
             <div className="BackgroundPlases">
                 <div className="modalContainerPlases">
                     <div className="titleCloseBtnPlases">
                         <button
                             onClick={() => {
-                                setOpenModalPlases(false);
+                                setOpenModalPlaces(false);
                             }}
                         >
                             X
@@ -104,17 +102,17 @@ function Modal_Plases({ setOpenModalPlases }) {
                     <div className="body">
                         <h3><b>הוסף אתר</b></h3>
                         <form id="IPU" className="w3-container">
-                            <h6>:רשום את שם האתר <FcMultipleInputs /></h6>
+                            <h6>:רשום את שם האתר <RiAsterisk style={{ color: 'red' }} /></h6>
                             <p><input required={true} type="text" onChange={handleTitleInput} style={{
                                 textAlign: 'right',
-                                width: '350px'
+                                width: '420px'
                             }}></input></p>
                         </form>
                         <form id="IPU" className="w3-container">
-                            <h6>:תאר במשפט את האתר <FcMultipleInputs /></h6>
+                            <h6>:תאר במשפט את האתר <RiAsterisk style={{ color: 'red' }} /></h6>
                             <p><input type="text" onChange={handleDescriptionInput} style={{
                                 textAlign: 'right',
-                                width: '350px'
+                                width: '420px'
                             }}></input></p>
                         </form>
                         <form id="IPU" className="w3-container">
@@ -136,19 +134,8 @@ function Modal_Plases({ setOpenModalPlases }) {
 
                     </div>
                     <div className="footer">
-                        <input type="submit" className='OK' value={ichour} onClick={Post_Place}/>
-                        {/* <button type='submit' className='OK'
-                            onClick={Post_Place}
-                        >
-                            אישור
-                        </button> */}
-                        {/* <button className='cancelBtn'
-                            onClick={() => {
-                                setOpenModalPlases(false);
-                            }}
-                        >
-                            Cancel
-                        </button> */}
+                        <input type="submit" className='OK' value={ichour} onClick={Post_Place} />
+
                     </div>
 
                 </div>
