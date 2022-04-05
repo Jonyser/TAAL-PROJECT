@@ -31,7 +31,6 @@ const Planner = () => {
     //-------------------input-------------------------
     function getName(val) {
         setName(val.target.value)
-        console.warn(val.target.value)
     }
 
     return (

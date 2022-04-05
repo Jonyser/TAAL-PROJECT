@@ -207,10 +207,10 @@
   }
   .OK{
     background-color: rgb(95, 95, 230);
-    margin: auto;
     width: 50%;
     border: 3px solid green;
-    padding: 10px;
+    margin: 20px;
+    margin-right: 46px;
   }
   .OK:hover{
     background-color: rgb(60, 60, 148);
