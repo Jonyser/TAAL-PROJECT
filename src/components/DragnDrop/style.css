@@ -21,6 +21,7 @@
   border: 5px solid rgb(83, 90, 146); 
   position:absolute;
   
+  
 } 
 .Board:hover{
   background-color:rgb(234, 237, 247) ;
@@ -62,6 +63,16 @@
   padding-top: 1px;
   padding-bottom: 1px;
   border-radius: 1.5ch;
+  overflow: scroll;
+  height: 440px;
+  width: 320px;
+}
+.addTaskCover{
+  background-color:  rgb(236, 245, 220);
+  margin: -0.5px;
+  padding-top: 1px;
+  padding-bottom: 1px;
+  width: 320px;
 }
 
 .MediaCover{
@@ -72,7 +83,7 @@
 .AddTasks{
   display: flex;
    width: 85%;
-   height: 70px;
+   height: 90px;
    margin: 20px;
    padding: 20px;
    justify-content: right;

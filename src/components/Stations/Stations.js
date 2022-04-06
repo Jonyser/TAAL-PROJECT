@@ -64,19 +64,7 @@ const Stations = (props) => {
                     {modalOpen && <Modal_Stations setOpenModalPlaces={setModalOpen} idTasks={props.idTask} />}
                     <div className='Cover_Stations'>
                         <div className='TitleStation'><h3>תחנות</h3></div>
-                        <div className='Stations'>
-                            {
-                                props.propsData.map((value, index) => {
-                                    return (
-                                        <button className='Station'
-                                            onClick={() => Display_The_Tasks(value)}
-                                            key={index}>
-                                            {value.name}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                            <BsPencilFill /> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                            <Dot color="#e29e62" />
-                                        </button>
-                                    )
-                                })}
+                        <div className='addStationCover'>
                             <button
                                 className='AddStation'
                                 onClick={() => {
@@ -90,6 +78,21 @@ const Stations = (props) => {
                                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                             </button>
+                        </div>
+                        <div className='Stations'>
+                            {
+                                props.propsData.map((value, index) => {
+                                    return (
+                                        <button className='Station'
+                                            onClick={() => Display_The_Tasks(value)}
+                                            key={index}>
+                                            {value.name}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                            <BsPencilFill /> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                            <Dot color="#e29e62" />
+                                        </button>
+                                    )
+                                })}
+
 
                         </div>
                     </div>

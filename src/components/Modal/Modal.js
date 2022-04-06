@@ -25,6 +25,7 @@ function Modal({ setOpenModal, setText }) {
         else {
             set_obj(obj.tasks = JSON.parse(localStorage.getItem('New_Routes')));
             console.log("obj : ", obj)
+            console.log("obj.tasks : ", obj.tasks)
 
             let url_post = `https://s83.bfa.myftpupload.com/wp-json/wp/v2/routes`
             fetch(url_post, {

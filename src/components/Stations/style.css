@@ -5,11 +5,20 @@
   padding-top: 1px;
   padding-bottom: 1px;
   border-radius: 1.5ch;
+  height: 435px;
+  overflow: scroll;
+}
+.addStationCover{
+  background-color: rgb(255, 242, 234);
+  margin: -0.5px;
+  padding-top: 1px;
+  padding-bottom: 1px;
+
 }
 .Station,.AddStation{
   display: flex;
   width: 85%;
-  height: 30%;
+  height: 18%;
   margin: 20px;
   padding: 20px;
   justify-content:right;

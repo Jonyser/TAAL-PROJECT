@@ -100,19 +100,7 @@ const Places = () => {
                     {modalOpen && <Modal_Places setOpenModalPlaces={setModalOpen} />}
                     <div className='Cover_Places'>
                         <div className='TitlePlaces'><h3>אתרים</h3></div>
-                        <div className='Places'>
-                            {places.map((value, index) => {
-                                return (
-                                    <button
-                                        className='Place'
-                                        onClick={() => Display_The_Stations(value)}
-                                        key={index}>{value.name}  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                        <BsPencilFill />
-                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                        <Dot color="rgb(161, 147, 229)" />
-                                    </button>
-                                )
-                            })}
+                        <div className='addPlaceCover'>
                             <button
                                 className='AddPlace'
                                 onClick={() => {
@@ -126,6 +114,21 @@ const Places = () => {
                                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                             </button>
+                        </div>
+                        <div className='Places'>
+                            {places.map((value, index) => {
+                                return (
+                                    <button
+                                        className='Place'
+                                        onClick={() => Display_The_Stations(value)}
+                                        key={index}>{value.name}  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                        <BsPencilFill />
+                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                        <Dot color="rgb(161, 147, 229)" />
+                                    </button>
+                                )
+                            })}
+
                         </div>
                     </div>
                     <Stations propsData={stationArray} idTask={thisIdTask} allStations={onlyAllStation} />

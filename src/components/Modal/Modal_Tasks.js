@@ -85,7 +85,7 @@ function Modal_Tasks({ setOpenModalPlases, allStations }) {
     return (
         <>
 
-            <div className="BackgroundPlases">
+            <div className="BackgroundTasks">
                 <div className="modalContainerPlases">
                     <div className="titleCloseBtnPlases">
                         <button
@@ -132,7 +132,7 @@ function Modal_Tasks({ setOpenModalPlases, allStations }) {
                             }}></input></p>
 
                             <div class="list-group">
-
+                                <h6>:בחר את התחנות שברצונך לשייך את המשימה <RiAsterisk style={{ color: 'red' }} /></h6>
                                 {allStations.map((value, index) => {
                                     return (
                                         <label key={index} class="list-group-item">

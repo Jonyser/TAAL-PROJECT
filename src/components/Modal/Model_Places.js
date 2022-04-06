@@ -3,20 +3,19 @@ import "./Modal.css";
 import { FcMultipleInputs } from "react-icons/fc";
 import { RiAsterisk } from "react-icons/ri";
 
-let obj = { tasks: [], users: [] }
-let get_Route_ID = 0;
+
 let getPicture, getSound;
 let ichour = 'אישור'
 let parentNum = 0;
-
+let file = {};
 function Modal_Plases({ setOpenModalPlaces }) {
-    const [, set_obj] = useState(null);// for TextView
-    const [, setDone] = useState(false);
+
+    // const [, setDone] = useState(false);
     const [get_title, settitle] = useState("");
-    const [, setPicture] = useState(null);
-    const [, setSound] = useState(null);
+    // const [, setPicture] = useState(null);
+    // const [, setSound] = useState(null);
     const [getDescription, setDescription] = useState("");
-    const fileInput = useRef(null)
+
 
 
     const handleTitleInput = (e) => {
@@ -28,17 +27,18 @@ function Modal_Plases({ setOpenModalPlaces }) {
 
     const handleFileInput = (e) => {
         // handle validations
-        const file = e.target.files[0];
+        file = e.target.files[0];
+        console.log("fileeeeeee:", file)
+        // console.log("fileOut:", file)
+        // if ((file.type).includes('image')) {
+        //     setPicture(getPicture = file)
+        //     alert("file:", getPicture)
+        // }
 
-        if ((file.type).includes('image')) {
-            setPicture(getPicture = file)
-            console.log(file)
-        }
-
-        if ((file.type).includes('audio')) {
-            setSound(getSound = file)
-            console.log(file)
-        }
+        // if ((file.type).includes('audio')) {
+        //     setSound(getSound = file)
+        //     alert("file:", getPicture)
+        // }
 
     };
 
@@ -48,13 +48,10 @@ function Modal_Plases({ setOpenModalPlaces }) {
         console.log("Title from post function", get_title)
         console.log("Description from post function", getDescription)
 
-        if (getPicture == null || getSound == null) {
-            alert('Please provide an image and a sound')
-            return
-        }
-        else {
-            set_obj(obj.tasks = JSON.parse(localStorage.getItem('New_Routes')));
-            console.log("obj : ", obj)
+
+        {
+
+
 
             let url_post = `https://s83.bfa.myftpupload.com/wp-json/wp/v2/places`
             fetch(url_post, {
@@ -69,8 +66,8 @@ function Modal_Plases({ setOpenModalPlaces }) {
                     description: getDescription,
                     parent: parentNum,
                     fields: {
-                        audio: getSound,
-                        image: getPicture
+                        image: file,
+                        audio: getSound
                     }
                 })
 
@@ -78,8 +75,8 @@ function Modal_Plases({ setOpenModalPlaces }) {
                 return response.json();
             }).then(function (post) {
 
-                console.log(post)
-                window.location.replace("/planner")
+                console.log("post:", post)
+                // window.location.replace("/planner")
             })
         }
     }

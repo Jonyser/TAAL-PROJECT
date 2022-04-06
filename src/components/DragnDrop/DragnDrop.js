@@ -93,11 +93,7 @@ function DragnDrop(props) {
             {modalOpen && <Modal_Tasks setOpenModalPlases={setModalOpen} allStations={props.allStations} />}
             <div className='Cover_Tasks'>
                 <div className='TitleTasks'><h3>משימות</h3></div>
-                <div className='TasksCover'>
-
-                    {dndArray.length === 0 ? null : dndArray.map((tag) => {
-                        return <Tag title={tag.title} id={tag.id} key={tag.id} show={jq()} idImg={thisId} dataImg={saveProps.propDataTask} />;
-                    })}
+                <div className='addTaskCover'>
                     <button
                         className='AddTasks'
                         onClick={() => {
@@ -111,18 +107,14 @@ function DragnDrop(props) {
                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     </button>
-                    {/* 
-                    <button
-                        className='AddTasks'
-                        onClick={() => AddStation()}>
-                        <FcAddDatabase style={{
-                            width: "85px",
-                            height: "30px"
-                        }} />
-                        <h6>הוסף משימה</h6>
-                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    </button> */}
+                </div>
+                <div className='TasksCover'>
+
+                    {dndArray.length === 0 ? null : dndArray.map((tag) => {
+                        return <Tag title={tag.title} id={tag.id} key={tag.id} show={jq()} idImg={thisId} dataImg={saveProps.propDataTask} />;
+                    })}
+
+
                 </div>
             </div>
 

@@ -4,11 +4,21 @@
   padding-top: 1px;
   padding-bottom: 1px;
   border-radius: 1.5ch;
+  height: 420px;
+  overflow: scroll;
+
+}
+.addPlaceCover{
+  background-color: rgb(237, 234, 255);
+  margin: -0.5px;
+  padding-top: 1px;
+  padding-bottom: 1px;
+
 }
 .Place ,.AddPlace{
   display: flex;
   width: 85%;
-  height: 30%;
+  height: 18%;
   margin: 20px;
   padding: 20px;
   justify-content:right;
@@ -16,6 +26,7 @@
   margin-right: 50;
   border-radius: 1.5ch;
   font-size: small;
+  
 }
 .Place:focus{
   background: linear-gradient(90deg,#f6f5ff 0,#bb98f3);
@@ -25,7 +36,6 @@
 }
 .AddPlace{
   background-color: rgb(243, 241, 255);
-
   color: rgb(90, 107, 122);
   border-style: dotted;
 }
