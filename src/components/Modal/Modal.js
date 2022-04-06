@@ -10,7 +10,6 @@ function Modal({ setOpenModal, setText }) {
     const [, set_obj] = useState(null);// for TextView
     const [, setDone] = useState(false);
 
-
     function Post_Route() {
 
         if (setText === null || setText === "") {
@@ -42,6 +41,7 @@ function Modal({ setOpenModal, setText }) {
                     fields: {
                         // tasks: obj.tasks[0].id,
                         tasks: obj.tasks.map((e) => {
+                            console.log("e.id:", e.id)
                             return e.id
                         }),
                         users: obj.tasks,
@@ -89,7 +89,6 @@ function Modal({ setOpenModal, setText }) {
                                 Cancel
                             </button>
                         </div>
-
                     </div>
                 </div>
             </>
@@ -117,18 +116,15 @@ function Modal({ setOpenModal, setText }) {
                                     setOpenModal(false);
                                 }}
 
-                            >
-                                לא
+                            >לא
                             </button>
 
                             &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
                             <button className='continueBtn'
                                 onClick={Post_Route}
-                            >
-                                כן
+                            > כן
                             </button>
                         </div>
-
                     </div>
                 </div>
             }

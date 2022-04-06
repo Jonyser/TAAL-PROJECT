@@ -3,9 +3,7 @@ import "./Modal.css";
 import { FcMultipleInputs } from "react-icons/fc";
 import { RiAsterisk } from "react-icons/ri";
 
-let obj = { tasks: [], users: [] }
 let get_Route_ID = 0;
-let myParent = 0;
 let getPicture, getSound;
 let ichour = 'אישור'
 let parentNum = 0;
@@ -13,9 +11,7 @@ let parentNum = 0;
 
 
 function Modal_Tasks({ setOpenModalPlases, allStations }) {
-    const [, set_obj] = useState(null);// for TextView
     const [, setDone] = useState(false);
-    const [, setParent] = useState(0);
     const [get_title, settitle] = useState("");
     const [, setPicture] = useState(null);
     const [, setSound] = useState(null);
@@ -48,43 +44,35 @@ function Modal_Tasks({ setOpenModalPlases, allStations }) {
         }
     }
     function Post_Task() {
+        let url_post = `https://s83.bfa.myftpupload.com/wp-json/wp/v2/tasks/`
+        fetch(url_post, {
+            method: "POST",
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${sessionStorage.getItem('jwt')}`,
+            },
+            body: JSON.stringify({
 
-        if (JSON.parse(localStorage.getItem('New_Routes')) === null) {
-            alert('Route is empty ! ');
-            return
-        }
-        else {
-            set_obj(obj.tasks = JSON.parse(localStorage.getItem('New_Routes')));
-            console.log("obj : ", obj)
-
-            let url_post = `https://s83.bfa.myftpupload.com/wp-json/wp/v2/routes`
-            fetch(url_post, {
-                method: "POST",
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${sessionStorage.getItem('jwt')}`,
-                },
-
-                body: JSON.stringify({
-
-
-                })
-
-            }).then(function (response) {
-                return response.json();
-            }).then(function (post) {
-                get_Route_ID = post.id
-                setDone(true)
-
-                alert(get_Route_ID)
-                console.log(post)
-                window.location.replace("/planner")
+                name: get_title,
+                description: getDescription,
+                parent: parentNum,
+                fields: {
+                    audio: getSound
+                }
             })
-        }
+        }).then(function (response) {
+            return response.json();
+        }).then(function (post) {
+            get_Route_ID = post.id
+            setDone(true)
+
+            alert(get_Route_ID)
+            console.log(post)
+            window.location.replace("/planner")
+        })
     }
     return (
         <>
-
             <div className="BackgroundTasks">
                 <div className="modalContainerPlases">
                     <div className="titleCloseBtnPlases">
@@ -96,23 +84,22 @@ function Modal_Tasks({ setOpenModalPlases, allStations }) {
                             X
                         </button>
                     </div>
-                    <div className="title">
-
-                    </div>
                     <div className="body">
-                        <h3><b>הוסף משימה</b></h3>
+                        <h5 style={{ textAlign: 'center' }}> הוסף משימה</h5>
                         <form id="IPU" className="w3-container">
                             <h6>:רשום את שם המשימה <RiAsterisk style={{ color: 'red' }} /></h6>
                             <p><input required={true} type="text" onChange={handleTitleInput} style={{
                                 textAlign: 'right',
-                                width: '420px'
+                                width: '420px',
+                                height: '35px'
                             }}></input></p>
                         </form>
                         <form id="IPU" className="w3-container">
                             <h6>:תאר במשפט את משימה <RiAsterisk style={{ color: 'red' }} /></h6>
                             <p><input type="text" onChange={handleDescriptionInput} style={{
                                 textAlign: 'right',
-                                width: '420px'
+                                width: '420px',
+                                height: '35px'
                             }}></input></p>
                         </form>
                         <form id="IPU" className="w3-container">
@@ -120,7 +107,8 @@ function Modal_Tasks({ setOpenModalPlases, allStations }) {
                             <div className="input-group mb-3">
                                 <input required={true} accept=".png, .jpg, .jpeg" className='form-control' type="file" onChange={handleFileInput} style={{
                                     textAlign: 'right',
-                                    width: '100%'
+                                    width: '100%',
+                                    height: '35px'
                                 }} ></input>
                             </div>
                         </form>
@@ -128,26 +116,28 @@ function Modal_Tasks({ setOpenModalPlases, allStations }) {
                             <h6>: הוסף קטע קול המתאר את המשימה <FcMultipleInputs /></h6>
                             <p><input required={true} accept='.mp3' type="file" className='form-control' onChange={handleFileInput} style={{
                                 textAlign: 'right',
-                                width: '96%'
+                                width: '96%',
+                                height: '35px'
                             }}></input></p>
 
-                            <div class="list-group">
+                            <div className="list-group">
                                 <h6>:בחר את התחנות שברצונך לשייך את המשימה <RiAsterisk style={{ color: 'red' }} /></h6>
-                                {allStations.map((value, index) => {
-                                    return (
-                                        <label key={index} class="list-group-item">
-                                            <input class="form-check-input me-1" type="checkbox" value=""></input>
-                                            {value.name}
-                                        </label>
-                                    )
-                                })}
+                                <div className='allTasks'>
+                                    {allStations.map((value, index) => {
+                                        return (
+                                            <label key={index} className="list-group-item">
+                                                <input className="form-check-input me-1" type="checkbox" value=""></input>
+                                                {value.name}
+                                            </label>
+                                        )
+                                    })}
+                                </div>
                             </div>
                         </form>
 
                     </div>
                     <div className="footer">
                         <input type="submit" className='OK' value={ichour} onClick={Post_Task} />
-
                     </div>
 
                 </div>

@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState } from 'react';
 import "./Modal.css";
 import { FcMultipleInputs } from "react-icons/fc";
 import { RiAsterisk } from "react-icons/ri";
@@ -10,75 +10,65 @@ let parentNum = 0;
 let file = {};
 function Modal_Plases({ setOpenModalPlaces }) {
 
-    // const [, setDone] = useState(false);
     const [get_title, settitle] = useState("");
-    // const [, setPicture] = useState(null);
-    // const [, setSound] = useState(null);
     const [getDescription, setDescription] = useState("");
-
-
-
+    const [, setSound] = useState(null);
+    const [, setPicture] = useState(null);
+    //----------------------------------
     const handleTitleInput = (e) => {
         settitle(e.target.value)
     }
+    //----------------------------------
     const handleDescriptionInput = (e) => {
         setDescription(e.target.value)
     }
-
+    //----------------------------------
     const handleFileInput = (e) => {
         // handle validations
         file = e.target.files[0];
         console.log("fileeeeeee:", file)
-        // console.log("fileOut:", file)
-        // if ((file.type).includes('image')) {
-        //     setPicture(getPicture = file)
-        //     alert("file:", getPicture)
-        // }
+        console.log("fileOut:", file)
+        if ((file.type).includes('image')) {
+            setPicture(getPicture = file)
+            alert("file:", getPicture)
+        }
 
-        // if ((file.type).includes('audio')) {
-        //     setSound(getSound = file)
-        //     alert("file:", getPicture)
-        // }
+        if ((file.type).includes('audio')) {
+            setSound(getSound = file)
+            alert("file:", getPicture)
+        }
 
     };
-
+    //----------------------------------
     function Post_Place() {
         console.log("Picture from post function", getPicture)
         console.log("Sound from post function", getSound)
         console.log("Title from post function", get_title)
         console.log("Description from post function", getDescription)
 
-
-        {
-
-
-
-            let url_post = `https://s83.bfa.myftpupload.com/wp-json/wp/v2/places`
-            fetch(url_post, {
-                method: "POST",
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${sessionStorage.getItem('jwt')}`,
-                },
-
-                body: JSON.stringify({
-                    name: get_title,
-                    description: getDescription,
-                    parent: parentNum,
-                    fields: {
-                        image: file,
-                        audio: getSound
-                    }
-                })
-
-            }).then(function (response) {
-                return response.json();
-            }).then(function (post) {
-
-                console.log("post:", post)
-                // window.location.replace("/planner")
+        let url_post = `https://s83.bfa.myftpupload.com/wp-json/wp/v2/places`
+        fetch(url_post, {
+            method: "POST",
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${sessionStorage.getItem('jwt')}`,
+            },
+            body: JSON.stringify({
+                name: get_title,
+                description: getDescription,
+                parent: parentNum,
+                fields: {
+                    image: file,
+                    audio: getSound
+                }
             })
-        }
+
+        }).then(function (response) {
+            return response.json();
+        }).then(function (post) {
+            // console.log("post:", post)
+            window.location.replace("/planner")
+        })
     }
     return (
         <>
@@ -94,10 +84,9 @@ function Modal_Plases({ setOpenModalPlaces }) {
                         </button>
                     </div>
                     <div className="title">
-
+                        <h3><b>הוסף אתר</b></h3>
                     </div>
                     <div className="body">
-                        <h3><b>הוסף אתר</b></h3>
                         <form id="IPU" className="w3-container">
                             <h6>:רשום את שם האתר <RiAsterisk style={{ color: 'red' }} /></h6>
                             <p><input required={true} type="text" onChange={handleTitleInput} style={{
@@ -128,16 +117,12 @@ function Modal_Plases({ setOpenModalPlaces }) {
                                 width: '96%'
                             }}></input></p>
                         </form>
-
                     </div>
                     <div className="footer">
                         <input type="submit" className='OK' value={ichour} onClick={Post_Place} />
-
                     </div>
-
                 </div>
             </div>
-
         </>
     );
 }

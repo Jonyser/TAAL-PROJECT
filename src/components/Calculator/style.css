@@ -61,3 +61,7 @@
     background-color: rgb(237, 234, 255); 
 
 }
+#dataFromServerButton{
+    height: 235px;
+    overflow: scroll;
+}

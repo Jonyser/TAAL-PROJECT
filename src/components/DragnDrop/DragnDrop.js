@@ -4,7 +4,6 @@ import { useDrop } from "react-dnd";
 import "./style.css";
 import Images from "../Images/Images";
 import Audios from "../Audios/Audios";
-import $ from 'jquery'
 import { RiDragMove2Line } from "react-icons/ri";
 import { FcAddDatabase } from "react-icons/fc";
 import Modal_Tasks from '../Modal/Modal_Tasks'
@@ -15,23 +14,15 @@ let saveProps = [];
 let thisId = ""
 let thisIdArray = [];
 let myTask = {};
-const jq = () => {
-    $(".TitleTasks").show();
-}
-
-// const jq_Hide = () => {
-//     $(".TitleTasks").hide();
-// }
 
 function DragnDrop(props) {
     // console.log("Task AllStation in:", props.allStations)
-    const [loading, setLoading] = useState(false);
+    const [, setLoading] = useState(false);
     const [modalOpen, setModalOpen] = useState(false)
     useEffect(() => {
         const fetchData = async () => {
             setLoading(true);
             try {
-                jq();
             } catch (error) {
                 console.error(error.message);
             }
@@ -73,10 +64,6 @@ function DragnDrop(props) {
         localStorage.setItem('New_Routes', JSON.stringify(thisIdArray))
     };
     //---------------------------------------------------------
-
-    const AddStation = () => {
-
-    }
     return (
         <>
             <div className="Board" ref={drop} >
@@ -111,7 +98,7 @@ function DragnDrop(props) {
                 <div className='TasksCover'>
 
                     {dndArray.length === 0 ? null : dndArray.map((tag) => {
-                        return <Tag title={tag.title} id={tag.id} key={tag.id} show={jq()} idImg={thisId} dataImg={saveProps.propDataTask} />;
+                        return <Tag title={tag.title} id={tag.id} key={tag.id} idImg={thisId} dataImg={saveProps.propDataTask} />;
                     })}
 
 

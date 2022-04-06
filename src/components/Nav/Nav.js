@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { FcPlus, FcAbout, FcHome, FcBusinessman, FcCalculator } from "react-icons/fc";
+import { FcPlus, FcAbout, FcCalculator } from "react-icons/fc";
 import './style.css';
 import { FaUser } from "react-icons/fa";
 import { AiOutlineIdcard } from "react-icons/ai";
@@ -13,7 +13,7 @@ const Nav = () => {
 
     const [, login_token] = useState('')
     const [complete_name, setcomplete_name] = useState('')
-    const [role, setRole] = useState('')
+
 
     useEffect(() => {
 
@@ -32,7 +32,6 @@ const Nav = () => {
                     login_token(flag_token = true)
                     console.log("user: ", user)
                     setcomplete_name(user.name)
-                    // setRole(user.)
                 }
             });
     })
@@ -52,7 +51,7 @@ const Nav = () => {
                 {/* <Link to="/profile" className='link'>
                     <li>בניית פרופיל <FcBusinessman /></li>
                 </Link> */}
-                <Link to="/calc" className='link'>
+                <Link to="/Calculator" className='link'>
                     <li>פעולות נוספות <FcCalculator /></li>
                 </Link>
                 <Link to="/planner" className='link'>
@@ -63,10 +62,7 @@ const Nav = () => {
             {complete_name}
 
 
-            {/* ---------------------------- */}
             <div className='user'>
-
-                {/* ---------------------------- */}
                 <FaUser className='UserIcon' />
             </div>
 

@@ -6,7 +6,7 @@ import './style.css';
 import Tasks_comp from "../Tasks_comp/Tasks_comp";
 import Dot from '../Dot/Dot'
 import Modal_Stations from '../Modal/Modal_Stations'
-// import $ from 'jquery'
+
 let allTasks = [];
 let tasks = [];
 const Stations = (props) => {

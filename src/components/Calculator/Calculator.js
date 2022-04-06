@@ -3,8 +3,8 @@ import { get } from "../../api/api";
 import '../../../node_modules/bootstrap/dist/css/bootstrap.css';
 import './style.css';
 import ReactLoading from 'react-loading';
+import Modal_Calculator from '../Modal/Modal_Calculator'
 // import Dot from '../Dot/Dot'
-
 let dataCards = [];
 let dataCards1 = [];
 let dataCards2 = [];
@@ -19,6 +19,10 @@ let textview = '';
 let Has_already_been_typed = false;
 
 
+let actionMode = "";
+let actionFlag = false;
+let arrayIdTasks = []
+
 const Calculator = () => {
     const [done, setDone] = useState(false);
     const [, setLoading] = useState(false);
@@ -29,6 +33,10 @@ const Calculator = () => {
     const [, setDataCards4] = useState([]);
     const [, setFlag] = useState(false);
     const [, setTextview] = useState();
+    const [, setActionMode] = useState("");
+    const [, setArrayIdTasks] = useState([]);
+    const [modalOpen, setModalOpen] = useState(false);
+    const [, setActionFlag] = useState(false);
 
     useEffect(() => {
         const fetchData = async () => {
@@ -65,7 +73,6 @@ const Calculator = () => {
                         }
                     })
                 )
-
                 sizeMod = dataCards.length % number;
                 size = (dataCards.length - sizeMod) / number;
 
@@ -79,7 +86,6 @@ const Calculator = () => {
                     setDataCards4(dataCards4[i] = dataCards[index])
                     index++;
                 }
-
                 for (let i = 0; i < sizeMod; i++) {
 
                     if (i < sizeMod) {
@@ -115,23 +121,80 @@ const Calculator = () => {
         textview = document.forms['myForm']['textview']
         if (Has_already_been_typed) {
             setTextview(textview.value = "")
+            setArrayIdTasks(arrayIdTasks = []) // reset array
+            setActionMode(actionMode = "")
+        }
+        if (actionMode === "") {
 
+            setArrayIdTasks(val.myTasks.map((value) => {
+                arrayIdTasks.push(value.ID)
+            }))
+            setActionFlag(actionFlag = false);
+        }
+        if (actionMode === "∪") {
 
+            setArrayIdTasks(val.myTasks.map((value) => {
+                arrayIdTasks.push(value.ID)
+
+            }))
+            setActionFlag(actionFlag = true);
+        }
+        //------------------------------
+        if (actionMode === "∩") {
+            let tempArray = [];
+            val.myTasks.forEach(element => {
+                for (let i = 0; i < arrayIdTasks.length; i++) {
+                    if (element.ID === arrayIdTasks[i]) {
+                        tempArray.push(element.ID)
+                    }
+                }
+            })
+            setArrayIdTasks(arrayIdTasks = [])
+            setArrayIdTasks(arrayIdTasks = tempArray)
+            setActionFlag(actionFlag = true);
+        }
+        //------------------------------
+        if (actionMode === "-") {
+            let tempArray = [];
+            let newTempArray = [];
+            val.myTasks.forEach(element => {
+                for (let i = 0; i < arrayIdTasks.length; i++) {
+                    if (element.ID === arrayIdTasks[i]) {
+                        tempArray.push(element.ID)
+                    }
+                }
+            })
+            for (let i = 0; i < arrayIdTasks.length; i++) {
+                let flag = false;
+                for (let j = 0; j < tempArray.length; j++) {
+                    if (tempArray[j] === arrayIdTasks[i]) {
+                        flag = true;
+                    }
+                }
+                if (!flag) {
+                    newTempArray.push(arrayIdTasks[i])
+                }
+            }
+            setArrayIdTasks(arrayIdTasks = [])
+            setArrayIdTasks(arrayIdTasks = newTempArray)
+            setActionFlag(actionFlag = true);
         }
         setTextview(textview.value += "(" + val.myTitle + ")")
-
         Has_already_been_typed = true;
+        console.log("arrayIdTasks:", arrayIdTasks)
     }
     //--------------------------------------------------------------
     const Action = (val) => {
         textview = document.forms['myForm']['textview']
         if (Has_already_been_typed) {
             setTextview(textview.value += val)
+            setActionMode(actionMode = val) // save the action choice 
             Has_already_been_typed = false;
         }
-
     }
-    const enter = () => {
+    //--------------------------------------------------------------
+    const reset = () => {
+        window.location.replace("/Calculator")
     }
     //--------------------------------------------------------------
     return (
@@ -143,6 +206,7 @@ const Calculator = () => {
                 </>
                     :
                     <>
+                        {modalOpen && <Modal_Calculator setOpenModal={setModalOpen} idsTasks={arrayIdTasks} propActionFlag={actionFlag} />}
                         <div className="row">
                             <div id="TaskShow" className='col-4 '></div>
                             <div className='col-4 ' id="containerCalc" style={{ width: "600px" }}>
@@ -155,7 +219,7 @@ const Calculator = () => {
                                     <input type="button" className="col-2" id="btns" value="\" onClick={() => Action("-")}></input>
                                     <input type="button" className="col-2" id="btns" value="⨁" onClick={() => Action('⨁')}></input>
                                 </div>
-                                <div className="row">
+                                <div className="row" id="dataFromServerButton">
                                     <div className="col-3">{dataCards1.map((value, index) => {
                                         return (
                                             <div key={index} className='App'>
@@ -203,8 +267,11 @@ const Calculator = () => {
                                     })} </div>
                                 </div>
                                 <div className="row">
-                                    <input type="button" className="col-2" id="btnsOrange" value="AC" onClick={() => calc("value")}  ></input>
-                                    <input type="button" className="col-2" id="btnsOrange" value="Enter" onClick={() => enter("value")} ></input>
+                                    <input type="button" className="col-2" id="btnsOrange" value="AC" onClick={() => reset("value")}  ></input>
+                                    <input type="button" className="col-2" id="btnsOrange" value="Enter" onClick={() => {
+                                        setModalOpen(true);
+                                    }}></input>
+
                                 </div>
                             </div>
                         </div>

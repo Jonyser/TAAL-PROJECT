@@ -3,33 +3,33 @@ import "./Modal.css";
 import { FcMultipleInputs } from "react-icons/fc";
 import { RiAsterisk } from "react-icons/ri";
 
-
-let obj = { tasks: [], users: [] }
 let get_Route_ID = 0;
-let myParent = 0;
-
 let getPicture, getSound;
 let ichour = 'אישור'
-let parentNum = 0;
+
 const Modal_Stations = ({ setOpenModalPlaces, idTasks }) => {
 
-    console.log('ID TASK:', idTasks)
-    const [, set_obj] = useState(null);// for TextView
+    // console.log('ID TASK:', idTasks)
+
     const [, setDone] = useState(false);
-    const [, setParent] = useState(0);
+
     const [get_title, settitle] = useState("");
     const [, setPicture] = useState(null);
     const [, setSound] = useState(null);
     const [getDescription, setDescription] = useState("");
     const fileInput = useRef(null)
 
+    //----------------------------------
 
     const handleTitleInput = (e) => {
         settitle(e.target.value)
     }
+    //----------------------------------
+
     const handleDescriptionInput = (e) => {
         setDescription(e.target.value)
     }
+    //----------------------------------
 
     const handleFileInput = (e) => {
         // handle validations
@@ -45,45 +45,36 @@ const Modal_Stations = ({ setOpenModalPlaces, idTasks }) => {
             console.log(file)
         }
     }
+    //----------------------------------
+
     function Post_Station() {
+        let url_post = `https://s83.bfa.myftpupload.com/wp-json/wp/v2/places`
+        fetch(url_post, {
+            method: "POST",
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${sessionStorage.getItem('jwt')}`,
+            },
 
-        if (JSON.parse(localStorage.getItem('New_Routes')) === null) {
-            alert('Route is empty ! ');
-            return
-        }
-        else {
-            set_obj(obj.tasks = JSON.parse(localStorage.getItem('New_Routes')));
-            console.log("obj : ", obj)
-
-            let url_post = `https://s83.bfa.myftpupload.com/wp-json/wp/v2/places`
-            fetch(url_post, {
-                method: "POST",
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${sessionStorage.getItem('jwt')}`,
-                },
-
-                body: JSON.stringify({
-                    name: get_title,
-                    description: getDescription,
-                    parent: idTasks,
-                    fields: {
-                        audio: getSound,
-                        image: getPicture
-                    }
-                })
-
-            }).then(function (response) {
-                return response.json();
-            }).then(function (post) {
-                get_Route_ID = post.id
-                setDone(true)
-
-                alert(get_Route_ID)
-                console.log(post)
-                window.location.replace("/planner")
+            body: JSON.stringify({
+                name: get_title,
+                description: getDescription,
+                parent: idTasks,
+                fields: {
+                    audio: getSound,
+                    image: getPicture
+                }
             })
-        }
+        }).then(function (response) {
+            return response.json();
+        }).then(function (post) {
+            get_Route_ID = post.id
+            setDone(true)
+
+            alert(get_Route_ID)
+            console.log(post)
+            window.location.replace("/planner")
+        })
     }
     return (
         <>
@@ -134,10 +125,9 @@ const Modal_Stations = ({ setOpenModalPlaces, idTasks }) => {
                                 </button>
                             </div>
                             <div className="title">
-
+                                <h3><b>הוסף תחנה</b></h3>
                             </div>
                             <div className="body">
-                                <h3><b>הוסף תחנה</b></h3>
                                 <form id="IPU" className="w3-container">
                                     <h6>:רשום את שם תחנה <RiAsterisk style={{ color: 'red' }} /></h6>
                                     <p><input required={true} type="text" onChange={handleTitleInput} style={{
@@ -168,20 +158,15 @@ const Modal_Stations = ({ setOpenModalPlaces, idTasks }) => {
                                         width: '96%'
                                     }}></input></p>
                                 </form>
-
                             </div>
                             <div className="footer">
                                 <input type="submit" className='OK' value={ichour} onClick={Post_Station} />
-
                             </div>
-
                         </div>
                     </div>
-
                 </>
             }
         </>
     );
 }
-
 export default Modal_Stations;

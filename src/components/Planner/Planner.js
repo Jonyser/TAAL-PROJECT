@@ -17,8 +17,6 @@ const Planner = () => {
         const fetchData = async () => {
             setLoading(true);
             try {
-                jq();
-                // useWindowSize()
             } catch (error) {
                 console.error(error.message);
             }
@@ -32,7 +30,6 @@ const Planner = () => {
     function getName(val) {
         setName(val.target.value)
     }
-
     return (
         <>
             {loading && <div>Loading</div>}
@@ -78,9 +75,6 @@ const Planner = () => {
             )}
         </>
     );
-}
-const jq = () => {
-
 }
 
 export default Planner;
