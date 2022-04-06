@@ -21,6 +21,7 @@ let Has_already_been_typed = false;
 
 let actionMode = "";
 let actionFlag = false;
+let helpFlag = false;
 let arrayIdTasks = []
 
 const Calculator = () => {
@@ -37,6 +38,8 @@ const Calculator = () => {
     const [, setArrayIdTasks] = useState([]);
     const [modalOpen, setModalOpen] = useState(false);
     const [, setActionFlag] = useState(false);
+    const [, setHelpFlag] = useState(false);
+
 
     useEffect(() => {
         const fetchData = async () => {
@@ -196,6 +199,10 @@ const Calculator = () => {
     const reset = () => {
         window.location.replace("/Calculator")
     }
+    const help = () => {
+        setHelpFlag(helpFlag = true)
+        setModalOpen(true);
+    }
     //--------------------------------------------------------------
     return (
         <>
@@ -206,7 +213,7 @@ const Calculator = () => {
                 </>
                     :
                     <>
-                        {modalOpen && <Modal_Calculator setOpenModal={setModalOpen} idsTasks={arrayIdTasks} propActionFlag={actionFlag} />}
+                        {modalOpen && <Modal_Calculator setOpenModal={setModalOpen} idsTasks={arrayIdTasks} propActionFlag={actionFlag} helpProps={helpFlag} />}
                         <div className="row">
                             <div id="TaskShow" className='col-4 '></div>
                             <div className='col-4 ' id="containerCalc" style={{ width: "600px" }}>
@@ -217,14 +224,21 @@ const Calculator = () => {
                                     <input type="button" className="col-2" id="btns" value="∪" onClick={() => Action('∪')} ></input>
                                     <input type="button" className="col-2" id="btns" value="∩" onClick={() => Action('∩')}></input>
                                     <input type="button" className="col-2" id="btns" value="\" onClick={() => Action("-")}></input>
-                                    <input type="button" className="col-2" id="btns" value="⨁" onClick={() => Action('⨁')}></input>
+
+
+                                    <input type="button" className="col-2" id="btnsOrange" value="AC" onClick={() => reset("value")}  ></input>
+                                    <input type="button" className="col-2" id="btnsOrange" value="Enter" onClick={() => {
+                                        setModalOpen(true);
+                                        setHelpFlag(helpFlag = false)
+
+                                    }}></input>
                                 </div>
                                 <div className="row" id="dataFromServerButton">
                                     <div className="col-3">{dataCards1.map((value, index) => {
                                         return (
                                             <div key={index} className='App'>
                                                 <header key={index}>
-                                                    <button className='btnRoute' onClick={() => calc(value)} style={{ color: "#000", marginBottom: 15, height: 80, width: 100, borderRadius: "10px" }}>
+                                                    <button className='btnRoute' onClick={() => calc(value)} style={{ marginBottom: 15, height: 80, width: 100, borderRadius: "10px" }}>
                                                         <div className='f' style={{ fontSize: "12px" }}>{value.myTitle}</div>
                                                     </button>
                                                 </header>
@@ -235,7 +249,7 @@ const Calculator = () => {
                                         return (
                                             <div key={index} className='App'>
                                                 <header key={index}>
-                                                    <button className='btnRoute' onClick={() => calc(value)} style={{ color: "#000", marginBottom: 15, height: 80, width: 100, borderRadius: "10px" }}>
+                                                    <button className='btnRoute' onClick={() => calc(value)} style={{ marginBottom: 15, height: 80, width: 100, borderRadius: "10px" }}>
 
                                                         <div className='f' style={{ fontSize: "12px" }}>{value.myTitle}</div>
                                                     </button>
@@ -247,7 +261,7 @@ const Calculator = () => {
                                         return (
                                             <div key={index} className='App'>
                                                 <header key={index}>
-                                                    <button className='btnRoute' onClick={() => calc(value)} style={{ color: "#000", marginBottom: 15, height: 80, width: 100, borderRadius: "10px" }}>
+                                                    <button className='btnRoute' onClick={() => calc(value)} style={{ marginBottom: 15, height: 80, width: 100, borderRadius: "10px" }}>
                                                         <div className='f' style={{ fontSize: "12px" }}>{value.myTitle}</div>
                                                     </button>
                                                 </header>
@@ -258,7 +272,7 @@ const Calculator = () => {
                                         return (
                                             <div key={index} className='App'>
                                                 <header key={index}>
-                                                    <button className='btnRoute' onClick={() => calc(value)} style={{ color: "#000", marginBottom: 15, height: 80, width: 100, borderRadius: "10px" }}>
+                                                    <button className='btnRoute' onClick={() => calc(value)} style={{ marginBottom: 15, height: 80, width: 100, borderRadius: "10px" }}>
                                                         <div className='f' style={{ fontSize: "12px" }}>{value.myTitle}</div>
                                                     </button>
                                                 </header>
@@ -266,15 +280,15 @@ const Calculator = () => {
                                         )
                                     })} </div>
                                 </div>
-                                <div className="row">
-                                    <input type="button" className="col-2" id="btnsOrange" value="AC" onClick={() => reset("value")}  ></input>
-                                    <input type="button" className="col-2" id="btnsOrange" value="Enter" onClick={() => {
-                                        setModalOpen(true);
-                                    }}></input>
+                                <input type="button" className="col-2" id="btnsOrange" value="Help" onClick={() => {
+                                    help()
 
-                                </div>
+                                }}  ></input>
+
                             </div>
+
                         </div>
+
                     </>
                 }
             </div>

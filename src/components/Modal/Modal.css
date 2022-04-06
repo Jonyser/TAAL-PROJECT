@@ -24,9 +24,8 @@
 }
 
 .modalContainerCalculator {
-  margin-left: 35%;
   margin-right: auto;
-  width: 500px;
+  width: 900px;
   height: 550px;
   background-color: aliceblue;
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;

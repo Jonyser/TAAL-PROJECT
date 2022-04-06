@@ -4,14 +4,14 @@ import { RiAsterisk } from "react-icons/ri";
 
 
 let get_title = ""
-function Modal({ setOpenModal, propActionFlag, idsTasks }) {
+function Modal({ setOpenModal, propActionFlag, idsTasks, helpProps }) {
     const [, settitle] = useState("");
 
     const handleTitleInput = (e) => {
         settitle(get_title = e.target.value)
     }
     console.log("idsTasks:", idsTasks)
-
+    console.log("helpProps:", helpProps)
 
     function Post_Route() {
 
@@ -32,10 +32,8 @@ function Modal({ setOpenModal, propActionFlag, idsTasks }) {
                     tasks: idsTasks.map((e) => {
                         return e
                     })
-
                 }
             })
-
         }).then(function (response) {
             return response.json();
         }).then(function (post) {
@@ -43,11 +41,10 @@ function Modal({ setOpenModal, propActionFlag, idsTasks }) {
             console.log(post)
             window.location.replace("/planner")
         })
-
     }
     return (
         <>
-            {!propActionFlag ? <>
+            {!propActionFlag && !helpProps ? <>
                 <div className="Background">
                     <div className="modalContainer">
                         <div className="titleCloseBtn">
@@ -60,67 +57,101 @@ function Modal({ setOpenModal, propActionFlag, idsTasks }) {
                         </div>
                         <div className="title">
                             <h3>נא לבחור את המסלולים ולבצע עליהם את הפעולה הרצויה למשל  </h3>
-                            <h2 style={{ color: "red" }}>בנק הפועלים ∪ קפה קרולינה</h2>
-                        </div>
-                        <div className="body">
 
                         </div>
-                        {/* <div className="footer">
-                            <button className='cancelBtn'
+                        <div className="body">
+                            <h2 style={{ color: "red" }}>בנק הפועלים ∪ קפה קרולינה</h2>
+                        </div>
+                        <div className="footer">
+                            {/* <button className='cancelBtn'
                                 onClick={() => {
                                     setOpenModal(false);
                                 }}
                             >
                                 Cancel
-                            </button>
-                        </div> */}
+                            </button> */}
+                        </div>
                     </div>
                 </div>
             </>
                 :
-                <div className="Background">
-                    <div className="modalContainerCalculator">
-                        <div className="titleCloseBtn">
-                            <button
-                                onClick={() => {
-                                    setOpenModal(false);
-                                }}
-                            > X
-                            </button>
+                <>
+                    {!helpProps ? <>
+                        <div className="Background">
+                            <div className="modalContainerCalculator">
+                                <div className="titleCloseBtn">
+                                    <button
+                                        onClick={() => {
+                                            setOpenModal(false);
+                                        }}
+                                    > X
+                                    </button>
+                                </div>
+                                <div className="title">
+                                    <h4 style={{ textAlign: 'center', color: 'red' }}>בניית מסלול חדש</h4>
+                                </div>
+                                <div className="body">
+                                    <form id="IPU" className="w3-container">
+                                        <h6 style={{ textAlign: 'right' }}> :רשום את שם המסלול <RiAsterisk style={{ color: 'red' }} /></h6>
+                                        <p><input required={true} type="text" onChange={handleTitleInput} style={{
+                                            textAlign: 'right',
+                                            width: '420px',
+                                            height: '35px'
+                                        }}></input></p>
+                                    </form>
+                                </div>
+                                <h6 style={{ textAlign: 'right' }}>?האם ברצונך לשמור מסלול זה</h6>
+                                <div className="footer" style={{ textAlign: 'right' }}>
+                                    <button className='cancelBtn'
+                                        onClick={() => {
+                                            setOpenModal(false);
+                                        }}
+                                    >                                לא
+                                    </button>
+                                    &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
+                                    <button className='continueBtn'
+                                        onClick={Post_Route}
+                                    >כן
+                                    </button>
+                                </div>
+                            </div>
                         </div>
-                        <div className="title">
-                            <h4 style={{ textAlign: 'center', color: 'red' }}>בניית מסלול חדש</h4>
+                    </>
+                        :
+                        <div className="Background">
+                            <div className="modalContainerCalculator">
+                                <div className="titleCloseBtn">
+                                    <button
+                                        onClick={() => {
+                                            setOpenModal(false);
+                                        }}
+                                    > X
+                                    </button>
+                                </div>
+                                <h3>הוראות שימוש במחשבון</h3>
+                                <div className="body" style={{ textAlign: 'right' }}>
+                                    <h4></h4>
+                                    <h5>:U</h5>
+                                    <h5>   פעולת איחוד - ניתן לאחד 2 מסלולים ויותר, פעולה זו מוסיפה את המשימות השייכים למסלולים שבחרת לפי סדר הפעולות וניתן לשמור כמסלול חדש
+                                    </h5>
+                                    <h6 style={{ color: "red" }}>הצורך בפעולה זו נועדה כדי ליצור מסלול חדש הבנוי מסדרת מסלולים כדי לאפשר לחניך בניה לסדר יום שלם</h6>
+                                    <br></br>
+                                    <h4>:∩</h4>
+                                    <h5>   פעולת חיתוך - פעולה זו יוצרת מסלול חדש המורכב מהמשימות המשותפות של המסלולים לפי בחירה
+                                    </h5>
+                                    <h6 style={{ color: "red" }}>הצורך בפעולה זו נועדה כדי ליצור מסלול חדש הבנוי מהמשימות המשותפות של מספר מסלולים. מידע זה יכול לסייע אם יש כמה חניכים שעליהם לבצע משימה משותפת ושיקול אם לשים אותם יחד או לא.</h6>
+                                    <br></br>
+                                    <h5>:\</h5>
+                                    <h5>   פעולת חיסור - פעולה זו יוצרת מסלול חדש המורכב מחיסור של המסלולים לפי בחירה
+                                    </h5>
+                                    <h6 style={{ color: "red" }}> פעולה זו נועדה כדי לסנן משימות שבעל האתר  מבין כי לא מתאימים לחניך (כדאי לבנות מסלול הבנוי ממשימות שלא מומלצים לחניך ואז לבצע פעולת חיסור)</h6>
+                                </div>
+                            </div>
                         </div>
-                        <div className="body">
-                            <form id="IPU" className="w3-container">
-                                <h6 style={{ textAlign: 'right' }}> :רשום את שם המסלול <RiAsterisk style={{ color: 'red' }} /></h6>
-                                <p><input required={true} type="text" onChange={handleTitleInput} style={{
-                                    textAlign: 'right',
-                                    width: '420px',
-                                    height: '35px'
-                                }}></input></p>
-                            </form>
-
-                        </div>
-                        <h6 style={{ textAlign: 'right' }}>?האם ברצונך לשמור מסלול זה</h6>
-                        <div className="footer" style={{ textAlign: 'right' }}>
-                            <button className='cancelBtn'
-                                onClick={() => {
-                                    setOpenModal(false);
-                                }}
-                            >                                לא
-                            </button>
-                            &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
-                            <button className='continueBtn'
-                                onClick={Post_Route}
-                            >כן
-                            </button>
-                        </div>
-                    </div>
-                </div>
+                    }
+                </>
             }
         </>
-
     );
 }
 
