@@ -55,8 +55,8 @@ function Modal({ setOpenModal, setText }) {
                 setDone(true)
 
                 alert(get_Route_ID)
-                console.log(post)
-                window.location.replace("/planner")
+                console.log("post:", post)
+                // window.location.replace("/planner")
             })
         }
     }

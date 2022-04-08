@@ -4,12 +4,13 @@ import { RiAsterisk } from "react-icons/ri";
 
 
 let get_title = ""
-function Modal({ setOpenModal, propActionFlag, idsTasks, helpProps }) {
+function Modal({ setOpenModal, propActionFlag, idsTasks, helpProps, usersArray }) {
     const [, settitle] = useState("");
 
     const handleTitleInput = (e) => {
         settitle(get_title = e.target.value)
     }
+    console.log("usersArray:", usersArray)
     console.log("idsTasks:", idsTasks)
     console.log("helpProps:", helpProps)
 
@@ -41,12 +42,31 @@ function Modal({ setOpenModal, propActionFlag, idsTasks, helpProps }) {
             console.log(post)
             window.location.replace("/planner")
         })
+
+
     }
+
+    // let url_get = `https://s83.bfa.myftpupload.com/wp-json/wp/v2/users`
+    // fetch(url_get, {
+    //     method: "get",
+    //     headers: {
+    //         'Content-Type': 'application/json',
+    //         'Authorization': `Bearer ${sessionStorage.getItem('jwt')}`,
+    //     },
+    //     params: {
+    //         per_page: 99, 'Cache-Control': 'no-cache'
+    //     }
+    // }).then(function (res) {
+    //     console.log("resUsersIncalc:", res)
+    // })
+
+
+
     return (
         <>
             {!propActionFlag && !helpProps ? <>
                 <div className="Background">
-                    <div className="modalContainer">
+                    <div className="modalContainerMessage">
                         <div className="titleCloseBtn">
                             <button
                                 onClick={() => {
@@ -56,20 +76,26 @@ function Modal({ setOpenModal, propActionFlag, idsTasks, helpProps }) {
                             </button>
                         </div>
                         <div className="title">
-                            <h3>נא לבחור את המסלולים ולבצע עליהם את הפעולה הרצויה למשל  </h3>
+                            <h1>נא לבחור את המסלולים ולבצע עליהם את הפעולה הרצויה למשל  </h1>
 
                         </div>
+                        <br></br>   <br></br>
                         <div className="body">
-                            <h2 style={{ color: "red" }}>בנק הפועלים ∪ קפה קרולינה</h2>
+                            <h1 style={{ color: "red" }}>בנק הפועלים ∪ קפה קרולינה</h1>
                         </div>
-                        <div className="footer">
-                            {/* <button className='cancelBtn'
+                        <br></br>
+                        <br></br>
+                        <br></br>
+                        <br></br>
+                        <br></br>
+                        <div className="footer" style={{ textAlign: "center" }}>
+                            <button className='cancelBtn'
+
                                 onClick={() => {
                                     setOpenModal(false);
                                 }}
-                            >
-                                Cancel
-                            </button> */}
+                            >   הבנתי
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -95,12 +121,28 @@ function Modal({ setOpenModal, propActionFlag, idsTasks, helpProps }) {
                                         <h6 style={{ textAlign: 'right' }}> :רשום את שם המסלול <RiAsterisk style={{ color: 'red' }} /></h6>
                                         <p><input required={true} type="text" onChange={handleTitleInput} style={{
                                             textAlign: 'right',
-                                            width: '420px',
+                                            width: '460px',
                                             height: '35px'
                                         }}></input></p>
                                     </form>
+                                    <h6 style={{ textAlign: 'right' }}>בחר חניכים שצריכים לבצע את המשימות</h6>
+                                    <div className='allTasks'>
+                                        {usersArray.map((value, index) => {
+                                            return (
+                                                <label key={index} className="list-group-item">
+                                                    <input className="form-check-input me-1" type="checkbox" value=""></input>
+                                                    {value}
+                                                </label>
+                                            )
+                                        })}
+                                    </div>
                                 </div>
-                                <h6 style={{ textAlign: 'right' }}>?האם ברצונך לשמור מסלול זה</h6>
+                                <br></br>
+                                <br></br>
+                                <br></br>
+                                <br></br>
+                                <br></br>
+                                <h5 style={{ textAlign: 'right', color: "red" }}>?האם ברצונך לשמור מסלול זה</h5>
                                 <div className="footer" style={{ textAlign: 'right' }}>
                                     <button className='cancelBtn'
                                         onClick={() => {
@@ -134,17 +176,17 @@ function Modal({ setOpenModal, propActionFlag, idsTasks, helpProps }) {
                                     <h5>:U</h5>
                                     <h5>   פעולת איחוד - ניתן לאחד 2 מסלולים ויותר, פעולה זו מוסיפה את המשימות השייכים למסלולים שבחרת לפי סדר הפעולות וניתן לשמור כמסלול חדש
                                     </h5>
-                                    <h6 style={{ color: "red" }}>הצורך בפעולה זו נועדה כדי ליצור מסלול חדש הבנוי מסדרת מסלולים כדי לאפשר לחניך בניה לסדר יום שלם</h6>
+                                    <h6 style={{ color: "red" }}>הצורך בפעולה זו נועדה ליצור מסלול חדש הבנוי מסדרת מסלולים כדי לאפשר לחניך מסלול בבנוי ממספר מסלולים לסדר יום שלם</h6>
                                     <br></br>
                                     <h4>:∩</h4>
                                     <h5>   פעולת חיתוך - פעולה זו יוצרת מסלול חדש המורכב מהמשימות המשותפות של המסלולים לפי בחירה
                                     </h5>
-                                    <h6 style={{ color: "red" }}>הצורך בפעולה זו נועדה כדי ליצור מסלול חדש הבנוי מהמשימות המשותפות של מספר מסלולים. מידע זה יכול לסייע אם יש כמה חניכים שעליהם לבצע משימה משותפת ושיקול אם לשים אותם יחד או לא.</h6>
+                                    <h6 style={{ color: "red" }}>הצורך בפעולה זו נועדה ליצור מסלול חדש הבנוי מהמשימות המשותפות של מספר מסלולים. מידע זה יכול לסייע אם יש כמה חניכים שעליהם לבצע משימה משותפת ושיקול אם לשים אותם יחד או לא.</h6>
                                     <br></br>
                                     <h5>:\</h5>
                                     <h5>   פעולת חיסור - פעולה זו יוצרת מסלול חדש המורכב מחיסור של המסלולים לפי בחירה
                                     </h5>
-                                    <h6 style={{ color: "red" }}> פעולה זו נועדה כדי לסנן משימות שבעל האתר  מבין כי לא מתאימים לחניך (כדאי לבנות מסלול הבנוי ממשימות שלא מומלצים לחניך ואז לבצע פעולת חיסור)</h6>
+                                    <h6 style={{ color: "red" }}> פעולה זו נועדה לסנן משימות שבעל האתר  מבין כי לא מתאימים לחניך (כדאי לבנות מסלול הבנוי ממשימות שלא מומלצים לחניך ואז לבצע פעולת חיסור)</h6>
                                 </div>
                             </div>
                         </div>

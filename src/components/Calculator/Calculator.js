@@ -23,7 +23,8 @@ let actionMode = "";
 let actionFlag = false;
 let helpFlag = false;
 let arrayIdTasks = []
-
+let getUsers = [];
+let student = "";
 const Calculator = () => {
     const [done, setDone] = useState(false);
     const [, setLoading] = useState(false);
@@ -39,6 +40,8 @@ const Calculator = () => {
     const [modalOpen, setModalOpen] = useState(false);
     const [, setActionFlag] = useState(false);
     const [, setHelpFlag] = useState(false);
+    const [, setUsers] = useState([]);
+    const [, setStudent] = useState("")
 
 
     useEffect(() => {
@@ -116,7 +119,31 @@ const Calculator = () => {
                 sizeMod = dataCards.length % number;
                 size = (dataCards.length - sizeMod) / number;
             });
+
+
+
+
+        await get('https://s83.bfa.myftpupload.com/wp-json/wp/v2/users/', {
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${sessionStorage.getItem('jwt')}`,
+            },
+            params: {
+                per_page: 99, 'Cache-Control': 'no-cache'
+            }
+
+        }).then(res => {
+            console.log("result:", res)
+            // console.log("ressss:", res.map((r) => { return r.name }))
+            setStudent(student = res.filter((item) => item.description !== ""))
+            setUsers(getUsers = student.map((r) => { return r.name }));
+            console.log("result2:", getUsers)
+            // console.log("Newressss:", getUsers)
+
+
+        });
         setDone(true)
+
     }
     //-------------------------------------------------------------
     const calc = (val) => {
@@ -213,10 +240,10 @@ const Calculator = () => {
                 </>
                     :
                     <>
-                        {modalOpen && <Modal_Calculator setOpenModal={setModalOpen} idsTasks={arrayIdTasks} propActionFlag={actionFlag} helpProps={helpFlag} />}
-                        <div className="row">
+                        {modalOpen && <Modal_Calculator setOpenModal={setModalOpen} idsTasks={arrayIdTasks} propActionFlag={actionFlag} helpProps={helpFlag} usersArray={getUsers} />}
+                        <div className="row" >
                             <div id="TaskShow" className='col-4 '></div>
-                            <div className='col-4 ' id="containerCalc" style={{ width: "600px" }}>
+                            <div className='col-4 ' id="containerCalc" style={{ width: "600px", marginTop: "2px", }}>
                                 <form name="myForm">
                                     <input type="text" className='textview' id='textview' disabled ></input>
                                 </form>

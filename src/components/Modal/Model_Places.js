@@ -8,6 +8,7 @@ let getPicture, getSound;
 let ichour = 'אישור'
 let parentNum = 0;
 let file = {};
+
 function Modal_Plases({ setOpenModalPlaces }) {
 
     const [get_title, settitle] = useState("");
@@ -24,10 +25,8 @@ function Modal_Plases({ setOpenModalPlaces }) {
     }
     //----------------------------------
     const handleFileInput = (e) => {
-        // handle validations
         file = e.target.files[0];
-        console.log("fileeeeeee:", file)
-        console.log("fileOut:", file)
+        console.log("File:", file)
         if ((file.type).includes('image')) {
             setPicture(getPicture = file)
             alert("file:", getPicture)
@@ -58,16 +57,18 @@ function Modal_Plases({ setOpenModalPlaces }) {
                 description: getDescription,
                 parent: parentNum,
                 fields: {
-                    image: file,
-                    audio: getSound
+                    qr: false,
+                    // defaultPath: str,
+                    // image: file,
+                    // audio: getSound
                 }
             })
 
         }).then(function (response) {
             return response.json();
         }).then(function (post) {
-            // console.log("post:", post)
-            window.location.replace("/planner")
+            console.log("post:", post)
+            // window.location.replace("/planner")
         })
     }
     return (

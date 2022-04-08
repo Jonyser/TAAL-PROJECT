@@ -41,15 +41,17 @@ const Places = () => {
     const getData = async () => {
         // taal.tech/wp-json/wp/v2/places
         ///s83.bfa.myftpupload.com/wp-json/wp/v2/places
-        await get('https://s83.bfa.myftpupload.com/wp-json/wp/v2/places/', {
-
+        await get('https://s83.bfa.myftpupload.com/wp-json/wp/v2/users/', {
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${sessionStorage.getItem('jwt')}`,
+            },
             params: {
                 per_page: 99, 'Cache-Control': 'no-cache'
             }
 
         }).then(res => {
-
-            console.log("res: ", res)
+            console.log("ressss:", res.map((r) => { return r.name }))
             places = res.filter((item) => item.parent === 0)
             setOnlyAllStation(onlyAllStation = res.filter((item) => item.parent > 0))
             Places_and_their_stations = places.map((element) => {
@@ -139,3 +141,15 @@ const Places = () => {
     );
 }
 export default Places;
+
+
+<div className='allTasks'>
+    {allStations.map((value, index) => {
+        return (
+            <label key={index} className="list-group-item">
+                <input className="form-check-input me-1" type="checkbox" value=""></input>
+                {value.name}
+            </label>
+        )
+    })}
+</div> 

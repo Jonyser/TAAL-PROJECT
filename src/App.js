@@ -15,7 +15,7 @@ function App() {
     <>
       <div style={{
         backgroundColor: 'rgb(213, 221, 228)',
-        overflow: "auto",
+        overflow: "hidden"
       }}>
         <Provider store={store}>
           <Router>

@@ -9,6 +9,19 @@
 
 }
 
+.modalContainerMessage {
+  margin-right: auto;
+  width: 575px;
+  height: 550px;
+  background-color: aliceblue;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  flex-direction: column;
+  padding: 25px;
+  position: fixed;
+  border: 3px solid green;
+  margin-top: -60px;
+}
+
 .modalContainer {
   margin-left: 35%;
   margin-right: auto;
@@ -25,15 +38,16 @@
 
 .modalContainerCalculator {
   margin-right: auto;
-  width: 900px;
-  height: 550px;
+  width: 575px;
+  height: 650px;
   background-color: aliceblue;
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
-  display: flex;
   flex-direction: column;
   padding: 25px;
   position: fixed;
   border: 3px solid green;
+  margin-top: -130px;
+
 }
 
 .modalContainer .Planner {
