@@ -100,14 +100,12 @@ function DragnDrop(props) {
                     {dndArray.length === 0 ? null : dndArray.map((tag) => {
                         return <Tag title={tag.title} id={tag.id} key={tag.id} idImg={thisId} dataImg={saveProps.propDataTask} />;
                     })}
-
-
                 </div>
             </div>
 
             <div className=" MediaSize">
 
-                <Audios id={thisId} data={saveProps.propDataTask} />
+                <Audios id={thisId} data={myTask} />
 
             </div>
         </>

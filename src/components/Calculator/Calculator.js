@@ -4,6 +4,7 @@ import '../../../node_modules/bootstrap/dist/css/bootstrap.css';
 import './style.css';
 import ReactLoading from 'react-loading';
 import Modal_Calculator from '../Modal/Modal_Calculator'
+import View_my_tasks from '../View_my_tasks/View_my_tasks'
 // import Dot from '../Dot/Dot'
 let dataCards = [];
 let dataCards1 = [];
@@ -23,8 +24,11 @@ let actionMode = "";
 let actionFlag = false;
 let helpFlag = false;
 let arrayIdTasks = []
+let objTasks = [];
 let getUsers = [];
 let student = "";
+
+
 const Calculator = () => {
     const [done, setDone] = useState(false);
     const [, setLoading] = useState(false);
@@ -37,6 +41,8 @@ const Calculator = () => {
     const [, setTextview] = useState();
     const [, setActionMode] = useState("");
     const [, setArrayIdTasks] = useState([]);
+    const [, setObjTasks] = useState([]);
+
     const [modalOpen, setModalOpen] = useState(false);
     const [, setActionFlag] = useState(false);
     const [, setHelpFlag] = useState(false);
@@ -66,6 +72,7 @@ const Calculator = () => {
                     per_page: 99, 'Cache-Control': 'no-cache'
                 }
             }).then(res => {
+                console.log("resCAlc:", res)
                 size = res.length / number;
 
                 setDataCards(
@@ -75,13 +82,14 @@ const Calculator = () => {
                             myUsers: value.acf.users,
                             myTitle: value.title.rendered.replace("&#8211;", "-").replace("&#8217;", "'"),
                             myTasks: value.acf.tasks,
-                            myId: value.id
+                            myId: value.id,
+                            myACF: value.acf
                         }
                     })
                 )
+
                 sizeMod = dataCards.length % number;
                 size = (dataCards.length - sizeMod) / number;
-
                 for (let i = 0; i < size; i++) {
                     setDataCards1(dataCards1[i] = dataCards[index]);
                     index++;
@@ -133,17 +141,14 @@ const Calculator = () => {
             }
 
         }).then(res => {
-            console.log("result:", res)
+            // console.log("result:", res)
             // console.log("ressss:", res.map((r) => { return r.name }))
             setStudent(student = res.filter((item) => item.description !== ""))
             setUsers(getUsers = student.map((r) => { return r.name }));
-            console.log("result2:", getUsers)
+            // console.log("result2:", getUsers)
             // console.log("Newressss:", getUsers)
-
-
         });
         setDone(true)
-
     }
     //-------------------------------------------------------------
     const calc = (val) => {
@@ -152,13 +157,26 @@ const Calculator = () => {
         if (Has_already_been_typed) {
             setTextview(textview.value = "")
             setArrayIdTasks(arrayIdTasks = []) // reset array
+            setObjTasks(objTasks = [])
             setActionMode(actionMode = "")
+
+
         }
         if (actionMode === "") {
 
             setArrayIdTasks(val.myTasks.map((value) => {
                 arrayIdTasks.push(value.ID)
+
             }))
+
+            setObjTasks(val.myTasks.map((value) => {
+                objTasks.push(value)
+
+            }))
+            console.log("objTasks1:", objTasks)
+
+
+            // console.log("value.post_title:", arrayNameTasks)
             setActionFlag(actionFlag = false);
         }
         if (actionMode === "∪") {
@@ -166,31 +184,47 @@ const Calculator = () => {
             setArrayIdTasks(val.myTasks.map((value) => {
                 arrayIdTasks.push(value.ID)
 
+
             }))
+            setObjTasks(val.myTasks.map((value) => {
+                objTasks.push(value)
+            }))
+
             setActionFlag(actionFlag = true);
         }
         //------------------------------
         if (actionMode === "∩") {
             let tempArray = [];
+            let tempObj = [];
             val.myTasks.forEach(element => {
                 for (let i = 0; i < arrayIdTasks.length; i++) {
                     if (element.ID === arrayIdTasks[i]) {
-                        tempArray.push(element.ID)
+                        tempArray.push(element.ID);
+                        tempObj.push(element);
+
                     }
                 }
             })
+
             setArrayIdTasks(arrayIdTasks = [])
+            setObjTasks(objTasks = [])
+
             setArrayIdTasks(arrayIdTasks = tempArray)
+            setObjTasks(objTasks = tempObj)
+
             setActionFlag(actionFlag = true);
         }
         //------------------------------
         if (actionMode === "-") {
             let tempArray = [];
+            let tempObj = [];
             let newTempArray = [];
+            let newTempObj = [];
             val.myTasks.forEach(element => {
                 for (let i = 0; i < arrayIdTasks.length; i++) {
                     if (element.ID === arrayIdTasks[i]) {
                         tempArray.push(element.ID)
+                        tempObj.push(element)
                     }
                 }
             })
@@ -203,15 +237,23 @@ const Calculator = () => {
                 }
                 if (!flag) {
                     newTempArray.push(arrayIdTasks[i])
+                    newTempObj.push(objTasks[i])
                 }
             }
+            setObjTasks(objTasks = [])
             setArrayIdTasks(arrayIdTasks = [])
+
             setArrayIdTasks(arrayIdTasks = newTempArray)
+            setObjTasks(objTasks = newTempObj)
             setActionFlag(actionFlag = true);
         }
+
+
         setTextview(textview.value += "(" + val.myTitle + ")")
         Has_already_been_typed = true;
         console.log("arrayIdTasks:", arrayIdTasks)
+        console.log("arrayNameTasks:", objTasks)
+
     }
     //--------------------------------------------------------------
     const Action = (val) => {
@@ -233,13 +275,21 @@ const Calculator = () => {
     //--------------------------------------------------------------
     return (
         <>
-            <div className="d-flex justify-content-center">
-                {!done ? <>
-                    <h1 float={'right'}>Loading</h1>
-                    < ReactLoading type={"bars"} className='loading' color={"rgb(180, 175, 199)"} height={'10%'} width={'10%'} />
-                </>
-                    :
-                    <>
+            {!done ? <>
+                <h1 style={{ textAlign: "center" }}>נא להמתין</h1>
+
+                < ReactLoading type={"bars"} className='loading' color={"rgb(180, 175, 199)"} height={'10%'} width={'10%'} />
+            </>
+                :
+                <>
+                    <div className='Cover_view_my_tasks'>
+                        <h6 className="Title_view_my_tasks"> :המשימות שלי</h6>
+                        <div className="View_my_tasks">
+                            <View_my_tasks prop={objTasks} />
+
+                        </div>
+                    </div>
+                    <div className="d-flex justify-content-center">
                         {modalOpen && <Modal_Calculator setOpenModal={setModalOpen} idsTasks={arrayIdTasks} propActionFlag={actionFlag} helpProps={helpFlag} usersArray={getUsers} />}
                         <div className="row" >
                             <div id="TaskShow" className='col-4 '></div>
@@ -251,14 +301,12 @@ const Calculator = () => {
                                     <input type="button" className="col-2" id="btns" value="∪" onClick={() => Action('∪')} ></input>
                                     <input type="button" className="col-2" id="btns" value="∩" onClick={() => Action('∩')}></input>
                                     <input type="button" className="col-2" id="btns" value="\" onClick={() => Action("-")}></input>
-
-
-                                    <input type="button" className="col-2" id="btnsOrange" value="AC" onClick={() => reset("value")}  ></input>
                                     <input type="button" className="col-2" id="btnsOrange" value="Enter" onClick={() => {
                                         setModalOpen(true);
                                         setHelpFlag(helpFlag = false)
-
                                     }}></input>
+                                    <input type="button" className="col-2" id="btnsOrange" value="AC" onClick={() => reset("value")}  ></input>
+
                                 </div>
                                 <div className="row" id="dataFromServerButton">
                                     <div className="col-3">{dataCards1.map((value, index) => {
@@ -309,16 +357,12 @@ const Calculator = () => {
                                 </div>
                                 <input type="button" className="col-2" id="btnsOrange" value="Help" onClick={() => {
                                     help()
-
                                 }}  ></input>
-
                             </div>
-
                         </div>
-
-                    </>
-                }
-            </div>
+                    </div>
+                </>
+            }
         </>
     );
 }

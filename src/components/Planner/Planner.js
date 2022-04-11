@@ -12,7 +12,6 @@ const Planner = () => {
     const [loading, setLoading] = useState(false);
     const [modalOpen, setModalOpen] = useState(false);
 
-
     useEffect(() => {
         const fetchData = async () => {
             setLoading(true);
@@ -29,6 +28,7 @@ const Planner = () => {
     //-------------------input-------------------------
     function getName(val) {
         setName(val.target.value)
+
     }
     return (
         <>
