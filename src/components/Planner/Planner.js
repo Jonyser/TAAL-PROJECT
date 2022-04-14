@@ -48,14 +48,7 @@ const Planner = () => {
                                 }}
                             > שמור מסלול  <FcOk className='icon' /> </button>
                         </div>
-                        {/* <button
-                        className="openModalBtn"
-                        onClick={() => {
-                            setModalOpen(true);
-                        }}
-                        >
-                        Open
-                    </button> */}
+
                         {modalOpen && <Modal setOpenModal={setModalOpen} setText={get_Name} />}
 
 

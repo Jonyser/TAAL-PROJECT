@@ -73,7 +73,7 @@ const Modal_Stations = ({ setOpenModalPlaces, idTasks }) => {
 
             alert(get_Route_ID)
             console.log(post)
-            window.location.replace("/planner")
+            // window.location.replace("/planner")
         })
     }
     return (

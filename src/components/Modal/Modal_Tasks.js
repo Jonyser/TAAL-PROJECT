@@ -7,23 +7,26 @@ let get_Route_ID = 0;
 let getPicture, getSound;
 let ichour = 'אישור'
 let parentNum = 0;
-
-
+let file = "";
+let arr = [];
+arr[0] = "yakov";
 
 function Modal_Tasks({ setOpenModalPlases, allStations }) {
     const [, setDone] = useState(false);
-    const [get_title, settitle] = useState("");
+    const [get_title, setTitle] = useState("");
     const [, setPicture] = useState(null);
     const [, setSound] = useState(null);
     const [getDescription, setDescription] = useState("");
-    const fileInput = useRef(null)
+    const [, setFile] = useState("");
 
-    console.log("ModalTask AllStation in:", allStations)
+    // const fileInput = useRef(null)
+
+    // console.log("ModalTask AllStation in:", allStations)
 
 
 
     const handleTitleInput = (e) => {
-        settitle(e.target.value)
+        setTitle(e.target.value)
     }
     const handleDescriptionInput = (e) => {
         setDescription(e.target.value)
@@ -31,7 +34,8 @@ function Modal_Tasks({ setOpenModalPlases, allStations }) {
 
     const handleFileInput = (e) => {
         // handle validations
-        const file = e.target.files[0];
+        setFile(file = e.target.files[0]);
+        console.log("file", file)
 
         if ((file.type).includes('image')) {
             setPicture(getPicture = file)
@@ -44,7 +48,12 @@ function Modal_Tasks({ setOpenModalPlases, allStations }) {
         }
     }
     function Post_Task() {
-        let url_post = `https://s83.bfa.myftpupload.com/wp-json/wp/v2/tasks/`
+        console.log("Picture from post function", getPicture)
+        console.log("Sound from post function", getSound)
+        console.log("Title from post function", get_title)
+        console.log("Description from post function", getDescription)
+
+        let url_post = 'https://s83.bfa.myftpupload.com/wp-json/wp/v2/tasks/'
         fetch(url_post, {
             method: "POST",
             headers: {
@@ -52,13 +61,22 @@ function Modal_Tasks({ setOpenModalPlases, allStations }) {
                 'Authorization': `Bearer ${sessionStorage.getItem('jwt')}`,
             },
             body: JSON.stringify({
+                // password: "sdfsdf",
+                status: "publish",
+                // "places": [arr],
 
-                name: get_title,
-                description: getDescription,
-                parent: parentNum,
-                fields: {
-                    audio: getSound
-                }
+                "title": get_title,
+                // "description": getDescription,
+                "fields": [
+                    {
+                        // "label": "תמונה",
+                        // "name": "image",
+                        // "type": "image",
+                        // "instructions": "image",
+                        // "required": 1,
+                        // "conditional_logic": 0,
+                    },
+                ],
             })
         }).then(function (response) {
             return response.json();
@@ -67,8 +85,8 @@ function Modal_Tasks({ setOpenModalPlases, allStations }) {
             setDone(true)
 
             alert(get_Route_ID)
-            console.log(post)
-            window.location.replace("/planner")
+            console.log("post:", post)
+            // window.location.replace("/planner")
         })
     }
     return (

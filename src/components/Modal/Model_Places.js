@@ -15,6 +15,7 @@ function Modal_Plases({ setOpenModalPlaces }) {
     const [getDescription, setDescription] = useState("");
     const [, setSound] = useState(null);
     const [, setPicture] = useState(null);
+    const [, setFile] = useState({});
     //----------------------------------
     const handleTitleInput = (e) => {
         settitle(e.target.value)
@@ -25,11 +26,11 @@ function Modal_Plases({ setOpenModalPlaces }) {
     }
     //----------------------------------
     const handleFileInput = (e) => {
-        file = e.target.files[0];
+        setFile(file = e.target.files[0]);
         console.log("File:", file)
         if ((file.type).includes('image')) {
             setPicture(getPicture = file)
-            alert("file:", getPicture)
+
         }
 
         if ((file.type).includes('audio')) {
@@ -56,18 +57,36 @@ function Modal_Plases({ setOpenModalPlaces }) {
                 name: get_title,
                 description: getDescription,
                 parent: parentNum,
-                fields: {
+                fields: [{
                     qr: false,
-                    // defaultPath: str,
-                    // image: file,
-                    // audio: getSound
-                }
+                    defaultPath: "str",
+                    image: file,
+                    audio: getSound
+                }]
+
+
+                // "title": get_title,
+                // "fields": [
+                //     {
+                //         "key": "field_602fcb1e9b14a",
+                //         "label": file,
+                //         "name": "image",
+                //         "type": "image",
+                //         "instructions": "",
+                //         "required": 1,
+                //         "conditional_logic": 0,
+
+                //     },
+                // ],
+
             })
 
         }).then(function (response) {
             return response.json();
         }).then(function (post) {
             console.log("post:", post)
+            if (post.message !== "כבר יש מונח עם אותו שם ועם אותו הורה")
+                alert("כבר יש אתר עם אותו שם")
             // window.location.replace("/planner")
         })
     }

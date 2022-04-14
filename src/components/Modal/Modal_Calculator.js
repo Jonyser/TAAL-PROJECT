@@ -46,22 +46,6 @@ function Modal({ setOpenModal, propActionFlag, idsTasks, helpProps, usersArray }
 
     }
 
-    // let url_get = `https://s83.bfa.myftpupload.com/wp-json/wp/v2/users`
-    // fetch(url_get, {
-    //     method: "get",
-    //     headers: {
-    //         'Content-Type': 'application/json',
-    //         'Authorization': `Bearer ${sessionStorage.getItem('jwt')}`,
-    //     },
-    //     params: {
-    //         per_page: 99, 'Cache-Control': 'no-cache'
-    //     }
-    // }).then(function (res) {
-    //     console.log("resUsersIncalc:", res)
-    // })
-
-
-
     return (
         <>
             {!propActionFlag && !helpProps ? <>
