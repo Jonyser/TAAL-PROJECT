@@ -9,18 +9,22 @@ import img3 from '../../Pictures/img3.png';
 import img4 from '../../Pictures/img6.png';
 import logo from '../../Pictures/logo.jpeg';
 import ReactLoading from 'react-loading';
-
+import Modal_Cards from '../Modal/Model_Cards'
+// import { Form } from "react-bootstrap";
 //----------------------------------------------------|
 let dataCards = [];//                                 |
 let dataCards1 = [];//                                |
 let dataCards2 = [];//                                |
 let dataCards3 = [];//                                |
 let dataCards4 = [];//                                |
-let flag_show_page = false;//                                   |
+let flag_show_page = false;//                         |
 let size = 0;//                                       |
 let index = 0;//                                      |
 let sizeMod = 0;//                                    |
 const number = 4;//                                   |
+let resultData = []//                                 |
+let myRoute = [];//                                   |
+//                                                    |
 //----------------------------------------------------|
 const Cards = () => {
     const [done, setDone] = useState(false);
@@ -30,7 +34,10 @@ const Cards = () => {
     const [, setDataCards2] = useState([]);
     const [, setDataCards3] = useState([]);
     const [, setDataCards4] = useState([]);
+    const [, setMyRoute] = useState([]);
     const [, setFlag] = useState(false);
+    const [, setResultData] = useState([]);
+    const [modalOpen, setModalOpen] = useState(false);
 
     useEffect(() => {
         const fetchData = async () => {
@@ -52,9 +59,10 @@ const Cards = () => {
         if (flag_show_page === false)
             await get('https://s83.bfa.myftpupload.com/wp-json/wp/v2/routes/', {
                 params: {
-                    per_page: 99
+                    per_page: 99, 'Cache-Control': 'no-cache'
                 }
             }).then(res => {
+                setResultData(resultData = res)
                 console.log("Masloulims:", res)
                 size = res.length / number;
 
@@ -120,6 +128,12 @@ const Cards = () => {
             });
         setDone(true)
     }
+    const Replication = (val) => {
+        setModalOpen(true);
+        setMyRoute(myRoute = val)
+        // alert(val.myTitle);
+        // alert(val.myId)
+    }
     return (
         <>
             {!done ? <>
@@ -128,193 +142,242 @@ const Cards = () => {
             </>
                 :
                 <>
-                    <br></br>
-                    <div className='container'>
-                        <div className="row">
-                            <div className="col-3">{dataCards1.map((value, index) => {
-                                return (
-                                    <div key={index} className='App'>
-                                        <header key={index}>
-                                            <Card style={{ color: "#000", marginBottom: 15, border: "2px solid rgba(0, 0, 0, 0.125)" }}>
-                                                {/* display_name */}
-                                                <Card.Img src={img1} style={{ height: 237 }} />
-                                                <Card.Body src={logo}>
-                                                    <Card.Title >
-                                                        <div className="text-center ">
-                                                            <div className="row align-items-center">
-                                                                <div className="col-md-11">
-                                                                    <h5>{value.myTitle}</h5>
+                    <div style={{
+                        backgroundColor: 'rgb(213, 221, 228)',
+                        overflow: "hidden",
+                    }}>
+                        {modalOpen && <Modal_Cards setOpenModal={setModalOpen} thisMyRoute={myRoute} />}
+
+                        <br></br>
+
+                        <div className='container' >
+                            <div className="row">
+                                <div className="col-3">{dataCards1.map((value, index) => {
+                                    return (
+                                        <div key={index} className='App'>
+                                            <header key={index}>
+                                                <Card style={{ color: "#000", marginBottom: 15, border: "3px solid rgb(106 185 48)" }}>
+                                                    {/* display_name */}
+
+                                                    <Card.Img src={img1} style={{ height: 237 }} />
+
+                                                    <Card.Body src={logo}>
+                                                        <Card.Title >
+                                                            <div className="text-center ">
+                                                                <div className="row align-items-center">
+                                                                    <div className="col-md-11">
+                                                                        <h5>{value.myTitle}</h5>
+                                                                    </div>
                                                                 </div>
                                                             </div>
-                                                        </div>
-                                                    </Card.Title>
-                                                    <DropdownButton className="d-inline p-3 text-white" id="dropdown-basic-button" title="משימות" >
-                                                        {value.myTasks ? <>
-                                                            {value.myTasks.map((val, index) =>
-                                                                <Dropdown.Item key={index} >
-                                                                    {val.post_title}
-                                                                </Dropdown.Item>)} </>
-                                                            : <> <Dropdown.Item href="#/action-1">
-                                                                לא קיים
-                                                            </Dropdown.Item>
+                                                        </Card.Title>
+
+                                                        <DropdownButton className="d-inline p-3 text-white" id="dropdown-basic-button" title="משימות" >
+                                                            {value.myTasks ? <>
+                                                                {value.myTasks.map((val, index) =>
+                                                                    <Dropdown.Item key={index} >
+                                                                        {val.post_title}
+                                                                    </Dropdown.Item>)} </>
+                                                                : <> <Dropdown.Item href="#/action-1">
+                                                                    לא קיים
+                                                                </Dropdown.Item>
+                                                                </>}
+                                                        </DropdownButton>
+
+                                                        <DropdownButton className="d-inline p-3  text-white" id="dropdown-basic-button" title="משוייך ל"  >
+                                                            {value.myUsers ? <>
+                                                                {value.myUsers.map((val, index) =>
+                                                                    <Dropdown.Item key={index} >
+                                                                        {val.display_name}
+                                                                    </Dropdown.Item>)}
+                                                            </> : <>
+                                                                <Dropdown.Item href="#/action-1">
+                                                                    אינו משוייך
+                                                                </Dropdown.Item>
                                                             </>}
-                                                    </DropdownButton>
-                                                    <DropdownButton className="d-inline p-3  text-white" id="dropdown-basic-button" title="משוייך ל"  >
-                                                        {value.myUsers ? <>
-                                                            {value.myUsers.map((val, index) =>
-                                                                <Dropdown.Item key={index} >
-                                                                    {val.display_name}
-                                                                </Dropdown.Item>)}
-                                                        </> : <>
-                                                            <Dropdown.Item href="#/action-1">
-                                                                אינו משוייך
-                                                            </Dropdown.Item>
-                                                        </>}
-                                                    </DropdownButton>
-                                                </Card.Body>
-                                            </Card>
-                                        </header>
-                                    </div>
-                                )
-                            })}</div>
-                            <div className="col-3">{dataCards2.map((value, index) => {
-                                return (
-                                    <div key={index} className='App'>
-                                        <header key={index} >
-                                            <Card style={{ color: "#000", marginBottom: 15, border: "2px solid rgba(0, 0, 0, 0.125)" }}>
-                                                <Card.Img src={img2} style={{ height: 237 }} />
-                                                <Card.Body>
-                                                    <Card.Title >
-                                                        <div className="text-center ">
-                                                            <div className="row align-items-center">
-                                                                <div className="col-md-11">
-                                                                    <h5>{value.myTitle}</h5>
+                                                        </DropdownButton>
+                                                        <br></br>
+                                                        <br></br>
+
+                                                        <button type="button" className="btn btn-outline-primary" style={{ width: "270px" }}
+
+                                                            onClick={() => Replication(value)}
+                                                        >
+
+                                                            שכפל מסלול זה</button>
+
+                                                    </Card.Body>
+                                                </Card>
+                                            </header>
+                                        </div>
+                                    )
+                                })}</div>
+                                <div className="col-3">{dataCards2.map((value, index) => {
+                                    return (
+                                        <div key={index} className='App'>
+                                            <header key={index} >
+                                                <Card style={{ color: "#000", marginBottom: 15, border: "3px solid rgb(106 185 48)" }}>
+                                                    <Card.Img src={img2} style={{ height: 237 }} />
+                                                    <Card.Body>
+                                                        <Card.Title >
+                                                            <div className="text-center ">
+                                                                <div className="row align-items-center">
+                                                                    <div className="col-md-11">
+                                                                        <h5>{value.myTitle}</h5>
+                                                                    </div>
                                                                 </div>
                                                             </div>
-                                                        </div>
-                                                    </Card.Title>
-                                                    <DropdownButton className="d-inline p-3 text-white" id="dropdown-basic-button" title="משימות" >
-                                                        {value.myTasks ? <>
-                                                            {value.myTasks.map((val, index) =>
-                                                                <Dropdown.Item key={index} >
-                                                                    {val.post_title}
-                                                                </Dropdown.Item>)} </>
-                                                            : <> <Dropdown.Item href="#/action-1">
-                                                                לא קיים
-                                                            </Dropdown.Item>
-                                                            </>}
-                                                    </DropdownButton>
-                                                    <DropdownButton className="d-inline p-3 text-white" id="dropdown-basic-button" title="משוייך ל" >
-                                                        {value.myUsers ? <>
-                                                            {value.myUsers.map((value, index) =>
-                                                                <Dropdown.Item key={index} >
+                                                        </Card.Title>
+                                                        <DropdownButton className="d-inline p-3 text-white" id="dropdown-basic-button" title="משימות" >
+                                                            {value.myTasks ? <>
+                                                                {value.myTasks.map((val, index) =>
+                                                                    <Dropdown.Item key={index} >
+                                                                        {val.post_title}
+                                                                    </Dropdown.Item>)} </>
+                                                                : <> <Dropdown.Item href="#/action-1">
+                                                                    לא קיים
+                                                                </Dropdown.Item>
+                                                                </>}
+                                                        </DropdownButton>
+                                                        <DropdownButton className="d-inline p-3 text-white" id="dropdown-basic-button" title="משוייך ל" >
+                                                            {value.myUsers ? <>
+                                                                {value.myUsers.map((value, index) =>
+                                                                    <Dropdown.Item key={index} >
 
-                                                                    {value.display_name}
-                                                                </Dropdown.Item>)}
-                                                        </> : <>
-                                                            <Dropdown.Item href="#/action-1">
-                                                                אינו משוייך
-                                                            </Dropdown.Item>
-                                                        </>}
-                                                    </DropdownButton>
-                                                </Card.Body>
-                                            </Card>
-                                        </header>
-                                    </div>
-                                )
-                            })}</div>
-                            <div className="col-3">{dataCards3.map((value, index) => {
-                                return (
-                                    <div key={index} className='App'>
-                                        <header key={index} >
-                                            <Card style={{ color: "#000", marginBottom: 15, border: "2px solid rgba(0, 0, 0, 0.125)" }}>
-                                                <Card.Img src={img3} style={{ height: 237 }} />
-                                                <Card.Body>
-                                                    <Card.Title >
-                                                        <div className="text-center ">
-                                                            <div className="row align-items-center">
-                                                                <div className="col-md-11">
-                                                                    <h5>{value.myTitle}</h5>
+                                                                        {value.display_name}
+                                                                    </Dropdown.Item>)}
+                                                            </> : <>
+                                                                <Dropdown.Item href="#/action-1">
+                                                                    אינו משוייך
+                                                                </Dropdown.Item>
+                                                            </>}
+                                                        </DropdownButton>
+                                                        <br></br>
+                                                        <br></br>
+
+                                                        <button type="button" className="btn btn-outline-primary" style={{ width: "270px" }}
+
+                                                            onClick={() => Replication(value)}
+                                                        >
+
+                                                            שכפל מסלול זה</button>
+                                                    </Card.Body>
+                                                </Card>
+                                            </header>
+                                        </div>
+                                    )
+                                })}</div>
+                                <div className="col-3">{dataCards3.map((value, index) => {
+                                    return (
+                                        <div key={index} className='App'>
+                                            <header key={index} >
+                                                <Card style={{ color: "#000", marginBottom: 15, border: "3px solid rgb(106 185 48)" }}>
+                                                    <Card.Img src={img3} style={{ height: 237 }} />
+                                                    <Card.Body>
+                                                        <Card.Title >
+                                                            <div className="text-center ">
+                                                                <div className="row align-items-center">
+                                                                    <div className="col-md-11">
+                                                                        <h5>{value.myTitle}</h5>
+                                                                    </div>
                                                                 </div>
                                                             </div>
-                                                        </div>
-                                                    </Card.Title>
-                                                    <DropdownButton className="d-inline p-3 text-white" id="dropdown-basic-button" title="משימות" >
-                                                        {value.myTasks ? <>
-                                                            {value.myTasks.map((val, index) =>
-                                                                <Dropdown.Item key={index} >
-                                                                    {val.post_title}
-                                                                </Dropdown.Item>)} </>
-                                                            : <> <Dropdown.Item href="#/action-1">
-                                                                לא קיים
-                                                            </Dropdown.Item>
-                                                            </>}
-                                                    </DropdownButton>
-                                                    <DropdownButton className="d-inline p-3  text-white" id="dropdown-basic-button" title="משוייך ל" >
-                                                        {value.myUsers ? <>
-                                                            {value.myUsers.map((value, index) =>
-                                                                <Dropdown.Item key={index} >
-                                                                    {value.display_name}
-                                                                </Dropdown.Item>)}
-                                                        </> : <>
-                                                            <Dropdown.Item href="#/action-1">
-                                                                אינו משוייך
-                                                            </Dropdown.Item></>}
-                                                    </DropdownButton>
-                                                </Card.Body>
-                                            </Card>
-                                        </header>
-                                    </div>
-                                )
-                            })}</div>
-                            <div className="col-3">{dataCards4.map((value, index) => {
-                                return (
-                                    <div key={index} className='App'>
-                                        <header key={index} >
-                                            <Card style={{ color: "#000", marginBottom: 15, border: "2px solid rgba(0, 0, 0, 0.125)" }}>
+                                                        </Card.Title>
+                                                        <DropdownButton className="d-inline p-3 text-white" id="dropdown-basic-button" title="משימות" >
+                                                            {value.myTasks ? <>
+                                                                {value.myTasks.map((val, index) =>
+                                                                    <Dropdown.Item key={index} >
+                                                                        {val.post_title}
+                                                                    </Dropdown.Item>)} </>
+                                                                : <> <Dropdown.Item href="#/action-1">
+                                                                    לא קיים
+                                                                </Dropdown.Item>
+                                                                </>}
+                                                        </DropdownButton>
+                                                        <DropdownButton className="d-inline p-3  text-white" id="dropdown-basic-button" title="משוייך ל" >
+                                                            {value.myUsers ? <>
+                                                                {value.myUsers.map((value, index) =>
+                                                                    <Dropdown.Item key={index} >
+                                                                        {value.display_name}
+                                                                    </Dropdown.Item>)}
+                                                            </> : <>
+                                                                <Dropdown.Item href="#/action-1">
+                                                                    אינו משוייך
+                                                                </Dropdown.Item></>}
+                                                        </DropdownButton>
+                                                        <br></br>
+                                                        <br></br>
 
-                                                <Card.Img src={img4} style={{ height: 237 }} />
-                                                <Card.Body>
-                                                    <Card.Title >
-                                                        <div className="text-center ">
-                                                            <div className="row align-items-center">
-                                                                <div className="col-md-11">
-                                                                    <h5>{value.myTitle}</h5>
+                                                        <button type="button" className="btn btn-outline-primary" style={{ width: "270px" }}
+
+                                                            onClick={() => Replication(value)}
+                                                        >
+
+                                                            שכפל מסלול זה</button>
+                                                    </Card.Body>
+                                                </Card>
+                                            </header>
+                                        </div>
+                                    )
+                                })}</div>
+                                <div className="col-3">{dataCards4.map((value, index) => {
+                                    return (
+                                        <div key={index} className='App'>
+                                            <header key={index} >
+                                                <Card style={{ color: "#000", marginBottom: 15, border: "3px solid rgb(106 185 48)" }}>
+
+                                                    <Card.Img src={img4} style={{ height: 237 }} />
+                                                    <Card.Body>
+                                                        <Card.Title >
+                                                            <div className="text-center ">
+                                                                <div className="row align-items-center">
+                                                                    <div className="col-md-11">
+                                                                        <h5>{value.myTitle}</h5>
+                                                                    </div>
                                                                 </div>
                                                             </div>
-                                                        </div>
-                                                    </Card.Title>
-                                                    <DropdownButton className="d-inline p-3 " id="dropdown-basic-button" title="משימות" >
-                                                        {value.myTasks ? <>
-                                                            {value.myTasks.map((val, index) =>
-                                                                <Dropdown.Item key={index} >
+                                                        </Card.Title>
+                                                        <DropdownButton className="d-inline p-3 " id="dropdown-basic-button" title="משימות" >
+                                                            {value.myTasks ? <>
+                                                                {value.myTasks.map((val, index) =>
+                                                                    <Dropdown.Item key={index} >
 
-                                                                    {val.post_title}
-                                                                </Dropdown.Item>)} </>
-                                                            : <> <Dropdown.Item href="#/action-1">
-                                                                לא קיים
-                                                            </Dropdown.Item>
-                                                            </>}
-                                                    </DropdownButton>
-                                                    <DropdownButton className="d-inline p-3 " id="dropdown-basic-button" title="משוייך ל" >
-                                                        {value.myUsers ? <>
-                                                            {value.myUsers.map((value, index) =>
-                                                                <Dropdown.Item key={index} >
+                                                                        {val.post_title}
+                                                                    </Dropdown.Item>)} </>
+                                                                : <> <Dropdown.Item href="#/action-1">
+                                                                    לא קיים
+                                                                </Dropdown.Item>
+                                                                </>}
+                                                        </DropdownButton>
+                                                        <DropdownButton className="d-inline p-3 " id="dropdown-basic-button" title="משוייך ל" >
+                                                            {value.myUsers ? <>
+                                                                {value.myUsers.map((value, index) =>
+                                                                    <Dropdown.Item key={index} >
 
-                                                                    {value.display_name}
-                                                                </Dropdown.Item>)}
-                                                        </> : <>
-                                                            <Dropdown.Item href="#/action-1">
-                                                                אינו משוייך
-                                                            </Dropdown.Item></>}
-                                                    </DropdownButton>
-                                                </Card.Body>
-                                            </Card>
-                                        </header>
-                                    </div>
-                                )
-                            })}</div>
+                                                                        {value.display_name}
+                                                                    </Dropdown.Item>)}
+                                                            </> : <>
+                                                                <Dropdown.Item href="#/action-1">
+                                                                    אינו משוייך
+                                                                </Dropdown.Item></>}
+                                                        </DropdownButton>
+                                                        <br></br>
+                                                        <br></br>
 
+                                                        <button type="button" className="btn btn-outline-primary" style={{ width: "270px" }}
+
+                                                            onClick={() => Replication(value)}
+                                                        >
+
+                                                            שכפל מסלול זה</button>
+                                                    </Card.Body>
+                                                </Card>
+                                            </header>
+                                        </div>
+                                    )
+                                })}</div>
+
+                            </div>
                         </div>
                     </div>
                 </>

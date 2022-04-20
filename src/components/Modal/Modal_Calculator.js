@@ -42,10 +42,7 @@ function Modal({ setOpenModal, propActionFlag, idsTasks, helpProps, usersArray }
             console.log(post)
             window.location.replace("/planner")
         })
-
-
     }
-
     return (
         <>
             {!propActionFlag && !helpProps ? <>
@@ -158,7 +155,7 @@ function Modal({ setOpenModal, propActionFlag, idsTasks, helpProps, usersArray }
                                 <div className="body" style={{ textAlign: 'right' }}>
                                     <h4></h4>
                                     <h5>:U</h5>
-                                    <h5>   פעולת איחוד - ניתן לאחד 2 מסלולים ויותר, פעולה זו מוסיפה את המשימות השייכים למסלולים שבחרת לפי סדר הפעולות וניתן לשמור כמסלול חדש
+                                    <h5>   פעולת איחוד - ניתן לאחד 2 מסלולים ויותר, פעולה זו מוסיפה את המשימות השייכות למסלולים שבחרת לפי סדר הפעולות וניתן לשמור כמסלול חדש
                                     </h5>
                                     <h6 style={{ color: "red" }}>הצורך בפעולה זו נועדה ליצור מסלול חדש הבנוי מסדרת מסלולים כדי לאפשר לחניך מסלול הבנוי ממספר מסלולים לסדר יום שלם</h6>
                                     <br></br>

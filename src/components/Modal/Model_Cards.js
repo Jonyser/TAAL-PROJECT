@@ -8,48 +8,18 @@ let get_Route_ID = 0;
 let getUsers = [];
 let student = "";
 
-function Modal({ setOpenModal, setText }) {
+function Modal({ setOpenModal, setText, thisMyRoute }) {
+
+    console.log("thisMyRoute:", thisMyRoute)
     const [, set_obj] = useState(null);// for TextView
     const [, setDone] = useState(false);
-    const [, setLoading] = useState(false);
-    const [, setUsers] = useState([]);
-    const [, setStudent] = useState("")
+
     const [isChecked, setIsChecked] = useState(false);
 
     const handleOnChange = () => {
         setIsChecked(!isChecked);
     };
-    useEffect(() => {
-        const fetchData = async () => {
-            setLoading(true);
-            try {
-                getData();
 
-            } catch (error) {
-                console.error(error.message);
-            }
-            setLoading(false);
-        }
-        fetchData();
-    }, []);
-
-    const getData = () => {
-
-        get('https://s83.bfa.myftpupload.com/wp-json/wp/v2/users/', {
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${sessionStorage.getItem('jwt')}`,
-            },
-            params: {
-                per_page: 99, 'Cache-Control': 'no-cache'
-            }
-        }).then(res => {
-            setStudent(student = res.filter((item) => item.description !== ""))
-            console.log("student:", student)
-            setUsers(getUsers = student.map((r) => { return r.name }));
-            console.log("getUsers:", getUsers);
-        });
-    }
     function Post_Route() {
         if (setText === null || setText === "") {
             alert('Please give the Route a title !')
@@ -74,14 +44,15 @@ function Modal({ setOpenModal, setText }) {
                 },
 
                 body: JSON.stringify({
-                    title: setText,
-                    status: 'publish',
+                    status: "draft",
+                    title: thisMyRoute.myTitle + "-duplicate-1",
+
 
                     fields: {
                         // tasks: obj.tasks[0].id,
-                        tasks: obj.tasks.map((e) => {
-                            console.log("e.id:", e.id)
-                            return e.id
+                        tasks: thisMyRoute.myTasks.map((e) => {
+                            console.log("e.id:", e.ID)
+                            return e.ID
                         }),
                         users: obj.tasks,
                     }
@@ -93,7 +64,7 @@ function Modal({ setOpenModal, setText }) {
                 setDone(true)
 
                 alert(get_Route_ID)
-                console.log("post:", post)
+
                 // window.location.replace("/planner")
             })
         }
@@ -149,41 +120,10 @@ function Modal({ setOpenModal, setText }) {
                         <div className="title">
 
                         </div>
-                        <h6></h6>
-                        <h6 style={{ textAlign: 'right' }}>:שייך מסלול לחניכ/ים הרצוים <FcLink className='icon' /></h6>
-                        <div className='allStudent' >
-                            {getUsers.map((value, index) => {
-                                return (
-                                    <label key={index} className="list-group-item" onClick={saveCheckbox(value)}>
+                        <h1>שכפול מסלול</h1>
 
-                                        <input className="form-check-input me-1" type="checkbox" id={value} name={value} value=""></input>
-
-                                        {value}
-
-                                    </label>
-                                )
-                            })}
-
-                            {/* <div className="App">
-                                Select your pizza topping:
-                                <div className="topping">
-                                    <input
-                                        type="checkbox"
-                                        id="topping"
-                                        name="topping"
-                                        value="Paneer"
-                                        checked={isChecked}
-                                        onChange={handleOnChange}
-                                    />
-                                    Paneer
-                                </div>
-                                <div className="result">
-                                    Above checkbox is {isChecked ? "checked" : "un-checked"}.
-                                </div>
-                            </div> */}
-                        </div>
                         <div className="body">
-                            <h5>?האם את/ה בטוח/ה</h5>
+                            <h5> :האם את/ה מעוניין בשכפול המסלול <div style={{ color: "red" }}>?{thisMyRoute.myTitle}</div></h5>
                         </div>
                         <div className="footer">
                             <button className='cancelBtn'

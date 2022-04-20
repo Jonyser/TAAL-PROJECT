@@ -19,7 +19,6 @@ const number = 4;
 let textview = '';
 let Has_already_been_typed = false;
 
-
 let actionMode = "";
 let actionFlag = false;
 let helpFlag = false;
@@ -63,11 +62,11 @@ const Calculator = () => {
         fetchData();
     }, []);
 
-    const getData = async () => {
+    const getData = () => {
         // https://s83.bfa.myftpupload.com/wp-json/wp/v2/routes/
         // https://taal.tech/wp-json/wp/v2/routes/
         if (flag_show_page === false)
-            await get('https:///s83.bfa.myftpupload.com/wp-json/wp/v2/routes/', {
+            get('https:///s83.bfa.myftpupload.com/wp-json/wp/v2/routes/', {
                 params: {
                     per_page: 99, 'Cache-Control': 'no-cache'
                 }
@@ -131,7 +130,7 @@ const Calculator = () => {
 
 
 
-        await get('https://s83.bfa.myftpupload.com/wp-json/wp/v2/users/', {
+        get('https://s83.bfa.myftpupload.com/wp-json/wp/v2/users/', {
             headers: {
                 'Content-Type': 'application/json',
                 'Authorization': `Bearer ${sessionStorage.getItem('jwt')}`,
@@ -141,12 +140,8 @@ const Calculator = () => {
             }
 
         }).then(res => {
-            // console.log("result:", res)
-            // console.log("ressss:", res.map((r) => { return r.name }))
             setStudent(student = res.filter((item) => item.description !== ""))
             setUsers(getUsers = student.map((r) => { return r.name }));
-            // console.log("result2:", getUsers)
-            // console.log("Newressss:", getUsers)
         });
         setDone(true)
     }
@@ -276,22 +271,25 @@ const Calculator = () => {
     return (
         <>
             {!done ? <>
-                <h1 style={{ textAlign: "center" }}>נא להמתין</h1>
+                <h1 style={{ textAlign: "center", color: "white" }}>נא להמתין</h1>
 
                 < ReactLoading type={"bars"} className='loading' color={"rgb(180, 175, 199)"} height={'10%'} width={'10%'} />
             </>
                 :
-                <>
+                <>  <div style={{
+                    backgroundColor: 'rgb(213, 221, 228)',
+                    overflow: "hidden",
+                    height: "800px"
+                }}>
                     <div className='Cover_view_my_tasks'>
                         <h6 className="Title_view_my_tasks"> :המשימות שלי</h6>
                         <div className="View_my_tasks">
                             <View_my_tasks prop={objTasks} />
-
                         </div>
                     </div>
                     <div className="d-flex justify-content-center">
                         {modalOpen && <Modal_Calculator setOpenModal={setModalOpen} idsTasks={arrayIdTasks} propActionFlag={actionFlag} helpProps={helpFlag} usersArray={getUsers} />}
-                        <div className="row" >
+                        <div className="row" style={{ paddingBottom: "100px", margin: "-70px" }} >
                             <div id="TaskShow" className='col-4 '></div>
                             <div className='col-4 ' id="containerCalc" style={{ width: "600px", marginTop: "2px", }}>
                                 <form name="myForm">
@@ -361,6 +359,7 @@ const Calculator = () => {
                             </div>
                         </div>
                     </div>
+                </div>
                 </>
             }
         </>

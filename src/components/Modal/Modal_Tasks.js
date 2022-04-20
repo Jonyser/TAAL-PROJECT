@@ -81,6 +81,7 @@ function Modal_Tasks({ setOpenModalPlases, allStations }) {
         }).then(function (response) {
             return response.json();
         }).then(function (post) {
+            console.log("postpostpost:", post)
             get_Route_ID = post.id
             setDone(true)
 

@@ -66,15 +66,20 @@ function DragnDrop(props) {
     //---------------------------------------------------------
     return (
         <>
+
             <div className="Board" ref={drop} >
+
                 <i className="bi bi-dash-square">
                     <Images id={thisId} data={saveProps.propDataTask} />
+                    <Audios id={thisId} data={myTask} />
 
-                    <div className='txt'> :גרור משימה לכאן&nbsp;<RiDragMove2Line /></div>
+                    <div className='txt'> :גרור משימה לכאן&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<RiDragMove2Line /></div>
                 </i>
-                {board.map((tag, keyCount) => {
-                    return <Tag title={tag.title} id={tag.id} idImg={thisId} dataImg={saveProps.propDataTask} key={keyCount} />;
-                })}
+                <div className='MyTasks'>
+                    {board.map((tag, keyCount) => {
+                        return <Tag title={tag.title} id={tag.id} idImg={thisId} dataImg={saveProps.propDataTask} key={keyCount} />;
+                    })}
+                </div>
 
             </div>
             {modalOpen && <Modal_Tasks setOpenModalPlases={setModalOpen} allStations={props.allStations} />}
@@ -95,19 +100,16 @@ function DragnDrop(props) {
                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     </button>
                 </div>
+
                 <div className='TasksCover'>
 
                     {dndArray.length === 0 ? null : dndArray.map((tag) => {
                         return <Tag title={tag.title} id={tag.id} key={tag.id} idImg={thisId} dataImg={saveProps.propDataTask} />;
+
                     })}
                 </div>
             </div>
 
-            <div className=" MediaSize">
-
-                <Audios id={thisId} data={myTask} />
-
-            </div>
         </>
     );
 }

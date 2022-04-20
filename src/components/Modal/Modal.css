@@ -26,7 +26,7 @@
   margin-left: 35%;
   margin-right: auto;
   width: 500px;
-  height: 300px;
+  height: 400px;
   background-color: aliceblue;
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
   display: flex;
@@ -34,6 +34,7 @@
   padding: 25px;
   position: fixed;
   border: 3px solid green;
+  z-index: 10;
 }
 
 .modalContainerCalculator {
@@ -146,9 +147,11 @@
   background-color: aliceblue;
   border: 3px solid green;
   position: fixed;
+
   width: 500px;
   height: -200px;
-  margin: -25% auto;
+  /* margin: -25% auto; */
+  margin: -190px;
   margin-left: 500px;
   padding: 10px;
   width: 520px;
@@ -164,7 +167,8 @@
   position: fixed;
   width: 500px;
   height: -200px;
-  margin: -28% auto;
+  /* margin: -28% auto; */
+  margin: -270px;
   margin-left: 500px;
   padding: 10px;
   width: 520px;
@@ -178,12 +182,18 @@
   overflow: scroll;
 }
 
+.allStudent {
+  height: 635px;
+  overflow: scroll;
+}
+
 .BackgroundPlasesNoClick {
   background-color: aliceblue;
   border: 3px solid green;
   position: fixed;
   width: 500px;
-  margin: -25% auto;
+  /* margin: -25% auto; */
+  margin: -190px;
   margin-left: 500px;
   padding: 10px;
   width: 520px;

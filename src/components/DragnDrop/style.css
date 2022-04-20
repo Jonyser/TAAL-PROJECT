@@ -10,24 +10,29 @@
   position:absolute;
   
 }  */
-.Board{
-  left: 10px;
-  margin: 10px;
+.Board {
+  left: -60px;
+  margin: 70px;
   height: auto;
-  width: 300px;
+  width: 350px;
   justify-content: right;
- justify-self: unset;
-   /* border-radius: 1.5ch; */
-  border: 5px solid rgb(83, 90, 146); 
-  position:absolute;
-  
-  
-} 
-.Board:hover{
-  background-color:rgb(234, 237, 247) ;
+  justify-self: unset;
+  /* border-radius: 1.5ch; */
+  /* background-color: rgb(193, 191, 208); */
+  background-color: rgb(234, 237, 247);
+  border-radius: 20px;
+
+  position: absolute;
+
 
 }
-.txt{
+
+.Board:hover {
+  background-color: rgb(242, 245, 255);
+
+}
+
+.txt {
   margin: 10px;
   padding: 20px;
   width: auto;
@@ -35,67 +40,78 @@
   color: rgb(41, 61, 61);
   border: 1px solid transparent;
   font-size: 28px;
-  line-height: 32px;
+  /* line-height: 32px; */
   font-family: ReformaNarrowMedium;
   font-weight: 800;
-  white-space: nowrap;
+
 }
 
-.Cover_Tasks{
-    float: right;
-    padding: 5%;
-    margin-right: -7%;
-    font-size: small;
+.Cover_Tasks {
+  float: right;
+  padding: 5%;
+  margin-right: -7%;
+  font-size: small;
 }
 
-.TitleTasks{
+.TitleTasks {
   background: linear-gradient(90deg, rgb(236, 245, 220) 95%, rgb(164, 190, 125) 1%);
-  color:rgb(88, 92, 81);
+  color: rgb(88, 92, 81);
   height: 40px;
-   border-radius: 1ch;
-   margin-bottom: 15px;
-   font-size: small;
+  border-radius: 1ch;
+  margin-bottom: 15px;
+  font-size: small;
 }
 
-.TasksCover{
-  background-color:  rgb(236, 245, 220);
+.TasksCover {
+  background-color: rgb(236, 245, 220);
   margin: -0.5px;
   padding-top: 1px;
   padding-bottom: 1px;
   border-radius: 1.5ch;
-  overflow: scroll;
+  overflow: auto;
   height: 440px;
   width: 320px;
 }
-.addTaskCover{
-  background-color:  rgb(236, 245, 220);
+
+.addTaskCover {
+  background-color: rgb(236, 245, 220);
   margin: -0.5px;
   padding-top: 1px;
   padding-bottom: 1px;
   width: 320px;
 }
 
-.MediaCover{
-  float:right;
+.MediaCover {
+  float: right;
   margin: 10%;
 }
 
-.AddTasks{
+.AddTasks {
   display: flex;
-   width: 85%;
-   height: 90px;
-   margin: 20px;
-   padding: 20px;
-   justify-content: right;
-   justify-Content: 'space-between';
-   margin-right: 50px;
-   border-radius: 1.5ch;
-   color: rgb(90, 107, 122);
-   border-style: dotted;
-   background-color: rgb(240, 247, 229);
+  width: 85%;
+  height: 90px;
+  margin: 20px;
+  padding: 20px;
+  justify-content: right;
+  justify-Content: 'space-between';
+  margin-right: 50px;
+  border-radius: 1.5ch;
+  color: rgb(90, 107, 122);
+  border-style: dotted;
+  background-color: rgb(240, 247, 229);
 }
-.AddTasks:hover{
-  background: linear-gradient(90deg,#f1fae7 0,#deecd5);
+
+.AddTasks:hover {
+  background: linear-gradient(90deg, #f1fae7 0, #deecd5);
+}
+
+.MyTasks {
+  height: 340px;
+  overflow: auto;
+  background-color: rgb(199, 206, 212);
+  border: 1px solid rgb(83, 90, 146);
+
+  /* border: 8px solid rgb(133, 135, 148); */
 }
 
 /* .MediaSize{

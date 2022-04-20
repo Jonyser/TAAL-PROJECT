@@ -6,12 +6,10 @@
     padding: 20px;
     color: aliceblue;
     border: rgb(180, 182, 196);
-    width: 200px;
+    width: 240px;
     text-align: center;
 
 }
-
-.image {}
 
 .showTasks:hover {
     background-color: rgb(124, 127, 147);
@@ -19,8 +17,7 @@
 }
 
 .View_my_tasks {
-    width: 300px;
-    height: 400px;
+    width: 360px;
     position: absolute;
     background-color: rgb(244, 234, 255);
     border-radius: 20px;
@@ -28,13 +25,15 @@
     text-align: center;
     padding: 10px;
     height: 430px;
+
 }
 
 .tasksList {
     padding: 20px;
-    overflow: scroll;
+    overflow: auto;
     height: 266px;
     background-color: rgb(216, 206, 225);
+    border-radius: 20px;
 
 }
 
@@ -45,7 +44,7 @@
 .Title_view_my_tasks {
     background-color: rgb(244, 234, 255);
     color: rgb(27, 26, 26);
-    width: 300px;
+    width: 360px;
     height: 40px;
     border-radius: 1ch;
     text-align: center;
