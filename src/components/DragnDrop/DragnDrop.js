@@ -66,14 +66,17 @@ function DragnDrop(props) {
     //---------------------------------------------------------
     return (
         <>
-
             <div className="Board" ref={drop} >
 
                 <i className="bi bi-dash-square">
                     <Images id={thisId} data={saveProps.propDataTask} />
                     <Audios id={thisId} data={myTask} />
 
-                    <div className='txt'> :גרור משימה לכאן&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<RiDragMove2Line /></div>
+                    <div className='txt'> :גרור משימה לכאן
+                        <div class="blink"><span><RiDragMove2Line /></span></div>
+                        {/* &nbsp;<RiDragMove2Line /> */}
+                    </div>
+
                 </i>
                 <div className='MyTasks'>
                     {board.map((tag, keyCount) => {

@@ -14,7 +14,7 @@
   left: -60px;
   margin: 70px;
   height: auto;
-  width: 350px;
+  width: 370px;
   justify-content: right;
   justify-self: unset;
   /* border-radius: 1.5ch; */
@@ -29,20 +29,6 @@
 
 .Board:hover {
   background-color: rgb(242, 245, 255);
-
-}
-
-.txt {
-  margin: 10px;
-  padding: 20px;
-  width: auto;
-  height: 60px;
-  color: rgb(41, 61, 61);
-  border: 1px solid transparent;
-  font-size: 28px;
-  /* line-height: 32px; */
-  font-family: ReformaNarrowMedium;
-  font-weight: 800;
 
 }
 
@@ -106,10 +92,14 @@
 }
 
 .MyTasks {
+  margin: 10px;
   height: 340px;
+  width: 350px;
   overflow: auto;
-  background-color: rgb(199, 206, 212);
-  border: 1px solid rgb(83, 90, 146);
+  background-color: rgb(198, 204, 225);
+  border-radius: 20px;
+  border: 0.05px solid rgb(181, 184, 210);
+
 
   /* border: 8px solid rgb(133, 135, 148); */
 }
@@ -122,3 +112,56 @@
   border-radius: 1.5ch;
   
 } */
+
+.blink {
+  position: relative;
+  left: 80px;
+  margin: 10px;
+  padding: 20px;
+  width: auto;
+  height: 60px;
+  color: rgb(41, 61, 61);
+  border: 1px solid transparent;
+  font-size: 28px;
+  font-family: ReformaNarrowMedium;
+  font-weight: 800px;
+  justify-content: right;
+}
+
+span {
+  font-size: 35px;
+  position: relative;
+  left: 75px;
+  /* justify-content: right; */
+  font-family: cursive;
+  color: rgb(185, 168, 197);
+  animation: blink 1s linear infinite;
+}
+
+@keyframes blink {
+  99.9999% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: .999;
+  }
+}
+
+.txt {
+  position: relative;
+  left: 80px;
+  margin: 10px;
+  padding: 20px;
+  width: auto;
+  height: 60px;
+  color: rgb(41, 61, 61);
+  border: 1px solid transparent;
+  font-size: 28px;
+  /* line-height: 32px; */
+  font-family: ReformaNarrowMedium;
+  font-weight: 800px;
+  justify-content: right;
+
+
+}

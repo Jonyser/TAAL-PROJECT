@@ -139,7 +139,7 @@ const Planner = () => {
                                 onClick={() => {
                                     setModalOpen(true);
                                 }}
-                            >שמור מסלול</button>
+                            >  שמור מסלול &nbsp;&nbsp;<FcOk className='icon' /></button>
 
                             <input dir='rtl' type="text" className="form-control custom-search-input" onChange={getName} placeholder="רשום את שם המסלול"
                                 style={{ fontSize: "x-large" }}>

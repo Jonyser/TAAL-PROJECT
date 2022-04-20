@@ -7,7 +7,7 @@ const Dot = (props) => {
         <>
             {/* <span class="dot"></span>  */}
 
-            <span className="dot" style={{ backgroundColor: props.color }}></span>
+            <div className="dot" style={{ backgroundColor: props.color }}></div>
 
 
         </>

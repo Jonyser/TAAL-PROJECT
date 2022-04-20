@@ -3,8 +3,9 @@ import { get } from "../../api/api";
 import '../../../node_modules/bootstrap/dist/css/bootstrap.css';
 import './style.css';
 import ReactLoading from 'react-loading';
-import Modal_Calculator from '../Modal/Modal_Calculator'
-import View_my_tasks from '../View_my_tasks/View_my_tasks'
+import Modal_Calculator from '../Modal/Modal_Calculator';
+import View_my_tasks from '../View_my_tasks/View_my_tasks';
+
 // import Dot from '../Dot/Dot'
 let dataCards = [];
 let dataCards1 = [];
