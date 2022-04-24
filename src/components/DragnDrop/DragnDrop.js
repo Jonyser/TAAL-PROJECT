@@ -6,6 +6,7 @@ import Images from "../Images/Images";
 import Audios from "../Audios/Audios";
 import { RiDragMove2Line } from "react-icons/ri";
 import { FcAddDatabase } from "react-icons/fc";
+import { MdOutlineLiveHelp } from "react-icons/md";
 import Modal_Tasks from '../Modal/Modal_Tasks'
 
 let Route = [];
@@ -14,11 +15,14 @@ let saveProps = [];
 let thisId = ""
 let thisIdArray = [];
 let myTask = {};
+let helpFlag = false;
 
 function DragnDrop(props) {
     // console.log("Task AllStation in:", props.allStations)
     const [, setLoading] = useState(false);
-    const [modalOpen, setModalOpen] = useState(false)
+    const [modalOpen, setModalOpen] = useState(false);
+    const [, setHelpFlag] = useState(false);
+
     useEffect(() => {
         const fetchData = async () => {
             setLoading(true);
@@ -63,17 +67,32 @@ function DragnDrop(props) {
         thisIdArray.push(myTask[0]);
         localStorage.setItem('New_Routes', JSON.stringify(thisIdArray))
     };
+    const help = () => {
+        setHelpFlag(helpFlag = true)
+        setModalOpen(true);
+    }
     //---------------------------------------------------------
     return (
         <>
+
+
             <div className="Board" ref={drop} >
 
                 <i className="bi bi-dash-square">
-                    <Images id={thisId} data={saveProps.propDataTask} />
+                    <div style={{
+                        position: "relative",
+                        left: "13px"
+                    }}>
+                        <Images id={thisId} data={saveProps.propDataTask} />
+                    </div>
                     <Audios id={thisId} data={myTask} />
 
-                    <div className='txt'> :גרור משימה לכאן
-                        <div class="blink"><span><RiDragMove2Line /></span></div>
+                    <div className='txt'> :גרור משימה לכאן&nbsp;&nbsp;
+                        <button className="helpBtn" onClick={() => {
+                            help()
+                        }} >עזרה<MdOutlineLiveHelp /></button>
+
+                        <div className="blink"><span><RiDragMove2Line /></span></div>
                         {/* &nbsp;<RiDragMove2Line /> */}
                     </div>
 
@@ -85,7 +104,7 @@ function DragnDrop(props) {
                 </div>
 
             </div>
-            {modalOpen && <Modal_Tasks setOpenModalPlases={setModalOpen} allStations={props.allStations} />}
+            {modalOpen && <Modal_Tasks setOpenModalPlases={setModalOpen} allStations={props.allStations} help={helpFlag} />}
             <div className='Cover_Tasks'>
                 <div className='TitleTasks'><h3>משימות</h3></div>
                 <div className='addTaskCover'>
@@ -93,6 +112,8 @@ function DragnDrop(props) {
                         className='AddTasks'
                         onClick={() => {
                             setModalOpen(true);
+                            setHelpFlag(helpFlag = false)
+
                         }}>
                         <FcAddDatabase style={{
                             width: "85px",

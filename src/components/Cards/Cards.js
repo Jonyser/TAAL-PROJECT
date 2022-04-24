@@ -10,6 +10,8 @@ import img4 from '../../Pictures/img6.png';
 import logo from '../../Pictures/logo.jpeg';
 import ReactLoading from 'react-loading';
 import Modal_Cards from '../Modal/Model_Cards'
+import { GrDuplicate } from "react-icons/gr";
+
 // import { Form } from "react-bootstrap";
 //----------------------------------------------------|
 let dataCards = [];//                                 |
@@ -24,6 +26,10 @@ let sizeMod = 0;//                                    |
 const number = 4;//                                   |
 let resultData = []//                                 |
 let myRoute = [];//                                   |
+let getMyTasks = [];
+let flagTasks = false;
+let getMyUsers = [];
+let flagUsers = false;
 //                                                    |
 //----------------------------------------------------|
 const Cards = () => {
@@ -38,6 +44,11 @@ const Cards = () => {
     const [, setFlag] = useState(false);
     const [, setResultData] = useState([]);
     const [modalOpen, setModalOpen] = useState(false);
+    const [, setMyTasks] = useState([]);
+    const [, setFlagTasks] = useState(false);
+    const [, setMyUsers] = useState([]);
+    const [, setFlagUsers] = useState(false);
+
 
     useEffect(() => {
         const fetchData = async () => {
@@ -131,13 +142,31 @@ const Cards = () => {
     const Replication = (val) => {
         setModalOpen(true);
         setMyRoute(myRoute = val)
+        setFlagTasks(flagTasks = false)
+        setFlagUsers(flagUsers = false)
+
         // alert(val.myTitle);
         // alert(val.myId)
+    }
+    const myTasks = (val) => {
+        setMyTasks(getMyTasks = val);
+        setModalOpen(true);
+        setFlagTasks(flagTasks = true)
+        console.log("myval:", getMyTasks)
+        setFlagUsers(flagUsers = false)
+    }
+    const myUsersfunc = (val) => {
+        console.log(val)
+        setMyUsers(getMyUsers = val);
+        setModalOpen(true);
+        setFlagUsers(flagUsers = true)
+        setFlagTasks(flagTasks = false)
+
     }
     return (
         <>
             {!done ? <>
-                <h1 float={'right'}>Loading</h1>
+                <h1 float={'right'} style={{ color: 'white' }}>Loading</h1>
                 < ReactLoading type={"bars"} className='loading' color={"rgb(180, 175, 199)"} height={'10%'} width={'10%'} />
             </>
                 :
@@ -146,7 +175,7 @@ const Cards = () => {
                         backgroundColor: 'rgb(213, 221, 228)',
                         overflow: "hidden",
                     }}>
-                        {modalOpen && <Modal_Cards setOpenModal={setModalOpen} thisMyRoute={myRoute} />}
+                        {modalOpen && <Modal_Cards setOpenModal={setModalOpen} thisMyRoute={myRoute} thisGetMyTasks={getMyTasks} thisFlagTasks={flagTasks} thisFlagUsers={flagUsers} thisGetMyUsers={getMyUsers} />}
 
                         <br></br>
 
@@ -171,8 +200,9 @@ const Cards = () => {
                                                                 </div>
                                                             </div>
                                                         </Card.Title>
-
-                                                        <DropdownButton className="d-inline p-3 text-white" id="dropdown-basic-button" title="משימות" >
+                                                        <button className="btn btn-primary" id="dropdown-basic-button" onClick={() => myTasks(value.myTasks)}>משימות
+                                                        </button>
+                                                        {/* <DropdownButton className="d-inline p-3 text-white" id="dropdown-basic-button" title="משימות" >
                                                             {value.myTasks ? <>
                                                                 {value.myTasks.map((val, index) =>
                                                                     <Dropdown.Item key={index} >
@@ -182,20 +212,9 @@ const Cards = () => {
                                                                     לא קיים
                                                                 </Dropdown.Item>
                                                                 </>}
-                                                        </DropdownButton>
-
-                                                        <DropdownButton className="d-inline p-3  text-white" id="dropdown-basic-button" title="משוייך ל"  >
-                                                            {value.myUsers ? <>
-                                                                {value.myUsers.map((val, index) =>
-                                                                    <Dropdown.Item key={index} >
-                                                                        {val.display_name}
-                                                                    </Dropdown.Item>)}
-                                                            </> : <>
-                                                                <Dropdown.Item href="#/action-1">
-                                                                    אינו משוייך
-                                                                </Dropdown.Item>
-                                                            </>}
-                                                        </DropdownButton>
+                                                        </DropdownButton> */}
+                                                        <button className="btn btn-primary" id="dropdown-basic-button" style={{ marginLeft: "100px" }} onClick={() => myUsersfunc(value.myUsers)}>משוייך ל
+                                                        </button>
                                                         <br></br>
                                                         <br></br>
 
@@ -203,9 +222,12 @@ const Cards = () => {
 
                                                             onClick={() => Replication(value)}
                                                         >
+                                                            <GrDuplicate className='icon' />
+                                                            &nbsp;&nbsp;
+                                                            שכפל מסלול זה
 
-                                                            שכפל מסלול זה</button>
 
+                                                        </button>
                                                     </Card.Body>
                                                 </Card>
                                             </header>
@@ -228,7 +250,10 @@ const Cards = () => {
                                                                 </div>
                                                             </div>
                                                         </Card.Title>
-                                                        <DropdownButton className="d-inline p-3 text-white" id="dropdown-basic-button" title="משימות" >
+                                                        <button className="btn btn-primary" id="dropdown-basic-button" onClick={() => myTasks(value.myTasks)}>משימות
+
+                                                        </button>
+                                                        {/* <DropdownButton className="d-inline p-3 text-white" id="dropdown-basic-button" title="משימות" >
                                                             {value.myTasks ? <>
                                                                 {value.myTasks.map((val, index) =>
                                                                     <Dropdown.Item key={index} >
@@ -238,20 +263,9 @@ const Cards = () => {
                                                                     לא קיים
                                                                 </Dropdown.Item>
                                                                 </>}
-                                                        </DropdownButton>
-                                                        <DropdownButton className="d-inline p-3 text-white" id="dropdown-basic-button" title="משוייך ל" >
-                                                            {value.myUsers ? <>
-                                                                {value.myUsers.map((value, index) =>
-                                                                    <Dropdown.Item key={index} >
-
-                                                                        {value.display_name}
-                                                                    </Dropdown.Item>)}
-                                                            </> : <>
-                                                                <Dropdown.Item href="#/action-1">
-                                                                    אינו משוייך
-                                                                </Dropdown.Item>
-                                                            </>}
-                                                        </DropdownButton>
+                                                        </DropdownButton> */}
+                                                        <button className="btn btn-primary" id="dropdown-basic-button" style={{ marginLeft: "100px" }} onClick={() => myUsersfunc(value.myUsers)}>משוייך ל
+                                                        </button>
                                                         <br></br>
                                                         <br></br>
 
@@ -259,7 +273,8 @@ const Cards = () => {
 
                                                             onClick={() => Replication(value)}
                                                         >
-
+                                                            <GrDuplicate className='icon' />
+                                                            &nbsp;&nbsp;
                                                             שכפל מסלול זה</button>
                                                     </Card.Body>
                                                 </Card>
@@ -283,7 +298,9 @@ const Cards = () => {
                                                                 </div>
                                                             </div>
                                                         </Card.Title>
-                                                        <DropdownButton className="d-inline p-3 text-white" id="dropdown-basic-button" title="משימות" >
+                                                        <button className="btn btn-primary" id="dropdown-basic-button" onClick={() => myTasks(value.myTasks)}>משימות
+                                                        </button>
+                                                        {/* <DropdownButton className="d-inline p-3 text-white" id="dropdown-basic-button" title="משימות" >
                                                             {value.myTasks ? <>
                                                                 {value.myTasks.map((val, index) =>
                                                                     <Dropdown.Item key={index} >
@@ -293,18 +310,9 @@ const Cards = () => {
                                                                     לא קיים
                                                                 </Dropdown.Item>
                                                                 </>}
-                                                        </DropdownButton>
-                                                        <DropdownButton className="d-inline p-3  text-white" id="dropdown-basic-button" title="משוייך ל" >
-                                                            {value.myUsers ? <>
-                                                                {value.myUsers.map((value, index) =>
-                                                                    <Dropdown.Item key={index} >
-                                                                        {value.display_name}
-                                                                    </Dropdown.Item>)}
-                                                            </> : <>
-                                                                <Dropdown.Item href="#/action-1">
-                                                                    אינו משוייך
-                                                                </Dropdown.Item></>}
-                                                        </DropdownButton>
+                                                        </DropdownButton> */}
+                                                        <button className="btn btn-primary" id="dropdown-basic-button" style={{ marginLeft: "100px" }} onClick={() => myUsersfunc(value.myUsers)}>משוייך ל
+                                                        </button>
                                                         <br></br>
                                                         <br></br>
 
@@ -312,7 +320,8 @@ const Cards = () => {
 
                                                             onClick={() => Replication(value)}
                                                         >
-
+                                                            <GrDuplicate className='icon' />
+                                                            &nbsp;&nbsp;
                                                             שכפל מסלול זה</button>
                                                     </Card.Body>
                                                 </Card>
@@ -337,30 +346,21 @@ const Cards = () => {
                                                                 </div>
                                                             </div>
                                                         </Card.Title>
-                                                        <DropdownButton className="d-inline p-3 " id="dropdown-basic-button" title="משימות" >
+                                                        <button className="btn btn-primary" id="dropdown-basic-button" onClick={() => myTasks(value.myTasks)}>משימות
+                                                        </button>
+                                                        {/* <DropdownButton className="d-inline p-3 text-white" id="dropdown-basic-button" title="משימות" >
                                                             {value.myTasks ? <>
                                                                 {value.myTasks.map((val, index) =>
                                                                     <Dropdown.Item key={index} >
-
                                                                         {val.post_title}
                                                                     </Dropdown.Item>)} </>
                                                                 : <> <Dropdown.Item href="#/action-1">
                                                                     לא קיים
                                                                 </Dropdown.Item>
                                                                 </>}
-                                                        </DropdownButton>
-                                                        <DropdownButton className="d-inline p-3 " id="dropdown-basic-button" title="משוייך ל" >
-                                                            {value.myUsers ? <>
-                                                                {value.myUsers.map((value, index) =>
-                                                                    <Dropdown.Item key={index} >
-
-                                                                        {value.display_name}
-                                                                    </Dropdown.Item>)}
-                                                            </> : <>
-                                                                <Dropdown.Item href="#/action-1">
-                                                                    אינו משוייך
-                                                                </Dropdown.Item></>}
-                                                        </DropdownButton>
+                                                        </DropdownButton> */}
+                                                        <button className="btn btn-primary" id="dropdown-basic-button" style={{ marginLeft: "100px" }} onClick={() => myUsersfunc(value.myUsers)}>משוייך ל
+                                                        </button>
                                                         <br></br>
                                                         <br></br>
 
@@ -368,7 +368,8 @@ const Cards = () => {
 
                                                             onClick={() => Replication(value)}
                                                         >
-
+                                                            <GrDuplicate className='icon' />
+                                                            &nbsp;&nbsp;
                                                             שכפל מסלול זה</button>
                                                     </Card.Body>
                                                 </Card>

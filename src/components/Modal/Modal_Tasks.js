@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState } from 'react';
 import "./Modal.css";
 import { FcMultipleInputs } from "react-icons/fc";
 import { RiAsterisk } from "react-icons/ri";
@@ -6,12 +6,12 @@ import { RiAsterisk } from "react-icons/ri";
 let get_Route_ID = 0;
 let getPicture, getSound;
 let ichour = 'אישור'
-let parentNum = 0;
 let file = "";
 let arr = [];
 arr[0] = "yakov";
 
-function Modal_Tasks({ setOpenModalPlases, allStations }) {
+function Modal_Tasks({ setOpenModalPlases, allStations, help }) {
+    // alert(help)
     const [, setDone] = useState(false);
     const [get_title, setTitle] = useState("");
     const [, setPicture] = useState(null);
@@ -92,75 +92,104 @@ function Modal_Tasks({ setOpenModalPlases, allStations }) {
     }
     return (
         <>
-            <div className="BackgroundTasks">
-                <div className="modalContainerPlases">
-                    <div className="titleCloseBtnPlases">
-                        <button
-                            onClick={() => {
-                                setOpenModalPlases(false);
-                            }}
-                        >
-                            X
-                        </button>
-                    </div>
-                    <div className="body">
-                        <h5 style={{ textAlign: 'center' }}> הוסף משימה</h5>
-                        <form id="IPU" className="w3-container">
-                            <h6>:רשום את שם המשימה <RiAsterisk style={{ color: 'red' }} /></h6>
-                            <p><input required={true} type="text" onChange={handleTitleInput} style={{
-                                textAlign: 'right',
-                                width: '420px',
-                                height: '35px'
-                            }}></input></p>
-                        </form>
-                        <form id="IPU" className="w3-container">
-                            <h6>:תאר במשפט את משימה <RiAsterisk style={{ color: 'red' }} /></h6>
-                            <p><input type="text" onChange={handleDescriptionInput} style={{
-                                textAlign: 'right',
-                                width: '420px',
-                                height: '35px'
-                            }}></input></p>
-                        </form>
-                        <form id="IPU" className="w3-container">
-                            <h6>: הוסף תמונה של משימה <FcMultipleInputs /></h6>
-                            <div className="input-group mb-3">
-                                <input required={true} accept=".png, .jpg, .jpeg" className='form-control' type="file" onChange={handleFileInput} style={{
+            {!help ? <>
+                <div className="BackgroundTasks">
+                    <div className="modalContainerPlases">
+                        <div className="titleCloseBtnPlases">
+                            <button
+                                onClick={() => {
+                                    setOpenModalPlases(false);
+                                }}
+                            >
+                                X
+                            </button>
+                        </div>
+                        <div className="body">
+                            <h5 style={{ textAlign: 'center' }}> הוסף משימה</h5>
+                            <form id="IPU" className="w3-container">
+                                <h6>:רשום את שם המשימה <RiAsterisk style={{ color: 'red' }} /></h6>
+                                <p><input required={true} type="text" onChange={handleTitleInput} style={{
                                     textAlign: 'right',
-                                    width: '100%',
+                                    width: '420px',
                                     height: '35px'
-                                }} ></input>
-                            </div>
-                        </form>
-                        <form id="IPU" className="w3-container">
-                            <h6>: הוסף קטע קול המתאר את המשימה <FcMultipleInputs /></h6>
-                            <p><input required={true} accept='.mp3' type="file" className='form-control' onChange={handleFileInput} style={{
-                                textAlign: 'right',
-                                width: '96%',
-                                height: '35px'
-                            }}></input></p>
-
-                            <div className="list-group">
-                                <h6>:בחר את התחנות שברצונך לשייך את המשימה <RiAsterisk style={{ color: 'red' }} /></h6>
-                                <div className='allTasks'>
-                                    {allStations.map((value, index) => {
-                                        return (
-                                            <label key={index} className="list-group-item">
-                                                <input className="form-check-input me-1" type="checkbox" value=""></input>
-                                                {value.name}
-                                            </label>
-                                        )
-                                    })}
+                                }}></input></p>
+                            </form>
+                            <form id="IPU" className="w3-container">
+                                <h6>:תאר במשפט את משימה <RiAsterisk style={{ color: 'red' }} /></h6>
+                                <p><input type="text" onChange={handleDescriptionInput} style={{
+                                    textAlign: 'right',
+                                    width: '420px',
+                                    height: '35px'
+                                }}></input></p>
+                            </form>
+                            <form id="IPU" className="w3-container">
+                                <h6>: הוסף תמונה של משימה <FcMultipleInputs /></h6>
+                                <div className="input-group mb-3">
+                                    <input required={true} accept=".png, .jpg, .jpeg" className='form-control' type="file" onChange={handleFileInput} style={{
+                                        textAlign: 'right',
+                                        width: '100%',
+                                        height: '35px'
+                                    }} ></input>
                                 </div>
-                            </div>
-                        </form>
+                            </form>
+                            <form id="IPU" className="w3-container">
+                                <h6>: הוסף קטע קול המתאר את המשימה <FcMultipleInputs /></h6>
+                                <p><input required={true} accept='.mp3' type="file" className='form-control' onChange={handleFileInput} style={{
+                                    textAlign: 'right',
+                                    width: '96%',
+                                    height: '35px'
+                                }}></input></p>
+
+                                <div className="list-group">
+                                    <h6>:בחר את התחנות שברצונך לשייך את המשימה <RiAsterisk style={{ color: 'red' }} /></h6>
+                                    <div className='allTasks'>
+                                        {allStations.map((value, index) => {
+                                            return (
+                                                <label key={index} className="list-group-item">
+                                                    <input className="form-check-input me-1" type="checkbox" value=""></input>
+                                                    {value.name}
+                                                </label>
+                                            )
+                                        })}
+                                    </div>
+                                </div>
+                            </form>
+
+                        </div>
+                        <div className="footer">
+                            <input type="submit" className='OK' value={ichour} onClick={Post_Task} />
+                        </div>
 
                     </div>
-                    <div className="footer">
-                        <input type="submit" className='OK' value={ichour} onClick={Post_Task} />
-                    </div>
-
                 </div>
-            </div>
+            </> :
+                <div className="Background">
+                    <div className="modalContainerHelpPlanner">
+                        <div className="titleCloseBtn">
+                            <button
+                                onClick={() => {
+                                    setOpenModalPlases(false);
+                                }}
+                            > X
+                            </button>
+                        </div>
+                        <h3>הוראות לבניית מסלול</h3>
+                        <br></br>
+                        <div className="body" style={{ textAlign: 'right' }}>
+                            <h4></h4>
+
+                            <h6>בחר/י אתר קיים מרשימת האתרים או הוספ/י אתר משלך <samp>(1</samp></h6>
+                            <br></br>
+                            <h6>בחר/י תחנה השייכת לאתר שבחרת ו/או הוספ/י תחנה חדשה <samp>(2</samp></h6>
+                            <br></br>
+                            <h6>גרור לתיבת הגרירות את המשימות הרצויות כדי לבנות מסלול חדש <samp>(3</samp></h6>
+                            <h6>ו/או בחר/י בהוסף משימה ושייך משימה זו לתחנות שבהם יש צורך בביצוע משימה זו</h6>
+                            <br></br>
+                            <h6>רשום את שם המסלול ובצע שמירה <samp>(4</samp></h6>
+                        </div>
+                    </div>
+                </div>
+            }
         </>
     );
 }

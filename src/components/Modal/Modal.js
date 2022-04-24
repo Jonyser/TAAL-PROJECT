@@ -7,13 +7,16 @@ let obj = { tasks: [], users: [] }
 let get_Route_ID = 0;
 let getUsers = [];
 let student = "";
-
+let myStudents = [];
+let myStudentsChoice = [];
 function Modal({ setOpenModal, setText }) {
     const [, set_obj] = useState(null);// for TextView
     const [, setDone] = useState(false);
     const [, setLoading] = useState(false);
     const [, setUsers] = useState([]);
     const [, setStudent] = useState("")
+    const [, setMyStudents] = useState([])
+    const [, setMyStudentsChoice] = useState([])
     const [isChecked, setIsChecked] = useState(false);
 
     const handleOnChange = () => {
@@ -46,11 +49,12 @@ function Modal({ setOpenModal, setText }) {
         }).then(res => {
             setStudent(student = res.filter((item) => item.description !== ""))
             console.log("student:", student)
-            setUsers(getUsers = student.map((r) => { return r.name }));
+            setUsers(getUsers = student.map((r) => { return r }));
             console.log("getUsers:", getUsers);
         });
     }
     function Post_Route() {
+        resultMyArrayStudent()
         if (setText === null || setText === "") {
             alert('Please give the Route a title !')
             return
@@ -78,12 +82,17 @@ function Modal({ setOpenModal, setText }) {
                     status: 'publish',
 
                     fields: {
-                        // tasks: obj.tasks[0].id,
                         tasks: obj.tasks.map((e) => {
                             console.log("e.id:", e.id)
                             return e.id
                         }),
-                        users: obj.tasks,
+
+                        users: {
+                            ID: myStudentsChoice.map((e) => {
+                                console.log("e.id2:", e)
+                                return e.id
+                            }),
+                        }
                     }
                 })
             }).then(function (response) {
@@ -99,8 +108,40 @@ function Modal({ setOpenModal, setText }) {
         }
     }
     const saveCheckbox = (val) => {
-        console.log("val:", val)
-
+        setMyStudents(myStudents.push(val))
+        sortById()
+        console.log("myStudents:", myStudents);
+    }
+    const sortById = () => {
+        if (myStudents.length > 1)
+            for (let i = 0; i < myStudents.length; i++) {
+                let min = myStudents[i];
+                for (let j = i; j < myStudents.length; j++) {
+                    // console.log(j, ",", myStudents[j].id)
+                    if (myStudents[j].id < min.id) {
+                        setMyStudents(myStudents[i] = myStudents[j])
+                        setMyStudents(myStudents[j] = min)
+                        min = myStudents[j].id
+                    }
+                }
+            }
+    }
+    const resultMyArrayStudent = () => {
+        if (myStudents.length > 1)
+            for (let i = 0; i < myStudents.length; i++) {
+                let index = i;
+                let count = 1;
+                for (let j = i + 1; j < myStudents.length; j++) {
+                    if (myStudents[j].id === myStudents[i].id) {
+                        i++;
+                        count++;
+                    }
+                }
+                if (count % 2 != 0) {
+                    setMyStudentsChoice(myStudentsChoice.push(myStudents[index]))
+                }
+                console.log("myStudentsChoice:", myStudentsChoice)
+            }
     }
     return (
         <>
@@ -154,11 +195,10 @@ function Modal({ setOpenModal, setText }) {
                         <div className='allStudent' >
                             {getUsers.map((value, index) => {
                                 return (
-                                    <label key={index} className="list-group-item" onClick={saveCheckbox(value)}>
+                                    <label key={index} className="list-group-item" >
 
-                                        <input className="form-check-input me-1" type="checkbox" id={value} name={value} value=""></input>
-
-                                        {value}
+                                        <input onChange={() => saveCheckbox(value)} className="form-check-input me-1" type="checkbox" id={value.name} name={value.name} value=""></input>
+                                        {value.name}
 
                                     </label>
                                 )

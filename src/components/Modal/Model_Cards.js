@@ -1,16 +1,17 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import "./Modal.css";
-import { get } from "../../api/api";
-import { FcLink } from "react-icons/fc";
+import img1 from '../../Pictures/img1.png';
+import img2 from '../../Pictures/img2.png';
 
 let obj = { tasks: [], users: [] }
 let get_Route_ID = 0;
-let getUsers = [];
-let student = "";
 
-function Modal({ setOpenModal, setText, thisMyRoute }) {
 
-    console.log("thisMyRoute:", thisMyRoute)
+function Modal({ setOpenModal, setText, thisMyRoute, thisGetMyTasks, thisFlagTasks, thisGetMyUsers, thisFlagUsers }) {
+
+    console.log("thisGetMyTasks:", thisGetMyTasks)
+
+    // console.log("thisMyRoute:", thisMyRoute)
     const [, set_obj] = useState(null);// for TextView
     const [, setDone] = useState(false);
 
@@ -47,14 +48,13 @@ function Modal({ setOpenModal, setText, thisMyRoute }) {
                     status: "draft",
                     title: thisMyRoute.myTitle + "-duplicate-1",
 
-
                     fields: {
                         // tasks: obj.tasks[0].id,
                         tasks: thisMyRoute.myTasks.map((e) => {
                             console.log("e.id:", e.ID)
                             return e.ID
                         }),
-                        users: obj.tasks,
+                        // users: obj.tasks,
                     }
                 })
             }).then(function (response) {
@@ -62,22 +62,17 @@ function Modal({ setOpenModal, setText, thisMyRoute }) {
             }).then(function (post) {
                 get_Route_ID = post.id
                 setDone(true)
-
                 alert(get_Route_ID)
 
                 // window.location.replace("/planner")
             })
         }
     }
-    const saveCheckbox = (val) => {
-        console.log("val:", val)
-
-    }
     return (
         <>
-            {setText === null || setText === "" ? <>
+            {thisFlagTasks == true ? <>
                 <div className="Background">
-                    <div className="modalContainer">
+                    <div className="modalMyTasksContainer">
                         <div className="titleCloseBtn">
                             <button
                                 onClick={() => {
@@ -88,58 +83,105 @@ function Modal({ setOpenModal, setText, thisMyRoute }) {
                             </button>
                         </div>
                         <div className="title">
-                            <h3>נא להקליד את שם המסלול ולגרור משימות </h3>
                         </div>
-                        <div className="body">
+                        <img src={img1} alt="Logo" style={{ width: "230px", height: "230px" }} />;
+                        <h3>:רשימת המשימות</h3>
+                        <h5 className="bodyTasks">
+                            {thisGetMyTasks ? <>
+                                {thisGetMyTasks.map((val, index) => {
 
-                        </div>
-                        <div className="footer">
-                            <button className='cancelBtn'
-                                onClick={() => {
-                                    setOpenModal(false);
-                                }}
-                            >
-                                סגור
-                            </button>
-                        </div>
+                                    return (
+                                        < div key={index}>
+                                            <div >
+                                                {val.post_title + " - "}
+                                            </div>
+                                            <br></br>
+                                        </div>
+                                    )
+                                })}
+                            </> :
+                                <>
+                                    <h3 style={{ color: "red" }}>לא קיימים משימות</h3>
+                                </>
+                            }
+                        </h5>
+
                     </div>
                 </div>
             </>
                 :
-                <div className="Background">
-                    <div className="modalContainer">
-                        <div className="titleCloseBtn">
-                            <button
-                                onClick={() => {
-                                    setOpenModal(false);
-                                }}
-                            >
-                                X
-                            </button>
-                        </div>
-                        <div className="title">
+                thisFlagUsers ? <>
+                    <div className="Background">
+                        <div className="modalMyTasksContainer">
+                            <div className="titleCloseBtn">
+                                <button
+                                    onClick={() => {
+                                        setOpenModal(false);
+                                    }}
+                                >
+                                    X
+                                </button>
+                            </div>
+                            <div className="title">
+                            </div>
+                            <img src={img2} alt="Logo" style={{ width: "230px", height: "230px" }} />;
+                            <h3>:החניכים</h3>
+                            <h5 className="bodyTasks">
+                                {thisGetMyUsers ? <>
+                                    {thisGetMyUsers.map((val, index) => {
+                                        return (
+                                            < div key={index}>
+                                                <div >
+                                                    {val.display_name + " - "}
+                                                </div>
+                                                <br></br>
+                                            </div>
+                                        )
+                                    })}
+                                </> :
+                                    <>
+                                        <h6 style={{ color: "red" }}>אין חניכים המשוייכים למסלול זה</h6>
+                                    </>
+                                }
+                            </h5>
 
-                        </div>
-                        <h1>שכפול מסלול</h1>
-
-                        <div className="body">
-                            <h5> :האם את/ה מעוניין בשכפול המסלול <div style={{ color: "red" }}>?{thisMyRoute.myTitle}</div></h5>
-                        </div>
-                        <div className="footer">
-                            <button className='cancelBtn'
-                                onClick={() => {
-                                    setOpenModal(false);
-                                }}
-                            >ביטול
-                            </button>
-                            &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
-                            <button className='continueBtn'
-                                onClick={Post_Route}
-                            > אישור
-                            </button>
                         </div>
                     </div>
-                </div>
+                </>
+                    :
+                    <div className="Background">
+                        <div className="modalContainer">
+                            <div className="titleCloseBtn">
+                                <button
+                                    onClick={() => {
+                                        setOpenModal(false);
+                                    }}
+                                >
+                                    X
+                                </button>
+                            </div>
+                            <div className="title">
+
+                            </div>
+                            <h1>שכפול מסלול</h1>
+                            <div className="body">
+                                <h5> :האם את/ה מעוניין בשכפול המסלול <div style={{ color: "red" }}>?{thisMyRoute.myTitle}</div></h5>
+                            </div>
+                            <div className="footer">
+                                <button className='cancelBtn'
+                                    onClick={() => {
+                                        setOpenModal(false);
+                                    }}
+                                >ביטול
+                                </button>
+                                &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
+                                <button className='continueBtn'
+                                    onClick={Post_Route}
+                                > אישור
+                                </button>
+                            </div>
+                        </div>
+                    </div>
             }
         </>
     );

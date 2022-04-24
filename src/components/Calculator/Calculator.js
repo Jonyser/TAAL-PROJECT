@@ -19,7 +19,6 @@ let sizeMod = 0;
 const number = 4;
 let textview = '';
 let Has_already_been_typed = false;
-
 let actionMode = "";
 let actionFlag = false;
 let helpFlag = false;
