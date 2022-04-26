@@ -13,25 +13,20 @@ function View_my_tasks({ prop }) {
     const [, setIdTask] = useState([]);
     const [, setDataTask] = useState([]);
 
-
     const clickTask = async (e) => {
-
         setIdTask(IdTask = e.ID);
         //'https://taal.tech/wp-json/wp/v2/tasks/'
         //https://s83.bfa.myftpupload.com/wp-json/wp/v2/tasks/
         await get('https://s83.bfa.myftpupload.com/wp-json/wp/v2/tasks/', {
-
             params: {
                 per_page: 99, 'Cache-Control': 'no-cache'
             }
-
         }).then(res => {
             console.log("res: ", res)
             setDataTask(MyTasks = res.filter((item) => item.id === e.ID))
             console.log("MyTasks: ", MyTasks)
         });
     }
-
     return (
         <>
             <div className='image' style={{
@@ -42,7 +37,6 @@ function View_my_tasks({ prop }) {
             <br></br>
             <div className="tasksList">
                 {prop.map((value, index) => {
-
                     return (
                         <button
                             className='showTasks'
@@ -50,7 +44,6 @@ function View_my_tasks({ prop }) {
                             key={index}>
                             <FcSpeaker style={{ fontSize: "30px" }} />
                             &nbsp;&nbsp;&nbsp;{value.post_title}
-
                         </button>
                     )
                 })}
@@ -59,5 +52,4 @@ function View_my_tasks({ prop }) {
         </>
     );
 }
-
 export default View_my_tasks;

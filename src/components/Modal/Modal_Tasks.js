@@ -1,29 +1,20 @@
 import React, { useState } from 'react';
 import "./Modal.css";
-import { FcMultipleInputs } from "react-icons/fc";
+import { FcMultipleInputs, FcAbout } from "react-icons/fc";
 import { RiAsterisk } from "react-icons/ri";
 
-let get_Route_ID = 0;
 let getPicture, getSound;
 let ichour = 'אישור'
 let file = "";
-let arr = [];
-arr[0] = "yakov";
+let arrTemp = [1, 2];
 
 function Modal_Tasks({ setOpenModalPlases, allStations, help }) {
-    // alert(help)
     const [, setDone] = useState(false);
     const [get_title, setTitle] = useState("");
     const [, setPicture] = useState(null);
     const [, setSound] = useState(null);
     const [getDescription, setDescription] = useState("");
     const [, setFile] = useState("");
-
-    // const fileInput = useRef(null)
-
-    // console.log("ModalTask AllStation in:", allStations)
-
-
 
     const handleTitleInput = (e) => {
         setTitle(e.target.value)
@@ -33,15 +24,12 @@ function Modal_Tasks({ setOpenModalPlases, allStations, help }) {
     }
 
     const handleFileInput = (e) => {
-        // handle validations
         setFile(file = e.target.files[0]);
         console.log("file", file)
-
         if ((file.type).includes('image')) {
             setPicture(getPicture = file)
             console.log(file)
         }
-
         if ((file.type).includes('audio')) {
             setSound(getSound = file)
             console.log(file)
@@ -63,10 +51,10 @@ function Modal_Tasks({ setOpenModalPlases, allStations, help }) {
             body: JSON.stringify({
                 // password: "sdfsdf",
                 status: "publish",
-                // "places": [arr],
 
-                "title": get_title,
+                title: get_title,
                 // "description": getDescription,
+                places: arrTemp,
                 "fields": [
                     {
                         // "label": "תמונה",
@@ -81,11 +69,8 @@ function Modal_Tasks({ setOpenModalPlases, allStations, help }) {
         }).then(function (response) {
             return response.json();
         }).then(function (post) {
-            console.log("postpostpost:", post)
-            get_Route_ID = post.id
             setDone(true)
-
-            alert(get_Route_ID)
+            alert("ok")
             console.log("post:", post)
             // window.location.replace("/planner")
         })
@@ -159,7 +144,6 @@ function Modal_Tasks({ setOpenModalPlases, allStations, help }) {
                         <div className="footer">
                             <input type="submit" className='OK' value={ichour} onClick={Post_Task} />
                         </div>
-
                     </div>
                 </div>
             </> :
@@ -173,7 +157,7 @@ function Modal_Tasks({ setOpenModalPlases, allStations, help }) {
                             > X
                             </button>
                         </div>
-                        <h3>הוראות לבניית מסלול</h3>
+                        <h3>הוראות לבניית מסלול  &nbsp;<FcAbout /></h3>
                         <br></br>
                         <div className="body" style={{ textAlign: 'right' }}>
                             <h4></h4>

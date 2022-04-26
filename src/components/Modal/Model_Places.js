@@ -10,7 +10,6 @@ let parentNum = 0;
 let file = {};
 
 function Modal_Plases({ setOpenModalPlaces }) {
-
     const [get_title, settitle] = useState("");
     const [getDescription, setDescription] = useState("");
     const [, setSound] = useState(null);
@@ -30,22 +29,18 @@ function Modal_Plases({ setOpenModalPlaces }) {
         console.log("File:", file)
         if ((file.type).includes('image')) {
             setPicture(getPicture = file)
-
         }
-
         if ((file.type).includes('audio')) {
             setSound(getSound = file)
             alert("file:", getPicture)
         }
-
     };
     //----------------------------------
     function Post_Place() {
-        console.log("Picture from post function", getPicture)
-        console.log("Sound from post function", getSound)
-        console.log("Title from post function", get_title)
-        console.log("Description from post function", getDescription)
-
+        // console.log("Picture from post function", getPicture)
+        // console.log("Sound from post function", getSound)
+        // console.log("Title from post function", get_title)
+        // console.log("Description from post function", getDescription)
         let url_post = `https://s83.bfa.myftpupload.com/wp-json/wp/v2/places`
         fetch(url_post, {
             method: "POST",
@@ -63,8 +58,6 @@ function Modal_Plases({ setOpenModalPlaces }) {
                     image: file,
                     audio: getSound
                 }]
-
-
                 // "title": get_title,
                 // "fields": [
                 //     {
@@ -78,9 +71,7 @@ function Modal_Plases({ setOpenModalPlaces }) {
 
                 //     },
                 // ],
-
             })
-
         }).then(function (response) {
             return response.json();
         }).then(function (post) {

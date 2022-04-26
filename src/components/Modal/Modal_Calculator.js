@@ -2,20 +2,18 @@ import React, { useState } from 'react';
 import "./Modal.css";
 import { RiAsterisk } from "react-icons/ri";
 
-
 let get_title = ""
+
 function Modal({ setOpenModal, propActionFlag, idsTasks, helpProps, usersArray }) {
     const [, settitle] = useState("");
-
     const handleTitleInput = (e) => {
         settitle(get_title = e.target.value)
     }
-    console.log("usersArray:", usersArray)
-    console.log("idsTasks:", idsTasks)
-    console.log("helpProps:", helpProps)
+    // console.log("usersArray:", usersArray)
+    // console.log("idsTasks:", idsTasks)
+    // console.log("helpProps:", helpProps)
 
     function Post_Route() {
-
         let url_post = `https://s83.bfa.myftpupload.com/wp-json/wp/v2/routes`
         fetch(url_post, {
             method: "POST",
@@ -23,7 +21,6 @@ function Modal({ setOpenModal, propActionFlag, idsTasks, helpProps, usersArray }
                 'Content-Type': 'application/json',
                 'Authorization': `Bearer ${sessionStorage.getItem('jwt')}`,
             },
-
             body: JSON.stringify({
                 title: get_title,
                 status: 'publish',
@@ -58,7 +55,6 @@ function Modal({ setOpenModal, propActionFlag, idsTasks, helpProps, usersArray }
                         </div>
                         <div className="title">
                             <h1>נא לבחור את המסלולים ולבצע עליהם את הפעולה הרצויה למשל  </h1>
-
                         </div>
                         <br></br>   <br></br>
                         <div className="body">
@@ -71,7 +67,6 @@ function Modal({ setOpenModal, propActionFlag, idsTasks, helpProps, usersArray }
                         <br></br>
                         <div className="footer" style={{ textAlign: "center" }}>
                             <button className='cancelBtn'
-
                                 onClick={() => {
                                     setOpenModal(false);
                                 }}
@@ -177,5 +172,4 @@ function Modal({ setOpenModal, propActionFlag, idsTasks, helpProps, usersArray }
         </>
     );
 }
-
 export default Modal;

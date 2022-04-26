@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { get } from "../../api/api";
 import './style.css';
 import '../../../node_modules/bootstrap/dist/css/bootstrap.css';
-import { Dropdown, DropdownButton, Card } from 'react-bootstrap';
+import { Card } from 'react-bootstrap';
 import img1 from '../../Pictures/img1.png';
 import img2 from '../../Pictures/img2.png';
 import img3 from '../../Pictures/img3.png';
@@ -11,7 +11,7 @@ import logo from '../../Pictures/logo.jpeg';
 import ReactLoading from 'react-loading';
 import Modal_Cards from '../Modal/Model_Cards'
 import { GrDuplicate } from "react-icons/gr";
-
+import { BsFillFlagFill } from "react-icons/bs";
 // import { Form } from "react-bootstrap";
 //----------------------------------------------------|
 let dataCards = [];//                                 |
@@ -24,12 +24,15 @@ let size = 0;//                                       |
 let index = 0;//                                      |
 let sizeMod = 0;//                                    |
 const number = 4;//                                   |
-let resultData = []//                                 |
+// let resultData = []//                                 |
 let myRoute = [];//                                   |
-let getMyTasks = [];
-let flagTasks = false;
-let getMyUsers = [];
-let flagUsers = false;
+let getMyTasks = [];//                                |
+let flagTasks = false;//                              |
+let getMyUsers = [];//                                |
+let flagUsers = false;//                              |
+let red_flag = "red";//                               |
+let orange_flag = "orange";//                         |
+let green_flag = "green";//                           |
 //                                                    |
 //----------------------------------------------------|
 const Cards = () => {
@@ -42,13 +45,12 @@ const Cards = () => {
     const [, setDataCards4] = useState([]);
     const [, setMyRoute] = useState([]);
     const [, setFlag] = useState(false);
-    const [, setResultData] = useState([]);
+    // const [, setResultData] = useState([]);
     const [modalOpen, setModalOpen] = useState(false);
     const [, setMyTasks] = useState([]);
     const [, setFlagTasks] = useState(false);
     const [, setMyUsers] = useState([]);
     const [, setFlagUsers] = useState(false);
-
 
     useEffect(() => {
         const fetchData = async () => {
@@ -63,17 +65,16 @@ const Cards = () => {
         }
         fetchData();
     }, []);
-
-    const getData = async () => {
+    const getData = () => {
         // https://s83.bfa.myftpupload.com/wp-json/wp/v2/routes/
         // https://taal.tech/wp-json/wp/v2/routes/
         if (flag_show_page === false)
-            await get('https://s83.bfa.myftpupload.com/wp-json/wp/v2/routes/', {
+            get('https://s83.bfa.myftpupload.com/wp-json/wp/v2/routes/', {
                 params: {
                     per_page: 99, 'Cache-Control': 'no-cache'
                 }
             }).then(res => {
-                setResultData(resultData = res)
+                // setResultData(resultData = res)
                 console.log("Masloulims:", res)
                 size = res.length / number;
 
@@ -93,13 +94,11 @@ const Cards = () => {
                         }
                     })
                 )
-
                 // console.log("dataCards:", dataCards)
                 sizeMod = dataCards.length % number;
                 size = (dataCards.length - sizeMod) / number;
                 // console.log("size", size)
                 // console.log(flag)
-
                 for (let i = 0; i < size; i++) {
                     setDataCards1(dataCards1[i] = dataCards[index]);
                     index++;
@@ -110,7 +109,6 @@ const Cards = () => {
                     setDataCards4(dataCards4[i] = dataCards[index])
                     index++;
                 }
-
                 for (let i = 0; i < sizeMod; i++) {
                     if (i < sizeMod) {
                         setDataCards4(dataCards4[size] = dataCards[index]);
@@ -137,6 +135,7 @@ const Cards = () => {
                 sizeMod = dataCards.length % number;
                 size = (dataCards.length - sizeMod) / number;
             });
+
         setDone(true)
     }
     const Replication = (val) => {
@@ -144,38 +143,40 @@ const Cards = () => {
         setMyRoute(myRoute = val)
         setFlagTasks(flagTasks = false)
         setFlagUsers(flagUsers = false)
-
-        // alert(val.myTitle);
-        // alert(val.myId)
     }
     const myTasks = (val) => {
-        setMyTasks(getMyTasks = val);
+        console.log("getMyTasks:", val.myTasks)
+        setMyTasks(getMyTasks = val.myTasks);
         setModalOpen(true);
         setFlagTasks(flagTasks = true)
         console.log("myval:", getMyTasks)
         setFlagUsers(flagUsers = false)
     }
     const myUsersfunc = (val) => {
-        console.log(val)
-        setMyUsers(getMyUsers = val);
+        console.log("getMyUsers:", val.myUsers)
+        setMyUsers(getMyUsers = val.myUsers);
+        setMyTasks(getMyTasks = val.myTasks);
         setModalOpen(true);
         setFlagUsers(flagUsers = true)
         setFlagTasks(flagTasks = false)
-
     }
     return (
         <>
+
             {!done ? <>
                 <h1 float={'right'} style={{ color: 'white' }}>Loading</h1>
                 < ReactLoading type={"bars"} className='loading' color={"rgb(180, 175, 199)"} height={'10%'} width={'10%'} />
             </>
                 :
                 <>
+
                     <div style={{
                         backgroundColor: 'rgb(213, 221, 228)',
                         overflow: "hidden",
                     }}>
                         {modalOpen && <Modal_Cards setOpenModal={setModalOpen} thisMyRoute={myRoute} thisGetMyTasks={getMyTasks} thisFlagTasks={flagTasks} thisFlagUsers={flagUsers} thisGetMyUsers={getMyUsers} />}
+
+
 
                         <br></br>
 
@@ -187,9 +188,7 @@ const Cards = () => {
                                             <header key={index}>
                                                 <Card style={{ color: "#000", marginBottom: 15, border: "3px solid rgb(106 185 48)" }}>
                                                     {/* display_name */}
-
                                                     <Card.Img src={img1} style={{ height: 237 }} />
-
                                                     <Card.Body src={logo}>
                                                         <Card.Title >
                                                             <div className="text-center ">
@@ -200,24 +199,12 @@ const Cards = () => {
                                                                 </div>
                                                             </div>
                                                         </Card.Title>
-                                                        <button className="btn btn-primary" id="dropdown-basic-button" onClick={() => myTasks(value.myTasks)}>משימות
+                                                        <button className="btn btn-primary" id="dropdown-basic-button" onClick={() => myTasks(value)}>משימות
                                                         </button>
-                                                        {/* <DropdownButton className="d-inline p-3 text-white" id="dropdown-basic-button" title="משימות" >
-                                                            {value.myTasks ? <>
-                                                                {value.myTasks.map((val, index) =>
-                                                                    <Dropdown.Item key={index} >
-                                                                        {val.post_title}
-                                                                    </Dropdown.Item>)} </>
-                                                                : <> <Dropdown.Item href="#/action-1">
-                                                                    לא קיים
-                                                                </Dropdown.Item>
-                                                                </>}
-                                                        </DropdownButton> */}
-                                                        <button className="btn btn-primary" id="dropdown-basic-button" style={{ marginLeft: "100px" }} onClick={() => myUsersfunc(value.myUsers)}>משוייך ל
+                                                        <button className="btn btn-primary" id="dropdown-basic-button" style={{ marginLeft: "100px" }} onClick={() => myUsersfunc(value)}>משוייך ל
                                                         </button>
                                                         <br></br>
                                                         <br></br>
-
                                                         <button type="button" className="btn btn-outline-primary" style={{ width: "270px" }}
 
                                                             onClick={() => Replication(value)}
@@ -225,8 +212,6 @@ const Cards = () => {
                                                             <GrDuplicate className='icon' />
                                                             &nbsp;&nbsp;
                                                             שכפל מסלול זה
-
-
                                                         </button>
                                                     </Card.Body>
                                                 </Card>
@@ -250,7 +235,7 @@ const Cards = () => {
                                                                 </div>
                                                             </div>
                                                         </Card.Title>
-                                                        <button className="btn btn-primary" id="dropdown-basic-button" onClick={() => myTasks(value.myTasks)}>משימות
+                                                        <button className="btn btn-primary" id="dropdown-basic-button" onClick={() => myTasks(value)}>משימות
 
                                                         </button>
                                                         {/* <DropdownButton className="d-inline p-3 text-white" id="dropdown-basic-button" title="משימות" >
@@ -264,7 +249,7 @@ const Cards = () => {
                                                                 </Dropdown.Item>
                                                                 </>}
                                                         </DropdownButton> */}
-                                                        <button className="btn btn-primary" id="dropdown-basic-button" style={{ marginLeft: "100px" }} onClick={() => myUsersfunc(value.myUsers)}>משוייך ל
+                                                        <button className="btn btn-primary" id="dropdown-basic-button" style={{ marginLeft: "100px" }} onClick={() => myUsersfunc(value)}>משוייך ל
                                                         </button>
                                                         <br></br>
                                                         <br></br>
@@ -298,26 +283,13 @@ const Cards = () => {
                                                                 </div>
                                                             </div>
                                                         </Card.Title>
-                                                        <button className="btn btn-primary" id="dropdown-basic-button" onClick={() => myTasks(value.myTasks)}>משימות
+                                                        <button className="btn btn-primary" id="dropdown-basic-button" onClick={() => myTasks(value)}>משימות
                                                         </button>
-                                                        {/* <DropdownButton className="d-inline p-3 text-white" id="dropdown-basic-button" title="משימות" >
-                                                            {value.myTasks ? <>
-                                                                {value.myTasks.map((val, index) =>
-                                                                    <Dropdown.Item key={index} >
-                                                                        {val.post_title}
-                                                                    </Dropdown.Item>)} </>
-                                                                : <> <Dropdown.Item href="#/action-1">
-                                                                    לא קיים
-                                                                </Dropdown.Item>
-                                                                </>}
-                                                        </DropdownButton> */}
-                                                        <button className="btn btn-primary" id="dropdown-basic-button" style={{ marginLeft: "100px" }} onClick={() => myUsersfunc(value.myUsers)}>משוייך ל
+                                                        <button className="btn btn-primary" id="dropdown-basic-button" style={{ marginLeft: "100px" }} onClick={() => myUsersfunc(value)}>משוייך ל
                                                         </button>
                                                         <br></br>
                                                         <br></br>
-
                                                         <button type="button" className="btn btn-outline-primary" style={{ width: "270px" }}
-
                                                             onClick={() => Replication(value)}
                                                         >
                                                             <GrDuplicate className='icon' />
@@ -346,26 +318,13 @@ const Cards = () => {
                                                                 </div>
                                                             </div>
                                                         </Card.Title>
-                                                        <button className="btn btn-primary" id="dropdown-basic-button" onClick={() => myTasks(value.myTasks)}>משימות
+                                                        <button className="btn btn-primary" id="dropdown-basic-button" onClick={() => myTasks(value)}>משימות
                                                         </button>
-                                                        {/* <DropdownButton className="d-inline p-3 text-white" id="dropdown-basic-button" title="משימות" >
-                                                            {value.myTasks ? <>
-                                                                {value.myTasks.map((val, index) =>
-                                                                    <Dropdown.Item key={index} >
-                                                                        {val.post_title}
-                                                                    </Dropdown.Item>)} </>
-                                                                : <> <Dropdown.Item href="#/action-1">
-                                                                    לא קיים
-                                                                </Dropdown.Item>
-                                                                </>}
-                                                        </DropdownButton> */}
-                                                        <button className="btn btn-primary" id="dropdown-basic-button" style={{ marginLeft: "100px" }} onClick={() => myUsersfunc(value.myUsers)}>משוייך ל
+                                                        <button className="btn btn-primary" id="dropdown-basic-button" style={{ marginLeft: "100px" }} onClick={() => myUsersfunc(value)}>משוייך ל
                                                         </button>
                                                         <br></br>
                                                         <br></br>
-
                                                         <button type="button" className="btn btn-outline-primary" style={{ width: "270px" }}
-
                                                             onClick={() => Replication(value)}
                                                         >
                                                             <GrDuplicate className='icon' />

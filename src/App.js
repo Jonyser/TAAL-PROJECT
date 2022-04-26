@@ -9,16 +9,11 @@ import { Provider } from 'react-redux';
 import store from './redux/store';
 import Cards from './components/Cards/Cards';
 import { Switch, Route } from "react-router-loading";
-
 // import CallState from "./components/CallState/CallState";
-
 function App() {
   return (
     <>
-      <div style={{
-
-      }}>
-
+      <div>
         <Provider store={store}>
           <Router>
             <div>
@@ -31,7 +26,6 @@ function App() {
                 <Route path="/about" component={About}></Route>
                 <Route path="/Calculator" component={Calculator}></Route>
                 <Route path="/routes_cards" component={Cards}></Route>
-
                 {/* <Route path="/about" component={About}></Route> */}
               </Switch>
             </div>

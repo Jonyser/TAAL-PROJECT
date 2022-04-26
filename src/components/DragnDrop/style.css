@@ -99,9 +99,9 @@
 }
 
 span {
-  font-size: 35px;
+
   position: relative;
-  left: 75px;
+
   /* justify-content: right; */
   font-family: cursive;
   color: rgb(185, 168, 197);
@@ -125,7 +125,7 @@ span {
   padding: 20px;
   width: auto;
   height: 60px;
-  color: rgb(41, 61, 61);
+  color: rgb(43, 41, 61);
   border: 1px solid transparent;
   font-size: 28px;
   /* line-height: 32px; */
@@ -135,7 +135,7 @@ span {
 }
 
 .helpBtn {
-  background-color: #56585e;
+  background-color: rgba(49, 70, 90, 0.9);
   border-radius: 20px;
   color: #ffffff;
   font-family: ReformaNarrowMedium;
@@ -145,7 +145,7 @@ span {
 }
 
 .helpBtn:hover {
-  background: linear-gradient(90deg, #f6f5ff 0, #8d8a93);
+  background-color: rgba(79, 113, 145, 0.9);
   /* font-size: x-large;
   transition: 0.4s; */
 }

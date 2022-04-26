@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './style.css';
 // import { GrDuplicate } from "react-icons/gr";
-import { FcOk, FcMultipleInputs } from "react-icons/fc";
+import { FcOk } from "react-icons/fc";
 import Places from '../Places/Places';
 import 'reactjs-popup/dist/index.css';
 import Modal from '../Modal/Modal';
@@ -28,22 +28,18 @@ const Planner = () => {
         }
         fetchData();
     }, []);
-
     const getData = async () => {
         // taal.tech/wp-json/wp/v2/places
         ///s83.bfa.myftpupload.com/wp-json/wp/v2/places
         await get('https://s83.bfa.myftpupload.com/wp-json/wp/v2/routes/', {
-
             params: {
                 per_page: 99, 'Cache-Control': 'no-cache'
             }
-
         }).then(res => {
             setResultData(resultData = res)
             console.log("result from planer:", resultData)
         })
     }
-
     //-------------------input-------------------------
     function getName(val) {
         setName(val.target.value)
@@ -58,7 +54,28 @@ const Planner = () => {
                         overflow: "hidden",
                     }}>
                         <div className="Actions">
-                            {/* <DropdownButton className="d-inline p-3 text-white" title="שכפל מסלול"
+                            <button className="AddRoute" type="submit"
+                                onClick={() => {
+                                    setModalOpen(true);
+                                }}
+                            >  שמור מסלול &nbsp;&nbsp;<FcOk className='icon' /></button>
+                            <input dir='rtl' type="text" className="form-control custom-search-input" onChange={getName} placeholder="רשום את שם המסלול"
+                                style={{ fontSize: "x-large" }}>
+
+                            </input>
+                        </div>
+                        {modalOpen && <Modal setOpenModal={setModalOpen} setText={get_Name} />}
+                        <div>
+                            <Places />
+                        </div>
+                    </div>
+                </>
+            )}
+        </>
+    );
+}
+export default Planner;
+{/* <DropdownButton className="d-inline p-3 text-white" title="שכפל מסלול"
                             >
                                 <div className="col-3">{resultData.map((value, index) => {
                                     return (
@@ -75,7 +92,7 @@ const Planner = () => {
                             </DropdownButton>) */}
 
 
-                            {/* <button
+{/* <button
                                 style={{
                                     margin: "22px",
                                     padding: "20px",
@@ -113,18 +130,18 @@ const Planner = () => {
                                 </Form.Select>
                             </button> */}
 
-                            {/* <button className='AddRoute' > שייך מסלול לחניך  <FcLink className='icon' /></button> */}
-                            {/* <button className='AddRoute' > שכפל מסלול  <GrDuplicate className='icon' /></button> */}
+{/* <button className='AddRoute' > שייך מסלול לחניך  <FcLink className='icon' /></button> */ }
+{/* <button className='AddRoute' > שכפל מסלול  <GrDuplicate className='icon' /></button> */ }
 
 
-                            {/* 
+{/* 
                             <button className='AddRoute'
                                 // onClick={Post_Route}
                                 onClick={() => {
                                     setModalOpen(true);
                                 }}
                             > שמור מסלול  <FcOk className='icon' /> </button> */}
-                            {/* <form id="IPU" className="w3-container">
+{/* <form id="IPU" className="w3-container">
                                 <p id="titleIPU">:רשום את שם המסלול <FcMultipleInputs /></p>
                                 <p><input className="w3-input w3-hover-green" type="text" onChange={getName} style={{
                                     textAlign: 'right',
@@ -133,30 +150,3 @@ const Planner = () => {
                             </form> */}
 
 
-
-
-                            <button className="AddRoute" type="submit"
-                                onClick={() => {
-                                    setModalOpen(true);
-                                }}
-                            >  שמור מסלול &nbsp;&nbsp;<FcOk className='icon' /></button>
-
-                            <input dir='rtl' type="text" className="form-control custom-search-input" onChange={getName} placeholder="רשום את שם המסלול"
-                                style={{ fontSize: "x-large" }}>
-
-                            </input>
-                        </div>
-
-                        {modalOpen && <Modal setOpenModal={setModalOpen} setText={get_Name} />}
-
-
-                        <div>
-                            <Places />
-                        </div>
-                    </div>
-                </>
-            )}
-        </>
-    );
-}
-export default Planner;

@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import "./Modal.css";
 import { get } from "../../api/api";
 import { FcLink } from "react-icons/fc";
+import { BsExclamationLg } from "react-icons/bs";
+
 
 let obj = { tasks: [], users: [] }
 let get_Route_ID = 0;
@@ -37,7 +39,6 @@ function Modal({ setOpenModal, setText }) {
     }, []);
 
     const getData = () => {
-
         get('https://s83.bfa.myftpupload.com/wp-json/wp/v2/users/', {
             headers: {
                 'Content-Type': 'application/json',
@@ -47,10 +48,17 @@ function Modal({ setOpenModal, setText }) {
                 per_page: 99, 'Cache-Control': 'no-cache'
             }
         }).then(res => {
-            setStudent(student = res.filter((item) => item.description !== ""))
-            console.log("student:", student)
-            setUsers(getUsers = student.map((r) => { return r }));
+            console.log("result users:", res)
+            res.map((r) => {
+                console.log("result of student:", r)//to the algoritem
+            })
+
+            setUsers(getUsers = res.map((r) => { return r }));
             console.log("getUsers:", getUsers);
+            // setStudent(student = res.filter((item) => item.description !== ""))
+            // console.log("student:", student)
+            // setUsers(getUsers = student.map((r) => { return r }));
+            // console.log("getUsers:", getUsers);
         });
     }
     function Post_Route() {
@@ -76,24 +84,21 @@ function Modal({ setOpenModal, setText }) {
                     'Content-Type': 'application/json',
                     'Authorization': `Bearer ${sessionStorage.getItem('jwt')}`,
                 },
-
                 body: JSON.stringify({
                     title: setText,
                     status: 'publish',
-
                     fields: {
                         tasks: obj.tasks.map((e) => {
                             console.log("e.id:", e.id)
                             return e.id
                         }),
-
                         users: {
                             ID: myStudentsChoice.map((e) => {
                                 console.log("e.id2:", e)
                                 return e.id
                             }),
                         }
-                    }
+                    },
                 })
             }).then(function (response) {
                 return response.json();
@@ -158,7 +163,8 @@ function Modal({ setOpenModal, setText }) {
                             </button>
                         </div>
                         <div className="title">
-                            <h3>נא להקליד את שם המסלול ולגרור משימות </h3>
+                            <h3>נא להקליד את שם המסלול ולגרור משימות  </h3>
+                            <BsExclamationLg style={{ color: "red", fontSize: "80px" }} />
                         </div>
                         <div className="body">
 
@@ -187,9 +193,6 @@ function Modal({ setOpenModal, setText }) {
                                 X
                             </button>
                         </div>
-                        <div className="title">
-
-                        </div>
                         <h6></h6>
                         <h6 style={{ textAlign: 'right' }}>:שייך מסלול לחניכ/ים הרצוים <FcLink className='icon' /></h6>
                         <div className='allStudent' >
@@ -203,24 +206,6 @@ function Modal({ setOpenModal, setText }) {
                                     </label>
                                 )
                             })}
-
-                            {/* <div className="App">
-                                Select your pizza topping:
-                                <div className="topping">
-                                    <input
-                                        type="checkbox"
-                                        id="topping"
-                                        name="topping"
-                                        value="Paneer"
-                                        checked={isChecked}
-                                        onChange={handleOnChange}
-                                    />
-                                    Paneer
-                                </div>
-                                <div className="result">
-                                    Above checkbox is {isChecked ? "checked" : "un-checked"}.
-                                </div>
-                            </div> */}
                         </div>
                         <div className="body">
                             <h5>?האם את/ה בטוח/ה</h5>
@@ -244,5 +229,4 @@ function Modal({ setOpenModal, setText }) {
         </>
     );
 }
-
 export default Modal;

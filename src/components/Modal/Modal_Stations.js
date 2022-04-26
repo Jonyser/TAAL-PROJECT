@@ -2,23 +2,20 @@ import React, { useState, useRef } from 'react';
 import "./Modal.css";
 import { FcMultipleInputs } from "react-icons/fc";
 import { RiAsterisk } from "react-icons/ri";
+import { BsExclamationLg } from "react-icons/bs";
+
 
 let get_Route_ID = 0;
 let getPicture, getSound;
 let ichour = 'אישור'
 
 const Modal_Stations = ({ setOpenModalPlaces, idTasks }) => {
-
-    // console.log('ID TASK:', idTasks)
-
     const [, setDone] = useState(false);
-
     const [get_title, settitle] = useState("");
     const [, setPicture] = useState(null);
     const [, setSound] = useState(null);
     const [getDescription, setDescription] = useState("");
-    const fileInput = useRef(null)
-
+    const fileInput = useRef(null);
     //----------------------------------
 
     const handleTitleInput = (e) => {
@@ -91,7 +88,7 @@ const Modal_Stations = ({ setOpenModalPlaces, idTasks }) => {
                             </button>
                         </div>
                         <div className="title">
-                            <h1>!בחר אתר</h1>
+                            <h1><BsExclamationLg style={{ color: "red", fontSize: "40px" }} />בחר אתר</h1>
                         </div>
                         <br></br>
                         <div className="body">

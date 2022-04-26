@@ -127,9 +127,6 @@ const Calculator = () => {
                 size = (dataCards.length - sizeMod) / number;
             });
 
-
-
-
         get('https://s83.bfa.myftpupload.com/wp-json/wp/v2/users/', {
             headers: {
                 'Content-Type': 'application/json',
@@ -154,32 +151,21 @@ const Calculator = () => {
             setArrayIdTasks(arrayIdTasks = []) // reset array
             setObjTasks(objTasks = [])
             setActionMode(actionMode = "")
-
-
         }
         if (actionMode === "") {
-
             setArrayIdTasks(val.myTasks.map((value) => {
                 arrayIdTasks.push(value.ID)
-
             }))
-
             setObjTasks(val.myTasks.map((value) => {
                 objTasks.push(value)
-
             }))
             console.log("objTasks1:", objTasks)
-
-
             // console.log("value.post_title:", arrayNameTasks)
             setActionFlag(actionFlag = false);
         }
         if (actionMode === "∪") {
-
             setArrayIdTasks(val.myTasks.map((value) => {
                 arrayIdTasks.push(value.ID)
-
-
             }))
             setObjTasks(val.myTasks.map((value) => {
                 objTasks.push(value)
@@ -196,11 +182,9 @@ const Calculator = () => {
                     if (element.ID === arrayIdTasks[i]) {
                         tempArray.push(element.ID);
                         tempObj.push(element);
-
                     }
                 }
             })
-
             setArrayIdTasks(arrayIdTasks = [])
             setObjTasks(objTasks = [])
 
@@ -242,13 +226,10 @@ const Calculator = () => {
             setObjTasks(objTasks = newTempObj)
             setActionFlag(actionFlag = true);
         }
-
-
         setTextview(textview.value += "(" + val.myTitle + ")")
         Has_already_been_typed = true;
         console.log("arrayIdTasks:", arrayIdTasks)
         console.log("arrayNameTasks:", objTasks)
-
     }
     //--------------------------------------------------------------
     const Action = (val) => {
@@ -272,7 +253,6 @@ const Calculator = () => {
         <>
             {!done ? <>
                 <h1 style={{ textAlign: "center", color: "white" }}>נא להמתין</h1>
-
                 < ReactLoading type={"bars"} className='loading' color={"rgb(180, 175, 199)"} height={'10%'} width={'10%'} />
             </>
                 :

@@ -40,7 +40,5 @@ function LoginAPI(props) {
         <>
         </>
     )
-
 }
-
 export default LoginAPI

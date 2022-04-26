@@ -8,7 +8,6 @@ import Dot from '../Dot/Dot'
 import ReactLoading from 'react-loading';
 import Modal_Places from '../Modal/Model_Places'
 
-
 let places = [];
 let onlyAllStation = [];
 let stationArray = [];
@@ -28,8 +27,6 @@ const Places = () => {
             setLoading(true);
             try {
                 getData();
-
-
             } catch (error) {
                 console.error(error.message);
             }
@@ -42,13 +39,11 @@ const Places = () => {
         // taal.tech/wp-json/wp/v2/places
         ///s83.bfa.myftpupload.com/wp-json/wp/v2/places
         await get('https://s83.bfa.myftpupload.com/wp-json/wp/v2/places/', {
-
             params: {
                 per_page: 99, 'Cache-Control': 'no-cache'
             }
 
         }).then(res => {
-
             console.log("res: ", res)
             places = res.filter((item) => item.parent === 0)
             setOnlyAllStation(onlyAllStation = res.filter((item) => item.parent > 0))
@@ -61,39 +56,28 @@ const Places = () => {
         });
         setDone(true)
         // setData_Loaded(true)
-
     }
     const Display_The_Stations = (e) => {
-
         setThisIdTask(thisIdTask = e.id)
-
         if (stationArray.length > 0) {
             stationArray = [];
         }
         // console.log("val:", e);
-
         Places_and_their_stations.forEach(element => {
-
             if (element.parent.id === e.id) {
-
                 element.related.forEach(rel => {
-
                     setStateStation({ data: stationArray.push(rel) });
-
                 });
                 // console.log("stationArray:", stationArray);
             }
         });
         setStateStation({ data: stationArray })
     }
-
     //----------------------------------------------------------------------
     return (
         <>
             {!done ? <>
-
                 <h1 style={{ textAlign: "center" }}>Loading</h1>
-
                 < ReactLoading type={"bars"} className='loading' color={"rgb(180, 175, 199)"} height={'10%'} width={'10%'} />
             </>
                 :

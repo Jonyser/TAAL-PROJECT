@@ -6,7 +6,6 @@ import "./style.css";
 import $ from 'jquery';
 
 function Tag({ title, id, show }) {
-
     const [, drag] = useDrag(() => ({
         type: "image",
         item: { id: id },
@@ -23,8 +22,6 @@ function Tag({ title, id, show }) {
                 <Dot color="rgb(164, 190, 125)" />   </button>
             {show ? $(".TitleTasks").show() : null}
         </>
-
     );
 }
-
 export default Tag;

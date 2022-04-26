@@ -37,18 +37,13 @@ function DragnDrop(props) {
     saveProps = props;
     console.log("props,", saveProps.propDataTask)
 
-
     dndArray = (props.propDataTask).map((element) => {
         return {
-
             id: element.id,
             title: element.title.rendered.replace("&#8211;", "-").replace("&#8217;", "' ")
         }
     })
-    // console.log("dndArray:", dndArray)
-
     const [board, setBoard] = useState([]);
-
     //---------------------------------------------------------
     const [, drop] = useDrop(() => ({
         accept: "image",
@@ -74,10 +69,7 @@ function DragnDrop(props) {
     //---------------------------------------------------------
     return (
         <>
-
-
             <div className="Board" ref={drop} >
-
                 <i className="bi bi-dash-square">
                     <div style={{
                         position: "relative",
@@ -91,18 +83,15 @@ function DragnDrop(props) {
                         <button className="helpBtn" onClick={() => {
                             help()
                         }} >עזרה<MdOutlineLiveHelp /></button>
-
-                        <div className="blink"><span><RiDragMove2Line /></span></div>
+                        <div className="blink" style={{ fontSize: "35px", left: "75px" }}><span><RiDragMove2Line /></span></div>
                         {/* &nbsp;<RiDragMove2Line /> */}
                     </div>
-
                 </i>
                 <div className='MyTasks'>
                     {board.map((tag, keyCount) => {
                         return <Tag title={tag.title} id={tag.id} idImg={thisId} dataImg={saveProps.propDataTask} key={keyCount} />;
                     })}
                 </div>
-
             </div>
             {modalOpen && <Modal_Tasks setOpenModalPlases={setModalOpen} allStations={props.allStations} help={helpFlag} />}
             <div className='Cover_Tasks'>
@@ -113,7 +102,6 @@ function DragnDrop(props) {
                         onClick={() => {
                             setModalOpen(true);
                             setHelpFlag(helpFlag = false)
-
                         }}>
                         <FcAddDatabase style={{
                             width: "85px",
@@ -124,18 +112,13 @@ function DragnDrop(props) {
                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     </button>
                 </div>
-
                 <div className='TasksCover'>
-
                     {dndArray.length === 0 ? null : dndArray.map((tag) => {
                         return <Tag title={tag.title} id={tag.id} key={tag.id} idImg={thisId} dataImg={saveProps.propDataTask} />;
-
                     })}
                 </div>
             </div>
-
         </>
     );
 }
-
 export default DragnDrop;

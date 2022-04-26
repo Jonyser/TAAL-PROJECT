@@ -8,15 +8,10 @@ import { useState } from 'react';
 
 let flag_token = false
 
-
 const Nav = () => {
-
     const [, login_token] = useState('')
     const [complete_name, setcomplete_name] = useState('')
-
-
     useEffect(() => {
-
         const url2 = 'https://s83.bfa.myftpupload.com/wp-json/wp/v2/users/me'
         fetch(url2, {
             method: 'GET',
@@ -35,7 +30,6 @@ const Nav = () => {
                 }
             });
     })
-
     return (
         <nav>
             <ul className="nav-links">
@@ -60,15 +54,11 @@ const Nav = () => {
 
             </ul>
             {complete_name}
-
-
             <div className='user'>
                 <FaUser className='UserIcon' />
             </div>
-
         </nav>
     );
 }
-
 export default Nav;
 //----------------------------------------

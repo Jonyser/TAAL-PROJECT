@@ -1,7 +1,6 @@
 import './style.css';
 import Image from 'react-bootstrap/Image'
 let image = ""
-
 const Images = ({ id, data }) => {
 
     for (let index = 0; index < data.length; index++) {
@@ -9,7 +8,6 @@ const Images = ({ id, data }) => {
             image = data[index].acf.image.url;
         }
     }
-
     return (
         <>
             <div className="images">

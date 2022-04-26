@@ -9,10 +9,10 @@ import Modal_Stations from '../Modal/Modal_Stations'
 
 let allTasks = [];
 let tasks = [];
-const Stations = (props) => {
-    console.log(" props.allStations:", props.allStations)
 
-    console.log(" props.idTask:", props.idTask)
+const Stations = (props) => {
+    // console.log(" props.allStations:", props.allStations)
+    // console.log(" props.idTask:", props.idTask)
     const [, setStateTask] = useState([]);
     const [loading, setLoading] = useState(false);
     const [modalOpen, setModalOpen] = useState(false)
@@ -38,14 +38,13 @@ const Stations = (props) => {
         })
             .then(res => {
                 allTasks = res;
-                console.log("temp:", allTasks)
+                console.log("allTasks:", allTasks)
             });
     }
     const Display_The_Tasks = (e) => {
         if (tasks.length > 0) {
             tasks = [];
         }
-
         allTasks.forEach(element => {
             for (let i = 0; i < element.places.length; i++) {
                 if (element.places[i] === e.id) {
@@ -92,8 +91,6 @@ const Stations = (props) => {
                                         </button>
                                     )
                                 })}
-
-
                         </div>
                     </div>
                     <Tasks_comp propsDataTask={tasks} allStations={props.allStations} />
