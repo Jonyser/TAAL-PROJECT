@@ -77,8 +77,9 @@ function Modal_Plases({ setOpenModalPlaces }) {
         }).then(function (post) {
             console.log("post:", post)
             if (post.message === "כבר יש מונח עם אותו שם ועם אותו הורה.")
-                alert("כבר יש אתר עם אותו שם")
-            window.location.replace("/planner")
+                alert("כבר יש אתר עם אותו שם, בחר/י בשם אחר")
+            else
+                window.location.replace("/planner")
         })
     }
     return (

@@ -2,8 +2,9 @@ import React, { useState } from 'react'
 import LoginAPI from './LoginAPI';
 import logo from '../../Pictures/logo.jpeg'
 import './styleLogin.css';
-
+let flagLoading = false
 function Login(props) {
+    const [, setFlagLoading] = useState(false)
     const [APIDetailsLogin, setAPIDetailsLogin] = useState({
         user: '',
         pass: '',
@@ -22,6 +23,7 @@ function Login(props) {
     }
     function handleSubmit() {
         setAPIDetailsLogin({ ...loginDetails })
+        setFlagLoading(flagLoading = true)
     }
     return (
         <>
@@ -39,7 +41,7 @@ function Login(props) {
                                     <input type="text" placeholder="User Name" name="user" value={loginDetails.user} onChange={handleChange} />
                                     <input type="password" placeholder="Password" name="pass" value={loginDetails.pass} onChange={handleChange} />
                                     <div className="d-flex justify-content-center">
-                                        <input type="submit" onClick={handleSubmit} />
+                                        <input type="submit" onClick={handleSubmit} value="כניסה" />
                                     </div>
                                 </div>
                             </div>
@@ -47,7 +49,8 @@ function Login(props) {
                         <img src={logo} className="App-logo" alt="logo" style={{ paddingTop: "4.5%" }}></img>
                     </div>
                 </header>
-                <LoginAPI APIDetailsLogin={APIDetailsLogin} setUsername={props.setUsername} setIsLoggedIn={props.setIsLoggedIn} setServerMessage={props.setServerMessage} /></>}
+                <LoginAPI APIDetailsLogin={APIDetailsLogin} setUsername={props.setUsername} setIsLoggedIn={props.setIsLoggedIn} setServerMessage={props.setServerMessage} getFlagLoading={flagLoading} />
+            </>}
         </>
     )
 }

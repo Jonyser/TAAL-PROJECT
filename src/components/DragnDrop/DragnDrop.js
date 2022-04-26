@@ -83,7 +83,7 @@ function DragnDrop(props) {
                         <button className="helpBtn" onClick={() => {
                             help()
                         }} >עזרה<MdOutlineLiveHelp /></button>
-                        <div className="blink" style={{ fontSize: "35px", left: "75px" }}><span><RiDragMove2Line /></span></div>
+                        <div className="blink" style={{ fontSize: "35px", left: "185px" }}><span><RiDragMove2Line /></span></div>
                         {/* &nbsp;<RiDragMove2Line /> */}
                     </div>
                 </i>

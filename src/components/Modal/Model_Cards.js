@@ -6,7 +6,7 @@ import img2 from '../../Pictures/img2.png';
 import { BsFillFlagFill } from "react-icons/bs";
 
 let obj = { tasks: [], users: [] }
-let get_Route_ID = 0;
+
 let profileStudent = 0;
 let myOriginalTasks = [];
 let red_flag = "red";//      
@@ -109,9 +109,9 @@ function Modal({ setOpenModal, setText, thisMyRoute, thisGetMyTasks, thisFlagTas
             }).then(function (response) {
                 return response.json();
             }).then(function (post) {
-                get_Route_ID = post.id
+
                 setDone(true)
-                alert(get_Route_ID)
+                // alert(get_Route_ID)
                 // window.location.replace("/planner")
             })
         }
@@ -131,7 +131,7 @@ function Modal({ setOpenModal, setText, thisMyRoute, thisGetMyTasks, thisFlagTas
         });
         let myStudent = dataUsers.filter((item) => item.id === val.ID)
         setProfileStudent(profileStudent = myStudent[0].acf.risk_profile)
-        alert(profileStudent)
+        // alert(profileStudent)
         // setMyOriginalTasks(myOriginalTasks = thisGetMyTasks.map((val) => dataTasks.filter((item) => item.id === val.ID)));
         console.log("my Original Tasks:", myOriginalTasks);
     }
@@ -156,9 +156,10 @@ function Modal({ setOpenModal, setText, thisMyRoute, thisGetMyTasks, thisFlagTas
                         </div>
                         <div className="title">
                         </div>
-                        <img src={img1} alt="Logo" style={{ width: "230px", height: "230px" }} />;
-                        <h3>:רשימת המשימות</h3>
-                        <h5 className="bodyTasks">
+                        <img src={img1} alt="Logo" style={{ width: "220px", height: "180px", marginLeft: "110px" }} />;
+                        <h3 style={{ color: "red" }}>:רשימת המשימות</h3>
+                        <br></br>
+                        <h5 className="bodyTasks" >
 
                             {thisGetMyTasks && !myOriginalTasksFlag ? <>
                                 {thisGetMyTasks.map((val, index) => {
@@ -202,8 +203,6 @@ function Modal({ setOpenModal, setText, thisMyRoute, thisGetMyTasks, thisFlagTas
                                     }
                                 </>
                             }
-
-
                         </h5>
                     </div>
                 </div>
@@ -223,8 +222,9 @@ function Modal({ setOpenModal, setText, thisMyRoute, thisGetMyTasks, thisFlagTas
                             </div>
                             <div className="title">
                             </div>
-                            <img src={img2} alt="Logo" style={{ width: "230px", height: "230px" }} />;
-                            <h3>:החניכים</h3>
+                            <img src={img2} alt="Logo" style={{ width: "220px", height: "180px", marginLeft: "110px" }} />;
+                            <h3 style={{ color: "red" }}>:החניכים</h3>
+                            <br></br>
                             <h5 className="bodyTasks">
                                 {thisGetMyUsers ? <>
                                     {thisGetMyUsers.map((val, index) => {
@@ -245,7 +245,6 @@ function Modal({ setOpenModal, setText, thisMyRoute, thisGetMyTasks, thisFlagTas
                                     </>
                                 }
                             </h5>
-
                         </div>
                     </div>
                 </>

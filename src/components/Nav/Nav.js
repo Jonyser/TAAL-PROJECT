@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { FcPlus, FcAbout, FcCalculator } from "react-icons/fc";
+import { FcPlus, FcCalculator } from "react-icons/fc";
 import './style.css';
 import { FaUser } from "react-icons/fa";
 import { AiOutlineIdcard } from "react-icons/ai";
@@ -33,18 +33,10 @@ const Nav = () => {
     return (
         <nav>
             <ul className="nav-links">
-                {/* <Link to="/" className='link'>
-                    <li>כניסה <FcHome /></li>
-                </Link> */}
-                <Link to="/about" className='link'>
-                    <li>אודות <FcAbout /></li>
-                </Link>
                 <Link to="/routes_cards" className='link'>
                     <li>כרטיסיות <AiOutlineIdcard /></li>
                 </Link>
-                {/* <Link to="/profile" className='link'>
-                    <li>בניית פרופיל <FcBusinessman /></li>
-                </Link> */}
+
                 <Link to="/Calculator" className='link'>
                     <li>פעולות נוספות <FcCalculator /></li>
                 </Link>

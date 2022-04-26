@@ -70,9 +70,9 @@ function Modal_Tasks({ setOpenModalPlases, allStations, help }) {
             return response.json();
         }).then(function (post) {
             setDone(true)
-            alert("ok")
+            // alert("ok")
             console.log("post:", post)
-            // window.location.replace("/planner")
+            window.location.replace("/planner")
         })
     }
     return (

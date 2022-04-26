@@ -1,7 +1,6 @@
 import { BrowserRouter as Router } from "react-router-dom";
 import Nav from './components/Nav/Nav';
 import Planner from './components/Planner/Planner';
-import About from './components/About/About'
 import Calculator from './components/Calculator/Calculator';
 import './App.css';
 import Login from './components/Login/Login';
@@ -23,7 +22,6 @@ function App() {
                 <Route path="/" exact component={Home}></Route>
                 <Route path="/planner" component={Planner}></Route>
                 {/* <Route path="/profile" component={Profile}></Route> */}
-                <Route path="/about" component={About}></Route>
                 <Route path="/Calculator" component={Calculator}></Route>
                 <Route path="/routes_cards" component={Cards}></Route>
                 {/* <Route path="/about" component={About}></Route> */}

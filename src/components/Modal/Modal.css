@@ -38,10 +38,11 @@
 }
 
 .modalMyTasksContainer {
-  margin-left: 40%;
+  margin-top: -15vh;
+  margin-left: 34%;
   margin-right: auto;
-  width: 300px;
-  height: 500px;
+  width: 500px;
+  height: 650px;
   background-color: aliceblue;
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
   display: flex;
@@ -54,9 +55,11 @@
 }
 
 .bodyTasks {
+  padding: 23px;
   height: 400px;
   overflow: auto;
   text-align: right;
+  background-color: rgb(204, 228, 248);
 }
 
 .modalContainerCalculator {
