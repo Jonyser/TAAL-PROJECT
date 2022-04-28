@@ -32,7 +32,11 @@ const Nav = () => {
     })
     return (
         <nav>
+
             <ul className="nav-links">
+                <Link to="/student" className='link'>
+                    <li>חניכים  <AiOutlineIdcard /></li>
+                </Link>
                 <Link to="/routes_cards" className='link'>
                     <li>כרטיסיות <AiOutlineIdcard /></li>
                 </Link>
@@ -43,6 +47,9 @@ const Nav = () => {
                 <Link to="/planner" className='link'>
                     <li>הוספת מסלול <FcPlus /></li>
                 </Link>
+
+
+
 
             </ul>
             {complete_name}

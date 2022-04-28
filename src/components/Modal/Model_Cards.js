@@ -3,9 +3,9 @@ import { get } from "../../api/api";
 import "./Modal.css";
 import img1 from '../../Pictures/img1.png';
 import img2 from '../../Pictures/img2.png';
-import { BsFillFlagFill } from "react-icons/bs";
 
-let obj = { tasks: [], users: [] }
+
+import { BsFillFlagFill } from "react-icons/bs";
 
 let profileStudent = 0;
 let myOriginalTasks = [];
@@ -17,15 +17,14 @@ let dataUsers = []
 let epsilon = 10;
 let myOriginalTasksFlag = false;
 
-function Modal({ setOpenModal, setText, thisMyRoute, thisGetMyTasks, thisFlagTasks, thisGetMyUsers, thisFlagUsers }) {
+function Modal_Cards({ setOpenModal, setText, thisMyRoute, thisGetMyTasks, thisFlagTasks, thisGetMyUsers, thisFlagUsers, thisFlagUsersFromStudent }) {
     console.log("thisGetMyUsers:", thisGetMyUsers);
     console.log("thisGetMyTasks:", thisGetMyTasks);
     //minimum_profile
-    const [, set_obj] = useState(null);// for TextView
     const [, setDone] = useState(false);
     const [, setProfileStudent] = useState(0);
     const [, setMyOriginalTasks] = useState([]);
-    const [loading, setLoading] = useState(false);
+    const [, setLoading] = useState(false);
     const [, setDataTasks] = useState([]);
     const [, setDataUsers] = useState([]);
     const [, setMyOriginalTasksFlag] = useState(false);
@@ -44,8 +43,8 @@ function Modal({ setOpenModal, setText, thisMyRoute, thisGetMyTasks, thisFlagTas
         fetchData();
     }, []);
 
-    const getData = async (val_id) => {
-        await get('https://s83.bfa.myftpupload.com/wp-json/wp/v2/tasks/', {
+    const getData = () => {
+        get('https://s83.bfa.myftpupload.com/wp-json/wp/v2/tasks/', {
             params: {
                 per_page: 99, 'Cache-Control': 'no-cache'
             }
@@ -55,7 +54,7 @@ function Modal({ setOpenModal, setText, thisMyRoute, thisGetMyTasks, thisFlagTas
 
             });
 
-        await get('https://s83.bfa.myftpupload.com/wp-json/wp/v2/users/', {
+        get('https://s83.bfa.myftpupload.com/wp-json/wp/v2/users/', {
             headers: {
                 'Content-Type': 'application/json',
                 'Authorization': `Bearer ${sessionStorage.getItem('jwt')}`,
@@ -65,12 +64,6 @@ function Modal({ setOpenModal, setText, thisMyRoute, thisGetMyTasks, thisFlagTas
             }
         }).then(res => {
             setDataUsers(dataUsers = res);
-            // setUsers(getUsers = dataUsers.map((r) => { return r }));
-            // console.log("getUsers:", getUsers);
-            // setStudent(student = res.filter((item) => item.description !== ""))
-            // console.log("student:", student)
-            // setUsers(getUsers = student.map((r) => { return r }));
-            // console.log("getUsers:", getUsers);
         });
     }
     function Post_Route() {
@@ -83,10 +76,6 @@ function Modal({ setOpenModal, setText, thisMyRoute, thisGetMyTasks, thisFlagTas
             return
         }
         else {
-            set_obj(obj.tasks = JSON.parse(localStorage.getItem('New_Routes')));
-            console.log("obj : ", obj)
-            console.log("obj.tasks : ", obj.tasks)
-
             let url_post = `https://s83.bfa.myftpupload.com/wp-json/wp/v2/routes`
             fetch(url_post, {
                 method: "POST",
@@ -98,7 +87,6 @@ function Modal({ setOpenModal, setText, thisMyRoute, thisGetMyTasks, thisFlagTas
                     status: "draft",
                     title: thisMyRoute.myTitle + "-duplicate-1",
                     fields: {
-                        // tasks: obj.tasks[0].id,
                         tasks: thisMyRoute.myTasks.map((e) => {
                             console.log("e.id:", e.ID)
                             return e.ID
@@ -109,10 +97,8 @@ function Modal({ setOpenModal, setText, thisMyRoute, thisGetMyTasks, thisFlagTas
             }).then(function (response) {
                 return response.json();
             }).then(function (post) {
-
                 setDone(true)
-                // alert(get_Route_ID)
-                // window.location.replace("/planner")
+                window.location.replace("/routes_cards")
             })
         }
     }
@@ -123,10 +109,12 @@ function Modal({ setOpenModal, setText, thisMyRoute, thisGetMyTasks, thisFlagTas
         setOpenModal(false);
         setMyOriginalTasksFlag(myOriginalTasksFlag = true)
         thisGetMyTasks.map((val) => {
-            dataTasks.map((item) => {
+
+            return dataTasks.map((item) => {
                 if (val.ID === item.id) {
-                    setMyOriginalTasks(myOriginalTasks.push(item));
+                    return setMyOriginalTasks(myOriginalTasks.push(item));
                 }
+                return null
             })
         });
         let myStudent = dataUsers.filter((item) => item.id === val.ID)
@@ -141,7 +129,7 @@ function Modal({ setOpenModal, setText, thisMyRoute, thisGetMyTasks, thisFlagTas
             <BsFillFlagFill style={{ color: red_flag }} />
             <BsFillFlagFill style={{ color: orange_flag }} />
             <BsFillFlagFill style={{ color: green_flag }} /> */}
-            {thisFlagTasks == true ? <>
+            {thisFlagTasks === true ? <>
                 <div className="Background">
                     <div className="modalMyTasksContainer">
                         <div className="titleCloseBtn">
@@ -283,4 +271,4 @@ function Modal({ setOpenModal, setText, thisMyRoute, thisGetMyTasks, thisFlagTas
         </>
     );
 }
-export default Modal;
+export default Modal_Cards;

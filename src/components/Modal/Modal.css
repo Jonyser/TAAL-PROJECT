@@ -73,7 +73,22 @@
   position: fixed;
   border: 3px solid green;
   margin-top: -180px;
+  z-index: 10;
 
+}
+
+.modalContainerStudent {
+  width: 575px;
+  height: 620px;
+  background-color: aliceblue;
+  box-shadow: rgb(0 0 0 / 35%) 0px 5px 15px;
+  flex-direction: column;
+  padding: 25px;
+  position: fixed;
+  border: 3px solid green;
+  margin-top: -90px;
+  z-index: 10;
+  margin-left: 30%;
 }
 
 .modalContainerHelpPlanner {

@@ -160,8 +160,6 @@ function Modal_Tasks({ setOpenModalPlases, allStations, help }) {
                         <h3>הוראות לבניית מסלול  &nbsp;<FcAbout /></h3>
                         <br></br>
                         <div className="body" style={{ textAlign: 'right' }}>
-                            <h4></h4>
-
                             <h6>בחר/י אתר קיים מרשימת האתרים או הוספ/י אתר משלך <samp>(1</samp></h6>
                             <br></br>
                             <h6>בחר/י תחנה השייכת לאתר שבחרת ו/או הוספ/י תחנה חדשה <samp>(2</samp></h6>

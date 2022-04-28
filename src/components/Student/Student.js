@@ -1,16 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { get } from "../../api/api";
-import './style.css';
 import '../../../node_modules/bootstrap/dist/css/bootstrap.css';
 import { Card } from 'react-bootstrap';
-import img1 from '../../Pictures/img1.png';
-import img2 from '../../Pictures/img2.png';
-import img3 from '../../Pictures/img3.png';
-import img4 from '../../Pictures/img6.png';
+import profile from '../../Pictures/profile1.png';
 import logo from '../../Pictures/logo.jpeg';
 import ReactLoading from 'react-loading';
-import Modal_Cards from '../Modal/Model_Cards'
-import { GrDuplicate } from "react-icons/gr";
+import Modal_Student from '../Modal/Modal_Student'
+import Image from 'react-bootstrap/Image';
 // import { Form } from "react-bootstrap";
 //----------------------------------------------------|
 let dataCards = [];//                                 |
@@ -23,12 +19,7 @@ let size = 0;//                                       |
 let index = 0;//                                      |
 let sizeMod = 0;//                                    |
 const number = 4;//                                   |
-let myRoute = [];//                                   |
-let getMyTasks = [];//                                |
-let flagTasks = false;//                              |
 let getMyUsers = [];//                                |
-let flagUsers = false;//                              |
-
 //                                                    |
 //----------------------------------------------------|
 const Cards = () => {
@@ -39,13 +30,10 @@ const Cards = () => {
     const [, setDataCards2] = useState([]);
     const [, setDataCards3] = useState([]);
     const [, setDataCards4] = useState([]);
-    const [, setMyRoute] = useState([]);
     const [, setFlag] = useState(false);
+    // const [, setResultData] = useState([]);
     const [modalOpen, setModalOpen] = useState(false);
-    const [, setMyTasks] = useState([]);
-    const [, setFlagTasks] = useState(false);
     const [, setMyUsers] = useState([]);
-    const [, setFlagUsers] = useState(false);
 
     useEffect(() => {
         const fetchData = async () => {
@@ -54,45 +42,30 @@ const Cards = () => {
                 getData();
 
             } catch (error) {
-                alert(error.message);
+                console.error(error.message);
             }
             setLoading(false);
         }
         fetchData();
     }, []);
     const getData = () => {
-        // https://s83.bfa.myftpupload.com/wp-json/wp/v2/routes/
-        // https://taal.tech/wp-json/wp/v2/routes/
         if (flag_show_page === false)
-            get('https://s83.bfa.myftpupload.com/wp-json/wp/v2/routes/', {
+            get('https://s83.bfa.myftpupload.com/wp-json/wp/v2/users/', {
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${sessionStorage.getItem('jwt')}`,
+                },
                 params: {
                     per_page: 99, 'Cache-Control': 'no-cache'
                 }
             }).then(res => {
-                console.log("Masloulims:", res)
+                console.log("Users:", res)
                 size = res.length / number;
-
-                // console.log("dataCards:", dataCards)
-                // console.log("flag:", flag)
-
-                setDataCards(
-
-                    dataCards = res.map((value
-                    ) => {
-                        // console.log("value :", value)
-                        return {
-                            myUsers: value.acf.users,
-                            myTitle: value.title.rendered.replace("&#8211;", "-").replace("&#8217;", "'"),
-                            myTasks: value.acf.tasks,
-                            myId: value.id
-                        }
-                    })
-                )
-                // console.log("dataCards:", dataCards)
+                setDataCards(dataCards = res.filter((item) => item.acf.risk_profile > 0))
+                console.log("dataCards:", dataCards)
                 sizeMod = dataCards.length % number;
                 size = (dataCards.length - sizeMod) / number;
-                // console.log("size", size)
-                // console.log(flag)
+
                 for (let i = 0; i < size; i++) {
                     setDataCards1(dataCards1[i] = dataCards[index]);
                     index++;
@@ -129,28 +102,27 @@ const Cards = () => {
                 sizeMod = dataCards.length % number;
                 size = (dataCards.length - sizeMod) / number;
             });
+
         setDone(true)
     }
-    const Replication = (val) => {
-        setModalOpen(true);
-        setMyRoute(myRoute = val)
-        setFlagTasks(flagTasks = false)
-        setFlagUsers(flagUsers = false)
-    }
-    const myTasks = (val) => {
-        console.log("getMyTasks:", val)
-        setMyTasks(getMyTasks = val);
-        setModalOpen(true);
-        setFlagTasks(flagTasks = true)
-        console.log("myval:", getMyTasks)
-        setFlagUsers(flagUsers = false)
-    }
+    // const Replication = (val) => {
+    //     setModalOpen(true);
+    //     setMyRoute(myRoute = val)
+    //     setFlagTasks(flagTasks = false)
+    //     setFlagUsers(flagUsers = false)
+    // }
+    // const myTasks = (val) => {
+    //     console.log("getMyTasks:", val.myTasks)
+    //     setMyTasks(getMyTasks = val.myTasks);
+    //     setModalOpen(true);
+    //     setFlagTasks(flagTasks = true)
+    //     console.log("myval:", getMyTasks)
+    //     setFlagUsers(flagUsers = false)
+    // }
     const myUsersfunc = (val) => {
-        console.log("getMyUsers:", val)
+        console.log("getMyUsers.name:", val.name);
         setMyUsers(getMyUsers = val);
         setModalOpen(true);
-        setFlagUsers(flagUsers = true)
-        setFlagTasks(flagTasks = false)
     }
     return (
         <>
@@ -160,12 +132,11 @@ const Cards = () => {
             </>
                 :
                 <>
-
                     <div style={{
                         backgroundColor: 'rgb(213, 221, 228)',
                         overflow: "hidden",
                     }}>
-                        {modalOpen && <Modal_Cards setOpenModal={setModalOpen} thisMyRoute={myRoute} thisGetMyTasks={getMyTasks} thisFlagTasks={flagTasks} thisFlagUsers={flagUsers} thisGetMyUsers={getMyUsers} />}
+                        {modalOpen && <Modal_Student setOpenModal={setModalOpen} thisGetMyUsers={getMyUsers} />}
                         <br></br>
                         <div className='container' >
                             <div className="row">
@@ -175,31 +146,33 @@ const Cards = () => {
                                             <header key={index}>
                                                 <Card style={{ color: "#000", marginBottom: 15, border: "3px solid rgb(106 185 48)" }}>
                                                     {/* display_name */}
-                                                    <Card.Img src={img1} style={{ height: 237 }} />
+
+                                                    {value.acf.image ? <>
+                                                        <Image style={{ height: 237, width: '97%' }}
+                                                            src={value.acf.image.url}
+                                                            alt="new"
+                                                        />
+                                                    </> :
+                                                        <Card.Img src={profile} style={{ height: 237, width: '97%' }} />}
+
+
+
                                                     <Card.Body src={logo}>
                                                         <Card.Title >
+
                                                             <div className="text-center ">
                                                                 <div className="row align-items-center">
                                                                     <div className="col-md-11">
-                                                                        <h5>{value.myTitle}</h5>
+                                                                        <h5>{value.name}</h5>
                                                                     </div>
                                                                 </div>
                                                             </div>
                                                         </Card.Title>
-                                                        <button className="btn btn-primary" id="dropdown-basic-button" onClick={() => myTasks(value.myTasks)}>משימות
-                                                        </button>
-                                                        <button className="btn btn-primary" id="dropdown-basic-button" style={{ marginLeft: "100px" }} onClick={() => myUsersfunc(value.myUsers)}>משוייך ל
+                                                        <button className="btn btn-info" id="dropdown-basic-button" style={{ marginLeft: "90px" }} onClick={() => myUsersfunc(value)}> :מידע נוסף
                                                         </button>
                                                         <br></br>
                                                         <br></br>
-                                                        <button type="button" className="btn btn-outline-primary" style={{ width: "270px" }}
 
-                                                            onClick={() => Replication(value)}
-                                                        >
-                                                            <GrDuplicate className='icon' />
-                                                            &nbsp;&nbsp;
-                                                            שכפל מסלול זה
-                                                        </button>
                                                     </Card.Body>
                                                 </Card>
                                             </header>
@@ -211,43 +184,29 @@ const Cards = () => {
                                         <div key={index} className='App'>
                                             <header key={index} >
                                                 <Card style={{ color: "#000", marginBottom: 15, border: "3px solid rgb(106 185 48)" }}>
-                                                    <Card.Img src={img2} style={{ height: 237 }} />
+                                                    {/* <Card.Img src={profile} style={{ height: 237, width: '97%' }} /> */}
+                                                    {value.acf.image ? <>
+                                                        <Image style={{ height: 237, width: '97%' }}
+                                                            src={value.acf.image.url}
+                                                            alt="new"
+                                                        />
+                                                    </> :
+                                                        <Card.Img src={profile} style={{ height: 237, width: '97%' }} />}
+
                                                     <Card.Body>
                                                         <Card.Title >
                                                             <div className="text-center ">
                                                                 <div className="row align-items-center">
-                                                                    <div className="col-md-11">
-                                                                        <h5>{value.myTitle}</h5>
+                                                                    <div className="col-md-12">
+                                                                        <h5>{value.name}</h5>
                                                                     </div>
                                                                 </div>
                                                             </div>
                                                         </Card.Title>
-                                                        <button className="btn btn-primary" id="dropdown-basic-button" onClick={() => myTasks(value.myTasks)}>משימות
-
-                                                        </button>
-                                                        {/* <DropdownButton className="d-inline p-3 text-white" id="dropdown-basic-button" title="משימות" >
-                                                            {value.myTasks ? <>
-                                                                {value.myTasks.map((val, index) =>
-                                                                    <Dropdown.Item key={index} >
-                                                                        {val.post_title}
-                                                                    </Dropdown.Item>)} </>
-                                                                : <> <Dropdown.Item href="#/action-1">
-                                                                    לא קיים
-                                                                </Dropdown.Item>
-                                                                </>}
-                                                        </DropdownButton> */}
-                                                        <button className="btn btn-primary" id="dropdown-basic-button" style={{ marginLeft: "100px" }} onClick={() => myUsersfunc(value.myUsers)}>משוייך ל
+                                                        <button className="btn btn-info" id="dropdown-basic-button" style={{ marginLeft: "90px" }} onClick={() => myUsersfunc(value)}>:מידע נוסף
                                                         </button>
                                                         <br></br>
                                                         <br></br>
-
-                                                        <button type="button" className="btn btn-outline-primary" style={{ width: "270px" }}
-
-                                                            onClick={() => Replication(value)}
-                                                        >
-                                                            <GrDuplicate className='icon' />
-                                                            &nbsp;&nbsp;
-                                                            שכפל מסלול זה</button>
                                                     </Card.Body>
                                                 </Card>
                                             </header>
@@ -259,29 +218,30 @@ const Cards = () => {
                                         <div key={index} className='App'>
                                             <header key={index} >
                                                 <Card style={{ color: "#000", marginBottom: 15, border: "3px solid rgb(106 185 48)" }}>
-                                                    <Card.Img src={img3} style={{ height: 237 }} />
+                                                    {/* <Card.Img src={profile} style={{ height: 237, width: '97%' }} /> */}
+                                                    {value.acf.image ? <>
+                                                        <Image style={{ height: 237, width: '97%' }}
+                                                            src={value.acf.image.url}
+                                                            alt="new"
+                                                        />
+                                                    </> :
+                                                        <Card.Img src={profile} style={{ height: 237, width: '97%' }} />}
+
                                                     <Card.Body>
                                                         <Card.Title >
                                                             <div className="text-center ">
                                                                 <div className="row align-items-center">
                                                                     <div className="col-md-11">
-                                                                        <h5>{value.myTitle}</h5>
+                                                                        <h5>{value.name}</h5>
                                                                     </div>
                                                                 </div>
                                                             </div>
                                                         </Card.Title>
-                                                        <button className="btn btn-primary" id="dropdown-basic-button" onClick={() => myTasks(value.myTasks)}>משימות
-                                                        </button>
-                                                        <button className="btn btn-primary" id="dropdown-basic-button" style={{ marginLeft: "100px" }} onClick={() => myUsersfunc(value.myUsers)}>משוייך ל
+                                                        <button className="btn btn-info" id="dropdown-basic-button" style={{ marginLeft: "90px" }} onClick={() => myUsersfunc(value)}>:מידע נוסף
                                                         </button>
                                                         <br></br>
                                                         <br></br>
-                                                        <button type="button" className="btn btn-outline-primary" style={{ width: "270px" }}
-                                                            onClick={() => Replication(value)}
-                                                        >
-                                                            <GrDuplicate className='icon' />
-                                                            &nbsp;&nbsp;
-                                                            שכפל מסלול זה</button>
+
                                                     </Card.Body>
                                                 </Card>
                                             </header>
@@ -293,30 +253,29 @@ const Cards = () => {
                                         <div key={index} className='App'>
                                             <header key={index} >
                                                 <Card style={{ color: "#000", marginBottom: 15, border: "3px solid rgb(106 185 48)" }}>
+                                                    {/* <Card.Img src={profile} style={{ height: 237, width: '97%' }} /> */}
+                                                    {value.acf.image ? <>
+                                                        <Image style={{ height: 237, width: '97%' }}
+                                                            src={value.acf.image.url}
+                                                            alt="new"
+                                                        />
+                                                    </> :
+                                                        <Card.Img src={profile} style={{ height: 237, width: '97%' }} />}
 
-                                                    <Card.Img src={img4} style={{ height: 237 }} />
                                                     <Card.Body>
                                                         <Card.Title >
                                                             <div className="text-center ">
                                                                 <div className="row align-items-center">
                                                                     <div className="col-md-11">
-                                                                        <h5>{value.myTitle}</h5>
+                                                                        <h5>{value.name}</h5>
                                                                     </div>
                                                                 </div>
                                                             </div>
                                                         </Card.Title>
-                                                        <button className="btn btn-primary" id="dropdown-basic-button" onClick={() => myTasks(value.myTasks)}>משימות
-                                                        </button>
-                                                        <button className="btn btn-primary" id="dropdown-basic-button" style={{ marginLeft: "100px" }} onClick={() => myUsersfunc(value.myUsers)}>משוייך ל
+                                                        <button className="btn btn-info" id="dropdown-basic-button" style={{ marginLeft: "90px" }} onClick={() => myUsersfunc(value)}>:מידע נוסף
                                                         </button>
                                                         <br></br>
                                                         <br></br>
-                                                        <button type="button" className="btn btn-outline-primary" style={{ width: "270px" }}
-                                                            onClick={() => Replication(value)}
-                                                        >
-                                                            <GrDuplicate className='icon' />
-                                                            &nbsp;&nbsp;
-                                                            שכפל מסלול זה</button>
                                                     </Card.Body>
                                                 </Card>
                                             </header>

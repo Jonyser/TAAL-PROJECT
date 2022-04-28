@@ -6,24 +6,17 @@ import { BsExclamationLg } from "react-icons/bs";
 
 
 let obj = { tasks: [], users: [] }
-let get_Route_ID = 0;
-let getUsers = [];
-let student = "";
+let student = [];
 let myStudents = [];
 let myStudentsChoice = [];
 function Modal({ setOpenModal, setText }) {
     const [, set_obj] = useState(null);// for TextView
     const [, setDone] = useState(false);
     const [, setLoading] = useState(false);
-    const [, setUsers] = useState([]);
-    const [, setStudent] = useState("")
+    const [, setStudent] = useState([])
     const [, setMyStudents] = useState([])
     const [, setMyStudentsChoice] = useState([])
-    const [isChecked, setIsChecked] = useState(false);
 
-    const handleOnChange = () => {
-        setIsChecked(!isChecked);
-    };
     useEffect(() => {
         const fetchData = async () => {
             setLoading(true);
@@ -48,17 +41,10 @@ function Modal({ setOpenModal, setText }) {
                 per_page: 99, 'Cache-Control': 'no-cache'
             }
         }).then(res => {
-            console.log("result users:", res)
-            res.map((r) => {
-                console.log("result of student:", r)//to the algoritem
-            })
 
-            setUsers(getUsers = res.map((r) => { return r }));
-            console.log("getUsers:", getUsers);
-            // setStudent(student = res.filter((item) => item.description !== ""))
-            // console.log("student:", student)
-            // setUsers(getUsers = student.map((r) => { return r }));
-            // console.log("getUsers:", getUsers);
+            setStudent(student = res.filter((item) => item.acf.risk_profile > 0))
+            console.log("student:", student);
+
         });
     }
     function Post_Route() {
@@ -103,12 +89,11 @@ function Modal({ setOpenModal, setText }) {
             }).then(function (response) {
                 return response.json();
             }).then(function (post) {
-                get_Route_ID = post.id
                 setDone(true)
 
-                alert(get_Route_ID)
-                console.log("post:", post)
-                // window.location.replace("/planner")
+                // alert(get_Route_ID)
+                // console.log("post:", post)
+                window.location.replace("/planner")
             })
         }
     }
@@ -142,7 +127,7 @@ function Modal({ setOpenModal, setText }) {
                         count++;
                     }
                 }
-                if (count % 2 != 0) {
+                if (count % 2 !== 0) {
                     setMyStudentsChoice(myStudentsChoice.push(myStudents[index]))
                 }
                 console.log("myStudentsChoice:", myStudentsChoice)
@@ -193,10 +178,10 @@ function Modal({ setOpenModal, setText }) {
                                 X
                             </button>
                         </div>
-                        <h6></h6>
+
                         <h6 style={{ textAlign: 'right' }}>:שייך מסלול לחניכ/ים הרצוים <FcLink className='icon' /></h6>
                         <div className='allStudent' >
-                            {getUsers.map((value, index) => {
+                            {student.map((value, index) => {
                                 return (
                                     <label key={index} className="list-group-item" >
 

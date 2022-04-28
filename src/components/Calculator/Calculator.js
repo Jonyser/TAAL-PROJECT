@@ -154,10 +154,10 @@ const Calculator = () => {
         }
         if (actionMode === "") {
             setArrayIdTasks(val.myTasks.map((value) => {
-                arrayIdTasks.push(value.ID)
+                return arrayIdTasks.push(value.ID)
             }))
             setObjTasks(val.myTasks.map((value) => {
-                objTasks.push(value)
+                return objTasks.push(value)
             }))
             console.log("objTasks1:", objTasks)
             // console.log("value.post_title:", arrayNameTasks)
@@ -165,10 +165,10 @@ const Calculator = () => {
         }
         if (actionMode === "∪") {
             setArrayIdTasks(val.myTasks.map((value) => {
-                arrayIdTasks.push(value.ID)
+                return arrayIdTasks.push(value.ID)
             }))
             setObjTasks(val.myTasks.map((value) => {
-                objTasks.push(value)
+                return objTasks.push(value)
             }))
 
             setActionFlag(actionFlag = true);

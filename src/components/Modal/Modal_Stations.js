@@ -1,11 +1,9 @@
-import React, { useState, useRef } from 'react';
+import React, { useState } from 'react';
 import "./Modal.css";
 import { FcMultipleInputs } from "react-icons/fc";
 import { RiAsterisk } from "react-icons/ri";
 import { BsExclamationLg } from "react-icons/bs";
 
-
-let get_Route_ID = 0;
 let getPicture, getSound;
 let ichour = 'אישור'
 
@@ -15,7 +13,6 @@ const Modal_Stations = ({ setOpenModalPlaces, idTasks }) => {
     const [, setPicture] = useState(null);
     const [, setSound] = useState(null);
     const [getDescription, setDescription] = useState("");
-    const fileInput = useRef(null);
     //----------------------------------
 
     const handleTitleInput = (e) => {
@@ -65,7 +62,7 @@ const Modal_Stations = ({ setOpenModalPlaces, idTasks }) => {
         }).then(function (response) {
             return response.json();
         }).then(function (post) {
-            get_Route_ID = post.id
+            // get_Route_ID = post.id
             setDone(true)
 
             // alert(get_Route_ID)

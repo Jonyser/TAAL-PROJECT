@@ -148,7 +148,6 @@ function Modal({ setOpenModal, propActionFlag, idsTasks, helpProps, usersArray }
                                 </div>
                                 <h3>הוראות שימוש במחשבון</h3>
                                 <div className="body" style={{ textAlign: 'right' }}>
-                                    <h4></h4>
                                     <h5>:U</h5>
                                     <h5>   פעולת איחוד - ניתן לאחד 2 מסלולים ויותר, פעולה זו מוסיפה את המשימות השייכות למסלולים שבחרת לפי סדר הפעולות וניתן לשמור כמסלול חדש
                                     </h5>
