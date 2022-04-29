@@ -168,7 +168,7 @@ const Cards = () => {
                                                                 </div>
                                                             </div>
                                                         </Card.Title>
-                                                        <button className="btn btn-info" id="dropdown-basic-button" style={{ marginLeft: "90px" }} onClick={() => myUsersfunc(value)}> :מידע נוסף
+                                                        <button className="btn btn-primary" id="dropdown-basic-button" style={{ marginLeft: "90px" }} onClick={() => myUsersfunc(value)}>מידע נוסף
                                                         </button>
                                                         <br></br>
                                                         <br></br>
@@ -203,7 +203,7 @@ const Cards = () => {
                                                                 </div>
                                                             </div>
                                                         </Card.Title>
-                                                        <button className="btn btn-info" id="dropdown-basic-button" style={{ marginLeft: "90px" }} onClick={() => myUsersfunc(value)}>:מידע נוסף
+                                                        <button className="btn btn-primary" id="dropdown-basic-button" style={{ marginLeft: "90px" }} onClick={() => myUsersfunc(value)}>מידע נוסף
                                                         </button>
                                                         <br></br>
                                                         <br></br>
@@ -237,7 +237,7 @@ const Cards = () => {
                                                                 </div>
                                                             </div>
                                                         </Card.Title>
-                                                        <button className="btn btn-info" id="dropdown-basic-button" style={{ marginLeft: "90px" }} onClick={() => myUsersfunc(value)}>:מידע נוסף
+                                                        <button className="btn btn-primary" id="dropdown-basic-button" style={{ marginLeft: "90px" }} onClick={() => myUsersfunc(value)}>מידע נוסף
                                                         </button>
                                                         <br></br>
                                                         <br></br>
@@ -272,7 +272,7 @@ const Cards = () => {
                                                                 </div>
                                                             </div>
                                                         </Card.Title>
-                                                        <button className="btn btn-info" id="dropdown-basic-button" style={{ marginLeft: "90px" }} onClick={() => myUsersfunc(value)}>:מידע נוסף
+                                                        <button className="btn btn-primary" id="dropdown-basic-button" style={{ marginLeft: "90px" }} onClick={() => myUsersfunc(value)}>מידע נוסף
                                                         </button>
                                                         <br></br>
                                                         <br></br>

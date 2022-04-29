@@ -3,8 +3,6 @@ import { get } from "../../api/api";
 import "./Modal.css";
 import img1 from '../../Pictures/img1.png';
 import img2 from '../../Pictures/img2.png';
-
-
 import { BsFillFlagFill } from "react-icons/bs";
 
 let profileStudent = 0;
@@ -17,10 +15,9 @@ let dataUsers = []
 let epsilon = 10;
 let myOriginalTasksFlag = false;
 
-function Modal_Cards({ setOpenModal, setText, thisMyRoute, thisGetMyTasks, thisFlagTasks, thisGetMyUsers, thisFlagUsers, thisFlagUsersFromStudent }) {
-    console.log("thisGetMyUsers:", thisGetMyUsers);
-    console.log("thisGetMyTasks:", thisGetMyTasks);
-    //minimum_profile
+function Modal_Cards({ setOpenModal, setText, thisMyRoute, thisGetMyTasks, thisFlagTasks, thisGetMyUsers, thisFlagUsers }) {
+    // console.log("thisGetMyUsers:", thisGetMyUsers);
+    // console.log("thisGetMyTasks:", thisGetMyTasks);
     const [, setDone] = useState(false);
     const [, setProfileStudent] = useState(0);
     const [, setMyOriginalTasks] = useState([]);
@@ -28,6 +25,7 @@ function Modal_Cards({ setOpenModal, setText, thisMyRoute, thisGetMyTasks, thisF
     const [, setDataTasks] = useState([]);
     const [, setDataUsers] = useState([]);
     const [, setMyOriginalTasksFlag] = useState(false);
+    const [, setThisFlagTasks] = useState(false);
 
 
     useEffect(() => {
@@ -103,32 +101,29 @@ function Modal_Cards({ setOpenModal, setText, thisMyRoute, thisGetMyTasks, thisF
         }
     }
     const studentChois = (val) => {
-
-        setMyOriginalTasks(myOriginalTasks = [])
+        // setThisFlagTasks(thisFlagTasks = true);
+        setMyOriginalTasks(myOriginalTasks = []);
         // console.log("val:", val.ID);
         setOpenModal(false);
         setMyOriginalTasksFlag(myOriginalTasksFlag = true)
         thisGetMyTasks.map((val) => {
-
             return dataTasks.map((item) => {
                 if (val.ID === item.id) {
+                    console.log("my Original Tasks:", myOriginalTasks);
                     return setMyOriginalTasks(myOriginalTasks.push(item));
                 }
                 return null
             })
         });
         let myStudent = dataUsers.filter((item) => item.id === val.ID)
+        console.log("myStudent:", myStudent)
         setProfileStudent(profileStudent = myStudent[0].acf.risk_profile)
         // alert(profileStudent)
         // setMyOriginalTasks(myOriginalTasks = thisGetMyTasks.map((val) => dataTasks.filter((item) => item.id === val.ID)));
-        console.log("my Original Tasks:", myOriginalTasks);
+
     }
     return (
         <>
-            {/* <span><BsFillFlagFill style={{ color: red_flag }} /></span>
-            <BsFillFlagFill style={{ color: red_flag }} />
-            <BsFillFlagFill style={{ color: orange_flag }} />
-            <BsFillFlagFill style={{ color: green_flag }} /> */}
             {thisFlagTasks === true ? <>
                 <div className="Background">
                     <div className="modalMyTasksContainer">
@@ -178,7 +173,7 @@ function Modal_Cards({ setOpenModal, setText, thisMyRoute, thisGetMyTasks, thisF
                                                         </> :
                                                             <BsFillFlagFill style={{ color: green_flag }} />
                                                         }
-                                                        {console.log("val.acf.minimum_profile:", typeof (parseInt(val.acf.minimum_profile)))}
+                                                        {/* {console.log("val.acf.minimum_profile:", typeof (parseInt(val.acf.minimum_profile)))} */}
                                                     </div>
                                                     <br></br>
                                                 </div>

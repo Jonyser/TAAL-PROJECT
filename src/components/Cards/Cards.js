@@ -146,8 +146,10 @@ const Cards = () => {
         setFlagUsers(flagUsers = false)
     }
     const myUsersfunc = (val) => {
-        console.log("getMyUsers:", val)
-        setMyUsers(getMyUsers = val);
+        setMyTasks(getMyTasks = val.myTasks);
+        console.log("getMyUsers:", val.myUsers)
+        console.log("getMyTasks:", val.myTasks)
+        setMyUsers(getMyUsers = val.myUsers);
         setModalOpen(true);
         setFlagUsers(flagUsers = true)
         setFlagTasks(flagTasks = false)
@@ -188,7 +190,7 @@ const Cards = () => {
                                                         </Card.Title>
                                                         <button className="btn btn-primary" id="dropdown-basic-button" onClick={() => myTasks(value.myTasks)}>משימות
                                                         </button>
-                                                        <button className="btn btn-primary" id="dropdown-basic-button" style={{ marginLeft: "100px" }} onClick={() => myUsersfunc(value.myUsers)}>משוייך ל
+                                                        <button className="btn btn-primary" id="dropdown-basic-button" style={{ marginLeft: "100px" }} onClick={() => myUsersfunc(value)}>משוייך ל
                                                         </button>
                                                         <br></br>
                                                         <br></br>
@@ -236,7 +238,7 @@ const Cards = () => {
                                                                 </Dropdown.Item>
                                                                 </>}
                                                         </DropdownButton> */}
-                                                        <button className="btn btn-primary" id="dropdown-basic-button" style={{ marginLeft: "100px" }} onClick={() => myUsersfunc(value.myUsers)}>משוייך ל
+                                                        <button className="btn btn-primary" id="dropdown-basic-button" style={{ marginLeft: "100px" }} onClick={() => myUsersfunc(value)}>משוייך ל
                                                         </button>
                                                         <br></br>
                                                         <br></br>
@@ -272,7 +274,7 @@ const Cards = () => {
                                                         </Card.Title>
                                                         <button className="btn btn-primary" id="dropdown-basic-button" onClick={() => myTasks(value.myTasks)}>משימות
                                                         </button>
-                                                        <button className="btn btn-primary" id="dropdown-basic-button" style={{ marginLeft: "100px" }} onClick={() => myUsersfunc(value.myUsers)}>משוייך ל
+                                                        <button className="btn btn-primary" id="dropdown-basic-button" style={{ marginLeft: "100px" }} onClick={() => myUsersfunc(value)}>משוייך ל
                                                         </button>
                                                         <br></br>
                                                         <br></br>
@@ -307,7 +309,7 @@ const Cards = () => {
                                                         </Card.Title>
                                                         <button className="btn btn-primary" id="dropdown-basic-button" onClick={() => myTasks(value.myTasks)}>משימות
                                                         </button>
-                                                        <button className="btn btn-primary" id="dropdown-basic-button" style={{ marginLeft: "100px" }} onClick={() => myUsersfunc(value.myUsers)}>משוייך ל
+                                                        <button className="btn btn-primary" id="dropdown-basic-button" style={{ marginLeft: "100px" }} onClick={() => myUsersfunc(value)}>משוייך ל
                                                         </button>
                                                         <br></br>
                                                         <br></br>

@@ -5,14 +5,12 @@ import { get } from "../../api/api";
 import Images from '../Images/Images';
 import { FcSpeaker } from "react-icons/fc";
 
-
 let MyTasks = [];
 let IdTask = 0;
 // let dataTask = [];
 function View_my_tasks({ prop }) {
     const [, setIdTask] = useState([]);
     const [, setDataTask] = useState([]);
-
     const clickTask = async (e) => {
         setIdTask(IdTask = e.ID);
         //'https://taal.tech/wp-json/wp/v2/tasks/'
