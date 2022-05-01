@@ -14,7 +14,6 @@
   margin: -0.5px;
   padding-top: 1px;
   padding-bottom: 1px;
-
 }
 
 .Station{
@@ -45,6 +44,7 @@
   background-color: rgb(253, 245, 241);
   color: rgb(90, 107, 122);
   border-style: dotted;
+  margin: 20px;
 }
 
 .Station:hover {

@@ -45,6 +45,7 @@
   background-color: rgb(243, 241, 255);
   color: rgb(90, 107, 122);
   border-style: dotted;
+  margin: 20px;
 }
 
 .Place:hover {
