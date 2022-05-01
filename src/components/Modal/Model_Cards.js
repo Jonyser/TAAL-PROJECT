@@ -7,17 +7,16 @@ import { BsFillFlagFill } from "react-icons/bs";
 
 let profileStudent = 0;
 let myOriginalTasks = [];
-let red_flag = "red";//      
-let orange_flag = "orange";//
-let green_flag = "green";// 
+let red_flag = "red";
+let orange_flag = "orange";
+let green_flag = "green";
 let dataTasks = [];
 let dataUsers = []
 let epsilon = 10;
 let myOriginalTasksFlag = false;
 
 function Modal_Cards({ setOpenModal, setText, thisMyRoute, thisGetMyTasks, thisFlagTasks, thisGetMyUsers, thisFlagUsers }) {
-    // console.log("thisGetMyUsers:", thisGetMyUsers);
-    // console.log("thisGetMyTasks:", thisGetMyTasks);
+
     const [, setDone] = useState(false);
     const [, setProfileStudent] = useState(0);
     const [, setMyOriginalTasks] = useState([]);
@@ -25,8 +24,6 @@ function Modal_Cards({ setOpenModal, setText, thisMyRoute, thisGetMyTasks, thisF
     const [, setDataTasks] = useState([]);
     const [, setDataUsers] = useState([]);
     const [, setMyOriginalTasksFlag] = useState(false);
-    const [, setThisFlagTasks] = useState(false);
-
 
     useEffect(() => {
         const fetchData = async () => {
