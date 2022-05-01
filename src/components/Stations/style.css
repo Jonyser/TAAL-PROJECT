@@ -17,6 +17,10 @@
 
 }
 
+.Station{
+  margin: 20px;
+}
+
 .Station,
 .AddStation {
   display: flex;

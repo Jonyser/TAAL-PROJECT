@@ -17,6 +17,10 @@
 
 }
 
+.Place{
+  margin: 20px;
+}
+
 .Place,
 .AddPlace {
   display: flex;
@@ -29,7 +33,6 @@
   margin-right: 50;
   border-radius: 1.5ch;
   font-size: small;
-
 }
 
 .Place:focus {
