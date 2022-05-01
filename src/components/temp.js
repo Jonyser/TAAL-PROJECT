@@ -1,17 +1,11 @@
 import React, { useState } from "react";
 import ReactLoading from 'react-loading';
 let flag_token = false
-// let myStatus = 0;
-
-let flag_token = false
-
-
+let myStatus = 0;
 function LoginAPI(props) {
 
-    // alert(props.getFlagLoading)
     const [, login_token] = useState('')
-    // const [, setMyStatus] = useState(0)
-
+    const [, setMyStatus] = useState(0)
     if (props.APIDetailsLogin.user.length > 0) {
 
         const url = 'https://s83.bfa.myftpupload.com/wp-json/jwt-auth/v1/token'
@@ -26,9 +20,11 @@ function LoginAPI(props) {
                 password: props.APIDetailsLogin.pass
             })
         })
-            .then((response) =>
-                response.status === 403 ? (alert('Wrong username/mail or wrong Password'), flag_token = true) : response.json())
+            .then((response) => {
+                setMyStatus(myStatus = response.status)
+                console.log(myStatus)
 
+            }).then((response) => response.status === 403 ? (alert('Wrong username/mail or wrong Password'), flag_token = true) : response.json())
             .then(function (user) {
                 if (!flag_token) {
                     if (user.message !== undefined) {
@@ -40,6 +36,7 @@ function LoginAPI(props) {
                     }
                     console.log("token", user.token)
                     sessionStorage.setItem('jwt', user.token)
+
                     sessionStorage.setItem('logged_in', 1)
                     window.location.replace('/planner')
                 }

@@ -1,16 +1,13 @@
-  .images{
-    display: flex;
-    width: 280px;
-    height: 100px;
-    /* margin-right:  230px;
-    margin-left: 240px;
-    padding:  80px; */
+.images {
+  display: flex;
+  width: 340px;
+  height: 100px;
+}
 
-  }
-  img{
+img {
 
-    width: 600px;
-    height: 130px;
-    margin: 2%;
-    padding: 2%;
-  }
+  width: 600px;
+  height: 140px;
+  margin: 2%;
+  padding: 2%;
+}

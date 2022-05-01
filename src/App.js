@@ -1,49 +1,42 @@
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { BrowserRouter as Router } from "react-router-dom";
 import Nav from './components/Nav/Nav';
-import About from './components/About.js/About';
 import Planner from './components/Planner/Planner';
-import Profile from './components/Profile/Profile';
-import Calc from './components/Calc/Calc';
+import Calculator from './components/Calculator/Calculator';
+import Student from './components/Student/Student';
+// import Student from '/components/Student/Student';
 import './App.css';
-import LoginApp from './components/Login/LoginApp';
+import Login from './components/Login/Login';
 import { Provider } from 'react-redux';
 import store from './redux/store';
-import background from './Pictures/img8.jpg';
-// import CallState from "./components/CallState/CallState";
 
+import Cards from './components/Cards/Cards';
+import { Switch, Route } from "react-router-loading";
+// import CallState from "./components/CallState/CallState";
 function App() {
   return (
-
-    <div style={{
-      backgroundColor: 'rgba(37,47,57,.9)',
-      overflow: "auto",
-      height: 'auto', backgroundImage: `url(${background})`,
-
-    }}>
-      <Provider store={store}>
-        <Router>
-          <div>
-            <Nav />
-            <Switch>
-              {/* <CallState /> */}
-              <Route path="/planner" component={Planner}></Route>
-              <Route path="/profile" component={Profile}></Route>
-              <Route path="/calc" component={Calc}></Route>
-              <Route path="/about" component={About}></Route>
-              <Route path="/" exact component={Home}></Route>
-            </Switch>
-          </div>
-        </Router>
-      </Provider>
-    </div >
-
-
+    <>
+      <div>
+        <Provider store={store}>
+          <Router>
+            <div>
+              {sessionStorage.logged_in == 1 ? <><Nav /></> : null}
+              <Switch>
+                {/* <CallState /> */}
+                <Route path="/" exact component={Home}></Route>
+                <Route path="/planner" component={Planner}></Route>
+                <Route path="/student" component={Student}></Route>
+                <Route path="/Calculator" component={Calculator}></Route>
+                <Route path="/routes_cards" component={Cards}></Route>
+                {/* <Route path="/about" component={About}></Route> */}
+              </Switch>
+            </div>
+          </Router>
+        </Provider>
+      </div >
+    </>
   );
 }
-
 const Home = () => (
-
-  <LoginApp />
-
+  <Login />
 )
 export default App;

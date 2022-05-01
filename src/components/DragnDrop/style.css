@@ -1,83 +1,151 @@
-/* .Board{
-  right: 60px;
-  margin: -60px;
-  height: 130px;
-  width: 100%;
-  justify-content: right;
- justify-self: unset;
-  display:inline-flex;
-  border: 5px solid rgb(83, 90, 146); 
-  position:absolute;
-  
-}  */
-.Board{
-  left: 10px;
-  margin: 10px;
+.Board {
+  left: -60px;
+  margin: 70px;
   height: auto;
-  width: 300px;
+  width: 370px;
   justify-content: right;
- justify-self: unset;
-   /* border-radius: 1.5ch; */
-  border: 5px solid rgb(83, 90, 146); 
-  position:absolute;
-  
-} 
-.txt{
-  margin: 10px;
-  padding: 20px;
-  width: auto;
-  height: 60px;
-
-  color: rgb(55, 82, 82);
+  justify-self: unset;
+  background-color: rgb(234, 237, 247);
   border-radius: 20px;
-  border: 1px solid transparent;
-  position: relative;
-  font-size: 28px;
-  line-height: 32px;
-  font-family: ReformaNarrowMedium;
-  font-weight: 400;
-  display: inline-block;
-  white-space: nowrap;
+  position: absolute;
 }
 
-
-
-.Cover_Tasks{
-    float: right;
-    padding: 5%;
-    margin-right: -7%;
-    font-size: small;
+.Board:hover {
+  background-color: rgb(242, 245, 255);
 }
 
-.TitleTasks{
+.Cover_Tasks {
+  float: right;
+  padding: 5%;
+  margin-right: -7%;
+  font-size: small;
+}
 
-  background: linear-gradient(90deg,#6eb5b8 0,#738376);
-  color:rgb(236, 245, 220);
+.TitleTasks {
+  background: linear-gradient(90deg, rgb(236, 245, 220) 95%, rgb(164, 190, 125) 1%);
+  color: rgb(88, 92, 81);
   height: 40px;
-   border-radius: 1ch;
-   margin-bottom: 15px;
-   font-size: small;
+  border-radius: 1ch;
+  margin-bottom: 15px;
+  font-size: small;
 }
 
-.TasksCover{
-  background: linear-gradient(90deg,#a3b0b1 0,#738376);
+.TasksCover {
+  background-color: rgb(236, 245, 220);
   margin: -0.5px;
   padding-top: 1px;
   padding-bottom: 1px;
   border-radius: 1.5ch;
+  overflow: auto;
+  height: 440px;
+  width: 320px;
 }
 
-.MediaCover{
-  float:right;
+.addTaskCover {
+  background-color: rgb(236, 245, 220);
+  margin: -0.5px;
+  padding-top: 1px;
+  padding-bottom: 1px;
+  width: 320px;
+}
+
+.MediaCover {
+  float: right;
   margin: 10%;
 }
 
-/* .MediaSize{
-  background-color:rgb(194, 219, 240);
-  height: 50px;
-  width:50px;
-
+.AddTasks {
+  display: flex;
+  width: 85%;
+  height: 90px;
+  margin: 20px;
+  padding: 20px;
+  justify-content: right;
+  justify-Content: 'space-between';
+  margin-right: 50px;
   border-radius: 1.5ch;
-  
-} */
-  
+  color: rgb(90, 107, 122);
+  border-style: dotted;
+  background-color: rgb(240, 247, 229);
+}
+
+.AddTasks:hover {
+  background: linear-gradient(90deg, #f1fae7 0, #deecd5);
+}
+
+.MyTasks {
+  margin: 10px;
+  height: 340px;
+  width: 350px;
+  overflow: auto;
+  background-color: rgb(198, 204, 225);
+  border-radius: 20px;
+  border: 0.05px solid rgb(181, 184, 210);
+}
+
+.blink {
+  position: relative;
+  left: 95px;
+  margin: 10px;
+  padding: 20px;
+  width: auto;
+  height: 60px;
+  color: rgb(41, 61, 61);
+  border: 1px solid transparent;
+  font-size: 28px;
+  font-family: ReformaNarrowMedium;
+  font-weight: 800px;
+  justify-content: right;
+}
+
+span {
+
+  position: relative;
+
+  /* justify-content: right; */
+  font-family: cursive;
+  color: rgb(185, 168, 197);
+  animation: blink 1s linear infinite;
+}
+
+@keyframes blink {
+  99.9999% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: .999;
+  }
+}
+
+.txt {
+  position: relative;
+  left: 60px;
+  margin: 10px;
+  padding: 20px;
+  width: auto;
+  height: 60px;
+  color: rgb(43, 41, 61);
+  border: 1px solid transparent;
+  font-size: 28px;
+  /* line-height: 32px; */
+  font-family: ReformaNarrowMedium;
+  font-weight: 800px;
+  justify-content: right;
+}
+
+.helpBtn {
+  background-color: rgba(49, 70, 90, 0.9);
+  border-radius: 20px;
+  color: #ffffff;
+  font-family: ReformaNarrowMedium;
+  font-size: 18px;
+  font-weight: 400;
+  height: 40px;
+}
+
+.helpBtn:hover {
+  background-color: rgba(79, 113, 145, 0.9);
+  /* font-size: x-large;
+  transition: 0.4s; */
+}

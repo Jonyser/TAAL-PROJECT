@@ -2,36 +2,31 @@ import React, { useState, useEffect } from 'react';
 import { get } from "../../api/api";
 import './style.css';
 import { BsPencilFill } from "react-icons/bs";
+import { FcAddDatabase } from "react-icons/fc";
 import Stations from '../Stations/Stations'
 import Dot from '../Dot/Dot'
-// import $, { } from 'jquery'
 import ReactLoading from 'react-loading';
-
+import Modal_Places from '../Modal/Model_Places'
 
 let places = [];
+let onlyAllStation = [];
 let stationArray = [];
 let Places_and_their_stations = [];
-
-const jq = () => {
-    // $(".TitleStation").hide();
-    // console.log("ttt")
-}
-
+let thisIdTask = 0;
 
 const Places = () => {
-    const [, setData] = useState([]);
-    const [done, setDone] = useState(undefined);
+    const [done, setDone] = useState(false);
     const [, setLoading] = useState(false);
     const [, setStateStation] = useState([]);
-
+    const [modalOpen, setModalOpen] = useState(false);
+    const [, setThisIdTask] = useState(0)
+    const [, setOnlyAllStation] = useState([]);
 
     useEffect(() => {
         const fetchData = async () => {
             setLoading(true);
             try {
                 getData();
-                jq();
-
             } catch (error) {
                 console.error(error.message);
             }
@@ -39,67 +34,19 @@ const Places = () => {
         }
         fetchData();
     }, []);
-    useEffect(() => {
-        setTimeout(() => {
-            fetch('https://jsonplaceholder.typicode.com/posts/1') //https://jsonplaceholder.typicode.com/guide/ api
-                .then((response) => response.json())
-                .then((json) => {
-                    setData(json);
-                    setDone(true);
-                });
-        }, 2000);
-
-    }, [])
 
     const getData = async () => {
-        // let a = "https://s83.bfa.myftpupload.com/?rest_route=/simple-jwt-login/v1/auth"
-
-        // fetch(a, { method: "POST", body: "email=jonassp@post.jce.ac.il&password=GvS7GZJUDLt0DKBM" }).then(r => r.json()).then(console.log)
-        // ----------------------------------------------------------------------------
-        //https://s83.bfa.myftpupload.com/wp-json/wp/v2/places/
-
-        // var token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2NDY3NDEzMjYsImlkIjoyNSwidXNlcm5hbWUiOiJKb25hcyJ9.TURkjx5n7UmSIry5BUbCmAGPbt8TvueupVet6cQwzjQ";
-        // let url_post = `https://s83.bfa.myftpupload.com/wp-json/wp/v2/routes`
-        // fetch(url_post, {
-        //     method: "POST",
-        //     headers: {
-        //         'Content-Type': 'application/json',
-                
-        //         'Authorization': `Basic ${btoa('Jonas:' + 'Y6fV e9VO vvfq o6HJ 4ook EV2U')}`,
-
-        //     },
-        // }).then(function (response) {
-        //     return response.json();
-        // }).then(function (post) {
-        //     console.log(post);
-        // });
-
-            // fetch('https://s83.bfa.myftpupload.com/wp-json/wp/v2/routes',{
-            //     method: "POST",
-            //     headers: {
-            //         'Content-Type': 'application/json',
-            //         'accept': 'application/json',
-            //         'Authorization': `Bearer ${localStorage.getItem('jwt')}`
-            //     },
-            //     body:JSON.stringify({
-            //         title: 'Add posts from the frontend',
-            //         content: 'This is the way to add posts from your frontend.',
-            //         status: 'publish'
-            //     })
-            // }).then(function(response){
-            //     return response.json()
-            // }).then(function(post){
-            //     console.log(post)
-            // });
-
+        // taal.tech/wp-json/wp/v2/places
+        ///s83.bfa.myftpupload.com/wp-json/wp/v2/places
         await get('https://s83.bfa.myftpupload.com/wp-json/wp/v2/places/', {
             params: {
                 per_page: 99, 'Cache-Control': 'no-cache'
             }
+
         }).then(res => {
             console.log("res: ", res)
             places = res.filter((item) => item.parent === 0)
-
+            setOnlyAllStation(onlyAllStation = res.filter((item) => item.parent > 0))
             Places_and_their_stations = places.map((element) => {
                 return {
                     parent: element,
@@ -107,46 +54,53 @@ const Places = () => {
                 }
             })
         });
+        setDone(true)
+        // setData_Loaded(true)
     }
-
     const Display_The_Stations = (e) => {
-        jq()
+        setThisIdTask(thisIdTask = e.id)
         if (stationArray.length > 0) {
             stationArray = [];
         }
         // console.log("val:", e);
-
-
         Places_and_their_stations.forEach(element => {
-
             if (element.parent.id === e.id) {
-
                 element.related.forEach(rel => {
-
                     setStateStation({ data: stationArray.push(rel) });
-
                 });
                 // console.log("stationArray:", stationArray);
             }
         });
+        setStateStation({ data: stationArray })
     }
-
     //----------------------------------------------------------------------
-
     return (
         <>
-
             {!done ? <>
-                <h1 float={'right'}>loading</h1>
+                <h1 style={{ textAlign: "center" }}>Loading</h1>
                 < ReactLoading type={"bars"} className='loading' color={"rgb(180, 175, 199)"} height={'10%'} width={'10%'} />
             </>
                 :
                 <>
+                    {modalOpen && <Modal_Places setOpenModalPlaces={setModalOpen} />}
                     <div className='Cover_Places'>
                         <div className='TitlePlaces'><h3>אתרים</h3></div>
-
+                        <div className='addPlaceCover'>
+                            <button
+                                className='AddPlace'
+                                onClick={() => {
+                                    setModalOpen(true);
+                                }}>
+                                <FcAddDatabase style={{
+                                    width: "85px",
+                                    height: "30px"
+                                }} />
+                                <h6>הוסף אתר</h6>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            </button>
+                        </div>
                         <div className='Places'>
-
                             {places.map((value, index) => {
                                 return (
                                     <button
@@ -161,82 +115,11 @@ const Places = () => {
                             })}
 
                         </div>
-
                     </div>
-                    <Stations propsData={stationArray} />
+                    <Stations propsData={stationArray} idTask={thisIdTask} allStations={onlyAllStation} />
                 </>
             }
         </>
     );
-
 }
 export default Places;
-
-
-// connect(
-//     undefined,
-//     (dispatch) => {
-//         return {
-//             changeNameFromPlaces:
-//                 (newName) => dispatch(setName(newName))
-//         }
-
-//     }
-
-// )(Places);
-
- // let a = "https://s83.bfa.myftpupload.com/?rest_route=/simple-jwt-login/v1/auth"
-
-        // fetch(a, { method: "POST", body: "email=jonassp@post.jce.ac.il&password=GvS7GZJUDLt0DKBM" }).then(r => r.json()).then(console.log)
-        // ----------------------------------------------------------------------------
-        //https://s83.bfa.myftpupload.com/wp-json/wp/v2/places/
-
-
-        // await get('https://s83.bfa.myftpupload.com/wp-json/wp/v2/routes/', {
-        //     params: {
-        //         per_page: 99, 'Cache-Control': 'no-cache'
-        //     }
-        // }).then(res => {
-        //     places = res.filter((item) => item.parent === 0)
-
-        //     Places_and_their_stations = places.map((element) => {
-        //         return {
-        //             parent: element,
-        //             related: res.filter((r) => r.parent === element.id)
-        //         }
-        //     })
-
-        //     for (let i = 0; i < Places_and_their_stations.length; i++) {
-        //         let temp = Places_and_their_stations[i]
-        //         setStatePlaces(statePlaces => [...statePlaces, { value: temp.parent.name, label: temp.parent.name }])
-        //     }
-        // });
-
-        // await get('https://s83.bfa.myftpupload.com/wp-json/wp/v2/routes/', {
-        //     params: {
-        //         per_page: 99, 'Cache-Control': 'no-cache'
-        //     }
-        // }).then(res => {
-        //     console.log("masloulims :", res)
-        // })
-
-        // var token = `eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2N…hcyJ9.IdhRTqgRouzeJHx6CmPu1oNVFddK5bjtfmxOk2Fnb1s`;
-        // let url_post = `https://s83.bfa.myftpupload.com/wp-json/wp/v2/routes`
-        // fetch(url_post, {
-        //     method: "POST",
-        //     headers: {
-        //         'Content-Type': 'application/json',
-        //         'Authorization': `Bearer ${token}`,
-
-
-        //     },
-        //     body: JSON.stringify({
-        //         title: 'Lorem ipsum',
-        //         content: 'Lorem ipsum dolor sit amet.',
-        //         status: 'draft'
-        //     })
-        // }).then(function (response) {
-        //     return response.json();
-        // }).then(function (post) {
-        //     console.log(post);
-        // });
