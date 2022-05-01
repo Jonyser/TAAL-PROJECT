@@ -3,8 +3,6 @@ import ReactLoading from 'react-loading';
 let flag_token = false
 // let myStatus = 0;
 
-let flag_token = false
-
 
 function LoginAPI(props) {
 
