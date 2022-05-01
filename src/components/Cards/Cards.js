@@ -157,8 +157,11 @@ const Cards = () => {
     return (
         <>
             {!done ? <>
+                <h1>asfsdfsdgdfgdfhdrfhdfh</h1>
+
                 <h1 float={'right'} style={{ color: 'white' }}>Loading</h1>
                 < ReactLoading type={"bars"} className='loading' color={"rgb(180, 175, 199)"} height={'10%'} width={'10%'} />
+                {console.log("loading")}
             </>
                 :
                 <>

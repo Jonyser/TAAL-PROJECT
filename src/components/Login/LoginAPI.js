@@ -1,12 +1,15 @@
 import React, { useState } from "react";
 import ReactLoading from 'react-loading';
 let flag_token = false
+let flag = false;
 // let myStatus = 0;
 
 function LoginAPI(props) {
 
+    console.log()
     // alert(props.getFlagLoading)
     const [, login_token] = useState('')
+    const [, setFlag] = useState(false)
     // const [, setMyStatus] = useState(0)
 
     if (props.APIDetailsLogin.user.length > 0) {
@@ -24,7 +27,7 @@ function LoginAPI(props) {
             })
         })
             .then((response) =>
-                response.status === 403 ? (alert('Wrong username/mail or wrong Password'), flag_token = true) : response.json())
+                response.status === 403 ? (alert('Wrong username/mail or wrong Password')) : response.json())
 
             .then(function (user) {
                 if (!flag_token) {
@@ -35,16 +38,19 @@ function LoginAPI(props) {
                             login_token(flag_token = true)
                         }
                     }
+                    setFlag(flag = true);
                     console.log("token", user.token)
                     sessionStorage.setItem('jwt', user.token)
                     sessionStorage.setItem('logged_in', 1)
                     window.location.replace('/planner')
+
+
                 }
             })
     }
     return (
         <>
-            {props.getFlagLoading ? <>
+            {props.getFlagLoading && flag ? <>
                 <h1 style={{ textAlign: "center", color: "white" }}>Loading</h1>
                 < ReactLoading type={"bars"} className='loading' color={"rgb(180, 175, 199)"} height={'10%'} width={'10%'} />
             </> : null
