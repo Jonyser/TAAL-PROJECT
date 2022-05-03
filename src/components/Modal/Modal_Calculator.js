@@ -1,11 +1,15 @@
 import React, { useState } from 'react';
 import "./Modal.css";
 import { RiAsterisk } from "react-icons/ri";
+import Modal_Loading from "./Modal_Loading";
+
 
 let get_title = ""
+let flagClickOK = false;
 
 function Modal({ setOpenModal, propActionFlag, idsTasks, helpProps, usersArray }) {
     const [, settitle] = useState("");
+    const [, setFlagClickOK] = useState(false);
     const handleTitleInput = (e) => {
         settitle(get_title = e.target.value)
     }
@@ -14,6 +18,8 @@ function Modal({ setOpenModal, propActionFlag, idsTasks, helpProps, usersArray }
     // console.log("helpProps:", helpProps)
 
     function Post_Route() {
+
+        setFlagClickOK(flagClickOK = true)
         let url_post = `https://s83.bfa.myftpupload.com/wp-json/wp/v2/routes`
         fetch(url_post, {
             method: "POST",
@@ -131,6 +137,7 @@ function Modal({ setOpenModal, propActionFlag, idsTasks, helpProps, usersArray }
                                         onClick={Post_Route}
                                     >כן
                                     </button>
+                                    {flagClickOK ? <><Modal_Loading props={false} /></> : <></>}
                                 </div>
                             </div>
                         </div>

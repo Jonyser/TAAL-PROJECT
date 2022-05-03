@@ -8,9 +8,9 @@ import img2 from '../../Pictures/img2.png';
 import img3 from '../../Pictures/img3.png';
 import img4 from '../../Pictures/img6.png';
 import logo from '../../Pictures/logo.jpeg';
-import ReactLoading from 'react-loading';
 import Modal_Cards from '../Modal/Model_Cards'
 import { GrDuplicate } from "react-icons/gr";
+import Modal_Loading from "../Modal/Modal_Loading";
 // import { Form } from "react-bootstrap";
 //----------------------------------------------------|
 let dataCards = [];//                                 |
@@ -63,12 +63,15 @@ const Cards = () => {
     const getData = () => {
         // https://s83.bfa.myftpupload.com/wp-json/wp/v2/routes/
         // https://taal.tech/wp-json/wp/v2/routes/
+        if (flag_show_page === true)
+            setDone(true)
         if (flag_show_page === false)
             get('https://s83.bfa.myftpupload.com/wp-json/wp/v2/routes/', {
                 params: {
                     per_page: 99, 'Cache-Control': 'no-cache'
                 }
             }).then(res => {
+                setDone(true)
                 console.log("Masloulims:", res)
                 size = res.length / number;
 
@@ -129,7 +132,7 @@ const Cards = () => {
                 sizeMod = dataCards.length % number;
                 size = (dataCards.length - sizeMod) / number;
             });
-        setDone(true)
+
     }
     const Replication = (val) => {
         setModalOpen(true);
@@ -157,11 +160,8 @@ const Cards = () => {
     return (
         <>
             {!done ? <>
-                <h1>asfsdfsdgdfgdfhdrfhdfh</h1>
 
-                <h1 float={'right'} style={{ color: 'white' }}>Loading</h1>
-                < ReactLoading type={"bars"} className='loading' color={"rgb(180, 175, 199)"} height={'10%'} width={'10%'} />
-                {console.log("loading")}
+                {<Modal_Loading />}
             </>
                 :
                 <>

@@ -4,9 +4,9 @@ import '../../../node_modules/bootstrap/dist/css/bootstrap.css';
 import { Card } from 'react-bootstrap';
 import profile from '../../Pictures/profile1.png';
 import logo from '../../Pictures/logo.jpeg';
-import ReactLoading from 'react-loading';
 import Modal_Student from '../Modal/Modal_Student'
 import Image from 'react-bootstrap/Image';
+import Modal_Loading from '../Modal/Modal_Loading'
 // import { Form } from "react-bootstrap";
 //----------------------------------------------------|
 let dataCards = [];//                                 |
@@ -49,6 +49,8 @@ const Cards = () => {
         fetchData();
     }, []);
     const getData = () => {
+        if (flag_show_page === true)
+            setDone(true)
         if (flag_show_page === false)
             get('https://s83.bfa.myftpupload.com/wp-json/wp/v2/users/', {
                 headers: {
@@ -59,6 +61,8 @@ const Cards = () => {
                     per_page: 99, 'Cache-Control': 'no-cache'
                 }
             }).then(res => {
+
+                setDone(true)
                 console.log("Users:", res)
                 size = res.length / number;
                 setDataCards(dataCards = res.filter((item) => item.acf.risk_profile > 0))
@@ -103,22 +107,7 @@ const Cards = () => {
                 size = (dataCards.length - sizeMod) / number;
             });
 
-        setDone(true)
     }
-    // const Replication = (val) => {
-    //     setModalOpen(true);
-    //     setMyRoute(myRoute = val)
-    //     setFlagTasks(flagTasks = false)
-    //     setFlagUsers(flagUsers = false)
-    // }
-    // const myTasks = (val) => {
-    //     console.log("getMyTasks:", val.myTasks)
-    //     setMyTasks(getMyTasks = val.myTasks);
-    //     setModalOpen(true);
-    //     setFlagTasks(flagTasks = true)
-    //     console.log("myval:", getMyTasks)
-    //     setFlagUsers(flagUsers = false)
-    // }
     const myUsersfunc = (val) => {
         console.log("getMyUsers.name:", val.name);
         setMyUsers(getMyUsers = val);
@@ -127,8 +116,7 @@ const Cards = () => {
     return (
         <>
             {!done ? <>
-                <h1 float={'right'} style={{ color: 'white' }}>Loading</h1>
-                < ReactLoading type={"bars"} className='loading' color={"rgb(180, 175, 199)"} height={'10%'} width={'10%'} />
+                {<Modal_Loading />}
             </>
                 :
                 <>
@@ -145,8 +133,6 @@ const Cards = () => {
                                         <div key={index} className='App'>
                                             <header key={index}>
                                                 <Card style={{ color: "#000", marginBottom: 15, border: "3px solid rgb(106 185 48)" }}>
-                                                    {/* display_name */}
-
                                                     {value.acf.image ? <>
                                                         <Image style={{ height: 237, width: '97%' }}
                                                             src={value.acf.image.url}
@@ -154,9 +140,6 @@ const Cards = () => {
                                                         />
                                                     </> :
                                                         <Card.Img src={profile} style={{ height: 237, width: '97%' }} />}
-
-
-
                                                     <Card.Body src={logo}>
                                                         <Card.Title >
 
@@ -172,7 +155,6 @@ const Cards = () => {
                                                         </button>
                                                         <br></br>
                                                         <br></br>
-
                                                     </Card.Body>
                                                 </Card>
                                             </header>
@@ -261,7 +243,6 @@ const Cards = () => {
                                                         />
                                                     </> :
                                                         <Card.Img src={profile} style={{ height: 237, width: '97%' }} />}
-
                                                     <Card.Body>
                                                         <Card.Title >
                                                             <div className="text-center ">

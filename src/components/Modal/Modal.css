@@ -91,6 +91,62 @@
   margin-left: 30%;
 }
 
+.modalContainerLoading {
+  background-color: aliceblue;
+  box-shadow: rgb(0 0 0 / 35%) 0px 5px 15px;
+  flex-direction: column;
+  position: fixed;
+  margin-top: -90px;
+  z-index: 10;
+  width: 100vw;
+  height: 100vh;
+  /* background-color: #728596;
+  box-shadow: rgb(0 0 0 / 35%) 0px 5px 15px;
+  flex-direction: column;
+  position: fixed;
+  margin-top: -390px;
+  margin-left: 140px;
+  z-index: 10;
+  width: 200px;
+  height: 200px;
+  border-radius: 100%;
+  padding: 30px; */
+}
+
+.modalContainerLittleLoading {
+  /* background-color: aliceblue;
+  box-shadow: rgb(0 0 0 / 35%) 0px 5px 15px;
+  flex-direction: column;
+  position: fixed;
+  margin-top: -90px;
+  z-index: 10;
+  width: 100vw;
+  height: 100vh; */
+  background-color: #728596;
+  box-shadow: rgb(0 0 0 / 35%) 0px 5px 15px;
+  flex-direction: column;
+  position: fixed;
+  margin-top: -390px;
+  margin-left: 140px;
+  z-index: 10;
+  width: 200px;
+  height: 200px;
+  border-radius: 100%;
+  padding: 30px;
+}
+
+
+/* background-color: aliceblue;
+box-shadow: rgb(0 0 0 / 35%) 0px 5px 15px;
+flex-direction: column;
+margin-top: -100px;
+z-index: 10;
+width: 500px;
+height: 0vh; */
+
+
+
+
 .modalContainerHelpPlanner {
   margin-right: auto;
   width: 575px;

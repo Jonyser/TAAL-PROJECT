@@ -14,7 +14,7 @@ let dataTasks = [];
 let dataUsers = []
 let epsilon = 10;
 let myOriginalTasksFlag = false;
-
+let flagClickOK = false;
 function Modal_Cards({ setOpenModal, setText, thisMyRoute, thisGetMyTasks, thisFlagTasks, thisGetMyUsers, thisFlagUsers }) {
 
     const [, setDone] = useState(false);
@@ -24,6 +24,7 @@ function Modal_Cards({ setOpenModal, setText, thisMyRoute, thisGetMyTasks, thisF
     const [, setDataTasks] = useState([]);
     const [, setDataUsers] = useState([]);
     const [, setMyOriginalTasksFlag] = useState(false);
+    const [, setFlagClickOK] = useState(false);
 
     useEffect(() => {
         const fetchData = async () => {
@@ -62,6 +63,7 @@ function Modal_Cards({ setOpenModal, setText, thisMyRoute, thisGetMyTasks, thisF
         });
     }
     function Post_Route() {
+        setFlagClickOK(flagClickOK = true);
         if (setText === null || setText === "") {
             alert('Please give the Route a title !')
             return
@@ -256,6 +258,8 @@ function Modal_Cards({ setOpenModal, setText, thisMyRoute, thisGetMyTasks, thisF
                                     onClick={Post_Route}
                                 > אישור
                                 </button>
+                                {flagClickOK ? <>
+                                </> : <></>}
                             </div>
                         </div>
                     </div>

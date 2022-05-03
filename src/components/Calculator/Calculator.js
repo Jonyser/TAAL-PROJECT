@@ -2,9 +2,9 @@ import React, { useState, useEffect } from 'react';
 import { get } from "../../api/api";
 import '../../../node_modules/bootstrap/dist/css/bootstrap.css';
 import './style.css';
-import ReactLoading from 'react-loading';
 import Modal_Calculator from '../Modal/Modal_Calculator';
 import View_my_tasks from '../View_my_tasks/View_my_tasks';
+import Modal_Loading from "../Modal/Modal_Loading";
 
 // import Dot from '../Dot/Dot'
 let dataCards = [];
@@ -65,12 +65,15 @@ const Calculator = () => {
     const getData = () => {
         // https://s83.bfa.myftpupload.com/wp-json/wp/v2/routes/
         // https://taal.tech/wp-json/wp/v2/routes/
+        if (flag_show_page === true)
+            setDone(true)
         if (flag_show_page === false)
             get('https:///s83.bfa.myftpupload.com/wp-json/wp/v2/routes/', {
                 params: {
                     per_page: 99, 'Cache-Control': 'no-cache'
                 }
             }).then(res => {
+                setDone(true)
                 console.log("resCAlc:", res)
                 size = res.length / number;
 
@@ -140,7 +143,7 @@ const Calculator = () => {
             setStudent(student = res.filter((item) => item.description !== ""))
             setUsers(getUsers = student.map((r) => { return r.name }));
         });
-        setDone(true)
+
     }
     //-------------------------------------------------------------
     const calc = (val) => {
@@ -252,8 +255,7 @@ const Calculator = () => {
     return (
         <>
             {!done ? <>
-                <h1 style={{ textAlign: "center", color: "white" }}>נא להמתין</h1>
-                < ReactLoading type={"bars"} className='loading' color={"rgb(180, 175, 199)"} height={'10%'} width={'10%'} />
+                <Modal_Loading />
             </>
                 :
                 <>  <div style={{

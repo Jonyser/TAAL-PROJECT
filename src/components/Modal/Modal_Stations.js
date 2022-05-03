@@ -3,9 +3,12 @@ import "./Modal.css";
 import { FcMultipleInputs } from "react-icons/fc";
 import { RiAsterisk } from "react-icons/ri";
 import { BsExclamationLg } from "react-icons/bs";
+import ReactLoading from 'react-loading';
+import Modal_Loading from "./Modal_Loading";
 
 let getPicture, getSound;
 let ichour = 'אישור'
+let flagClickOK = false;
 
 const Modal_Stations = ({ setOpenModalPlaces, idTasks }) => {
     const [, setDone] = useState(false);
@@ -13,6 +16,7 @@ const Modal_Stations = ({ setOpenModalPlaces, idTasks }) => {
     const [, setPicture] = useState(null);
     const [, setSound] = useState(null);
     const [getDescription, setDescription] = useState("");
+    const [, setFlagClickOK] = useState(false);
     //----------------------------------
 
     const handleTitleInput = (e) => {
@@ -42,6 +46,8 @@ const Modal_Stations = ({ setOpenModalPlaces, idTasks }) => {
     //----------------------------------
 
     function Post_Station() {
+        setFlagClickOK(flagClickOK = true)
+
         let url_post = `https://s83.bfa.myftpupload.com/wp-json/wp/v2/places`
         fetch(url_post, {
             method: "POST",
@@ -67,6 +73,7 @@ const Modal_Stations = ({ setOpenModalPlaces, idTasks }) => {
 
             // alert(get_Route_ID)
             console.log(post)
+            setFlagClickOK(flagClickOK = false);
             window.location.replace("/planner")
         })
     }
@@ -156,6 +163,7 @@ const Modal_Stations = ({ setOpenModalPlaces, idTasks }) => {
                             <div className="footer">
                                 <input type="submit" className='OK' value={ichour} onClick={Post_Station} />
                             </div>
+                            {flagClickOK ? <><Modal_Loading props={false} /></> : <></>}
                         </div>
                     </div>
                 </>

@@ -7,7 +7,7 @@ import Stations from '../Stations/Stations'
 import Dot from '../Dot/Dot'
 import ReactLoading from 'react-loading';
 import Modal_Places from '../Modal/Model_Places'
-
+import Modal_Loading from '../Modal/Modal_Loading'
 let places = [];
 let onlyAllStation = [];
 let stationArray = [];
@@ -77,8 +77,7 @@ const Places = () => {
     return (
         <>
             {!done ? <>
-                <h1 style={{ textAlign: "center" }}>Loading</h1>
-                < ReactLoading type={"bars"} className='loading' color={"rgb(180, 175, 199)"} height={'10%'} width={'10%'} />
+                {<Modal_Loading />}
             </>
                 :
                 <>

@@ -2,11 +2,13 @@ import React, { useState } from 'react';
 import "./Modal.css";
 import { FcMultipleInputs, FcAbout } from "react-icons/fc";
 import { RiAsterisk } from "react-icons/ri";
+import Modal_Loading from "./Modal_Loading";
 
 let getPicture, getSound;
 let ichour = 'אישור'
 let file = "";
 let arrTemp = [1, 2];
+let flagClickOK = false;
 
 function Modal_Tasks({ setOpenModalPlases, allStations, help }) {
     const [, setDone] = useState(false);
@@ -15,6 +17,7 @@ function Modal_Tasks({ setOpenModalPlases, allStations, help }) {
     const [, setSound] = useState(null);
     const [getDescription, setDescription] = useState("");
     const [, setFile] = useState("");
+    const [, setFlagClickOK] = useState(false);
 
     const handleTitleInput = (e) => {
         setTitle(e.target.value)
@@ -36,10 +39,13 @@ function Modal_Tasks({ setOpenModalPlases, allStations, help }) {
         }
     }
     function Post_Task() {
-        console.log("Picture from post function", getPicture)
-        console.log("Sound from post function", getSound)
-        console.log("Title from post function", get_title)
-        console.log("Description from post function", getDescription)
+
+        setFlagClickOK(flagClickOK = true)
+
+        // console.log("Picture from post function", getPicture)
+        // console.log("Sound from post function", getSound)
+        // console.log("Title from post function", get_title)
+        // console.log("Description from post function", getDescription)
 
         let url_post = 'https://s83.bfa.myftpupload.com/wp-json/wp/v2/tasks/'
         fetch(url_post, {
@@ -144,6 +150,8 @@ function Modal_Tasks({ setOpenModalPlases, allStations, help }) {
                         <div className="footer">
                             <input type="submit" className='OK' value={ichour} onClick={Post_Task} />
                         </div>
+                        {flagClickOK ? <><Modal_Loading props={false} /></> : <></>}
+
                     </div>
                 </div>
             </> :

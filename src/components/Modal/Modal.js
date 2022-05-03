@@ -3,12 +3,15 @@ import "./Modal.css";
 import { get } from "../../api/api";
 import { FcLink } from "react-icons/fc";
 import { BsExclamationLg } from "react-icons/bs";
+import Modal_Loading from "./Modal_Loading";
 
 
 let obj = { tasks: [], users: [] }
 let student = [];
 let myStudents = [];
 let myStudentsChoice = [];
+let flagClickOK = false;
+
 function Modal({ setOpenModal, setText }) {
     const [, set_obj] = useState(null);// for TextView
     const [, setDone] = useState(false);
@@ -16,6 +19,7 @@ function Modal({ setOpenModal, setText }) {
     const [, setStudent] = useState([])
     const [, setMyStudents] = useState([])
     const [, setMyStudentsChoice] = useState([])
+    const [, setFlagClickOK] = useState(false);
 
     useEffect(() => {
         const fetchData = async () => {
@@ -48,6 +52,8 @@ function Modal({ setOpenModal, setText }) {
         });
     }
     function Post_Route() {
+
+        setFlagClickOK(flagClickOK = true)
         resultMyArrayStudent()
         if (setText === null || setText === "") {
             alert('Please give the Route a title !')
@@ -207,6 +213,8 @@ function Modal({ setOpenModal, setText }) {
                                 onClick={Post_Route}
                             > אישור
                             </button>
+                            {flagClickOK ? <><Modal_Loading props={false} /></> : <></>}
+
                         </div>
                     </div>
                 </div>
