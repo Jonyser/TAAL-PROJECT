@@ -4,14 +4,13 @@ import { get } from "../../api/api";
 import { FcLink } from "react-icons/fc";
 import { BsExclamationLg } from "react-icons/bs";
 import Modal_Loading from "./Modal_Loading";
-
-
+//--------------------------
 let obj = { tasks: [], users: [] }
 let student = [];
 let myStudents = [];
 let myStudentsChoice = [];
 let flagClickOK = false;
-
+//--------------------------
 function Modal({ setOpenModal, setText }) {
     const [, set_obj] = useState(null);// for TextView
     const [, setDone] = useState(false);

@@ -3,13 +3,12 @@ import "./Modal.css";
 import { FcMultipleInputs } from "react-icons/fc";
 import { RiAsterisk } from "react-icons/ri";
 import { BsExclamationLg } from "react-icons/bs";
-import ReactLoading from 'react-loading';
 import Modal_Loading from "./Modal_Loading";
-
+//--------------------------
 let getPicture, getSound;
 let ichour = 'אישור'
 let flagClickOK = false;
-
+//--------------------------
 const Modal_Stations = ({ setOpenModalPlaces, idTasks }) => {
     const [, setDone] = useState(false);
     const [get_title, settitle] = useState("");
@@ -46,36 +45,41 @@ const Modal_Stations = ({ setOpenModalPlaces, idTasks }) => {
     //----------------------------------
 
     function Post_Station() {
-        setFlagClickOK(flagClickOK = true)
 
-        let url_post = `https://s83.bfa.myftpupload.com/wp-json/wp/v2/places`
-        fetch(url_post, {
-            method: "POST",
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${sessionStorage.getItem('jwt')}`,
-            },
+        if (get_title === "" || getDescription === "") {
+            alert("עליך למלא שדות חובה המסומנים בכוכבית")
+        }
+        else {
+            setFlagClickOK(flagClickOK = true)
+            let url_post = `https://s83.bfa.myftpupload.com/wp-json/wp/v2/places`
+            fetch(url_post, {
+                method: "POST",
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${sessionStorage.getItem('jwt')}`,
+                },
 
-            body: JSON.stringify({
-                name: get_title,
-                description: getDescription,
-                parent: idTasks,
-                fields: {
-                    audio: getSound,
-                    image: getPicture
-                }
+                body: JSON.stringify({
+                    name: get_title,
+                    description: getDescription,
+                    parent: idTasks,
+                    fields: {
+                        audio: getSound,
+                        image: getPicture
+                    }
+                })
+            }).then(function (response) {
+                return response.json();
+            }).then(function (post) {
+                // get_Route_ID = post.id
+                setDone(true)
+
+                // alert(get_Route_ID)
+                console.log(post)
+                setFlagClickOK(flagClickOK = false);
+                window.location.replace("/planner")
             })
-        }).then(function (response) {
-            return response.json();
-        }).then(function (post) {
-            // get_Route_ID = post.id
-            setDone(true)
-
-            // alert(get_Route_ID)
-            console.log(post)
-            setFlagClickOK(flagClickOK = false);
-            window.location.replace("/planner")
-        })
+        }
     }
     return (
         <>

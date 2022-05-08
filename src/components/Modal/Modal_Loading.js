@@ -14,18 +14,11 @@ const Modal_Loading = (props) => {
             </> : <>
                 <div className="modalContainerLoading">
 
-                    <div style={{
-                        // backgroundColor: 'rgb(213, 221, 228)',
-                        // overflow: "hidden",
-                        // height: "500px"
-                    }}>
+                    <div >
                         <h1 float={'right'} style={{ color: '' }}>Loading</h1>
                         < ReactLoading type={"bars"} className='loading' color={"rgb(180, 175, 199)"} height={'12%'} width={'12%'} />
                     </div>
-
                 </div></>}
-
-
         </>
     );
 }

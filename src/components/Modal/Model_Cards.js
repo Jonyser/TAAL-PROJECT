@@ -4,6 +4,8 @@ import "./Modal.css";
 import img1 from '../../Pictures/img1.png';
 import img2 from '../../Pictures/img2.png';
 import { BsFillFlagFill } from "react-icons/bs";
+import Modal_Loading from "./Modal_Loading";
+//--------------------------
 
 let profileStudent = 0;
 let myOriginalTasks = [];
@@ -15,6 +17,8 @@ let dataUsers = []
 let epsilon = 10;
 let myOriginalTasksFlag = false;
 let flagClickOK = false;
+//--------------------------
+
 function Modal_Cards({ setOpenModal, setText, thisMyRoute, thisGetMyTasks, thisFlagTasks, thisGetMyUsers, thisFlagUsers }) {
 
     const [, setDone] = useState(false);
@@ -63,7 +67,7 @@ function Modal_Cards({ setOpenModal, setText, thisMyRoute, thisGetMyTasks, thisF
         });
     }
     function Post_Route() {
-        setFlagClickOK(flagClickOK = true);
+        setFlagClickOK(flagClickOK = true)
         if (setText === null || setText === "") {
             alert('Please give the Route a title !')
             return
@@ -258,8 +262,8 @@ function Modal_Cards({ setOpenModal, setText, thisMyRoute, thisGetMyTasks, thisF
                                     onClick={Post_Route}
                                 > אישור
                                 </button>
-                                {flagClickOK ? <>
-                                </> : <></>}
+                                {flagClickOK ? <><Modal_Loading props={false} /></> : <></>}
+
                             </div>
                         </div>
                     </div>

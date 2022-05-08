@@ -16,9 +16,7 @@ function App() {
   return (
     <>
       <div style={{
-        backgroundColor: 'rgb(213, 221, 228)',
 
-        height: "1000px"
       }}>
         <Provider store={store}>
           <Router>

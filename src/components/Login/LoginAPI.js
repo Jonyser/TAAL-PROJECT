@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 import ReactLoading from 'react-loading';
+//---------------------
 let flag_token = false
 let flag = false;
 // let myStatus = 0;
+//---------------------
 
 function LoginAPI(props) {
 

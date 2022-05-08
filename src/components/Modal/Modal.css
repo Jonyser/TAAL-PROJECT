@@ -91,6 +91,18 @@
   margin-left: 30%;
 }
 
+.modalContainerStudentPrint {
+
+  width: 575px;
+  height: 620px;
+  flex-direction: column;
+  position: fixed;
+  margin-top: 120px;
+  z-index: 10;
+
+
+}
+
 .modalContainerLoading {
   background-color: aliceblue;
   box-shadow: rgb(0 0 0 / 35%) 0px 5px 15px;
