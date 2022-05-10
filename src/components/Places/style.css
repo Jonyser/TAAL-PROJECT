@@ -17,6 +17,10 @@
 
 }
 
+.Place {
+  margin: 20px;
+}
+
 .Place,
 .AddPlace {
   display: flex;
@@ -29,7 +33,6 @@
   margin-right: 50;
   border-radius: 1.5ch;
   font-size: small;
-
 }
 
 .Place:focus {
@@ -42,6 +45,7 @@
   background-color: rgb(243, 241, 255);
   color: rgb(90, 107, 122);
   border-style: dotted;
+  margin: 20px;
 }
 
 .Place:hover {
@@ -85,4 +89,8 @@ h3 {
   display: block;
   margin-right: auto;
   margin-left: auto;
+}
+
+.search {
+  text-align: right;
 }

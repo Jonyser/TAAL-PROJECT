@@ -8,7 +8,8 @@ import { RiDragMove2Line } from "react-icons/ri";
 import { FcAddDatabase } from "react-icons/fc";
 import { MdOutlineLiveHelp } from "react-icons/md";
 import Modal_Tasks from '../Modal/Modal_Tasks'
-
+import TextField from "@mui/material/TextField";
+//-------------------------
 let Route = [];
 let dndArray = [];
 let saveProps = [];
@@ -16,12 +17,18 @@ let thisId = ""
 let thisIdArray = [];
 let myTask = {};
 let helpFlag = false;
-
+let filteredData = []
+let inputText = ""
+//-------------------------
 function DragnDrop(props) {
     // console.log("Task AllStation in:", props.allStations)
     const [, setLoading] = useState(false);
     const [modalOpen, setModalOpen] = useState(false);
     const [, setHelpFlag] = useState(false);
+    const [, setFilteredData] = useState([]);
+    const [, setInputText] = useState("");
+
+
 
     useEffect(() => {
         const fetchData = async () => {

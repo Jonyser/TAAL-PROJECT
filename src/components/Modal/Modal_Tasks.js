@@ -63,10 +63,13 @@ function Modal_Tasks({ setOpenModalPlases, allStations, help }) {
                     title: get_title,
                     // "description": getDescription,
                     places: myPlacesChoice
-
                     ,
                     "fields":
                     {
+                        image: {
+                            ID: 372,
+
+                        }
                         // minimum_profile: 6
 
                     },
@@ -77,7 +80,7 @@ function Modal_Tasks({ setOpenModalPlases, allStations, help }) {
                 setDone(true)
                 // alert("ok")
                 console.log("post Modale Tasks:", post)
-                window.location.replace("/planner")
+                // window.location.replace("/planner")
             })
         }
     }

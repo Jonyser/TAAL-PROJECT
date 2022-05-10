@@ -5,19 +5,18 @@ import ReactToPrint, { PrintContextConsumer } from "react-to-print";
 import Image from 'react-bootstrap/Image';
 import logo from '../../Pictures/logo.jpeg'
 
-
-
-
 const Modal_Student = ({ thisGetMyUsers, setOpenModal }) => {
     console.log("thisGetMyUsers:", thisGetMyUsers)
     const ComponentToPrint = forwardRef((props, ref) => {
         return <div ref={ref}>
 
             <div className="modalContainerStudentPrint">
-                <Image style={{ height: 237, width: '97%', marginLeft: "20%" }}
-                    src={thisGetMyUsers.acf.image.url}
-                    alt="new"
-                />
+                {thisGetMyUsers.acf.image.url ? <>
+                    <Image style={{ height: 237, width: '97%', marginLeft: "20%" }}
+                        src={thisGetMyUsers.acf.image.url}
+                        alt="new"
+                    /></> : <></>}
+
                 <h3 style={{ marginLeft: "50%" }}>{thisGetMyUsers.name}  </h3>
 
                 <div className="body" style={{ textAlign: 'right' }}>
@@ -28,7 +27,6 @@ const Modal_Student = ({ thisGetMyUsers, setOpenModal }) => {
                         <>
                             <h5>{thisGetMyUsers.description}</h5>
                         </>}
-
                     <br></br>
                     {thisGetMyUsers.acf.short_term_memory ? <>
                         <h5 style={{ marginLeft: "220px", color: "red" }}>
@@ -36,7 +34,6 @@ const Modal_Student = ({ thisGetMyUsers, setOpenModal }) => {
                     </> :
                         <>
                             <h5 style={{ marginLeft: "220px", color: "red" }}><samp style={{ color: "black" }}> ןיא </samp>  :זיכרון לטווח קצר מ1-50 -</h5>
-
                         </>}
                     <br></br>
                     {thisGetMyUsers.acf.middle_term_memory ? <>
@@ -45,7 +42,6 @@ const Modal_Student = ({ thisGetMyUsers, setOpenModal }) => {
                     </> :
                         <>
                             <h5 style={{ marginLeft: "220px", color: "red" }}><samp style={{ color: "black" }}>  ןיא </samp>  :זיכרון לטווח בינוני מ1-50 -</h5>
-
                         </>}
                     <br></br>
                     {thisGetMyUsers.acf.long_term_memory ? <>
@@ -54,7 +50,6 @@ const Modal_Student = ({ thisGetMyUsers, setOpenModal }) => {
                     </> :
                         <>
                             <h5 style={{ marginLeft: "220px", color: "red" }}><samp style={{ color: "black" }}>  ןיא </samp>:זיכרון לטווח ארוך מ1-50 -</h5>
-
                         </>}
                     <br></br>
                     {thisGetMyUsers.acf.concentration_and_focus_in_actions ? <>
@@ -63,9 +58,7 @@ const Modal_Student = ({ thisGetMyUsers, setOpenModal }) => {
                     </> :
                         <>
                             <h5 style={{ marginLeft: "220px", color: "red" }}><samp style={{ color: "black" }}>  ןיא </samp>  :ריכוז ומיקוד בפעולות מ1-50 -</h5>
-
                         </>}
-
                     <br></br>
                     {thisGetMyUsers.acf.hearing_level ? <>
                         <h5 style={{ marginLeft: "220px", color: "red" }}>
@@ -73,7 +66,6 @@ const Modal_Student = ({ thisGetMyUsers, setOpenModal }) => {
                     </> :
                         <>
                             <h5 style={{ marginLeft: "220px", color: "red" }}><samp style={{ color: "black" }}>  ןיא </samp>  :רמת שמיעה כללית: מ1-50 -</h5>
-
                         </>}
                     <br></br>
                     {thisGetMyUsers.acf.vision_level ? <>
@@ -85,7 +77,7 @@ const Modal_Student = ({ thisGetMyUsers, setOpenModal }) => {
                         </>}
                 </div>
                 <Image style={{
-                    height: 87, width: '47%', marginRight: "20%",
+                    height: 87, width: '37%', marginRight: "20%",
 
                     bottom: '0.001px'
                 }}
@@ -93,17 +85,12 @@ const Modal_Student = ({ thisGetMyUsers, setOpenModal }) => {
                     alt="new"
                 />
             </div>
-
-
         </div >
     });
     console.log("thisGetMyUsers:", thisGetMyUsers.acf);
     const ref = useRef();
-
     return (
         <>
-
-
             <div className="Background">
                 <div className="modalContainerStudent">
                     <div className="titleCloseBtn">
@@ -132,7 +119,6 @@ const Modal_Student = ({ thisGetMyUsers, setOpenModal }) => {
                         </> :
                             <>
                                 <h5 style={{ marginLeft: "220px", color: "red" }}><samp style={{ color: "black" }}> ןיא </samp>  :זיכרון לטווח קצר מ1-50 -</h5>
-
                             </>}
                         <br></br>
                         {thisGetMyUsers.acf.middle_term_memory ? <>
@@ -141,7 +127,6 @@ const Modal_Student = ({ thisGetMyUsers, setOpenModal }) => {
                         </> :
                             <>
                                 <h5 style={{ marginLeft: "220px", color: "red" }}><samp style={{ color: "black" }}>  ןיא </samp>  :זיכרון לטווח בינוני מ1-50 -</h5>
-
                             </>}
                         <br></br>
                         {thisGetMyUsers.acf.long_term_memory ? <>
@@ -150,7 +135,6 @@ const Modal_Student = ({ thisGetMyUsers, setOpenModal }) => {
                         </> :
                             <>
                                 <h5 style={{ marginLeft: "220px", color: "red" }}><samp style={{ color: "black" }}>  ןיא </samp>:זיכרון לטווח ארוך מ1-50 -</h5>
-
                             </>}
                         <br></br>
                         {thisGetMyUsers.acf.concentration_and_focus_in_actions ? <>
@@ -159,7 +143,6 @@ const Modal_Student = ({ thisGetMyUsers, setOpenModal }) => {
                         </> :
                             <>
                                 <h5 style={{ marginLeft: "220px", color: "red" }}><samp style={{ color: "black" }}>  ןיא </samp>  :ריכוז ומיקוד בפעולות מ1-50 -</h5>
-
                             </>}
 
                         <br></br>
@@ -169,7 +152,6 @@ const Modal_Student = ({ thisGetMyUsers, setOpenModal }) => {
                         </> :
                             <>
                                 <h5 style={{ marginLeft: "220px", color: "red" }}><samp style={{ color: "black" }}>  ןיא </samp>  :רמת שמיעה כללית: מ1-50 -</h5>
-
                             </>}
                         <br></br>
                         {thisGetMyUsers.acf.vision_level ? <>
@@ -178,11 +160,8 @@ const Modal_Student = ({ thisGetMyUsers, setOpenModal }) => {
                         </> :
                             <>
                                 <h5 style={{ marginLeft: "220px", color: "red" }}><samp style={{ color: "black" }}>  ןיא </samp>  :רמת ראיה כללית: מ1-50 -</h5>
-
                             </>}
-
                     </div>
-
                     <ReactToPrint content={() => ref.current}>
                         <PrintContextConsumer>
                             {({ handlePrint }) => (
@@ -192,7 +171,6 @@ const Modal_Student = ({ thisGetMyUsers, setOpenModal }) => {
                     </ReactToPrint>
                     <ComponentToPrint ref={ref} />
                 </div>
-
             </div>
         </>
     );

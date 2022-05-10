@@ -1,14 +1,19 @@
 import React, { useState, useEffect } from 'react';
 import { get } from "../../api/api";
 import { BsPencilFill } from "react-icons/bs";
-import { FcAddDatabase } from "react-icons/fc";
+import { FcAddDatabase, FcSearch } from "react-icons/fc";
 import './style.css';
 import Tasks_comp from "../Tasks_comp/Tasks_comp";
 import Dot from '../Dot/Dot'
 import Modal_Stations from '../Modal/Modal_Stations'
-
+import TextField from "@mui/material/TextField";
+//-----------------------
 let allTasks = [];
 let tasks = [];
+let filteredData = []
+let inputText = ""
+let flagFirstTime = true;
+//-----------------------
 
 const Stations = (props) => {
     // console.log(" props.allStations:", props.allStations)
@@ -16,6 +21,36 @@ const Stations = (props) => {
     const [, setStateTask] = useState([]);
     const [loading, setLoading] = useState(false);
     const [modalOpen, setModalOpen] = useState(false)
+    const [, setFilteredData] = useState([]);
+    const [, setInputText] = useState("");
+    const [, setFlagFirstTime] = useState(false);
+
+    if (flagFirstTime === true) {
+        filteredData = props.propsData
+    }
+
+    console.log("filtered Data 1:", filteredData)
+
+    let inputHandler = (e) => {
+        setInputText(inputText = e.target.value.toLowerCase());
+
+        setFlagFirstTime(flagFirstTime = false)
+        //convert input text to lower case
+        // setFilteredData(filteredData = [])
+        console.log("filtered Data 2:", filteredData)
+        setFilteredData(filteredData = props.propsData.filter((el) => {
+            if (inputText === '') {
+                return el;
+            }
+            //return the item which contains the user input
+            else {
+                return el.name.toLowerCase().includes(inputText)
+            }
+        }))
+        console.log("filtered Data 3:", filteredData)
+
+
+    };
     useEffect(() => {
         const fetchData = async () => {
             setLoading(true);
@@ -29,6 +64,7 @@ const Stations = (props) => {
         fetchData();
     }, []);
     const getingData = async () => {
+
         //'https://taal.tech/wp-json/wp/v2/tasks/'
         //https://s83.bfa.myftpupload.com/wp-json/wp/v2/tasks/
         await get('https://s83.bfa.myftpupload.com/wp-json/wp/v2/tasks/', {
@@ -52,6 +88,17 @@ const Stations = (props) => {
                 }
             }
         })
+
+        setFilteredData(filteredData = props.propsData.filter((el) => {
+            if (inputText === '') {
+                return el;
+            }
+            //return the item which contains the user input
+            else {
+                return el.name.toLowerCase().includes(inputText)
+            }
+        }))
+        console.log("filteredData from st:", filteredData)
         setStateTask({ data: tasks })//Updating the state
     }
     //----------------------------------------------------------
@@ -78,9 +125,18 @@ const Stations = (props) => {
                                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                             </button>
                         </div>
+                        <div className="search">
+                            <TextField
+                                id="outlined-basic"
+                                variant="outlined"
+                                fullWidth
+                                label={<FcSearch style={{ fontSize: "x-large" }} />}
+                                onChange={inputHandler}
+                            />
+                        </div>
                         <div className='Stations'>
                             {
-                                props.propsData.map((value, index) => {
+                                filteredData.map((value, index) => {
                                     return (
                                         <button className='Station'
                                             onClick={() => Display_The_Tasks(value)}

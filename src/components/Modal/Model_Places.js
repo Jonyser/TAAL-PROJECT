@@ -70,19 +70,7 @@ function Modal_Plases({ setOpenModalPlaces }) {
                         image: file,
                         audio: getSound
                     }]
-                    // "title": get_title,
-                    // "fields": [
-                    //     {
-                    //         "key": "field_602fcb1e9b14a",
-                    //         "label": file,
-                    //         "name": "image",
-                    //         "type": "image",
-                    //         "instructions": "",
-                    //         "required": 1,
-                    //         "conditional_logic": 0,
 
-                    //     },
-                    // ],
                 })
             }).then(function (response) {
                 return response.json();

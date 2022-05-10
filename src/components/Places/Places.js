@@ -2,18 +2,24 @@ import React, { useState, useEffect } from 'react';
 import { get } from "../../api/api";
 import './style.css';
 import { BsPencilFill } from "react-icons/bs";
-import { FcAddDatabase } from "react-icons/fc";
+import { FcAddDatabase, FcSearch } from "react-icons/fc";
 import Stations from '../Stations/Stations'
 import Dot from '../Dot/Dot'
-import ReactLoading from 'react-loading';
 import Modal_Places from '../Modal/Model_Places'
 import Modal_Loading from '../Modal/Modal_Loading'
+import TextField from "@mui/material/TextField";
+
+
+//-----------------------
 let places = [];
 let onlyAllStation = [];
 let stationArray = [];
 let Places_and_their_stations = [];
 let thisIdTask = 0;
-
+let filteredData = []
+let inputText = ""
+let search = "חיפוש אתר"
+//-----------------------
 const Places = () => {
     const [done, setDone] = useState(false);
     const [, setLoading] = useState(false);
@@ -21,6 +27,26 @@ const Places = () => {
     const [modalOpen, setModalOpen] = useState(false);
     const [, setThisIdTask] = useState(0)
     const [, setOnlyAllStation] = useState([]);
+    const [, setPlaces] = useState([]);
+    const [, setFilteredData] = useState([]);
+    const [, setInputText] = useState("");
+
+    let inputHandler = (e) => {
+        //convert input text to lower case
+        setInputText(inputText = e.target.value.toLowerCase());
+
+        setFilteredData(filteredData = places.filter((el) => {
+            // setInputText(lowerCase);
+
+            if (inputText === '') {
+                return el;
+            }
+            //return the item which contains the user input
+            else {
+                return el.name.toLowerCase().includes(inputText)
+            }
+        }))
+    };
 
     useEffect(() => {
         const fetchData = async () => {
@@ -36,6 +62,7 @@ const Places = () => {
     }, []);
 
     const getData = async () => {
+
         // taal.tech/wp-json/wp/v2/places
         ///s83.bfa.myftpupload.com/wp-json/wp/v2/places
         await get('https://s83.bfa.myftpupload.com/wp-json/wp/v2/places/', {
@@ -45,19 +72,38 @@ const Places = () => {
 
         }).then(res => {
             console.log("res: ", res)
-            places = res.filter((item) => item.parent === 0)
+            setPlaces(places = res.filter((item) => item.parent === 0))
             setOnlyAllStation(onlyAllStation = res.filter((item) => item.parent > 0))
+
+
             Places_and_their_stations = places.map((element) => {
                 return {
                     parent: element,
                     related: res.filter((r) => r.parent === element.id)
                 }
             })
+            setFilteredData(filteredData = places.filter((el) => {
+
+
+                if (inputText === '') {
+                    return el;
+                }
+                //return the item which contains the user input
+                else {
+                    return el.name.toLowerCase().includes(inputText)
+                }
+            }))
+
+
         });
+
+
         setDone(true)
         // setData_Loaded(true)
     }
+
     const Display_The_Stations = (e) => {
+
         setThisIdTask(thisIdTask = e.id)
         if (stationArray.length > 0) {
             stationArray = [];
@@ -71,8 +117,10 @@ const Places = () => {
                 // console.log("stationArray:", stationArray);
             }
         });
+
         setStateStation({ data: stationArray })
     }
+
     //----------------------------------------------------------------------
     return (
         <>
@@ -82,6 +130,7 @@ const Places = () => {
                 :
                 <>
                     {modalOpen && <Modal_Places setOpenModalPlaces={setModalOpen} />}
+
                     <div className='Cover_Places'>
                         <div className='TitlePlaces'><h3>אתרים</h3></div>
                         <div className='addPlaceCover'>
@@ -99,8 +148,19 @@ const Places = () => {
                                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                             </button>
                         </div>
+                        <div className="search" style={{
+                            textAlign: 'right'
+                        }}>
+                            <TextField
+                                id="outlined-basic"
+                                variant="outlined"
+                                fullWidth
+                                label={<FcSearch style={{ fontSize: "x-large" }} />}
+                                onChange={inputHandler}
+                            />
+                        </div>
                         <div className='Places'>
-                            {places.map((value, index) => {
+                            {filteredData.map((value, index) => {
                                 return (
                                     <button
                                         className='Place'
