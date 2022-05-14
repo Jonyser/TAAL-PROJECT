@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { get } from "../../api/api";
-import { BsPencilFill } from "react-icons/bs";
 import { FcAddDatabase, FcSearch } from "react-icons/fc";
+import { MdOutlineAdsClick } from "react-icons/md";
 import './style.css';
 import Tasks_comp from "../Tasks_comp/Tasks_comp";
 import Dot from '../Dot/Dot'
 import Modal_Stations from '../Modal/Modal_Stations'
 import TextField from "@mui/material/TextField";
+
 //-----------------------
 let allTasks = [];
 let tasks = [];
@@ -125,11 +126,18 @@ const Stations = (props) => {
                                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                             </button>
                         </div>
-                        <div className="search">
+                        <div className="search" style={{
+                            backgroundColor: "rgb(255, 242, 234)", borderStyle: 'none none solid none', borderColor: "#fff", borderWidth: "5px"
+
+                        }}>
                             <TextField
+                                dir="rtl"
+                                style={{
+                                    backgroundColor: "#fff", right: "10%", margin: "10px"
+                                }}
                                 id="outlined-basic"
                                 variant="outlined"
-                                fullWidth
+
                                 label={<FcSearch style={{ fontSize: "x-large" }} />}
                                 onChange={inputHandler}
                             />
@@ -141,9 +149,10 @@ const Stations = (props) => {
                                         <button className='Station'
                                             onClick={() => Display_The_Tasks(value)}
                                             key={index}>
+                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                             {value.name}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                            <BsPencilFill /> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                            <Dot color="#e29e62" />
+                                            <MdOutlineAdsClick style={{ fontSize: "25px", color: "#e29e62" }} />
+                                            {/* <Dot color="#e29e62" /> */}
                                         </button>
                                     )
                                 })}

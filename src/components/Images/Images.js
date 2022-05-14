@@ -10,12 +10,15 @@ const Images = ({ id, data }) => {
     }
     return (
         <>
-            <div className="images">
+            {image !== "" ? <><div className="images">
                 <Image
                     src={image}
                     alt="new"
                 />
-            </div>
+            </div></> :
+                null
+            }
+
         </>
     );
 }

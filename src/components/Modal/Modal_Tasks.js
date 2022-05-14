@@ -80,7 +80,7 @@ function Modal_Tasks({ setOpenModalPlases, allStations, help }) {
                 setDone(true)
                 // alert("ok")
                 console.log("post Modale Tasks:", post)
-                // window.location.replace("/planner")
+                window.location.replace("/planner")
             })
         }
     }

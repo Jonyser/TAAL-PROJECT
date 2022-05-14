@@ -17,18 +17,13 @@ let thisId = ""
 let thisIdArray = [];
 let myTask = {};
 let helpFlag = false;
-let filteredData = []
-let inputText = ""
+
 //-------------------------
 function DragnDrop(props) {
     // console.log("Task AllStation in:", props.allStations)
     const [, setLoading] = useState(false);
     const [modalOpen, setModalOpen] = useState(false);
     const [, setHelpFlag] = useState(false);
-    const [, setFilteredData] = useState([]);
-    const [, setInputText] = useState("");
-
-
 
     useEffect(() => {
         const fetchData = async () => {

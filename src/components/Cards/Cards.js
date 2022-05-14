@@ -10,7 +10,11 @@ import img4 from '../../Pictures/img6.png';
 import logo from '../../Pictures/logo.jpeg';
 import Modal_Cards from '../Modal/Model_Cards'
 import { GrDuplicate } from "react-icons/gr";
+import { FcSearch } from "react-icons/fc";
 import Modal_Loading from "../Modal/Modal_Loading";
+import TextField from "@mui/material/TextField";
+
+
 // import { Form } from "react-bootstrap";
 //----------------------------------------------------|
 let dataCards = [];//                                 |
@@ -28,7 +32,8 @@ let getMyTasks = [];//                                |
 let flagTasks = false;//                              |
 let getMyUsers = [];//                                |
 let flagUsers = false;//                              |
-
+let filteredData = []
+let inputText = ""
 //                                                    |
 //----------------------------------------------------|
 const Cards = () => {
@@ -46,7 +51,72 @@ const Cards = () => {
     const [, setFlagTasks] = useState(false);
     const [, setMyUsers] = useState([]);
     const [, setFlagUsers] = useState(false);
+    const [, setFilteredData] = useState([]);
+    const [, setInputText] = useState("");
 
+    let inputHandler = (e) => {
+        // console.log("element from card:", e.target.value)
+        //convert input text to lower case
+        setInputText(inputText = e.target.value.toLowerCase());
+        console.log("dataCards:", dataCards)
+        setFilteredData(filteredData = dataCards.filter((el) => {
+            // setInputText(lowerCase);
+            if (inputText === '') {
+                return el;
+            }
+            //return the item which contains the user input
+            else {
+                return el.myTitle.toLowerCase().includes(inputText)
+            }
+        }))
+        // console.log("filteredData:", filteredData)
+        sizeMod = filteredData.length % number;
+        size = (filteredData.length - sizeMod) / number;
+        // console.log("filteredData.length", filteredData.length)
+        console.log("size", size)
+        console.log("sizeMod:", sizeMod)
+        dataCards1 = [];
+        dataCards2 = [];
+        dataCards3 = [];
+        dataCards4 = [];
+        index = 0
+        for (let i = 0; i < size; i++) {
+            setDataCards1(dataCards1[i] = filteredData[index]);
+            index++;
+            setDataCards2(dataCards2[i] = filteredData[index])
+            index++;
+            setDataCards3(dataCards3[i] = filteredData[index])
+            index++;
+            setDataCards4(dataCards4[i] = filteredData[index])
+            index++;
+        }
+        console.log("dataCards1", dataCards1)
+        console.log("dataCards2", dataCards2)
+        console.log("dataCards3", dataCards3)
+        console.log("dataCards4", dataCards4)
+        for (let i = 0; i < sizeMod; i++) {
+            if (i < sizeMod) {
+                setDataCards4(dataCards4[size] = filteredData[index]);
+                i++;
+                index++;
+            }
+            if (i < sizeMod) {
+                setDataCards3(dataCards3[size] = filteredData[index]);
+                i++;
+                index++;
+            }
+            if (i < sizeMod) {
+                setDataCards2(dataCards2[size] = filteredData[index]);
+                i++;
+                index++;
+            }
+            if (i < sizeMod) {
+                setDataCards1(dataCards1[size] = filteredData[index]);
+                i++;
+                index++;
+            }
+        }
+    };
     useEffect(() => {
         const fetchData = async () => {
             setLoading(true);
@@ -77,7 +147,6 @@ const Cards = () => {
 
                 // console.log("dataCards:", dataCards)
                 // console.log("flag:", flag)
-
                 setDataCards(
 
                     dataCards = res.map((value
@@ -157,6 +226,7 @@ const Cards = () => {
         setFlagUsers(flagUsers = true)
         setFlagTasks(flagTasks = false)
     }
+
     return (
         <>
             {!done ? <>
@@ -165,7 +235,17 @@ const Cards = () => {
             </>
                 :
                 <>
-
+                    <div className='inputCover' dir="rtl" >
+                        <TextField
+                            dir="rtl"
+                            style={{ borderRadius: '10px', textAlign: 'right', width: "200px", backgroundColor: "#fff" }}
+                            id="outlined-basic"
+                            variant="outlined"
+                            placeholder="חיפוש מסלול"
+                            label={<FcSearch style={{ fontSize: "xx-large" }} />}
+                            onChange={inputHandler}
+                        />
+                    </div>
                     <div style={{
                         backgroundColor: 'rgb(213, 221, 228)',
                         overflow: "hidden",

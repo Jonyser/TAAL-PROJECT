@@ -1,14 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import './style.css';
-// import { GrDuplicate } from "react-icons/gr";
 import { FcOk } from "react-icons/fc";
 import Places from '../Places/Places';
 import 'reactjs-popup/dist/index.css';
 import Modal from '../Modal/Modal';
 import { get } from "../../api/api";
-// import { Dropdown, DropdownButton } from 'react-bootstrap';
-// import { Form } from "react-bootstrap";
+//-------------------------
 let resultData = [];
+//-------------------------
 const Planner = () => {
     const [get_Name, setName] = useState(null);// for TextView
     const [loading, setLoading] = useState(false);

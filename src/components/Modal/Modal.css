@@ -279,6 +279,8 @@ height: 0vh; */
   width: 520px;
   text-align: right;
   align-self: center;
+  z-index: 10;
+
 }
 
 .allTasks {

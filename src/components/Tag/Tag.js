@@ -18,9 +18,11 @@ function Tag({ title, id, show }) {
 
             <button className='Tasks' ref={drag} src={title}>{title}
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                <RiDragMove2Line />
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                <Dot color="rgb(164, 190, 125)" />   </button>
+                {/* <Dot color="rgb(164, 190, 125)" />   */}
+                <RiDragMove2Line style={{ fontSize: "25px", color: "rgb(164, 190, 125)" }} />
+
+            </button>
 
         </>
     );
