@@ -5,6 +5,7 @@ import './style.css';
 import Modal_Calculator from '../Modal/Modal_Calculator';
 import View_my_tasks from '../View_my_tasks/View_my_tasks';
 import Modal_Loading from "../Modal/Modal_Loading";
+import { baseUrl } from "../../config";
 
 // import Dot from '../Dot/Dot'
 let dataCards = [];
@@ -68,13 +69,13 @@ const Calculator = () => {
         if (flag_show_page === true)
             setDone(true)
         if (flag_show_page === false)
-            get('https:///s83.bfa.myftpupload.com/wp-json/wp/v2/routes/', {
+            get(`${baseUrl}/wp-json/wp/v2/routes/`, {
                 params: {
                     per_page: 99, 'Cache-Control': 'no-cache'
                 }
             }).then(res => {
                 setDone(true)
-                console.log("resCAlc:", res)
+                // console.log("resCAlc:", res)
                 size = res.length / number;
 
                 setDataCards(
@@ -130,7 +131,7 @@ const Calculator = () => {
                 size = (dataCards.length - sizeMod) / number;
             });
 
-        get('https://s83.bfa.myftpupload.com/wp-json/wp/v2/users/', {
+        get(`${baseUrl}/wp-json/wp/v2/users/`, {
             headers: {
                 'Content-Type': 'application/json',
                 'Authorization': `Bearer ${sessionStorage.getItem('jwt')}`,
@@ -162,7 +163,7 @@ const Calculator = () => {
             setObjTasks(val.myTasks.map((value) => {
                 return objTasks.push(value)
             }))
-            console.log("objTasks1:", objTasks)
+            // console.log("objTasks1:", objTasks)
             // console.log("value.post_title:", arrayNameTasks)
             setActionFlag(actionFlag = false);
         }
@@ -231,8 +232,8 @@ const Calculator = () => {
         }
         setTextview(textview.value += "(" + val.myTitle + ")")
         Has_already_been_typed = true;
-        console.log("arrayIdTasks:", arrayIdTasks)
-        console.log("arrayNameTasks:", objTasks)
+        // console.log("arrayIdTasks:", arrayIdTasks)
+        // console.log("arrayNameTasks:", objTasks)
     }
     //--------------------------------------------------------------
     const Action = (val) => {

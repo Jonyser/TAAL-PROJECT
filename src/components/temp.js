@@ -22,19 +22,19 @@ function LoginAPI(props) {
         })
             .then((response) => {
                 setMyStatus(myStatus = response.status)
-                console.log(myStatus)
+                // console.log(myStatus)
 
             }).then((response) => response.status === 403 ? (alert('Wrong username/mail or wrong Password'), flag_token = true) : response.json())
             .then(function (user) {
                 if (!flag_token) {
                     if (user.message !== undefined) {
                         if (user.message.includes("2FA")) {
-                            console.log("2FA")
+                            // console.log("2FA")
                             alert('2FA is activated, No support for this feature, Please login with another user')
                             login_token(flag_token = true)
                         }
                     }
-                    console.log("token", user.token)
+                    // console.log("token", user.token)
                     sessionStorage.setItem('jwt', user.token)
 
                     sessionStorage.setItem('logged_in', 1)

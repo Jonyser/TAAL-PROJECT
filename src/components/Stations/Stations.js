@@ -7,6 +7,7 @@ import Tasks_comp from "../Tasks_comp/Tasks_comp";
 import Dot from '../Dot/Dot'
 import Modal_Stations from '../Modal/Modal_Stations'
 import TextField from "@mui/material/TextField";
+import { baseUrl } from "../../config";
 
 //-----------------------
 let allTasks = [];
@@ -30,7 +31,7 @@ const Stations = (props) => {
         filteredData = props.propsData
     }
 
-    console.log("filtered Data 1:", filteredData)
+    // console.log("filtered Data 1:", filteredData)
 
     let inputHandler = (e) => {
         setInputText(inputText = e.target.value.toLowerCase());
@@ -38,7 +39,7 @@ const Stations = (props) => {
         setFlagFirstTime(flagFirstTime = false)
         //convert input text to lower case
         // setFilteredData(filteredData = [])
-        console.log("filtered Data 2:", filteredData)
+        // console.log("filtered Data 2:", filteredData)
         setFilteredData(filteredData = props.propsData.filter((el) => {
             if (inputText === '') {
                 return el;
@@ -48,7 +49,7 @@ const Stations = (props) => {
                 return el.name.toLowerCase().includes(inputText)
             }
         }))
-        console.log("filtered Data 3:", filteredData)
+        // console.log("filtered Data 3:", filteredData)
 
 
     };
@@ -68,14 +69,15 @@ const Stations = (props) => {
 
         //'https://taal.tech/wp-json/wp/v2/tasks/'
         //https://s83.bfa.myftpupload.com/wp-json/wp/v2/tasks/
-        await get('https://s83.bfa.myftpupload.com/wp-json/wp/v2/tasks/', {
+
+        await get(`${baseUrl}/wp-json/wp/v2/tasks/`, {
             params: {
                 per_page: 99, 'Cache-Control': 'no-cache'
             }
         })
             .then(res => {
                 allTasks = res;
-                console.log("allTasks:", allTasks)
+                // console.log("allTasks:", allTasks)
             });
     }
     const Display_The_Tasks = (e) => {
@@ -99,7 +101,7 @@ const Stations = (props) => {
                 return el.name.toLowerCase().includes(inputText)
             }
         }))
-        console.log("filteredData from st:", filteredData)
+        // console.log("filteredData from st:", filteredData)
         setStateTask({ data: tasks })//Updating the state
     }
     //----------------------------------------------------------

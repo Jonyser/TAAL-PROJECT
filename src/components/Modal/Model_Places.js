@@ -3,6 +3,8 @@ import "./Modal.css";
 import { FcMultipleInputs } from "react-icons/fc";
 import { RiAsterisk } from "react-icons/ri";
 import Modal_Loading from "./Modal_Loading";
+import { baseUrl } from "../../config";
+
 //--------------------------
 let getPicture, getSound;
 let ichour = 'אישור'
@@ -29,7 +31,7 @@ function Modal_Plases({ setOpenModalPlaces }) {
     //----------------------------------
     const handleFileInput = (e) => {
         setFile(file = e.target.files[0]);
-        console.log("File:", file)
+        // console.log("File:", file)
         if ((file.type).includes('image')) {
             setPicture(getPicture = file)
         }
@@ -47,13 +49,13 @@ function Modal_Plases({ setOpenModalPlaces }) {
         // console.log("Description from post function", getDescription)
 
 
-        console.log("get_title:", get_title)
+        // console.log("get_title:", get_title)
         if (get_title === "" || getDescription === "") {
             alert("עליך למלא שדות חובה המסומנים בכוכבית")
         }
         else {
             setFlagClickOK(flagClickOK = true)
-            let url_post = `https://s83.bfa.myftpupload.com/wp-json/wp/v2/places`
+            let url_post = `${baseUrl}/wp-json/wp/v2/places/`
             fetch(url_post, {
                 method: "POST",
                 headers: {
@@ -75,7 +77,7 @@ function Modal_Plases({ setOpenModalPlaces }) {
             }).then(function (response) {
                 return response.json();
             }).then(function (post) {
-                console.log("post:", post)
+                // console.log("post:", post)
                 if (post.message === "כבר יש מונח עם אותו שם ועם אותו הורה.")
                     alert("כבר יש אתר עם אותו שם, בחר/י בשם אחר")
                 else {

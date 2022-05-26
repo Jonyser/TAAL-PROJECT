@@ -4,9 +4,13 @@ import { Button } from "react-bootstrap";
 import ReactToPrint, { PrintContextConsumer } from "react-to-print";
 import Image from 'react-bootstrap/Image';
 import logo from '../../Pictures/logo.jpeg'
+import { FcPrint } from "react-icons/fc";
+
+
+
 
 const Modal_Student = ({ thisGetMyUsers, setOpenModal }) => {
-    console.log("thisGetMyUsers:", thisGetMyUsers)
+    // console.log("thisGetMyUsers:", thisGetMyUsers)
     const ComponentToPrint = forwardRef((props, ref) => {
         return <div ref={ref}>
 
@@ -87,7 +91,7 @@ const Modal_Student = ({ thisGetMyUsers, setOpenModal }) => {
             </div>
         </div >
     });
-    console.log("thisGetMyUsers:", thisGetMyUsers.acf);
+    // console.log("thisGetMyUsers:", thisGetMyUsers.acf);
     const ref = useRef();
     return (
         <>
@@ -165,7 +169,10 @@ const Modal_Student = ({ thisGetMyUsers, setOpenModal }) => {
                     <ReactToPrint content={() => ref.current}>
                         <PrintContextConsumer>
                             {({ handlePrint }) => (
-                                <Button onClick={handlePrint}>  הדפס נתונים על {thisGetMyUsers.name}</Button>
+                                <button className="printStudent" onClick={handlePrint}> הדפסה
+                                    {/* הדפס את הנתונים אודות {thisGetMyUsers.name} */}
+                                    <FcPrint style={{ fontSize: "30px" }} />
+                                </button>
                             )}
                         </PrintContextConsumer>
                     </ReactToPrint>

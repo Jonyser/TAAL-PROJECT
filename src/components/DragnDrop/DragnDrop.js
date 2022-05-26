@@ -37,7 +37,7 @@ function DragnDrop(props) {
         fetchData();
     }, []);
     saveProps = props;
-    console.log("props,", saveProps.propDataTask)
+    // console.log("props,", saveProps.propDataTask)
 
     dndArray = (props.propDataTask).map((element) => {
         return {
@@ -84,7 +84,7 @@ function DragnDrop(props) {
                     <div className='txt'> :גרור משימה לכאן&nbsp;&nbsp;
                         <button className="helpBtn" onClick={() => {
                             help()
-                        }} >עזרה<MdOutlineLiveHelp /></button>
+                        }} >עזרה<MdOutlineLiveHelp style={{ fontSize: "30px" }} /></button>
                         <div className="blink" style={{ fontSize: "35px", left: "185px" }}><span><RiDragMove2Line /></span></div>
                         {/* &nbsp;<RiDragMove2Line /> */}
                     </div>
@@ -98,7 +98,10 @@ function DragnDrop(props) {
             {modalOpen && <Modal_Tasks setOpenModalPlases={setModalOpen} allStations={props.allStations} help={helpFlag} />}
             <div className='Cover_Tasks'>
                 <div className='TitleTasks'><h3>משימות</h3></div>
-                <div className='addTaskCover'>
+                <div className='addTaskCover' style={{
+                    borderStyle: 'none none solid none', borderColor: "#fff", borderWidth: "5px"
+                }}>
+
                     <button
                         className='AddTasks'
                         onClick={() => {
@@ -109,7 +112,7 @@ function DragnDrop(props) {
                             width: "85px",
                             height: "30px"
                         }} />
-                        <h6>הוסף משימה</h6>
+                        <h6 >הוסף משימה</h6>
                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     </button>

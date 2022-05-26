@@ -13,6 +13,7 @@ import { GrDuplicate } from "react-icons/gr";
 import { FcSearch } from "react-icons/fc";
 import Modal_Loading from "../Modal/Modal_Loading";
 import TextField from "@mui/material/TextField";
+import { baseUrl } from "../../config";
 
 
 // import { Form } from "react-bootstrap";
@@ -55,10 +56,9 @@ const Cards = () => {
     const [, setInputText] = useState("");
 
     let inputHandler = (e) => {
-        // console.log("element from card:", e.target.value)
-        //convert input text to lower case
+
         setInputText(inputText = e.target.value.toLowerCase());
-        console.log("dataCards:", dataCards)
+        // console.log("dataCards:", dataCards)
         setFilteredData(filteredData = dataCards.filter((el) => {
             // setInputText(lowerCase);
             if (inputText === '') {
@@ -73,8 +73,8 @@ const Cards = () => {
         sizeMod = filteredData.length % number;
         size = (filteredData.length - sizeMod) / number;
         // console.log("filteredData.length", filteredData.length)
-        console.log("size", size)
-        console.log("sizeMod:", sizeMod)
+        // console.log("size", size)
+        // console.log("sizeMod:", sizeMod)
         dataCards1 = [];
         dataCards2 = [];
         dataCards3 = [];
@@ -90,10 +90,10 @@ const Cards = () => {
             setDataCards4(dataCards4[i] = filteredData[index])
             index++;
         }
-        console.log("dataCards1", dataCards1)
-        console.log("dataCards2", dataCards2)
-        console.log("dataCards3", dataCards3)
-        console.log("dataCards4", dataCards4)
+        // console.log("dataCards1", dataCards1)
+        // console.log("dataCards2", dataCards2)
+        // console.log("dataCards3", dataCards3)
+        // console.log("dataCards4", dataCards4)
         for (let i = 0; i < sizeMod; i++) {
             if (i < sizeMod) {
                 setDataCards4(dataCards4[size] = filteredData[index]);
@@ -136,13 +136,13 @@ const Cards = () => {
         if (flag_show_page === true)
             setDone(true)
         if (flag_show_page === false)
-            get('https://s83.bfa.myftpupload.com/wp-json/wp/v2/routes/', {
+            get(`${baseUrl}/wp-json/wp/v2/routes/`, {
                 params: {
                     per_page: 99, 'Cache-Control': 'no-cache'
                 }
             }).then(res => {
                 setDone(true)
-                console.log("Masloulims:", res)
+                // console.log("Masloulims:", res)
                 size = res.length / number;
 
                 // console.log("dataCards:", dataCards)
@@ -210,17 +210,17 @@ const Cards = () => {
         setFlagUsers(flagUsers = false)
     }
     const myTasks = (val) => {
-        console.log("getMyTasks:", val)
+        // console.log("getMyTasks:", val)
         setMyTasks(getMyTasks = val);
         setModalOpen(true);
         setFlagTasks(flagTasks = true)
-        console.log("myval:", getMyTasks)
+        // console.log("myval:", getMyTasks)
         setFlagUsers(flagUsers = false)
     }
     const myUsersfunc = (val) => {
         setMyTasks(getMyTasks = val.myTasks);
-        console.log("getMyUsers:", val.myUsers)
-        console.log("getMyTasks:", val.myTasks)
+        // console.log("getMyUsers:", val.myUsers)
+        // console.log("getMyTasks:", val.myTasks)
         setMyUsers(getMyUsers = val.myUsers);
         setModalOpen(true);
         setFlagUsers(flagUsers = true)
@@ -258,26 +258,28 @@ const Cards = () => {
                                     return (
                                         <div key={index} className='App'>
                                             <header key={index}>
-                                                <Card style={{ color: "#000", marginBottom: 15, border: "3px solid rgb(106 185 48)" }}>
+                                                <Card style={{ color: "#000", marginBottom: 15, boxShadow: "1px 2px #888888", borderRadius: "30px" }}>
                                                     {/* display_name */}
-                                                    <Card.Img src={img1} style={{ height: 237 }} />
+                                                    <Card.Img src={img1} style={{ height: 237, borderRadius: "30px" }} />
                                                     <Card.Body src={logo}>
                                                         <Card.Title >
                                                             <div className="text-center ">
                                                                 <div className="row align-items-center">
-                                                                    <div className="col-md-11">
+                                                                    <div className="col-md-11" style={{ backgroundColor: "rgb(225, 241, 251)", width: '300px', height: '50px', padding: "10px" }}>
                                                                         <h5>{value.myTitle}</h5>
                                                                     </div>
                                                                 </div>
+                                                                <br></br>
                                                             </div>
                                                         </Card.Title>
-                                                        <button className="btn btn-primary" id="dropdown-basic-button" onClick={() => myTasks(value.myTasks)}>משימות
+                                                        <button className="btn btn-Light" id="dropdown-basic-button" style={{ borderRadius: "100px", borderColor: "black", width: "130px" }} onClick={() => myTasks(value.myTasks)}>משימות
                                                         </button>
-                                                        <button className="btn btn-primary" id="dropdown-basic-button" style={{ marginLeft: "100px" }} onClick={() => myUsersfunc(value)}>משוייך ל
+                                                        &nbsp;&nbsp;
+                                                        <button className="btn btn-primary" id="dropdown-basic-button" style={{ color: "#fff", borderRadius: "100px", width: "130px" }} onClick={() => myUsersfunc(value)}>משוייך ל
                                                         </button>
                                                         <br></br>
                                                         <br></br>
-                                                        <button type="button" className="btn btn-outline-primary" style={{ width: "270px" }}
+                                                        <button type="button" className="btn btn-outline-primary" style={{ width: "270px", borderRadius: "100px" }}
 
                                                             onClick={() => Replication(value)}
                                                         >
@@ -295,38 +297,27 @@ const Cards = () => {
                                     return (
                                         <div key={index} className='App'>
                                             <header key={index} >
-                                                <Card style={{ color: "#000", marginBottom: 15, border: "3px solid rgb(106 185 48)" }}>
-                                                    <Card.Img src={img2} style={{ height: 237 }} />
+                                                <Card style={{ color: "#000", marginBottom: 15, boxShadow: "1px 2px #888888", borderRadius: "30px" }}>
+                                                    <Card.Img src={img2} style={{ height: 237, borderRadius: "30px" }} />
                                                     <Card.Body>
                                                         <Card.Title >
                                                             <div className="text-center ">
                                                                 <div className="row align-items-center">
-                                                                    <div className="col-md-11">
+                                                                    <div className="col-md-11" style={{ backgroundColor: "rgb(225, 241, 251)", width: '300px', height: '50px', padding: "10px" }}>
                                                                         <h5>{value.myTitle}</h5>
                                                                     </div>
                                                                 </div>
                                                             </div>
+                                                            <br></br>
                                                         </Card.Title>
-                                                        <button className="btn btn-primary" id="dropdown-basic-button" onClick={() => myTasks(value.myTasks)}>משימות
-
+                                                        <button className="btn btn-Light" id="dropdown-basic-button" style={{ borderRadius: "100px", borderColor: "black", width: "130px" }} onClick={() => myTasks(value.myTasks)}>משימות
                                                         </button>
-                                                        {/* <DropdownButton className="d-inline p-3 text-white" id="dropdown-basic-button" title="משימות" >
-                                                            {value.myTasks ? <>
-                                                                {value.myTasks.map((val, index) =>
-                                                                    <Dropdown.Item key={index} >
-                                                                        {val.post_title}
-                                                                    </Dropdown.Item>)} </>
-                                                                : <> <Dropdown.Item href="#/action-1">
-                                                                    לא קיים
-                                                                </Dropdown.Item>
-                                                                </>}
-                                                        </DropdownButton> */}
-                                                        <button className="btn btn-primary" id="dropdown-basic-button" style={{ marginLeft: "100px" }} onClick={() => myUsersfunc(value)}>משוייך ל
+                                                        &nbsp;&nbsp;
+                                                        <button className="btn btn-primary" id="dropdown-basic-button" style={{ color: "#fff", borderRadius: "100px", width: "130px" }} onClick={() => myUsersfunc(value)}>משוייך ל
                                                         </button>
                                                         <br></br>
                                                         <br></br>
-
-                                                        <button type="button" className="btn btn-outline-primary" style={{ width: "270px" }}
+                                                        <button type="button" className="btn btn-outline-primary" style={{ width: "270px", borderRadius: "100px" }}
 
                                                             onClick={() => Replication(value)}
                                                         >
@@ -342,61 +333,68 @@ const Cards = () => {
                                 <div className="col-3">{dataCards3.map((value, index) => {
                                     return (
                                         <div key={index} className='App'>
-                                            <header key={index} >
-                                                <Card style={{ color: "#000", marginBottom: 15, border: "3px solid rgb(106 185 48)" }}>
-                                                    <Card.Img src={img3} style={{ height: 237 }} />
-                                                    <Card.Body>
+                                            <header key={index}>
+                                                <Card style={{ color: "#000", marginBottom: 15, boxShadow: "1px 2px #888888", borderRadius: "30px" }}>
+                                                    {/* display_name */}
+                                                    <Card.Img src={img3} style={{ height: 237, borderRadius: "30px" }} />
+                                                    <Card.Body src={logo}>
                                                         <Card.Title >
                                                             <div className="text-center ">
                                                                 <div className="row align-items-center">
-                                                                    <div className="col-md-11">
+                                                                    <div className="col-md-11" style={{ backgroundColor: "rgb(225, 241, 251)", width: '300px', height: '50px', padding: "10px" }}>
                                                                         <h5>{value.myTitle}</h5>
                                                                     </div>
                                                                 </div>
                                                             </div>
+                                                            <br></br>
                                                         </Card.Title>
-                                                        <button className="btn btn-primary" id="dropdown-basic-button" onClick={() => myTasks(value.myTasks)}>משימות
+                                                        <button className="btn btn-Light" id="dropdown-basic-button" style={{ borderRadius: "100px", borderColor: "black", width: "130px" }} onClick={() => myTasks(value.myTasks)}>משימות
                                                         </button>
-                                                        <button className="btn btn-primary" id="dropdown-basic-button" style={{ marginLeft: "100px" }} onClick={() => myUsersfunc(value)}>משוייך ל
+                                                        &nbsp;&nbsp;
+                                                        <button className="btn btn-primary" id="dropdown-basic-button" style={{ color: "#fff", borderRadius: "100px", width: "130px" }} onClick={() => myUsersfunc(value)}>משוייך ל
                                                         </button>
                                                         <br></br>
                                                         <br></br>
-                                                        <button type="button" className="btn btn-outline-primary" style={{ width: "270px" }}
+                                                        <button type="button" className="btn btn-outline-primary" style={{ width: "270px", borderRadius: "100px" }}
+
                                                             onClick={() => Replication(value)}
                                                         >
                                                             <GrDuplicate className='icon' />
                                                             &nbsp;&nbsp;
-                                                            שכפל מסלול זה</button>
+                                                            שכפל מסלול זה </button>
                                                     </Card.Body>
                                                 </Card>
                                             </header>
                                         </div>
                                     )
                                 })}</div>
+
                                 <div className="col-3">{dataCards4.map((value, index) => {
                                     return (
                                         <div key={index} className='App'>
                                             <header key={index} >
-                                                <Card style={{ color: "#000", marginBottom: 15, border: "3px solid rgb(106 185 48)" }}>
+                                                <Card style={{ color: "#000", marginBottom: 15, boxShadow: "1px 2px #888888", borderRadius: "30px" }}>
 
-                                                    <Card.Img src={img4} style={{ height: 237 }} />
+                                                    <Card.Img src={img4} style={{ height: 237, borderRadius: "30px" }} />
                                                     <Card.Body>
                                                         <Card.Title >
                                                             <div className="text-center ">
                                                                 <div className="row align-items-center">
-                                                                    <div className="col-md-11">
+                                                                    <div className="col-md-11" style={{ backgroundColor: "rgb(225, 241, 251)", width: '300px', height: '50px', padding: "10px" }}>
                                                                         <h5>{value.myTitle}</h5>
                                                                     </div>
                                                                 </div>
                                                             </div>
+                                                            <br></br>
                                                         </Card.Title>
-                                                        <button className="btn btn-primary" id="dropdown-basic-button" onClick={() => myTasks(value.myTasks)}>משימות
+                                                        <button className="btn btn-Light" id="dropdown-basic-button" style={{ borderRadius: "100px", borderColor: "black", width: "130px" }} onClick={() => myTasks(value.myTasks)}>משימות
                                                         </button>
-                                                        <button className="btn btn-primary" id="dropdown-basic-button" style={{ marginLeft: "100px" }} onClick={() => myUsersfunc(value)}>משוייך ל
+                                                        &nbsp;&nbsp;
+                                                        <button className="btn btn-primary" id="dropdown-basic-button" style={{ color: "#fff", borderRadius: "100px", width: "130px" }} onClick={() => myUsersfunc(value)}>משוייך ל
                                                         </button>
                                                         <br></br>
                                                         <br></br>
-                                                        <button type="button" className="btn btn-outline-primary" style={{ width: "270px" }}
+                                                        <button type="button" className="btn btn-outline-primary" style={{ width: "270px", borderRadius: "100px" }}
                                                             onClick={() => Replication(value)}
                                                         >
                                                             <GrDuplicate className='icon' />

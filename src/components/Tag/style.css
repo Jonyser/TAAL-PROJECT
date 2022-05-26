@@ -10,7 +10,6 @@
   justify-Content: 'space-between';
   margin-right: 50px;
   border-radius: 1.5ch;
-
 }
 
 .Tasks:hover {
@@ -19,17 +18,6 @@
 
 }
 
-/* 
-  .Places{
-    background-color: rgb(237, 234, 255);
-    margin: -0.5px;
-    padding-top: 1px;
-    padding-bottom: 1px;
-    border-radius: 1.5ch;
-    height: 435px;
-    overflow: scroll;
-  
-  } */
 .addPlaceCover {
   background-color: rgb(237, 234, 255);
   margin: -0.5px;

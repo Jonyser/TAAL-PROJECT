@@ -9,6 +9,7 @@ import Image from 'react-bootstrap/Image';
 import Modal_Loading from '../Modal/Modal_Loading';
 import TextField from "@mui/material/TextField";
 import { FcSearch } from "react-icons/fc";
+import { baseUrl } from "../../config";
 
 // import { Form } from "react-bootstrap";
 //----------------------------------------------------|
@@ -43,10 +44,10 @@ const Cards = () => {
     const [, setInputText] = useState("");
 
     let inputHandler = (e) => {
-        console.log("element from card:", e.target.value)
+        // console.log("element from card:", e.target.value)
         //convert input text to lower case
         setInputText(inputText = e.target.value.toLowerCase());
-        console.log("dataCards:", dataCards)
+        // console.log("dataCards:", dataCards)
         setFilteredData(filteredData = dataCards.filter((el) => {
             // setInputText(lowerCase);
 
@@ -59,16 +60,16 @@ const Cards = () => {
             }
         }))
 
-        console.log("filteredData:", filteredData)
+        // console.log("filteredData:", filteredData)
 
         sizeMod = filteredData.length % number;
         size = (filteredData.length - sizeMod) / number;
 
 
-        console.log("filteredData.length", filteredData.length)
+        // console.log("filteredData.length", filteredData.length)
 
-        console.log("size", size)
-        console.log("sizeMod:", sizeMod)
+        // console.log("size", size)
+        // console.log("sizeMod:", sizeMod)
         dataCards1 = [];
         dataCards2 = [];
         dataCards3 = [];
@@ -84,10 +85,7 @@ const Cards = () => {
             setDataCards4(dataCards4[i] = filteredData[index])
             index++;
         }
-        console.log("dataCards1", dataCards1)
-        console.log("dataCards2", dataCards2)
-        console.log("dataCards3", dataCards3)
-        console.log("dataCards4", dataCards4)
+
         for (let i = 0; i < sizeMod; i++) {
             if (i < sizeMod) {
                 setDataCards4(dataCards4[size] = filteredData[index]);
@@ -128,7 +126,7 @@ const Cards = () => {
         if (flag_show_page === true)
             setDone(true)
         if (flag_show_page === false)
-            get('https://s83.bfa.myftpupload.com/wp-json/wp/v2/users/', {
+            get(`${baseUrl}/wp-json/wp/v2/users/`, {
                 headers: {
                     'Content-Type': 'application/json',
                     'Authorization': `Bearer ${sessionStorage.getItem('jwt')}`,
@@ -139,10 +137,10 @@ const Cards = () => {
             }).then(res => {
 
                 setDone(true)
-                console.log("Users:", res)
+                // console.log("Users:", res)
                 size = res.length / number;
                 setDataCards(dataCards = res.filter((item) => item.acf.risk_profile > 0))
-                console.log("dataCards:", dataCards)
+                // console.log("dataCards:", dataCards)
                 sizeMod = dataCards.length % number;
                 size = (dataCards.length - sizeMod) / number;
 
@@ -185,7 +183,7 @@ const Cards = () => {
 
     }
     const myUsersfunc = (val) => {
-        console.log("getMyUsers.name:", val.name);
+        // console.log("getMyUsers.name:", val.name);
         setMyUsers(getMyUsers = val);
         setModalOpen(true);
     }
@@ -219,14 +217,14 @@ const Cards = () => {
                                     return (
                                         <div key={index} className='App'>
                                             <header key={index}>
-                                                <Card style={{ color: "#000", marginBottom: 15, border: "3px solid rgb(106 185 48)" }}>
+                                                <Card style={{ color: "#000", marginBottom: 15, border: "1px solid #888888", borderRadius: "20px" }}>
                                                     {value.acf.image ? <>
-                                                        <Image style={{ height: 237, width: '97%' }}
+                                                        <Image style={{ height: 237, width: '97%', borderRadius: "20px" }}
                                                             src={value.acf.image.url}
                                                             alt="new"
                                                         />
                                                     </> :
-                                                        <Card.Img src={profile} style={{ height: 237, width: '97%' }} />}
+                                                        <Card.Img src={profile} style={{ height: 237, width: '97%', borderRadius: "20px" }} />}
                                                     <Card.Body src={logo}>
                                                         <Card.Title >
 
@@ -252,15 +250,15 @@ const Cards = () => {
                                     return (
                                         <div key={index} className='App'>
                                             <header key={index} >
-                                                <Card style={{ color: "#000", marginBottom: 15, border: "3px solid rgb(106 185 48)" }}>
+                                                <Card style={{ color: "#000", marginBottom: 15, border: "1px solid #888888", borderRadius: "20px" }}>
                                                     {/* <Card.Img src={profile} style={{ height: 237, width: '97%' }} /> */}
                                                     {value.acf.image ? <>
-                                                        <Image style={{ height: 237, width: '97%' }}
+                                                        <Image style={{ height: 237, width: '97%', borderRadius: "20px" }}
                                                             src={value.acf.image.url}
                                                             alt="new"
                                                         />
                                                     </> :
-                                                        <Card.Img src={profile} style={{ height: 237, width: '97%' }} />}
+                                                        <Card.Img src={profile} style={{ height: 237, width: '97%', borderRadius: "20px" }} />}
 
                                                     <Card.Body>
                                                         <Card.Title >
@@ -286,15 +284,15 @@ const Cards = () => {
                                     return (
                                         <div key={index} className='App'>
                                             <header key={index} >
-                                                <Card style={{ color: "#000", marginBottom: 15, border: "3px solid rgb(106 185 48)" }}>
+                                                <Card style={{ color: "#000", marginBottom: 15, border: "1px solid #888888", borderRadius: "20px" }}>
                                                     {/* <Card.Img src={profile} style={{ height: 237, width: '97%' }} /> */}
                                                     {value.acf.image ? <>
-                                                        <Image style={{ height: 237, width: '97%' }}
+                                                        <Image style={{ height: 237, width: '97%', borderRadius: "20px" }}
                                                             src={value.acf.image.url}
                                                             alt="new"
                                                         />
                                                     </> :
-                                                        <Card.Img src={profile} style={{ height: 237, width: '97%' }} />}
+                                                        <Card.Img src={profile} style={{ height: 237, width: '97%', borderRadius: "20px" }} />}
 
                                                     <Card.Body>
                                                         <Card.Title >
@@ -321,15 +319,15 @@ const Cards = () => {
                                     return (
                                         <div key={index} className='App'>
                                             <header key={index} >
-                                                <Card style={{ color: "#000", marginBottom: 15, border: "3px solid rgb(106 185 48)" }}>
+                                                <Card style={{ color: "#000", marginBottom: 15, border: "1px solid #888888", borderRadius: "20px" }}>
                                                     {/* <Card.Img src={profile} style={{ height: 237, width: '97%' }} /> */}
                                                     {value.acf.image ? <>
-                                                        <Image style={{ height: 237, width: '97%' }}
+                                                        <Image style={{ height: 237, width: '97%', borderRadius: "20px" }}
                                                             src={value.acf.image.url}
                                                             alt="new"
                                                         />
                                                     </> :
-                                                        <Card.Img src={profile} style={{ height: 237, width: '97%' }} />}
+                                                        <Card.Img src={profile} style={{ height: 237, width: '97%', borderRadius: "20px" }} />}
                                                     <Card.Body>
                                                         <Card.Title >
                                                             <div className="text-center ">

@@ -4,6 +4,8 @@ import { FcMultipleInputs, FcAbout } from "react-icons/fc";
 import { RiAsterisk } from "react-icons/ri";
 import { IoMdCheckbox } from "react-icons/io";
 import Modal_Loading from "./Modal_Loading";
+import { baseUrl } from "../../config";
+
 //--------------------------
 let getPicture, getSound;
 let ichour = 'אישור'
@@ -48,7 +50,7 @@ function Modal_Tasks({ setOpenModalPlases, allStations, help }) {
         }
         else {
             setFlagClickOK(flagClickOK = true)
-            let url_post = 'https://s83.bfa.myftpupload.com/wp-json/wp/v2/tasks/'
+            let url_post = `${baseUrl}/wp-json/wp/v2/tasks/`
             fetch(url_post, {
                 method: "POST",
                 mode: 'cors',
@@ -79,13 +81,13 @@ function Modal_Tasks({ setOpenModalPlases, allStations, help }) {
             }).then(function (post) {
                 setDone(true)
                 // alert("ok")
-                console.log("post Modale Tasks:", post)
+                // console.log("post Modale Tasks:", post)
                 window.location.replace("/planner")
             })
         }
     }
     const saveCheckbox = (val) => {
-        console.log(val)
+        // console.log(val)
         setMyPlacesChoice(myPlacesChoiceTemp.push(val))
         // setMyStudents(myStudents.push(val))
         sortById()
@@ -124,23 +126,7 @@ function Modal_Tasks({ setOpenModalPlases, allStations, help }) {
                 // console.log("myPlacesChoice:", myPlacesChoice)
             }
     }
-    // const resultMyArrayStudent = () => {
-    //     if (myStudents.length > 1)
-    //         for (let i = 0; i < myStudents.length; i++) {
-    //             let index = i;
-    //             let count = 1;
-    //             for (let j = i + 1; j < myStudents.length; j++) {
-    //                 if (myStudents[j].id === myStudents[i].id) {
-    //                     i++;
-    //                     count++;
-    //                 }
-    //             }
-    //             if (count % 2 !== 0) {
-    //                 setMyStudentsChoice(myStudentsChoice.push(myStudents[index]))
-    //             }
-    //             console.log("myStudentsChoice:", myStudentsChoice)
-    //         }
-    // }
+
     return (
         <>
             {!help ? <>

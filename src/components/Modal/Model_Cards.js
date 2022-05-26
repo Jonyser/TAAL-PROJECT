@@ -5,6 +5,8 @@ import img1 from '../../Pictures/img1.png';
 import img2 from '../../Pictures/img2.png';
 import { BsFillFlagFill } from "react-icons/bs";
 import Modal_Loading from "./Modal_Loading";
+import { baseUrl } from "../../config";
+
 //--------------------------
 
 let profileStudent = 0;
@@ -44,7 +46,7 @@ function Modal_Cards({ setOpenModal, setText, thisMyRoute, thisGetMyTasks, thisF
     }, []);
 
     const getData = () => {
-        get('https://s83.bfa.myftpupload.com/wp-json/wp/v2/tasks/', {
+        get(`${baseUrl}/wp-json/wp/v2/tasks/`, {
             params: {
                 per_page: 99, 'Cache-Control': 'no-cache'
             }
@@ -54,7 +56,7 @@ function Modal_Cards({ setOpenModal, setText, thisMyRoute, thisGetMyTasks, thisF
 
             });
 
-        get('https://s83.bfa.myftpupload.com/wp-json/wp/v2/users/', {
+        get(`${baseUrl}/wp-json/wp/v2/users/`, {
             headers: {
                 'Content-Type': 'application/json',
                 'Authorization': `Bearer ${sessionStorage.getItem('jwt')}`,
@@ -77,7 +79,7 @@ function Modal_Cards({ setOpenModal, setText, thisMyRoute, thisGetMyTasks, thisF
             return
         }
         else {
-            let url_post = `https://s83.bfa.myftpupload.com/wp-json/wp/v2/routes`
+            let url_post = `${baseUrl}/wp-json/wp/v2/routes/`
             fetch(url_post, {
                 method: "POST",
                 headers: {
@@ -89,7 +91,7 @@ function Modal_Cards({ setOpenModal, setText, thisMyRoute, thisGetMyTasks, thisF
                     title: thisMyRoute.myTitle + "-duplicate-1",
                     fields: {
                         tasks: thisMyRoute.myTasks.map((e) => {
-                            console.log("e.id:", e.ID)
+                            // console.log("e.id:", e.ID)
                             return e.ID
                         }),
                         // users: obj.tasks,
@@ -112,14 +114,14 @@ function Modal_Cards({ setOpenModal, setText, thisMyRoute, thisGetMyTasks, thisF
         thisGetMyTasks.map((val) => {
             return dataTasks.map((item) => {
                 if (val.ID === item.id) {
-                    console.log("my Original Tasks:", myOriginalTasks);
+                    // console.log("my Original Tasks:", myOriginalTasks);
                     return setMyOriginalTasks(myOriginalTasks.push(item));
                 }
                 return null
             })
         });
         let myStudent = dataUsers.filter((item) => item.id === val.ID)
-        console.log("myStudent:", myStudent)
+        // console.log("myStudent:", myStudent)
         setProfileStudent(profileStudent = myStudent[0].acf.risk_profile)
         // alert(profileStudent)
         // setMyOriginalTasks(myOriginalTasks = thisGetMyTasks.map((val) => dataTasks.filter((item) => item.id === val.ID)));

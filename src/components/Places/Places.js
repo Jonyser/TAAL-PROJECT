@@ -4,8 +4,6 @@ import './style.css';
 import { BsPencilFill } from "react-icons/bs";
 import { HiOutlineCursorClick } from "react-icons/hi";
 import { MdOutlineAdsClick } from "react-icons/md";
-
-
 import { FcAddDatabase, FcSearch } from "react-icons/fc";
 
 import Stations from '../Stations/Stations'
@@ -13,8 +11,8 @@ import Dot from '../Dot/Dot'
 import Modal_Places from '../Modal/Model_Places'
 import Modal_Loading from '../Modal/Modal_Loading'
 import TextField from "@mui/material/TextField";
-
-
+import { baseUrl } from "../../config";
+// const { baseUrl } = require
 //-----------------------
 let places = [];
 let onlyAllStation = [];
@@ -70,13 +68,14 @@ const Places = () => {
 
         // taal.tech/wp-json/wp/v2/places
         ///s83.bfa.myftpupload.com/wp-json/wp/v2/places
-        await get('https://s83.bfa.myftpupload.com/wp-json/wp/v2/places/', {
+
+        await get(`${baseUrl}/wp-json/wp/v2/places/`, {
             params: {
                 per_page: 99, 'Cache-Control': 'no-cache'
             }
 
         }).then(res => {
-            console.log("res: ", res)
+            // console.log("res: ", res)
             setPlaces(places = res.filter((item) => item.parent === 0))
             setOnlyAllStation(onlyAllStation = res.filter((item) => item.parent > 0))
 

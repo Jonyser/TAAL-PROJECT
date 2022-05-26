@@ -5,6 +5,7 @@ import Places from '../Places/Places';
 import 'reactjs-popup/dist/index.css';
 import Modal from '../Modal/Modal';
 import { get } from "../../api/api";
+
 //-------------------------
 let resultData = [];
 //-------------------------
@@ -18,7 +19,7 @@ const Planner = () => {
         const fetchData = async () => {
             setLoading(true);
             try {
-                getData();
+                // getData();
             } catch (error) {
                 console.error(error.message);
             }
@@ -26,18 +27,19 @@ const Planner = () => {
         }
         fetchData();
     }, []);
-    const getData = async () => {
-        // taal.tech/wp-json/wp/v2/places
-        // /s83.bfa.myftpupload.com/wp-json/wp/v2/places
-        await get('https://s83.bfa.myftpupload.com/wp-json/wp/v2/routes/', {
-            params: {
-                per_page: 99, 'Cache-Control': 'no-cache'
-            }
-        }).then(res => {
-            setResultData(resultData = res)
-            console.log("result from planer:", resultData)
-        })
-    }
+    // const getData = async () => {
+    //     // taal.tech/wp-json/wp/v2/places
+    //     // /s83.bfa.myftpupload.com/wp-json/wp/v2/places
+
+    //     await get(`${baseUrl}/wp-json/wp/v2/routes/`, {
+    //         params: {
+    //             per_page: 99, 'Cache-Control': 'no-cache'
+    //         }
+    //     }).then(res => {
+    //         setResultData(resultData = res)
+    //         // console.log("result from planer:", resultData)
+    //     })
+    // }
     //-------------------input-------------------------
     function getName(val) {
         setName(val.target.value)

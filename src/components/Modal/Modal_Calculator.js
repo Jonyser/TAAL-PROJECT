@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import "./Modal.css";
 import { RiAsterisk } from "react-icons/ri";
 import Modal_Loading from "./Modal_Loading";
+import { baseUrl } from "../../config";
+
 //--------------------------
 let get_title = ""
 let flagClickOK = false;
@@ -24,7 +26,7 @@ function Modal({ setOpenModal, propActionFlag, idsTasks, helpProps, usersArray }
         else {
             setFlagClickOK(flagClickOK = true)
 
-            let url_post = `https://s83.bfa.myftpupload.com/wp-json/wp/v2/routes`
+            let url_post = `${baseUrl}/wp-json/wp/v2/routes/`
             fetch(url_post, {
                 method: "POST",
                 headers: {
@@ -46,7 +48,7 @@ function Modal({ setOpenModal, propActionFlag, idsTasks, helpProps, usersArray }
                 return response.json();
             }).then(function (post) {
 
-                console.log(post)
+                // console.log(post)
                 window.location.replace("/planner")
             })
         }

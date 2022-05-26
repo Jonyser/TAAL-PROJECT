@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import ReactLoading from 'react-loading';
+import { baseUrl } from "../../config";
+
 //---------------------
 let flag_token = false
 let flag = false;
@@ -8,7 +10,7 @@ let flag = false;
 
 function LoginAPI(props) {
 
-    console.log()
+    // console.log()
     // alert(props.getFlagLoading)
     const [, login_token] = useState('')
     const [, setFlag] = useState(false)
@@ -16,7 +18,7 @@ function LoginAPI(props) {
 
     if (props.APIDetailsLogin.user.length > 0) {
 
-        const url = 'https://s83.bfa.myftpupload.com/wp-json/jwt-auth/v1/token'
+        const url = `${baseUrl}/wp-json/jwt-auth/v1/token/`
         fetch(url, {
             method: 'POST',
             headers: {
@@ -35,13 +37,13 @@ function LoginAPI(props) {
                 if (!flag_token) {
                     if (user.message !== undefined) {
                         if (user.message.includes("2FA")) {
-                            console.log("2FA")
+                            // console.log("2FA")
                             alert('2FA is activated, No support for this feature, Please login with another user')
                             login_token(flag_token = true)
                         }
                     }
                     setFlag(flag = true);
-                    console.log("token", user.token)
+                    // console.log("token", user.token)
                     sessionStorage.setItem('jwt', user.token)
                     sessionStorage.setItem('logged_in', 1)
                     window.location.replace('/planner')

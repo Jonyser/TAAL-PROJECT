@@ -4,6 +4,8 @@ import { get } from "../../api/api";
 import { FcLink } from "react-icons/fc";
 import { BsExclamationLg } from "react-icons/bs";
 import Modal_Loading from "./Modal_Loading";
+import { baseUrl } from "../../config";
+
 //--------------------------
 let obj = { tasks: [], users: [] }
 let student = [];
@@ -35,7 +37,7 @@ function Modal({ setOpenModal, setText }) {
     }, []);
 
     const getData = () => {
-        get('https://s83.bfa.myftpupload.com/wp-json/wp/v2/users/', {
+        get(`${baseUrl}/wp-json/wp/v2/users/`, {
             headers: {
                 'Content-Type': 'application/json',
                 'Authorization': `Bearer ${sessionStorage.getItem('jwt')}`,
@@ -46,7 +48,7 @@ function Modal({ setOpenModal, setText }) {
         }).then(res => {
 
             setStudent(student = res.filter((item) => item.acf.risk_profile > 0))
-            console.log("student:", student);
+            // console.log("student:", student);
 
         });
     }
@@ -65,10 +67,10 @@ function Modal({ setOpenModal, setText }) {
         }
         else {
             set_obj(obj.tasks = JSON.parse(localStorage.getItem('New_Routes')));
-            console.log("obj : ", obj)
-            console.log("obj.tasks : ", obj.tasks)
+            // console.log("obj : ", obj)
+            // console.log("obj.tasks : ", obj.tasks)
 
-            let url_post = `https://s83.bfa.myftpupload.com/wp-json/wp/v2/routes`
+            let url_post = `${baseUrl}/wp-json/wp/v2/routes/`
             fetch(url_post, {
                 method: "POST",
                 headers: {
@@ -80,12 +82,12 @@ function Modal({ setOpenModal, setText }) {
                     status: 'publish',
                     fields: {
                         tasks: obj.tasks.map((e) => {
-                            console.log("e.id:", e.id)
+                            // console.log("e.id:", e.id)
                             return e.id
                         }),
                         users: {
                             ID: myStudentsChoice.map((e) => {
-                                console.log("e.id2:", e)
+                                // console.log("e.id2:", e)
                                 return e.id
                             }),
                         }
@@ -105,7 +107,7 @@ function Modal({ setOpenModal, setText }) {
     const saveCheckbox = (val) => {
         setMyStudents(myStudents.push(val))
         sortById()
-        console.log("myStudents:", myStudents);
+        // console.log("myStudents:", myStudents);
     }
     const sortById = () => {
         if (myStudents.length > 1)
@@ -135,7 +137,7 @@ function Modal({ setOpenModal, setText }) {
                 if (count % 2 !== 0) {
                     setMyStudentsChoice(myStudentsChoice.push(myStudents[index]))
                 }
-                console.log("myStudentsChoice:", myStudentsChoice)
+                // console.log("myStudentsChoice:", myStudentsChoice)
             }
     }
     return (
