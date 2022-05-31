@@ -1,11 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { get } from "../../api/api";
 import './style.css';
-import { BsPencilFill } from "react-icons/bs";
-import { HiOutlineCursorClick } from "react-icons/hi";
 import { MdOutlineAdsClick } from "react-icons/md";
 import { FcAddDatabase, FcSearch } from "react-icons/fc";
-
 import Stations from '../Stations/Stations'
 import Dot from '../Dot/Dot'
 import Modal_Places from '../Modal/Model_Places'
