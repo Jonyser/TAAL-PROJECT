@@ -23,13 +23,11 @@ function App() {
             <div>
               {sessionStorage.logged_in == 1 ? <><Nav /></> : null}
               <Switch>
-                {/* <CallState /> */}
                 <Route path="/" exact component={Home}></Route>
                 <Route path="/planner" component={Planner}></Route>
                 <Route path="/student" component={Student}></Route>
                 <Route path="/Calculator" component={Calculator}></Route>
                 <Route path="/routes_cards" component={Cards}></Route>
-                {/* <Route path="/about" component={About}></Route> */}
               </Switch>
             </div>
           </Router>
