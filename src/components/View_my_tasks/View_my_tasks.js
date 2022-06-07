@@ -4,6 +4,7 @@ import Audios from '../Audios/Audios'
 import { get } from "../../api/api";
 import Images from '../Images/Images';
 import { FcSpeaker } from "react-icons/fc";
+import { baseUrl } from "../../config";
 
 let MyTasks = [];
 let IdTask = 0;
@@ -13,9 +14,7 @@ function View_my_tasks({ prop }) {
     const [, setDataTask] = useState([]);
     const clickTask = async (e) => {
         setIdTask(IdTask = e.ID);
-        //'https://taal.tech/wp-json/wp/v2/tasks/'
-        //https://s83.bfa.myftpupload.com/wp-json/wp/v2/tasks/
-        await get('https://s83.bfa.myftpupload.com/wp-json/wp/v2/tasks/', {
+        await get(`${baseUrl}/wp-json/wp/v2/tasks/`, {
             params: {
                 per_page: 99, 'Cache-Control': 'no-cache'
             }

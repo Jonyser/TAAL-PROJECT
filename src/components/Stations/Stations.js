@@ -1,14 +1,21 @@
 import React, { useState, useEffect } from 'react';
 import { get } from "../../api/api";
-import { BsPencilFill } from "react-icons/bs";
-import { FcAddDatabase } from "react-icons/fc";
+import { FcAddDatabase, FcSearch } from "react-icons/fc";
+import { MdOutlineAdsClick } from "react-icons/md";
 import './style.css';
 import Tasks_comp from "../Tasks_comp/Tasks_comp";
 import Dot from '../Dot/Dot'
 import Modal_Stations from '../Modal/Modal_Stations'
+import TextField from "@mui/material/TextField";
+import { baseUrl } from "../../config";
 
+//-----------------------
 let allTasks = [];
 let tasks = [];
+let filteredData = []
+let inputText = ""
+let flagFirstTime = true;
+//-----------------------
 
 const Stations = (props) => {
     // console.log(" props.allStations:", props.allStations)
@@ -16,6 +23,36 @@ const Stations = (props) => {
     const [, setStateTask] = useState([]);
     const [loading, setLoading] = useState(false);
     const [modalOpen, setModalOpen] = useState(false)
+    const [, setFilteredData] = useState([]);
+    const [, setInputText] = useState("");
+    const [, setFlagFirstTime] = useState(false);
+
+    if (flagFirstTime === true) {
+        filteredData = props.propsData
+    }
+
+    // console.log("filtered Data 1:", filteredData)
+
+    let inputHandler = (e) => {
+        setInputText(inputText = e.target.value.toLowerCase());
+
+        setFlagFirstTime(flagFirstTime = false)
+        //convert input text to lower case
+        // setFilteredData(filteredData = [])
+        // console.log("filtered Data 2:", filteredData)
+        setFilteredData(filteredData = props.propsData.filter((el) => {
+            if (inputText === '') {
+                return el;
+            }
+            //return the item which contains the user input
+            else {
+                return el.name.toLowerCase().includes(inputText)
+            }
+        }))
+        // console.log("filtered Data 3:", filteredData)
+
+
+    };
     useEffect(() => {
         const fetchData = async () => {
             setLoading(true);
@@ -29,16 +66,18 @@ const Stations = (props) => {
         fetchData();
     }, []);
     const getingData = async () => {
+
         //'https://taal.tech/wp-json/wp/v2/tasks/'
         //https://s83.bfa.myftpupload.com/wp-json/wp/v2/tasks/
-        await get('https://s83.bfa.myftpupload.com/wp-json/wp/v2/tasks/', {
+
+        await get(`${baseUrl}/wp-json/wp/v2/tasks/`, {
             params: {
                 per_page: 99, 'Cache-Control': 'no-cache'
             }
         })
             .then(res => {
                 allTasks = res;
-                console.log("allTasks:", allTasks)
+                // console.log("allTasks:", allTasks)
             });
     }
     const Display_The_Tasks = (e) => {
@@ -52,6 +91,17 @@ const Stations = (props) => {
                 }
             }
         })
+
+        setFilteredData(filteredData = props.propsData.filter((el) => {
+            if (inputText === '') {
+                return el;
+            }
+            //return the item which contains the user input
+            else {
+                return el.name.toLowerCase().includes(inputText)
+            }
+        }))
+        // console.log("filteredData from st:", filteredData)
         setStateTask({ data: tasks })//Updating the state
     }
     //----------------------------------------------------------
@@ -78,16 +128,33 @@ const Stations = (props) => {
                                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                             </button>
                         </div>
+                        <div className="search" style={{
+                            backgroundColor: "rgb(255, 242, 234)", borderStyle: 'none none solid none', borderColor: "#fff", borderWidth: "5px"
+
+                        }}>
+                            <TextField
+                                dir="rtl"
+                                style={{
+                                    backgroundColor: "#fff", right: "10%", margin: "10px"
+                                }}
+                                id="outlined-basic"
+                                variant="outlined"
+
+                                label={<FcSearch style={{ fontSize: "x-large" }} />}
+                                onChange={inputHandler}
+                            />
+                        </div>
                         <div className='Stations'>
                             {
-                                props.propsData.map((value, index) => {
+                                filteredData.map((value, index) => {
                                     return (
                                         <button className='Station'
                                             onClick={() => Display_The_Tasks(value)}
                                             key={index}>
+                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                             {value.name}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                            <BsPencilFill /> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                            <Dot color="#e29e62" />
+                                            <MdOutlineAdsClick style={{ fontSize: "25px", color: "#e29e62" }} />
+                                            {/* <Dot color="#e29e62" /> */}
                                         </button>
                                     )
                                 })}

@@ -1,15 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import './style.css';
-// import { GrDuplicate } from "react-icons/gr";
 import { FcOk } from "react-icons/fc";
 import Places from '../Places/Places';
 import 'reactjs-popup/dist/index.css';
 import Modal from '../Modal/Modal';
-import { get } from "../../api/api";
-// import { Dropdown, DropdownButton } from 'react-bootstrap';
-// import { Form } from "react-bootstrap";
+// import { get } from "../../api/api";
+
+//-------------------------
 let resultData = [];
+//-------------------------
 const Planner = () => {
+
+    const [get_logged_in, setLogged_in] = useState(false);// for TextView
     const [get_Name, setName] = useState(null);// for TextView
     const [loading, setLoading] = useState(false);
     const [modalOpen, setModalOpen] = useState(false);
@@ -19,7 +21,8 @@ const Planner = () => {
         const fetchData = async () => {
             setLoading(true);
             try {
-                getData();
+                setLogged_in(sessionStorage.getItem('logged_in'))
+                // getData();
             } catch (error) {
                 console.error(error.message);
             }
@@ -27,24 +30,15 @@ const Planner = () => {
         }
         fetchData();
     }, []);
-    const getData = async () => {
-        // taal.tech/wp-json/wp/v2/places
-        // /s83.bfa.myftpupload.com/wp-json/wp/v2/places
-        await get('https://s83.bfa.myftpupload.com/wp-json/wp/v2/routes/', {
-            params: {
-                per_page: 99, 'Cache-Control': 'no-cache'
-            }
-        }).then(res => {
-            setResultData(resultData = res)
-            console.log("result from planer:", resultData)
-        })
-    }
+
     //-------------------input-------------------------
     function getName(val) {
         setName(val.target.value)
     }
     return (
         <>
+            {!get_logged_in ? <div style={{color:"white"}}>Please connect properly !</div>:
+            <>
             {loading && <div>Loading</div>}
             {!loading && (
                 <div className="Planner" style={{
@@ -68,6 +62,9 @@ const Planner = () => {
                     </div>
                 </div>
             )}
+            </>
+            }
+            
         </>
     );
 }

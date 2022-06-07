@@ -1,11 +1,16 @@
 import React, { useState } from 'react';
 import "./Modal.css";
 import { RiAsterisk } from "react-icons/ri";
+import Modal_Loading from "./Modal_Loading";
+import { baseUrl } from "../../config";
 
+//--------------------------
 let get_title = ""
-
+let flagClickOK = false;
+//--------------------------
 function Modal({ setOpenModal, propActionFlag, idsTasks, helpProps, usersArray }) {
     const [, settitle] = useState("");
+    const [, setFlagClickOK] = useState(false);
     const handleTitleInput = (e) => {
         settitle(get_title = e.target.value)
     }
@@ -14,31 +19,39 @@ function Modal({ setOpenModal, propActionFlag, idsTasks, helpProps, usersArray }
     // console.log("helpProps:", helpProps)
 
     function Post_Route() {
-        let url_post = `https://s83.bfa.myftpupload.com/wp-json/wp/v2/routes`
-        fetch(url_post, {
-            method: "POST",
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${sessionStorage.getItem('jwt')}`,
-            },
-            body: JSON.stringify({
-                title: get_title,
-                status: 'publish',
 
-                fields: {
-                    // tasks: obj.tasks[0].id,
-                    tasks: idsTasks.map((e) => {
-                        return e
-                    })
-                }
+        if (get_title === "") {
+            alert("עליך למלא שדות חובה המסומנים בכוכבית")
+        }
+        else {
+            setFlagClickOK(flagClickOK = true)
+
+            let url_post = `${baseUrl}/wp-json/wp/v2/routes/`
+            fetch(url_post, {
+                method: "POST",
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${sessionStorage.getItem('jwt')}`,
+                },
+                body: JSON.stringify({
+                    title: get_title,
+                    status: 'publish',
+
+                    fields: {
+                        // tasks: obj.tasks[0].id,
+                        tasks: idsTasks.map((e) => {
+                            return e
+                        })
+                    }
+                })
+            }).then(function (response) {
+                return response.json();
+            }).then(function (post) {
+
+                // console.log(post)
+                window.location.replace("/planner")
             })
-        }).then(function (response) {
-            return response.json();
-        }).then(function (post) {
-
-            console.log(post)
-            window.location.replace("/planner")
-        })
+        }
     }
     return (
         <>
@@ -131,6 +144,7 @@ function Modal({ setOpenModal, propActionFlag, idsTasks, helpProps, usersArray }
                                         onClick={Post_Route}
                                     >כן
                                     </button>
+                                    {flagClickOK ? <><Modal_Loading props={false} /></> : <></>}
                                 </div>
                             </div>
                         </div>

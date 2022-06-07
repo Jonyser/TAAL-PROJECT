@@ -32,11 +32,12 @@
   margin-right: 50;
   border-radius: 1.5ch;
   font-size: small;
+
 }
 
 .Station:focus {
   background: linear-gradient(90deg, #fffbf7 0, #f5a55f);
-  font-size: medium;
+  /* font-size: medium; */
   transition: 0.4s;
 }
 

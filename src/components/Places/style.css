@@ -4,7 +4,7 @@
   padding-top: 1px;
   padding-bottom: 1px;
   border-radius: 1.5ch;
-  height: 420px;
+  height: 435px;
   overflow: auto;
 
 }
@@ -17,7 +17,7 @@
 
 }
 
-.Place{
+.Place {
   margin: 20px;
 }
 
@@ -37,7 +37,6 @@
 
 .Place:focus {
   background: linear-gradient(90deg, #f6f5ff 0, #bb98f3);
-  font-size: medium;
   transition: 0.4s;
 }
 
@@ -89,4 +88,8 @@ h3 {
   display: block;
   margin-right: auto;
   margin-left: auto;
+}
+
+.search {
+  text-align: right;
 }

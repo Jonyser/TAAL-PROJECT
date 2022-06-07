@@ -119,29 +119,3 @@
   line-height: 1 !important;
   z-index: 4;
 }
-
-
-
-/* .NewRouteBody{
-  height:60px;
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  min-height: 10vh;
-  background-color: rgb(178, 187, 201);
-  color: white;
-} */
-
-/* .GetElement{
-  text-align: right;
-  border: none;
-  display: flex;
-  height:30px;
-  width:100%;
-  color: rgb(0, 0, 0);
-  position: absolute;
-  right: 10px;
-} */
-/* .Dropdown:active, .styledSelect.active {
-  background-color:rgb(136, 30, 30);
-} */

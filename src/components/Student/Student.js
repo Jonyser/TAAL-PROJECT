@@ -4,9 +4,13 @@ import '../../../node_modules/bootstrap/dist/css/bootstrap.css';
 import { Card } from 'react-bootstrap';
 import profile from '../../Pictures/profile1.png';
 import logo from '../../Pictures/logo.jpeg';
-import ReactLoading from 'react-loading';
 import Modal_Student from '../Modal/Modal_Student'
 import Image from 'react-bootstrap/Image';
+import Modal_Loading from '../Modal/Modal_Loading';
+import TextField from "@mui/material/TextField";
+import { FcSearch } from "react-icons/fc";
+import { baseUrl } from "../../config";
+
 // import { Form } from "react-bootstrap";
 //----------------------------------------------------|
 let dataCards = [];//                                 |
@@ -20,9 +24,12 @@ let index = 0;//                                      |
 let sizeMod = 0;//                                    |
 const number = 4;//                                   |
 let getMyUsers = [];//                                |
+let filteredData = []
+let inputText = ""
 //                                                    |
 //----------------------------------------------------|
 const Cards = () => {
+    const [get_logged_in, setLogged_in] = useState(false);
     const [done, setDone] = useState(false);
     const [, setLoading] = useState(false);
     const [, setDataCards] = useState([]);
@@ -34,11 +41,80 @@ const Cards = () => {
     // const [, setResultData] = useState([]);
     const [modalOpen, setModalOpen] = useState(false);
     const [, setMyUsers] = useState([]);
+    const [, setFilteredData] = useState([]);
+    const [, setInputText] = useState("");
 
+    let inputHandler = (e) => {
+        // console.log("element from card:", e.target.value)
+        //convert input text to lower case
+        setInputText(inputText = e.target.value.toLowerCase());
+        // console.log("dataCards:", dataCards)
+        setFilteredData(filteredData = dataCards.filter((el) => {
+            // setInputText(lowerCase);
+
+            if (inputText === '') {
+                return el;
+            }
+            //return the item which contains the user input
+            else {
+                return el.name.toLowerCase().includes(inputText)
+            }
+        }))
+
+        // console.log("filteredData:", filteredData)
+
+        sizeMod = filteredData.length % number;
+        size = (filteredData.length - sizeMod) / number;
+
+
+        // console.log("filteredData.length", filteredData.length)
+
+        // console.log("size", size)
+        // console.log("sizeMod:", sizeMod)
+        dataCards1 = [];
+        dataCards2 = [];
+        dataCards3 = [];
+        dataCards4 = [];
+        index = 0
+        for (let i = 0; i < size; i++) {
+            setDataCards1(dataCards1[i] = filteredData[index]);
+            index++;
+            setDataCards2(dataCards2[i] = filteredData[index])
+            index++;
+            setDataCards3(dataCards3[i] = filteredData[index])
+            index++;
+            setDataCards4(dataCards4[i] = filteredData[index])
+            index++;
+        }
+
+        for (let i = 0; i < sizeMod; i++) {
+            if (i < sizeMod) {
+                setDataCards4(dataCards4[size] = filteredData[index]);
+                i++;
+                index++;
+            }
+            if (i < sizeMod) {
+                setDataCards3(dataCards3[size] = filteredData[index]);
+                i++;
+                index++;
+            }
+            if (i < sizeMod) {
+                setDataCards2(dataCards2[size] = filteredData[index]);
+                i++;
+                index++;
+            }
+            if (i < sizeMod) {
+                setDataCards1(dataCards1[size] = filteredData[index]);
+                i++;
+                index++;
+            }
+        }
+    };
     useEffect(() => {
         const fetchData = async () => {
             setLoading(true);
             try {
+                setLogged_in(sessionStorage.getItem('logged_in'))
                 getData();
 
             } catch (error) {
@@ -49,8 +125,10 @@ const Cards = () => {
         fetchData();
     }, []);
     const getData = () => {
+        if (flag_show_page === true)
+            setDone(true)
         if (flag_show_page === false)
-            get('https://s83.bfa.myftpupload.com/wp-json/wp/v2/users/', {
+            get(`${baseUrl}/wp-json/wp/v2/users/`, {
                 headers: {
                     'Content-Type': 'application/json',
                     'Authorization': `Bearer ${sessionStorage.getItem('jwt')}`,
@@ -59,10 +137,12 @@ const Cards = () => {
                     per_page: 99, 'Cache-Control': 'no-cache'
                 }
             }).then(res => {
-                console.log("Users:", res)
+
+                setDone(true)
+                // console.log("Users:", res)
                 size = res.length / number;
                 setDataCards(dataCards = res.filter((item) => item.acf.risk_profile > 0))
-                console.log("dataCards:", dataCards)
+                // console.log("dataCards:", dataCards)
                 sizeMod = dataCards.length % number;
                 size = (dataCards.length - sizeMod) / number;
 
@@ -103,191 +183,182 @@ const Cards = () => {
                 size = (dataCards.length - sizeMod) / number;
             });
 
-        setDone(true)
     }
-    // const Replication = (val) => {
-    //     setModalOpen(true);
-    //     setMyRoute(myRoute = val)
-    //     setFlagTasks(flagTasks = false)
-    //     setFlagUsers(flagUsers = false)
-    // }
-    // const myTasks = (val) => {
-    //     console.log("getMyTasks:", val.myTasks)
-    //     setMyTasks(getMyTasks = val.myTasks);
-    //     setModalOpen(true);
-    //     setFlagTasks(flagTasks = true)
-    //     console.log("myval:", getMyTasks)
-    //     setFlagUsers(flagUsers = false)
-    // }
     const myUsersfunc = (val) => {
-        console.log("getMyUsers.name:", val.name);
+        // console.log("getMyUsers.name:", val.name);
         setMyUsers(getMyUsers = val);
         setModalOpen(true);
     }
     return (
         <>
-            {!done ? <>
-                <h1 float={'right'} style={{ color: 'white' }}>Loading</h1>
-                < ReactLoading type={"bars"} className='loading' color={"rgb(180, 175, 199)"} height={'10%'} width={'10%'} />
-            </>
-                :
+            {!get_logged_in ? <div style={{ color: "white" }}>Please connect properly !</div> :
                 <>
-                    <div style={{
-                        backgroundColor: 'rgb(213, 221, 228)',
-                        overflow: "hidden",
-                    }}>
-                        {modalOpen && <Modal_Student setOpenModal={setModalOpen} thisGetMyUsers={getMyUsers} />}
-                        <br></br>
-                        <div className='container' >
-                            <div className="row">
-                                <div className="col-3">{dataCards1.map((value, index) => {
-                                    return (
-                                        <div key={index} className='App'>
-                                            <header key={index}>
-                                                <Card style={{ color: "#000", marginBottom: 15, border: "3px solid rgb(106 185 48)" }}>
-                                                    {/* display_name */}
-
-                                                    {value.acf.image ? <>
-                                                        <Image style={{ height: 237, width: '97%' }}
-                                                            src={value.acf.image.url}
-                                                            alt="new"
-                                                        />
-                                                    </> :
-                                                        <Card.Img src={profile} style={{ height: 237, width: '97%' }} />}
-
-
-
-                                                    <Card.Body src={logo}>
-                                                        <Card.Title >
-
-                                                            <div className="text-center ">
-                                                                <div className="row align-items-center">
-                                                                    <div className="col-md-11">
-                                                                        <h5>{value.name}</h5>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </Card.Title>
-                                                        <button className="btn btn-primary" id="dropdown-basic-button" style={{ marginLeft: "90px" }} onClick={() => myUsersfunc(value)}>מידע נוסף
-                                                        </button>
-                                                        <br></br>
-                                                        <br></br>
-
-                                                    </Card.Body>
-                                                </Card>
-                                            </header>
-                                        </div>
-                                    )
-                                })}</div>
-                                <div className="col-3">{dataCards2.map((value, index) => {
-                                    return (
-                                        <div key={index} className='App'>
-                                            <header key={index} >
-                                                <Card style={{ color: "#000", marginBottom: 15, border: "3px solid rgb(106 185 48)" }}>
-                                                    {/* <Card.Img src={profile} style={{ height: 237, width: '97%' }} /> */}
-                                                    {value.acf.image ? <>
-                                                        <Image style={{ height: 237, width: '97%' }}
-                                                            src={value.acf.image.url}
-                                                            alt="new"
-                                                        />
-                                                    </> :
-                                                        <Card.Img src={profile} style={{ height: 237, width: '97%' }} />}
-
-                                                    <Card.Body>
-                                                        <Card.Title >
-                                                            <div className="text-center ">
-                                                                <div className="row align-items-center">
-                                                                    <div className="col-md-12">
-                                                                        <h5>{value.name}</h5>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </Card.Title>
-                                                        <button className="btn btn-primary" id="dropdown-basic-button" style={{ marginLeft: "90px" }} onClick={() => myUsersfunc(value)}>מידע נוסף
-                                                        </button>
-                                                        <br></br>
-                                                        <br></br>
-                                                    </Card.Body>
-                                                </Card>
-                                            </header>
-                                        </div>
-                                    )
-                                })}</div>
-                                <div className="col-3">{dataCards3.map((value, index) => {
-                                    return (
-                                        <div key={index} className='App'>
-                                            <header key={index} >
-                                                <Card style={{ color: "#000", marginBottom: 15, border: "3px solid rgb(106 185 48)" }}>
-                                                    {/* <Card.Img src={profile} style={{ height: 237, width: '97%' }} /> */}
-                                                    {value.acf.image ? <>
-                                                        <Image style={{ height: 237, width: '97%' }}
-                                                            src={value.acf.image.url}
-                                                            alt="new"
-                                                        />
-                                                    </> :
-                                                        <Card.Img src={profile} style={{ height: 237, width: '97%' }} />}
-
-                                                    <Card.Body>
-                                                        <Card.Title >
-                                                            <div className="text-center ">
-                                                                <div className="row align-items-center">
-                                                                    <div className="col-md-11">
-                                                                        <h5>{value.name}</h5>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </Card.Title>
-                                                        <button className="btn btn-primary" id="dropdown-basic-button" style={{ marginLeft: "90px" }} onClick={() => myUsersfunc(value)}>מידע נוסף
-                                                        </button>
-                                                        <br></br>
-                                                        <br></br>
-
-                                                    </Card.Body>
-                                                </Card>
-                                            </header>
-                                        </div>
-                                    )
-                                })}</div>
-                                <div className="col-3">{dataCards4.map((value, index) => {
-                                    return (
-                                        <div key={index} className='App'>
-                                            <header key={index} >
-                                                <Card style={{ color: "#000", marginBottom: 15, border: "3px solid rgb(106 185 48)" }}>
-                                                    {/* <Card.Img src={profile} style={{ height: 237, width: '97%' }} /> */}
-                                                    {value.acf.image ? <>
-                                                        <Image style={{ height: 237, width: '97%' }}
-                                                            src={value.acf.image.url}
-                                                            alt="new"
-                                                        />
-                                                    </> :
-                                                        <Card.Img src={profile} style={{ height: 237, width: '97%' }} />}
-
-                                                    <Card.Body>
-                                                        <Card.Title >
-                                                            <div className="text-center ">
-                                                                <div className="row align-items-center">
-                                                                    <div className="col-md-11">
-                                                                        <h5>{value.name}</h5>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </Card.Title>
-                                                        <button className="btn btn-primary" id="dropdown-basic-button" style={{ marginLeft: "90px" }} onClick={() => myUsersfunc(value)}>מידע נוסף
-                                                        </button>
-                                                        <br></br>
-                                                        <br></br>
-                                                    </Card.Body>
-                                                </Card>
-                                            </header>
-                                        </div>
-                                    )
-                                })}</div>
-
+                    {!done ? <>
+                        {<Modal_Loading />}
+                    </>
+                        :
+                        <>
+                            <div className='inputCover' dir="rtl" >
+                                <TextField
+                                    dir="rtl"
+                                    style={{ borderRadius: '10px', textAlign: 'right', width: "200px", backgroundColor: "#fff" }}
+                                    id="outlined-basic"
+                                    variant="outlined"
+                                    placeholder="חיפוש מסלול"
+                                    label={<FcSearch style={{ fontSize: "xx-large" }} />}
+                                    onChange={inputHandler}
+                                />
                             </div>
-                        </div>
-                    </div>
-                </>
-            }
+                            <div style={{
+                                backgroundColor: 'rgb(213, 221, 228)',
+                                overflow: "hidden",
+                            }}>
+                                {modalOpen && <Modal_Student setOpenModal={setModalOpen} thisGetMyUsers={getMyUsers} />}
+                                <br></br>
+                                <div className='container' >
+                                    <div className="row">
+                                        <div className="col-3">{dataCards1.map((value, index) => {
+                                            return (
+                                                <div key={index} className='App'>
+                                                    <header key={index}>
+                                                        <Card style={{ color: "#000", marginBottom: 15, border: "1px solid #888888", borderRadius: "20px" }}>
+                                                            {value.acf.image ? <>
+                                                                <Image style={{ height: 237, width: '97%', borderRadius: "20px" }}
+                                                                    src={value.acf.image.url}
+                                                                    alt="new"
+                                                                />
+                                                            </> :
+                                                                <Card.Img src={profile} style={{ height: 237, width: '97%', borderRadius: "20px" }} />}
+                                                            <Card.Body src={logo}>
+                                                                <Card.Title >
+
+                                                                    <div className="text-center ">
+                                                                        <div className="row align-items-center">
+                                                                            <div className="col-md-11">
+                                                                                <h5>{value.name}</h5>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </Card.Title>
+                                                                <button className="btn btn-primary" id="dropdown-basic-button" style={{ marginLeft: "90px" }} onClick={() => myUsersfunc(value)}>מידע נוסף
+                                                                </button>
+                                                                <br></br>
+                                                                <br></br>
+                                                            </Card.Body>
+                                                        </Card>
+                                                    </header>
+                                                </div>
+                                            )
+                                        })}</div>
+                                        <div className="col-3">{dataCards2.map((value, index) => {
+                                            return (
+                                                <div key={index} className='App'>
+                                                    <header key={index} >
+                                                        <Card style={{ color: "#000", marginBottom: 15, border: "1px solid #888888", borderRadius: "20px" }}>
+                                                            {/* <Card.Img src={profile} style={{ height: 237, width: '97%' }} /> */}
+                                                            {value.acf.image ? <>
+                                                                <Image style={{ height: 237, width: '97%', borderRadius: "20px" }}
+                                                                    src={value.acf.image.url}
+                                                                    alt="new"
+                                                                />
+                                                            </> :
+                                                                <Card.Img src={profile} style={{ height: 237, width: '97%', borderRadius: "20px" }} />}
+
+                                                            <Card.Body>
+                                                                <Card.Title >
+                                                                    <div className="text-center ">
+                                                                        <div className="row align-items-center">
+                                                                            <div className="col-md-12">
+                                                                                <h5>{value.name}</h5>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </Card.Title>
+                                                                <button className="btn btn-primary" id="dropdown-basic-button" style={{ marginLeft: "90px" }} onClick={() => myUsersfunc(value)}>מידע נוסף
+                                                                </button>
+                                                                <br></br>
+                                                                <br></br>
+                                                            </Card.Body>
+                                                        </Card>
+                                                    </header>
+                                                </div>
+                                            )
+                                        })}</div>
+                                        <div className="col-3">{dataCards3.map((value, index) => {
+                                            return (
+                                                <div key={index} className='App'>
+                                                    <header key={index} >
+                                                        <Card style={{ color: "#000", marginBottom: 15, border: "1px solid #888888", borderRadius: "20px" }}>
+                                                            {/* <Card.Img src={profile} style={{ height: 237, width: '97%' }} /> */}
+                                                            {value.acf.image ? <>
+                                                                <Image style={{ height: 237, width: '97%', borderRadius: "20px" }}
+                                                                    src={value.acf.image.url}
+                                                                    alt="new"
+                                                                />
+                                                            </> :
+                                                                <Card.Img src={profile} style={{ height: 237, width: '97%', borderRadius: "20px" }} />}
+
+                                                            <Card.Body>
+                                                                <Card.Title >
+                                                                    <div className="text-center ">
+                                                                        <div className="row align-items-center">
+                                                                            <div className="col-md-11">
+                                                                                <h5>{value.name}</h5>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </Card.Title>
+                                                                <button className="btn btn-primary" id="dropdown-basic-button" style={{ marginLeft: "90px" }} onClick={() => myUsersfunc(value)}>מידע נוסף
+                                                                </button>
+                                                                <br></br>
+                                                                <br></br>
+
+                                                            </Card.Body>
+                                                        </Card>
+                                                    </header>
+                                                </div>
+                                            )
+                                        })}</div>
+                                        <div className="col-3">{dataCards4.map((value, index) => {
+                                            return (
+                                                <div key={index} className='App'>
+                                                    <header key={index} >
+                                                        <Card style={{ color: "#000", marginBottom: 15, border: "1px solid #888888", borderRadius: "20px" }}>
+                                                            {/* <Card.Img src={profile} style={{ height: 237, width: '97%' }} /> */}
+                                                            {value.acf.image ? <>
+                                                                <Image style={{ height: 237, width: '97%', borderRadius: "20px" }}
+                                                                    src={value.acf.image.url}
+                                                                    alt="new"
+                                                                />
+                                                            </> :
+                                                                <Card.Img src={profile} style={{ height: 237, width: '97%', borderRadius: "20px" }} />}
+                                                            <Card.Body>
+                                                                <Card.Title >
+                                                                    <div className="text-center ">
+                                                                        <div className="row align-items-center">
+                                                                            <div className="col-md-11">
+                                                                                <h5>{value.name}</h5>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </Card.Title>
+                                                                <button className="btn btn-primary" id="dropdown-basic-button" style={{ marginLeft: "90px" }} onClick={() => myUsersfunc(value)}>מידע נוסף
+                                                                </button>
+                                                                <br></br>
+                                                                <br></br>
+                                                            </Card.Body>
+                                                        </Card>
+                                                    </header>
+                                                </div>
+                                            )
+                                        })}</div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </>
+                    }
+                </>}
         </>
     );
 }

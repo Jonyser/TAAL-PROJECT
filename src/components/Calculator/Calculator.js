@@ -2,9 +2,10 @@ import React, { useState, useEffect } from 'react';
 import { get } from "../../api/api";
 import '../../../node_modules/bootstrap/dist/css/bootstrap.css';
 import './style.css';
-import ReactLoading from 'react-loading';
 import Modal_Calculator from '../Modal/Modal_Calculator';
 import View_my_tasks from '../View_my_tasks/View_my_tasks';
+import Modal_Loading from "../Modal/Modal_Loading";
+import { baseUrl } from "../../config";
 
 // import Dot from '../Dot/Dot'
 let dataCards = [];
@@ -29,6 +30,7 @@ let student = "";
 
 
 const Calculator = () => {
+    const [get_logged_in, setLogged_in] = useState(false);
     const [done, setDone] = useState(false);
     const [, setLoading] = useState(false);
     const [, setDataCards] = useState([]);
@@ -53,6 +55,7 @@ const Calculator = () => {
         const fetchData = async () => {
             setLoading(true);
             try {
+                setLogged_in(sessionStorage.getItem('logged_in'))
                 getData();
             } catch (error) {
                 console.error(error.message);
@@ -65,13 +68,16 @@ const Calculator = () => {
     const getData = () => {
         // https://s83.bfa.myftpupload.com/wp-json/wp/v2/routes/
         // https://taal.tech/wp-json/wp/v2/routes/
+        if (flag_show_page === true)
+            setDone(true)
         if (flag_show_page === false)
-            get('https:///s83.bfa.myftpupload.com/wp-json/wp/v2/routes/', {
+            get(`${baseUrl}/wp-json/wp/v2/routes/`, {
                 params: {
                     per_page: 99, 'Cache-Control': 'no-cache'
                 }
             }).then(res => {
-                console.log("resCAlc:", res)
+                setDone(true)
+                // console.log("resCAlc:", res)
                 size = res.length / number;
 
                 setDataCards(
@@ -127,7 +133,7 @@ const Calculator = () => {
                 size = (dataCards.length - sizeMod) / number;
             });
 
-        get('https://s83.bfa.myftpupload.com/wp-json/wp/v2/users/', {
+        get(`${baseUrl}/wp-json/wp/v2/users/`, {
             headers: {
                 'Content-Type': 'application/json',
                 'Authorization': `Bearer ${sessionStorage.getItem('jwt')}`,
@@ -140,7 +146,7 @@ const Calculator = () => {
             setStudent(student = res.filter((item) => item.description !== ""))
             setUsers(getUsers = student.map((r) => { return r.name }));
         });
-        setDone(true)
+
     }
     //-------------------------------------------------------------
     const calc = (val) => {
@@ -159,7 +165,7 @@ const Calculator = () => {
             setObjTasks(val.myTasks.map((value) => {
                 return objTasks.push(value)
             }))
-            console.log("objTasks1:", objTasks)
+            // console.log("objTasks1:", objTasks)
             // console.log("value.post_title:", arrayNameTasks)
             setActionFlag(actionFlag = false);
         }
@@ -228,8 +234,8 @@ const Calculator = () => {
         }
         setTextview(textview.value += "(" + val.myTitle + ")")
         Has_already_been_typed = true;
-        console.log("arrayIdTasks:", arrayIdTasks)
-        console.log("arrayNameTasks:", objTasks)
+        // console.log("arrayIdTasks:", arrayIdTasks)
+        // console.log("arrayNameTasks:", objTasks)
     }
     //--------------------------------------------------------------
     const Action = (val) => {
@@ -251,97 +257,99 @@ const Calculator = () => {
     //--------------------------------------------------------------
     return (
         <>
-            {!done ? <>
-                <h1 style={{ textAlign: "center", color: "white" }}>נא להמתין</h1>
-                < ReactLoading type={"bars"} className='loading' color={"rgb(180, 175, 199)"} height={'10%'} width={'10%'} />
-            </>
-                :
-                <>  <div style={{
-                    backgroundColor: 'rgb(213, 221, 228)',
-                    overflow: "hidden",
-                    height: "800px"
-                }}>
-                    <div className='Cover_view_my_tasks'>
-                        <h6 className="Title_view_my_tasks"> :המשימות שלי</h6>
-                        <div className="View_my_tasks">
-                            <View_my_tasks prop={objTasks} />
-                        </div>
-                    </div>
-                    <div className="d-flex justify-content-center">
-                        {modalOpen && <Modal_Calculator setOpenModal={setModalOpen} idsTasks={arrayIdTasks} propActionFlag={actionFlag} helpProps={helpFlag} usersArray={getUsers} />}
-                        <div className="row" style={{ paddingBottom: "100px", margin: "-70px" }} >
-                            <div id="TaskShow" className='col-4 '></div>
-                            <div className='col-4 ' id="containerCalc" style={{ width: "600px", marginTop: "2px", }}>
-                                <form name="myForm">
-                                    <input type="text" className='textview' id='textview' disabled ></input>
-                                </form>
-                                <div className="row">
-                                    <input type="button" className="col-2" id="btns" value="∪" onClick={() => Action('∪')} ></input>
-                                    <input type="button" className="col-2" id="btns" value="∩" onClick={() => Action('∩')}></input>
-                                    <input type="button" className="col-2" id="btns" value="\" onClick={() => Action("-")}></input>
-                                    <input type="button" className="col-2" id="btnsOrange" value="Enter" onClick={() => {
-                                        setModalOpen(true);
-                                        setHelpFlag(helpFlag = false)
-                                    }}></input>
-                                    <input type="button" className="col-2" id="btnsOrange" value="AC" onClick={() => reset("value")}  ></input>
-
+            {!get_logged_in ? <div style={{ color: "white" }}>Please connect properly !</div> :
+                <>
+                    {!done ? <>
+                        <Modal_Loading />
+                    </>
+                        :
+                        <>  <div style={{
+                            backgroundColor: 'rgb(213, 221, 228)',
+                            overflow: "hidden",
+                            height: "800px"
+                        }}>
+                            <div className='Cover_view_my_tasks'>
+                                <h6 className="Title_view_my_tasks"> :המשימות שלי</h6>
+                                <div className="View_my_tasks">
+                                    <View_my_tasks prop={objTasks} />
                                 </div>
-                                <div className="row" id="dataFromServerButton">
-                                    <div className="col-3">{dataCards1.map((value, index) => {
-                                        return (
-                                            <div key={index} className='App'>
-                                                <header key={index}>
-                                                    <button className='btnRoute' onClick={() => calc(value)} style={{ marginBottom: 15, height: 80, width: 100, borderRadius: "10px" }}>
-                                                        <div className='f' style={{ fontSize: "12px" }}>{value.myTitle}</div>
-                                                    </button>
-                                                </header>
-                                            </div>
-                                        )
-                                    })}</div>
-                                    <div className="col-3">{dataCards2.map((value, index) => {
-                                        return (
-                                            <div key={index} className='App'>
-                                                <header key={index}>
-                                                    <button className='btnRoute' onClick={() => calc(value)} style={{ marginBottom: 15, height: 80, width: 100, borderRadius: "10px" }}>
+                            </div>
+                            <div className="d-flex justify-content-center">
+                                {modalOpen && <Modal_Calculator setOpenModal={setModalOpen} idsTasks={arrayIdTasks} propActionFlag={actionFlag} helpProps={helpFlag} usersArray={getUsers} />}
+                                <div className="row" style={{ paddingBottom: "100px", margin: "-70px" }} >
+                                    <div id="TaskShow" className='col-4 '></div>
+                                    <div className='col-4 ' id="containerCalc" style={{ width: "600px", marginTop: "2px", }}>
+                                        <form name="myForm">
+                                            <input type="text" className='textview' id='textview' disabled ></input>
+                                        </form>
+                                        <div className="row">
+                                            <input type="button" className="col-2" id="btns" value="∪" onClick={() => Action('∪')} ></input>
+                                            <input type="button" className="col-2" id="btns" value="∩" onClick={() => Action('∩')}></input>
+                                            <input type="button" className="col-2" id="btns" value="\" onClick={() => Action("-")}></input>
+                                            <input type="button" className="col-2" id="btnsOrange" value="Enter" onClick={() => {
+                                                setModalOpen(true);
+                                                setHelpFlag(helpFlag = false)
+                                            }}></input>
+                                            <input type="button" className="col-2" id="btnsOrange" value="AC" onClick={() => reset("value")}  ></input>
 
-                                                        <div className='f' style={{ fontSize: "12px" }}>{value.myTitle}</div>
-                                                    </button>
-                                                </header>
-                                            </div>
-                                        )
-                                    })}</div>
-                                    <div className="col-3">{dataCards3.map((value, index) => {
-                                        return (
-                                            <div key={index} className='App'>
-                                                <header key={index}>
-                                                    <button className='btnRoute' onClick={() => calc(value)} style={{ marginBottom: 15, height: 80, width: 100, borderRadius: "10px" }}>
-                                                        <div className='f' style={{ fontSize: "12px" }}>{value.myTitle}</div>
-                                                    </button>
-                                                </header>
-                                            </div>
-                                        )
-                                    })}</div>
-                                    <div className="col-3">{dataCards4.map((value, index) => {
-                                        return (
-                                            <div key={index} className='App'>
-                                                <header key={index}>
-                                                    <button className='btnRoute' onClick={() => calc(value)} style={{ marginBottom: 15, height: 80, width: 100, borderRadius: "10px" }}>
-                                                        <div className='f' style={{ fontSize: "12px" }}>{value.myTitle}</div>
-                                                    </button>
-                                                </header>
-                                            </div>
-                                        )
-                                    })} </div>
+                                        </div>
+                                        <div className="row" id="dataFromServerButton">
+                                            <div className="col-3">{dataCards1.map((value, index) => {
+                                                return (
+                                                    <div key={index} className='App'>
+                                                        <header key={index}>
+                                                            <button className='btnRoute' onClick={() => calc(value)} style={{ marginBottom: 15, height: 80, width: 100, borderRadius: "10px" }}>
+                                                                <div className='f' style={{ fontSize: "12px" }}>{value.myTitle}</div>
+                                                            </button>
+                                                        </header>
+                                                    </div>
+                                                )
+                                            })}</div>
+                                            <div className="col-3">{dataCards2.map((value, index) => {
+                                                return (
+                                                    <div key={index} className='App'>
+                                                        <header key={index}>
+                                                            <button className='btnRoute' onClick={() => calc(value)} style={{ marginBottom: 15, height: 80, width: 100, borderRadius: "10px" }}>
+
+                                                                <div className='f' style={{ fontSize: "12px" }}>{value.myTitle}</div>
+                                                            </button>
+                                                        </header>
+                                                    </div>
+                                                )
+                                            })}</div>
+                                            <div className="col-3">{dataCards3.map((value, index) => {
+                                                return (
+                                                    <div key={index} className='App'>
+                                                        <header key={index}>
+                                                            <button className='btnRoute' onClick={() => calc(value)} style={{ marginBottom: 15, height: 80, width: 100, borderRadius: "10px" }}>
+                                                                <div className='f' style={{ fontSize: "12px" }}>{value.myTitle}</div>
+                                                            </button>
+                                                        </header>
+                                                    </div>
+                                                )
+                                            })}</div>
+                                            <div className="col-3">{dataCards4.map((value, index) => {
+                                                return (
+                                                    <div key={index} className='App'>
+                                                        <header key={index}>
+                                                            <button className='btnRoute' onClick={() => calc(value)} style={{ marginBottom: 15, height: 80, width: 100, borderRadius: "10px" }}>
+                                                                <div className='f' style={{ fontSize: "12px" }}>{value.myTitle}</div>
+                                                            </button>
+                                                        </header>
+                                                    </div>
+                                                )
+                                            })} </div>
+                                        </div>
+                                        <input type="button" className="col-2" id="btnsOrange" value="Help" onClick={() => {
+                                            help()
+                                        }}  ></input>
+                                    </div>
                                 </div>
-                                <input type="button" className="col-2" id="btnsOrange" value="Help" onClick={() => {
-                                    help()
-                                }}  ></input>
                             </div>
                         </div>
-                    </div>
-                </div>
-                </>
-            }
+                        </>
+                    }
+                </>}
         </>
     );
 }
