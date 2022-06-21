@@ -4,10 +4,7 @@ import { FcOk } from "react-icons/fc";
 import Places from '../Places/Places';
 import 'reactjs-popup/dist/index.css';
 import Modal from '../Modal/Modal';
-// import { get } from "../../api/api";
 
-//-------------------------
-let resultData = [];
 //-------------------------
 const Planner = () => {
 
@@ -15,8 +12,6 @@ const Planner = () => {
     const [get_Name, setName] = useState(null);// for TextView
     const [loading, setLoading] = useState(false);
     const [modalOpen, setModalOpen] = useState(false);
-    const [, setResultData] = useState([]);
-    // const [val, setVal] = useState();
     useEffect(() => {
         const fetchData = async () => {
             setLoading(true);

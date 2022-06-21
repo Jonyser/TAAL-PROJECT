@@ -10,6 +10,8 @@
   position: absolute;
 }
 
+
+
 .Board:hover {
   background-color: rgb(242, 245, 255);
 }

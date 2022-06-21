@@ -8,7 +8,6 @@ import { RiDragMove2Line } from "react-icons/ri";
 import { FcAddDatabase } from "react-icons/fc";
 import { MdOutlineLiveHelp } from "react-icons/md";
 import Modal_Tasks from '../Modal/Modal_Tasks'
-import TextField from "@mui/material/TextField";
 //-------------------------
 let Route = [];
 let dndArray = [];
@@ -37,6 +36,7 @@ function DragnDrop(props) {
         fetchData();
     }, []);
     saveProps = props;
+
     // console.log("props,", saveProps.propDataTask)
 
     dndArray = (props.propDataTask).map((element) => {

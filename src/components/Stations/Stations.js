@@ -67,9 +67,6 @@ const Stations = (props) => {
     }, []);
     const getingData = async () => {
 
-        //'https://taal.tech/wp-json/wp/v2/tasks/'
-        //https://s83.bfa.myftpupload.com/wp-json/wp/v2/tasks/
-
         await get(`${baseUrl}/wp-json/wp/v2/tasks/`, {
             params: {
                 per_page: 99, 'Cache-Control': 'no-cache'
@@ -77,7 +74,6 @@ const Stations = (props) => {
         })
             .then(res => {
                 allTasks = res;
-                // console.log("allTasks:", allTasks)
             });
     }
     const Display_The_Tasks = (e) => {

@@ -6,6 +6,8 @@ import Modal_Calculator from '../Modal/Modal_Calculator';
 import View_my_tasks from '../View_my_tasks/View_my_tasks';
 import Modal_Loading from "../Modal/Modal_Loading";
 import { baseUrl } from "../../config";
+import TextField from "@mui/material/TextField";
+import { FcSearch } from "react-icons/fc";
 
 // import Dot from '../Dot/Dot'
 let dataCards = [];
@@ -27,6 +29,8 @@ let arrayIdTasks = []
 let objTasks = [];
 let getUsers = [];
 let student = "";
+let filteredData = []
+let inputText = ""
 
 
 const Calculator = () => {
@@ -43,13 +47,65 @@ const Calculator = () => {
     const [, setActionMode] = useState("");
     const [, setArrayIdTasks] = useState([]);
     const [, setObjTasks] = useState([]);
-
+    const [, setInputText] = useState("");
+    const [, setFilteredData] = useState([]);
     const [modalOpen, setModalOpen] = useState(false);
     const [, setActionFlag] = useState(false);
     const [, setHelpFlag] = useState(false);
     const [, setUsers] = useState([]);
     const [, setStudent] = useState("")
-
+    let inputHandler = (e) => {
+        setInputText(inputText = e.target.value.toLowerCase());
+        setFilteredData(filteredData = dataCards.filter((el) => {
+            // setInputText(lowerCase);
+            if (inputText === '') {
+                return el;
+            }
+            //return the item which contains the user input
+            else {
+                return el.myTitle.toLowerCase().includes(inputText)
+            }
+        }))
+        sizeMod = filteredData.length % number;
+        size = (filteredData.length - sizeMod) / number;
+        dataCards1 = [];
+        dataCards2 = [];
+        dataCards3 = [];
+        dataCards4 = [];
+        index = 0
+        for (let i = 0; i < size; i++) {
+            setDataCards1(dataCards1[i] = filteredData[index]);
+            index++;
+            setDataCards2(dataCards2[i] = filteredData[index])
+            index++;
+            setDataCards3(dataCards3[i] = filteredData[index])
+            index++;
+            setDataCards4(dataCards4[i] = filteredData[index])
+            index++;
+        }
+        for (let i = 0; i < sizeMod; i++) {
+            if (i < sizeMod) {
+                setDataCards4(dataCards4[size] = filteredData[index]);
+                i++;
+                index++;
+            }
+            if (i < sizeMod) {
+                setDataCards3(dataCards3[size] = filteredData[index]);
+                i++;
+                index++;
+            }
+            if (i < sizeMod) {
+                setDataCards2(dataCards2[size] = filteredData[index]);
+                i++;
+                index++;
+            }
+            if (i < sizeMod) {
+                setDataCards1(dataCards1[size] = filteredData[index]);
+                i++;
+                index++;
+            }
+        }
+    };
 
     useEffect(() => {
         const fetchData = async () => {
@@ -227,7 +283,6 @@ const Calculator = () => {
             }
             setObjTasks(objTasks = [])
             setArrayIdTasks(arrayIdTasks = [])
-
             setArrayIdTasks(arrayIdTasks = newTempArray)
             setObjTasks(objTasks = newTempObj)
             setActionFlag(actionFlag = true);
@@ -257,6 +312,7 @@ const Calculator = () => {
     //--------------------------------------------------------------
     return (
         <>
+
             {!get_logged_in ? <div style={{ color: "white" }}>Please connect properly !</div> :
                 <>
                     {!done ? <>
@@ -291,7 +347,17 @@ const Calculator = () => {
                                                 setHelpFlag(helpFlag = false)
                                             }}></input>
                                             <input type="button" className="col-2" id="btnsOrange" value="AC" onClick={() => reset("value")}  ></input>
-
+                                            <div className='inputCover' dir="rtl" >
+                                                <TextField
+                                                    dir="rtl"
+                                                    style={{ marginRight: "180px", borderRadius: '10px', textAlign: 'right', width: "200px", backgroundColor: "#fff" }}
+                                                    id="outlined-basic"
+                                                    variant="outlined"
+                                                    placeholder="חיפוש כפתור"
+                                                    label={<FcSearch style={{ fontSize: "xx-large" }} />}
+                                                    onChange={inputHandler}
+                                                />
+                                            </div>
                                         </div>
                                         <div className="row" id="dataFromServerButton">
                                             <div className="col-3">{dataCards1.map((value, index) => {

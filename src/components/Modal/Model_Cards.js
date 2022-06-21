@@ -155,7 +155,6 @@ function Modal_Cards({ setOpenModal, setText, thisMyRoute, thisGetMyTasks, thisF
                                         < div key={index}>
                                             <div >
                                                 {val.post_title}
-
                                             </div>
                                             <br></br>
                                         </div>
