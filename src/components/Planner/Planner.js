@@ -7,6 +7,8 @@ import Modal from '../Modal/Modal';
 
 //-------------------------
 const Planner = () => {
+
+    const [get_logged_in, setLogged_in] = useState(false);// for TextView
     const [get_Name, setName] = useState(null);// for TextView
     const [loading, setLoading] = useState(false);
     const [modalOpen, setModalOpen] = useState(false);
@@ -14,6 +16,7 @@ const Planner = () => {
         const fetchData = async () => {
             setLoading(true);
             try {
+                setLogged_in(sessionStorage.getItem('logged_in'))
                 // getData();
             } catch (error) {
                 console.error(error.message);
@@ -29,6 +32,8 @@ const Planner = () => {
     }
     return (
         <>
+            {!get_logged_in ? <div style={{color:"white"}}>Please connect properly !</div>:
+            <>
             {loading && <div>Loading</div>}
             {!loading && (
                 <div className="Planner" style={{
@@ -52,6 +57,9 @@ const Planner = () => {
                     </div>
                 </div>
             )}
+            </>
+            }
+            
         </>
     );
 }
