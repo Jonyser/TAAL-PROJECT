@@ -56,9 +56,7 @@ const Cards = () => {
     const [, setInputText] = useState("");
 
     let inputHandler = (e) => {
-
         setInputText(inputText = e.target.value.toLowerCase());
-        // console.log("dataCards:", dataCards)
         setFilteredData(filteredData = dataCards.filter((el) => {
             // setInputText(lowerCase);
             if (inputText === '') {
@@ -69,12 +67,8 @@ const Cards = () => {
                 return el.myTitle.toLowerCase().includes(inputText)
             }
         }))
-        // console.log("filteredData:", filteredData)
         sizeMod = filteredData.length % number;
         size = (filteredData.length - sizeMod) / number;
-        // console.log("filteredData.length", filteredData.length)
-        // console.log("size", size)
-        // console.log("sizeMod:", sizeMod)
         dataCards1 = [];
         dataCards2 = [];
         dataCards3 = [];
@@ -90,10 +84,6 @@ const Cards = () => {
             setDataCards4(dataCards4[i] = filteredData[index])
             index++;
         }
-        // console.log("dataCards1", dataCards1)
-        // console.log("dataCards2", dataCards2)
-        // console.log("dataCards3", dataCards3)
-        // console.log("dataCards4", dataCards4)
         for (let i = 0; i < sizeMod; i++) {
             if (i < sizeMod) {
                 setDataCards4(dataCards4[size] = filteredData[index]);
@@ -131,8 +121,6 @@ const Cards = () => {
         fetchData();
     }, []);
     const getData = () => {
-        // https://s83.bfa.myftpupload.com/wp-json/wp/v2/routes/
-        // https://taal.tech/wp-json/wp/v2/routes/
         if (flag_show_page === true)
             setDone(true)
         if (flag_show_page === false)
@@ -142,11 +130,8 @@ const Cards = () => {
                 }
             }).then(res => {
                 setDone(true)
-                // console.log("Masloulims:", res)
                 size = res.length / number;
 
-                // console.log("dataCards:", dataCards)
-                // console.log("flag:", flag)
                 setDataCards(
 
                     dataCards = res.map((value
@@ -160,11 +145,8 @@ const Cards = () => {
                         }
                     })
                 )
-                // console.log("dataCards:", dataCards)
                 sizeMod = dataCards.length % number;
                 size = (dataCards.length - sizeMod) / number;
-                // console.log("size", size)
-                // console.log(flag)
                 for (let i = 0; i < size; i++) {
                     setDataCards1(dataCards1[i] = dataCards[index]);
                     index++;

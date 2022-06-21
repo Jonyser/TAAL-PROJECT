@@ -4,7 +4,6 @@ import './style.css';
 import { MdOutlineAdsClick } from "react-icons/md";
 import { FcAddDatabase, FcSearch } from "react-icons/fc";
 import Stations from '../Stations/Stations'
-import Dot from '../Dot/Dot'
 import Modal_Places from '../Modal/Model_Places'
 import Modal_Loading from '../Modal/Modal_Loading'
 import TextField from "@mui/material/TextField";
@@ -18,7 +17,7 @@ let Places_and_their_stations = [];
 let thisIdTask = 0;
 let filteredData = []
 let inputText = ""
-let search = "חיפוש אתר"
+
 //-----------------------
 const Places = () => {
     const [done, setDone] = useState(false);
@@ -60,22 +59,15 @@ const Places = () => {
         }
         fetchData();
     }, []);
-
     const getData = async () => {
-
-        // taal.tech/wp-json/wp/v2/places
-        ///s83.bfa.myftpupload.com/wp-json/wp/v2/places
-
         await get(`${baseUrl}/wp-json/wp/v2/places/`, {
             params: {
                 per_page: 99, 'Cache-Control': 'no-cache'
             }
-
         }).then(res => {
             // console.log("res: ", res)
             setPlaces(places = res.filter((item) => item.parent === 0))
             setOnlyAllStation(onlyAllStation = res.filter((item) => item.parent > 0))
-
 
             Places_and_their_stations = places.map((element) => {
                 return {
@@ -85,7 +77,6 @@ const Places = () => {
             })
             setFilteredData(filteredData = places.filter((el) => {
 
-
                 if (inputText === '') {
                     return el;
                 }
@@ -94,17 +85,11 @@ const Places = () => {
                     return el.name.toLowerCase().includes(inputText)
                 }
             }))
-
-
         });
-
-
         setDone(true)
         // setData_Loaded(true)
     }
-
     const Display_The_Stations = (e) => {
-
         setThisIdTask(thisIdTask = e.id)
         if (stationArray.length > 0) {
             stationArray = [];
@@ -118,10 +103,8 @@ const Places = () => {
                 // console.log("stationArray:", stationArray);
             }
         });
-
         setStateStation({ data: stationArray })
     }
-
     //----------------------------------------------------------------------
     return (
         <>
